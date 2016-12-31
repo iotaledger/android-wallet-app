@@ -1,2 +1,2 @@
-# android-app
-IOTA Android Application
+# android-wallet-app
+IOTA Android Wallet Application
