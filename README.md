@@ -1,12 +1,12 @@
 # IOTA Android App
-This project is the officail Android app for IOTA. Responisve material design app supports devices running Android 4.4+.
+This project is the officail Android app for IOTA. Responsive material design app supports devices running Android 4.4+.
 
 
 <h2>Features</h2>
 
 General:
 - Light client
-- Responive material design
+- Responsive material design
 - Secure and ready to start
 - Connect to your own node
 
@@ -26,7 +26,7 @@ Miscellaneous:
 - Current IOTA balance in differnt currencies like BTC, USD, EUR, YEN
 - Report issues or add a feature request directly to github
 - Seed generator
-- Seed paswort protection
+- Seed password protection
 
 <h2>Download</h2>
 
