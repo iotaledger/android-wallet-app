@@ -1,7 +1,6 @@
 # IOTA Android App
 This project is the official Android app for IOTA. Responsive material design app supports devices running Android 4.4+.
 
-## Master branch build status: 
 [![Build Status](https://travis-ci.org/iotaledger/android-wallet-app.svg?branch=master)](https://travis-ci.org/iotaledger/android-wallet-app)
 
 <h2>Features</h2>
