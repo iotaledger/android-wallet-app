@@ -1,5 +1,5 @@
 # IOTA Android App
-This project is the officail Android app for IOTA. Responsive material design app supports devices running Android 4.4+.
+This project is the official Android app for IOTA. Responsive material design app supports devices running Android 4.4+.
 
 
 <h2>Features</h2>
