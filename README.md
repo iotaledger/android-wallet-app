@@ -1,4 +1,4 @@
-# android-wallet-app
+# IOTA Android App
 This project is the officail Android app for IOTA. Responisve material design app supports devices running Android 4.4+.
 
 
