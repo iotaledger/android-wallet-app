@@ -33,10 +33,15 @@ Miscellaneous:
 
 <a href='https://play.google.com/store/apps/details?id=org.iota.wallet'><img alt='Get it on Google Play' src='https://play.google.com/intl/en_us/badges/images/generic/en_badge_web_generic.png' width="323" height="125"/></a></a>
 
-<h2>How to build
-</h2>
+<h2>How to build</h2>
 
 
 ```bash
 ./gradlew clean build
 ```
+<h2>Supporting the project</h2>
+If you like our work please feel free to constribute by posting bug report or push a pull request.
+Also a donation is very welcome too.
+
+- Bitcoin: `1MyCJP3yZtSJ3bMVEoQRPSY3D6Ev7CTvzo`
+- IOTA: `DBPECSH9YLSSTQDGERUHJBBJTKVUDBMTJLG9WPHBINGHIFOSJMDJLARTVOXXWEFQJLLBINOHCZGYFSMUE`
