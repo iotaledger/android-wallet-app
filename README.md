@@ -24,7 +24,7 @@ Neigbhors:
 - Add/remove neighbors and view the current state of them
 
 Miscellaneous:
-- Current IOTA balance in differnt currencies like BTC, USD, EUR, YEN
+- Current IOTA balance in differnt currencies such as BTC, USD, EUR, YEN
 - Report issues or add a feature request directly to github
 - Seed generator
 - Seed password protection
