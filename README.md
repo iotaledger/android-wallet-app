@@ -20,7 +20,7 @@ Wallet:
 Tangle Explorer:
 - Live Tangle explorer with full search function
 
-Neigbhors:
+Neighbors:
 - Add/remove neighbors and view the current state of them
 
 Miscellaneous:
