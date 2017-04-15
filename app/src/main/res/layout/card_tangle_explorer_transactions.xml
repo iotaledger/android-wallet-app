@@ -1,0 +1,280 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginLeft="@dimen/baseline_card"
+    android:layout_marginRight="@dimen/baseline_card"
+    android:layout_marginTop="@dimen/baseline_card"
+    app:cardCornerRadius="@dimen/card_corner_radius"
+    app:contentPadding="@dimen/baseline"
+    tools:ignore="contentDescription">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:clipChildren="false"
+            android:gravity="center_vertical"
+            android:paddingBottom="@dimen/baseline_typo">
+
+            <TextView
+                android:id="@+id/item_et_value"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="@style/Base.TextAppearance.AppCompat.Headline"
+                android:textStyle="bold"
+                tools:text="3 i"
+                tools:textColor="@color/flatGreen" />
+
+            <android.support.v4.widget.Space
+                android:layout_width="@dimen/baseline"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:id="@+id/item_et_alternate_value"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:textAppearance="@style/Base.TextAppearance.AppCompat.Body2"
+                tools:text="34,56 €" />
+
+            <android.support.v4.widget.Space
+                android:layout_width="@dimen/baseline_typo"
+                android:layout_height="wrap_content" />
+
+            <ImageButton
+                android:id="@+id/item_et_expand_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="top"
+                android:layout_marginBottom="-6dp"
+                android:layout_marginEnd="-6dp"
+                android:layout_marginTop="-6dp"
+                android:background="?selectableItemBackgroundBorderless"
+                android:contentDescription="@string/air_label_device_info"
+                android:padding="@dimen/air_icon_padding"
+                app:srcCompat="@drawable/ic_expand_more" />
+
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="sans-serif-medium"
+            android:text="@string/card_label_time"
+            android:textAppearance="@style/Base.TextAppearance.AppCompat.Caption" />
+
+        <TextView
+            android:id="@+id/item_et_timestamp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/baseline_typo"
+            android:textAppearance="@style/Base.TextAppearance.AppCompat.Body1"
+            tools:text="2017/01/04 22:02:43" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="sans-serif-medium"
+            android:text="@string/card_label_persistence"
+            android:textAppearance="@style/Base.TextAppearance.AppCompat.Caption" />
+
+        <TextView
+            android:id="@+id/item_et_persistence"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textAppearance="@style/Base.TextAppearance.AppCompat.Body1"
+            tools:text="@string/card_label_persistence" />
+
+        <com.github.aakira.expandablelayout.ExpandableRelativeLayout
+            android:id="@+id/item_et_expand_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingTop="@dimen/baseline_typo"
+            app:ael_expanded="false"
+            app:ael_interpolator="fastOutSlowIn">
+
+            <TextView
+                android:id="@+id/item_et_address_header"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="sans-serif-medium"
+                android:text="@string/card_label_address"
+                android:textAppearance="@style/Base.TextAppearance.AppCompat.Caption" />
+
+            <TextView
+                android:id="@+id/item_et_address"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/item_et_address_header"
+                android:layout_marginBottom="@dimen/baseline_typo"
+                android:textAppearance="@style/Base.TextAppearance.AppCompat.Body1"
+                tools:text="PFQIMSMFJZCXZEB99QTOMYDSKIFCXTLTVSWQFZMWKO9CZHZYA9VZRKQKMRDRVOVSGXWUULHD9MZK9HWAY" />
+
+            <TextView
+                android:id="@+id/item_et_tag_header"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/item_et_address"
+                android:fontFamily="sans-serif-medium"
+                android:text="@string/card_label_tag"
+                android:textAppearance="@style/Base.TextAppearance.AppCompat.Caption" />
+
+            <TextView
+                android:id="@+id/item_et_tag"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/item_et_tag_header"
+                android:layout_marginBottom="@dimen/baseline_typo"
+                android:textAppearance="@style/Base.TextAppearance.AppCompat.Body1"
+                tools:text="99999999999999999999999999999" />
+
+            <TextView
+                android:id="@+id/item_et_hash_header"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/item_et_tag"
+                android:fontFamily="sans-serif-medium"
+                android:text="@string/card_label_hash"
+                android:textAppearance="@style/Base.TextAppearance.AppCompat.Caption" />
+
+            <TextView
+                android:id="@+id/item_et_hash"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/item_et_hash_header"
+                android:textAppearance="@style/Base.TextAppearance.AppCompat.Body1"
+                tools:text="PFQIMSMFJZCXZEB99QTOMYDSKIFCXTLTVSWQFZMWKO9CZHZYA9VZRKQKMRDRV" />
+
+            <TextView
+                android:id="@+id/item_et_currentIndex_header"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/item_et_hash"
+                android:fontFamily="sans-serif-medium"
+                android:text="@string/card_label_current_index"
+                android:textAppearance="@style/Base.TextAppearance.AppCompat.Caption" />
+
+            <TextView
+                android:id="@+id/item_et_currentIndex"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/item_et_currentIndex_header"
+                android:textAppearance="@style/Base.TextAppearance.AppCompat.Body1"
+                tools:text="2" />
+
+            <TextView
+                android:id="@+id/item_et_lastIndex_header"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/item_et_currentIndex"
+                android:fontFamily="sans-serif-medium"
+                android:text="@string/card_label_last_index"
+                android:textAppearance="@style/Base.TextAppearance.AppCompat.Caption" />
+
+            <TextView
+                android:id="@+id/item_et_lastIndex"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/item_et_lastIndex_header"
+                android:textAppearance="@style/Base.TextAppearance.AppCompat.Body1"
+                tools:text="4" />
+
+            <TextView
+                android:id="@+id/item_et_bundle_header"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/item_et_lastIndex"
+                android:fontFamily="sans-serif-medium"
+                android:text="@string/card_label_bundle"
+                android:textAppearance="@style/Base.TextAppearance.AppCompat.Caption" />
+
+            <TextView
+                android:id="@+id/item_et_bundle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/item_et_bundle_header"
+                android:textAppearance="@style/Base.TextAppearance.AppCompat.Body1"
+                tools:text="PFQIMSMFJZCXZEB99QTOMYDSKIFCXTLTVSWQFZMWKO9CZHZYA9VZRKQKMRDRV" />
+
+            <TextView
+                android:id="@+id/item_et_trunkTransaction_header"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/item_et_bundle"
+                android:fontFamily="sans-serif-medium"
+                android:text="@string/card_label_trunk_transaction"
+                android:textAppearance="@style/Base.TextAppearance.AppCompat.Caption" />
+
+            <TextView
+                android:id="@+id/item_et_trunkTransaction"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/item_et_trunkTransaction_header"
+                android:textAppearance="@style/Base.TextAppearance.AppCompat.Body1"
+                tools:text="PFQIMSMFJZCXZEB99QTOMYDSKIFCXTLTVSWQFZMWKO9CZHZYA9VZRKQKMRDRV" />
+
+            <TextView
+                android:id="@+id/item_et_branchTransaction_header"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/item_et_trunkTransaction"
+                android:fontFamily="sans-serif-medium"
+                android:text="@string/card_label_branch_transaction"
+                android:textAppearance="@style/Base.TextAppearance.AppCompat.Caption" />
+
+            <TextView
+                android:id="@+id/item_et_branchTransaction"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/item_et_branchTransaction_header"
+                android:textAppearance="@style/Base.TextAppearance.AppCompat.Body1"
+                tools:text="PFQIMSMFJZCXZEB99QTOMYDSKIFCXTLTVSWQFZMWKO9CZHZYA9VZRKQKMRDRV" />
+
+            <TextView
+                android:id="@+id/item_et_nonce_header"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/item_et_branchTransaction"
+                android:fontFamily="sans-serif-medium"
+                android:text="@string/card_label_nonce"
+                android:textAppearance="@style/Base.TextAppearance.AppCompat.Caption" />
+
+            <TextView
+                android:id="@+id/item_et_nonce"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/item_et_nonce_header"
+                android:textAppearance="@style/Base.TextAppearance.AppCompat.Body1"
+                tools:text="PFQIMSMFJZCXZEB99QTOMYDSKIFCXTLTVSWQFZMWKO9CZHZYA9VZRKQKMRDRV" />
+
+            <TextView
+                android:id="@+id/item_et_signatureFragments_header"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/item_et_nonce"
+                android:fontFamily="sans-serif-medium"
+                android:text="@string/card_label_signature"
+                android:textAppearance="@style/Base.TextAppearance.AppCompat.Caption" />
+
+            <TextView
+                android:id="@+id/item_et_signatureFragments"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/item_et_signatureFragments_header"
+                android:layout_marginBottom="@dimen/baseline_typo"
+                android:textAppearance="@style/Base.TextAppearance.AppCompat.Body1"
+                tools:text="PFQIMSMFJZCXZEB99QTOMYDSKIPFQIMSMFJZCXZEB99QTOMYDSKIFCPFQIMSMFJZCXZEB99QTOMYDSKIFCXTLTVSWQFZMWKO9CZHZYA9VZRKQKMRDRVOVSGXWUULHD9MZK9HWAYXTLTVSWQPFQIMSMFJZCXZEB99QTOMYDSKIFCXTLTVSWQFZMWKO9CZHZYA9VZRKQKMRDRVOVSGXWUULHD9MZK9HWAYFZMWKO9CZHZYA9VZRKQKMRDRVOVSGXWUULHD9MZK9HWAYFCXTLTVSWQFZMWKO9CZHZYA9VZRKQKMRDRVOVSGXWUULHD9MZK9HWAY" />
+
+        </com.github.aakira.expandablelayout.ExpandableRelativeLayout>
+
+    </LinearLayout>
+
+</android.support.v7.widget.CardView>

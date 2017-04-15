@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+
+
+    <EditTextPreference
+        android:defaultValue="node.iotawallet.info"
+        android:key="preference_node_ip"
+        android:summary="@string/settings_node_ip_summary"
+        android:title="@string/settings_node_ip_title" />
+
+    <EditTextPreference
+        android:defaultValue="14265"
+        android:digits="0123456789"
+        android:inputType="number"
+        android:key="preference_node_port"
+        android:summary="@string/settings_node_port_summary"
+        android:title="@string/settings_node_port_title" />
+
+</PreferenceScreen>

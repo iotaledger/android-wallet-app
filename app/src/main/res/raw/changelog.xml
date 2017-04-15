@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<changelog bulletedList="true">
+
+    <changelogversion
+        changeDate="April 16, 2017"
+        versionName="0.4">
+        <changelogtext>Security bug fixes</changelogtext>
+        <changelogtext>Performance improvements</changelogtext>
+    </changelogversion>
+
+    <changelogversion
+        changeDate="April 3, 2017"
+        versionName="0.3">
+        <changelogtext>Bug fixes</changelogtext>
+    </changelogversion>
+
+    <changelogversion
+        changeDate="February 12, 2017"
+        versionName="0.2">
+        <changelogtext>Minor</changelogtext>
+    </changelogversion>
+
+    <changelogversion
+        changeDate="January 30, 2017"
+        versionName="0.1">
+        <changelogtext>[i]Google Play initial release[/i]</changelogtext>
+    </changelogversion>
+
+</changelog>

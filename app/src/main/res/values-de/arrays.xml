@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="listCurrencies">
+        <item>BTC</item>
+        <item>USD</item>
+        <item>EUR</item>
+        <item>CNY</item>
+        <item>RUR</item>
+    </string-array>
+
+    <string-array name="listValues">
+        <item>BTC</item>
+        <item>USD</item>
+        <item>EUR</item>
+        <item>CNY</item>
+        <item>RUR</item>
+    </string-array>
+
+    <string-array name="listOnWalletTransfersRecyclerViewClickDialog">
+        <item>@string/copy_address</item>
+        <item>@string/copy_hash</item>
+        <item>@string/open_tangle_explorer</item>
+        <item>@string/receive_to_address</item>
+        <item>@string/replay_bundle</item>
+    </string-array>
+
+    <string-array name="listOnWalletAddressesRecyclerViewClickDialog">
+        <item>@string/copy_address</item>
+        <item>@string/open_tangle_explorer</item>
+        <item>@string/receive_to_address</item>
+    </string-array>
+
+    <string-array name="listIotaUnits">
+        <item>i</item>
+        <item>Ki</item>
+        <item>Mi</item>
+        <item>Gi</item>
+        <item>Ti</item>
+        <item>Pi</item>
+    </string-array>
+
+</resources>

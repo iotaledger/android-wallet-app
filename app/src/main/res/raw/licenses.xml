@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<notices>
+    <notice>
+        <name>Android Support Library</name>
+        <url>http://developer.android.com/tools/support-library/index.html/</url>
+        <copyright>Copyright (C) 2013 The Android Open Source Project</copyright>
+        <license>Apache Software License 2.0</license>
+    </notice>
+    <notice>
+        <name>Issue Reporter</name>
+        <url>https://github.com/HeinrichReimer/android-issue-reporter</url>
+        <copyright />
+        <license>MIT License</license>
+    </notice>
+    <notice>
+        <name>Jota</name>
+        <url>https://github.com/iotaledger/iota.lib.java</url>
+        <copyright>Copyright (c) 2017 IOTA Foundation &amp; Developers</copyright>
+        <license>Apache Software License 2.0</license>
+    </notice>
+    <notice>
+        <name>Barcode Scanner</name>
+        <url>https://github.com/dm77/barcodescanner</url>
+        <copyright />
+        <license>Apache Software License 2.0</license>
+    </notice>
+    <notice>
+        <name>QRCode Generator</name>
+        <url>https://github.com/kenglxn/QRGen</url>
+        <copyright />
+        <license>Apache Software License 2.0</license>
+    </notice>
+    <notice>
+        <name>Android swipe-to-dismiss-undo library</name>
+        <url>https://github.com/hudomju/android-swipe-to-dismiss-undo</url>
+        <copyright />
+        <license>MIT License</license>
+    </notice>
+    <notice>
+        <name>CircularReveal</name>
+        <url>https://github.com/ozodrukh/CircularReveal</url>
+        <copyright>Copyright (c) 2016 Abdullaev Ozodrukh</copyright>
+        <copyright />
+        <license>MIT License</license>
+    </notice>
+    <notice>
+        <name>XChange library</name>
+        <url>https://github.com/timmolter/xchange</url>
+        <copyright />
+        <license>MIT License</license>
+    </notice>
+    <notice>
+        <name>ChangeLog Library</name>
+        <url>https://github.com/gabrielemariotti/changeloglib</url>
+        <copyright>Copyright 2013-2015 Gabriele Mariotti</copyright>
+        <license>Apache Software License 2.0</license>
+    </notice>
+    <notice>
+        <name>EventBus</name>
+        <url>https://github.com/greenrobot/EventBus</url>
+        <copyright>Copyright (C) 2012-2016 Markus Junginger</copyright>
+        <license>Apache Software License 2.0</license>
+    </notice>
+    <notice>
+        <name>MPAndroidChart</name>
+        <url>https://github.com/PhilJay/MPAndroidChart</url>
+        <copyright>Copyright 2016 Philipp Jahoda</copyright>
+        <license>Apache Software License 2.0</license>
+    </notice>
+    <notice>
+        <name>RecyclerView-FastScroll</name>
+        <url>https://github.com/timusus/RecyclerView-FastScroll</url>
+        <copyright />
+        <license>Apache Software License 2.0</license>
+    </notice>
+    <notice>
+        <name>Expandable Layout</name>
+        <url>https://github.com/AAkira/ExpandableLayout</url>
+        <copyright>Copyright (C) 2016 Tim Malsee</copyright>
+        <license>Apache Software License 2.0</license>
+    </notice>
+    <notice>
+        <name>gson</name>
+        <url>https://github.com/google/gson</url>
+        <copyright>Copyright 2008 Google Inc.</copyright>
+        <license>Apache Software License 2.0</license>
+    </notice>
+</notices>
+
+

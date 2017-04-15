@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    tools:ignore="contentDescription">
+
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:background="#fafafa"
+        tools:ignore="MissingConstraints">
+
+        <ImageView
+            android:id="@+id/item_neighbor_status"
+            android:layout_width="16dp"
+            android:layout_height="16dp"
+            android:layout_margin="16dp"
+            app:srcCompat="@drawable/indicator_offline"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/item_neighbor_address"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="16dp"
+            android:layout_marginStart="72dp"
+            android:layout_marginTop="8dp"
+            android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="27.154.8.46:14265" />
+
+        <TextView
+            android:id="@+id/item_neighbor_number_of_all_transactions"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+            android:textColor="?android:textColorSecondary"
+            app:layout_constraintLeft_toLeftOf="@+id/item_neighbor_address"
+            app:layout_constraintRight_toRightOf="@+id/item_neighbor_address"
+            app:layout_constraintTop_toBottomOf="@+id/item_neighbor_address"
+            tools:text="Number of all transactions: N/A" />
+
+        <TextView
+            android:id="@+id/item_neighbor_number_of_invalid_transactions"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:layout_marginTop="8dp"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+            android:textColor="?android:textColorSecondary"
+            app:layout_constraintLeft_toLeftOf="@+id/item_neighbor_number_of_all_transactions"
+            app:layout_constraintRight_toRightOf="@+id/item_neighbor_number_of_all_transactions"
+            app:layout_constraintTop_toBottomOf="@+id/item_neighbor_number_of_all_transactions"
+            tools:text="Number of invalid transactions: N/A" />
+
+        <TextView
+            android:id="@+id/item_neighbor_number_of_new_transactions"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:layout_marginTop="8dp"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+            android:textColor="?android:textColorSecondary"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="@+id/item_neighbor_number_of_invalid_transactions"
+            app:layout_constraintRight_toRightOf="@+id/item_neighbor_number_of_invalid_transactions"
+            app:layout_constraintTop_toBottomOf="@+id/item_neighbor_number_of_invalid_transactions"
+            tools:text="Number of new transactions: N/A" />
+
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+            android:background="#1F000000"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent" />
+
+    </android.support.constraint.ConstraintLayout>
+
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:visibility="gone"
+        tools:ignore="MissingConstraints">
+
+        <ImageView
+            android:id="@+id/neighbor_item_delete"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/baseline_typo"
+            android:padding="@dimen/baseline_typo"
+            app:srcCompat="@drawable/ic_delete"
+            android:tint="@color/colorPrimary"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/neighbor_item_undo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/baseline_typo"
+            android:minWidth="0dp"
+            android:padding="@dimen/baseline_typo"
+            app:srcCompat="@drawable/ic_undo"
+            android:tint="@color/colorPrimary"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    </android.support.constraint.ConstraintLayout>
+
+</FrameLayout>

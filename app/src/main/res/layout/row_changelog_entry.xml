@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/chg_row"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:gravity="center_vertical"
+    android:orientation="horizontal"
+    android:paddingBottom="@dimen/baseline_half"
+    android:paddingLeft="@dimen/baseline"
+    android:paddingRight="@dimen/baseline"
+    android:paddingTop="0dp">
+
+    <TextView
+        android:id="@+id/chg_textbullet"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="●"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+        tools:ignore="HardcodedText" />
+
+    <android.support.v4.widget.Space
+        android:layout_width="@dimen/baseline"
+        android:layout_height="match_parent" />
+
+    <TextView
+        android:id="@+id/chg_text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+        tools:text="Awesome new changes\nMore info" />
+
+</LinearLayout>

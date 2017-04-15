@@ -1,0 +1,229 @@
+<resources>
+    <string name="app_name">IOTA Wallet</string>
+    <string name="app_settings">Einstellungen</string>
+    <string name="app_issue_reporter">Fehlermeldung</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="action_settings">Einstellungen</string>
+    <string name="all_transactions">Alle Transaktionen:</string>
+    <string name="invalid_transactions">Ungültige Transaktionen:</string>
+    <string name="new_transactions">Neue Transaktionen:</string>
+    <string name="na">N/A</string>
+    <string name="seed">Seed:</string>
+    <string name="password">Passwort:</string>
+    <string name="current_password">Aktuelles Passwort:</string>
+    <string name="new_password">Neues Passwort:</string>
+    <string name="forgot_password">Passwort vergessen ?</string>
+    <string name="confirm_password">Passwort bestätigen:</string>
+    <string name="copy_seed">Seed kopieren?</string>
+    <string name="generate_seed">Seed generieren</string>
+    <string name="transactions_to_request">Transaktion zu bestätigen</string>
+    <string name="tips">Tips</string>
+    <string name="transactions">Transaktionen</string>
+    <string name="transfer">Überweisung</string>
+    <string name="transfers">Überweisungen</string>
+    <string name="addresses">Adressen</string>
+    <string name="search">Suche</string>
+    <string name="account_balance">Kontostand:</string>
+    <string name="account_balance_default">0 i</string>
+    <string name="generate_qr_code">QR Code generieren</string>
+    <string name="address">Adresse</string>
+    <string name="hash">Hash</string>
+    <string name="amount">Betrag</string>
+    <string name="message_optional">Nachricht (optional)</string>
+    <string name="tag_optional">Tag (optional)</string>
+    <string name="neighbor_ip">Nachbar IP:</string>
+
+    <!-- Buttons-->
+    <string name="buttons_ok">Ok</string>
+    <string name="buttons_cancel">Abbrechen</string>
+    <string name="buttons_login">Einloggen</string>
+    <string name="buttons_save">Speichern</string>
+    <string name="buttons_show">Anzeigen</string>
+    <string name="buttons_again">Nicht nochmal fragen</string>
+    <string name="buttons_share">Teilen</string>
+    <string name="buttons_backup">Sichern</string>
+
+    <!-- Messages-->
+    <string name="messages_shortcuts_not_available">Bitte zuerst einloggen.</string>
+    <string name="messages_invalid_search">Bitte gib ein gültiges Bundle, Tag, Adresse oder Transaktion an.</string>
+    <string name="messages_enter_neighbor_address">Bitte geben Sie eine gültige IP-Adresse ein um fortzufahren.</string>
+    <string name="messages_neighbor_address_forgiven">Ip Adresse bereits hinzugefügt.</string>
+    <string name="messages_network_remote_error">Verbindungsfehler, der Remote-Knoten konnte nicht erreicht werden.</string>
+    <string name="messages_network_access_error">Nicht autorisiert, das Kommando steht auf dem Knoten nicht zur Verfügung.</string>
+    <string name="messages_network_iota_error">Verbindungsfehler, es konnte keine Verbindung zu dem IOTA Netzwerk hergestellt werden.</string>
+    <string name="messages_network_error">Verbindungsfehler, keine Verbindung zum Internet.</string>
+    <string name="messages_no_chart_data">Keine Daten zum Anzeigen vorhanden.</string>
+    <string name="messages_store_seed">Seed speichern?</string>
+    <string name="messages_empty_seed">Bitte gibt einen gültigen seed ein.</string>
+    <string name="messages_seed_to_short">Dein Seed ist auch zu lang.</string>
+    <string name="messages_seed_to_long">Dein Seed ist auch zu kurz.</string>
+    <string name="messages_mixed_seed">Dein Seed besteht Groß- und Kleinbuchstaben. Kleinbuchstaben werden in Großbuchstabne konvertiert.</string>
+    <string name="messages_invalid_characters_seed">Dein Seed enthält ungültige Zeichen. Nur Großbuchstaben von A-Z und die Nummer 9 werden akzeptiert.</string>
+    <string name="messages_to_long_seed">Dein Seed enthält mehr wie 81 Zeichen. Dein Seed wird gekürzt.</string>
+    <string name="messages_to_short_seed">Dein Seed enthält nicht genug Zeichen. Das ist nicht sicher.</string>
+    <string name="messages_copy_seed">Halte ihn sicher und teile ihn mit niemandem. Wenn jemand Zugriff auf deinen Seed hat kann er sich Zugang zu deinem Account verschaffen. Möchtest du es in die Zwischeblage kopieren?</string>
+    <string name="messages_not_fully_synced_yet">Der Knoten ist noch nicht vollständig synchronisiert.</string>
+    <string name="messages_no_data_available">Keine Daten verfügbar</string>
+    <string name="messages_not_yet_implemented">Die Funktion ist noch nicht implementiert</string>
+    <string name="messages_enter_txaddress">Bitte eine gültige Empfängeradresse eingeben</string>
+    <string name="messages_enter_amount">Bitte einen Betrag angeben</string>
+    <string name="messages_not_enough_balance">Nicht genügend Guthaben</string>
+    <string name="messages_invalid_characters">Nur Großbuchstaben von A-Z und die Nummer 9 werden akzeptiert.</string>
+    <string name="messages_tag_to_long">Bitte ein gültiges Tag eingeben. Maximal 27 Trytes sind erlaubt</string>
+    <string name="messages_bundle_not_found">Bundle oder Adresse nicht gefunden</string>
+    <string name="messages_permission_camera">Für das lesen von QR Codes muss der Kamerazugriff erlaubt werden.</string>
+    <string name="messages_invalid_password">Falsches Passwort</string>
+    <string name="messages_match_password">Passwort stimmt nicht überein</string>
+    <string name="messages_empty_password">Passwort ist leer</string>
+    <string name="message_open_licenses_error">WebView kann nicht geöffnet werden.</string>
+    <string name="message_install_web_view">WebView installieren</string>
+    <string name="messages_iota_donation_require_login">Bitte log dich zuerst mit deinem Seed ein</string>
+
+    <!-- Menu-->
+    <string name="menu_group_misc">Verschiedenes</string>
+    <string name="menu_wallet">Wallet</string>
+    <string name="menu_tangle_explorer">Tangle Explorer</string>
+    <string name="menu_neighbors">Nachbarn</string>
+    <string name="menu_node_info">Node Info</string>
+    <string name="menu_settings">@string/action_settings</string>
+    <string name="menu_about">Über diese App</string>
+    <string name="menu_logout">Abmelden</string>
+    <string name="menu_search">Suchen</string>
+
+    <!-- Notification-->
+    <string name="notification_send_transfer_request_title">Überweisung wird gesendet</string>
+    <string name="notification_generate_new_address_request_title">Adresse wird generiert</string>
+    <string name="notification_attaching_new_address_request_title">Adresse wird angehangen</string>
+    <string name="notification_replay_bundle_request_title">Transfer wird wiederholt</string>
+
+    <string name="notification_generating_new_address_response_succeeded_title">Neue Adresse generiert</string>
+
+    <string name="notification_send_transfer_response_succeeded_title">Überweisung erfolgreich</string>
+    <string name="notification_send_transfer_response_failed_title">Überweisung fehlgeschlagen</string>
+
+    <string name="notification_attaching_new_address_response_succeeded_title">Neue Adresse erfolgreich angehangen</string>
+    <string name="notification_attaching_new_address_response_failed_title">Fehler beim anhängen der neuen Adresse</string>
+
+    <string name="notification_replay_bundle_response_succeeded_title">Wiederholung erfolgreich ausgeführt</string>
+    <string name="notification_replay_bundle_response_failed_title">Fehler beim wiederholen</string>
+
+    <!-- About-->
+    <string name="about_version">Version %1$s</string>
+    <string name="about_version_unknown">Version unbekannt</string>
+    <string name="about_changelog">Änderungen</string>
+    <string name="about_licenses">Lizenzen</string>
+    <string name="about_support">Unterstütze uns</string>
+    <string name="about_faq">FAQ</string>
+    <string name="about_donation_website">Besuche unsere Webseite</string>
+    <string name="about_donation_btc">BTC Spende</string>
+    <string name="about_donation_iota">IOTA Spende</string>
+    <string name="about_iota_support">Besuche Iotasupport.com</string>
+
+    <!-- Settings-->
+    <string name="settings_header_node_title">Knoten</string>
+    <string name="settings_header_node_summary">Knoten Einstellungen</string>
+
+    <string name="settings_node_ip_title">Knoten IP</string>
+    <string name="settings_node_ip_summary">IP-Adresse des vertrauenswürdigen Knotens, mit dem Sie eine Verbindung aufbauen möchten</string>
+
+    <string name="settings_node_port_title">Knoten Port</string>
+    <string name="settings_node_port_summary">Port des vertrauenswürdigen Knotens, mit dem Sie eine Verbindung aufbauen möchten</string>
+
+    <string name="settings_password_protection_title">Passwort</string>
+    <string name="settings_password_protection_summary">Seed- und Passwort-Einstellungen</string>
+
+    <string name="settings_show_seed_title">Seed anzeigen</string>
+    <string name="settings_show_seed_summary">Aktuellen Seed anzeigen</string>
+
+    <string name="settings_change_password_title">Password ändern</string>
+    <string name="settings_change_password_summary">Aktuelles Passwort ändern</string>
+
+    <string name="settings_encrypt_seed_title">Seed schützen</string>
+    <string name="settings_encrypt_seed_summary">Passwort-Schutz festlegen</string>
+
+    <string name="settings_header_misc_title">Sonstiges</string>
+    <string name="settings_header_misc_summary">Fehlerbericht, Währung</string>
+
+    <string name="settings_issue_reporter_title">Fehlerbericht</string>
+    <string name="settings_issue_reporter_summary">Fehler melden oder Feedback geben</string>
+
+    <string name="settings_wallet_currency_title">Währung</string>
+    <string name="settings_wallet_currency_summary">Währung, in der das Wallet-Guthaben angezeigt wird</string>
+
+    <string name="settings_messages_empty_node_ip">Es muss eine Knoten IP angegeben werden.</string>
+    <string name="settings_messages_empty_node_port">Es muss ein Knoten Port angegeben werden.</string>
+
+    <!-- Info -->
+    <string name="info_app_name">App Name:</string>
+    <string name="info_app_version">App Version:</string>
+    <string name="info_jre_version">JRE Version:</string>
+    <string name="info_max_processors">Verfügbare Prozessoren:</string>
+    <string name="info_free_memory">JRE free memory:</string>
+    <string name="info_max_memory">JRE max memory:</string>
+    <string name="info_total_memory">JRE total memory:</string>
+    <string name="info_latest_milestone">Letzter Meilenstein:</string>
+    <string name="info_latest_milestone_index">Letzter Meilenstein Index:</string>
+    <string name="info_latest_milestone_solid_subtangle">Letzter stabiler Subtangle:</string>
+    <string name="info_latest_milestone_solid_subtangle_index">Letzter stabiler Subtangle Index:</string>
+    <string name="info_neighbors">Nachbarn:</string>
+    <string name="info_packets_queue_size">Paketwarteschlangengröße:</string>
+    <string name="info_time">Zeit:</string>
+    <string name="info_tips">Tips:</string>
+    <string name="info_transactions_to_request">Transaktionen zu erledigen:</string>
+
+    <!-- Alert Dialog-->
+    <string name="copy_address">Adresse kopieren</string>
+    <string name="copy_hash">Hash kopieren</string>
+    <string name="open_tangle_explorer">Im Tangle Explorer öffnen</string>
+    <string name="receive_to_address">Anfordern an diese Adresse</string>
+    <string name="replay_bundle">Transfer wiederholen</string>
+    <string name="title_current_seed">Aktueller Seed:</string>
+    <string name="title_enter_password">Passwort eingeben</string>
+    <string name="message_enter_password">Lege dein Passwort fest</string>
+    <string name="title_new_password">Neues Passwort eingeben</string>
+    <string name="message_new_password">Lege dein neues Passwort fest</string>
+    <string name="title_forgot_password">Passwort vergessen?</string>
+    <string name="message_forgot_password">Es gibt keine Möglichkeit der Wiederherstellung. Mit neuem Seed anmelden? Das wird den alten löschen.</string>
+    <string name="title_root_detected">Gerät möglicherweise gerootet!</string>
+    <string name="message_root_detected">Es ist anzunhemen das dieses Gerät gerootet ist. Weiter auf eigene Gefahr?</string>
+
+    <!-- Confirm transfer dialog -->
+    <string name="message_confirm_transfer">Bist du sicher das die Überweisung senden willst?</string>
+
+    <!-- Confirm logout dialog -->
+    <string name="message_confirm_logout">Möchtest du dich jetzt ausloggen?\nBitte beachte das dein Seed verloren geht wenn du kein Backup hast!</string>
+
+
+    <!-- Fragment title -->
+    <string name="fragment_about_title">Über</string>
+    <string name="fragment_neighbors_title">Nachbarn</string>
+    <string name="fragment_node_info_title">Node Info</string>
+    <string name="fragment_login_title">Login</string>
+    <string name="fragment_new_transfer_title">Neue Überweisung</string>
+    <string name="fragment_wallet_title">Wallet</string>
+    <string name="fragment_tangle_explorer_title">Tangle Explorer</string>
+    <string name="fragment_generate_qr_code_title">QR Code</string>
+
+    <!-- App Shortcuts -->
+    <string name="shortcut_generate_qr_code">QR code generieren</string>
+    <string name="shortcut_send_transfer">Überweisung senden</string>
+
+    <!-- Cards -->
+    <string name="card_label_time">Zeit:</string>
+    <string name="card_label_persistence">Status:</string>
+    <string name="card_label_persistence_no">Ausstehend</string>
+    <string name="card_label_persistence_yes">Bestätigt</string>
+    <string name="card_label_message">Nachricht:</string>
+    <string name="card_label_address">Adresse:</string>
+    <string name="card_label_tag">Tag:</string>
+    <string name="card_label_hash">Hash:</string>
+    <string name="card_label_signature">Signatur:</string>
+    <string name="card_label_current_index">Aktueller Index:</string>
+    <string name="card_label_last_index">Letzter Index:</string>
+    <string name="card_label_bundle">Paket:</string>
+    <string name="card_label_trunk_transaction">Stamm-Transaktion:</string>
+    <string name="card_label_branch_transaction">Zweig-Transaktion:</string>
+    <string name="card_label_nonce">Nonce:</string>
+
+</resources>

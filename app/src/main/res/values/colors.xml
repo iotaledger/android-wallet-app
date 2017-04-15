@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#546e7a</color>
+    <color name="colorPrimaryDark">#37474f</color>
+    <color name="colorAccent">#80cbc4</color>
+    <color name="colorSecondary">#eceff1</color>
+
+    <color name="textColorPrimary">#546e7a</color>
+    <color name="textColorSecondary">#b3546e7a</color>
+
+    <color name="flatGreen">#43A047</color>
+    <color name="flatRed">#D32F2F</color>
+
+    <color name="divider">#1f000000</color>
+    <color name="overlay">#b3546e7a</color>
+</resources>

@@ -1,0 +1,16 @@
+<resources>
+    <dimen name="nav_header_height">160dp</dimen>
+
+    <dimen name="baseline">16dp</dimen>
+    <dimen name="baseline_half">8dp</dimen>
+    <dimen name="baseline_dialog">20dp</dimen>
+    <dimen name="baseline_typo">8dp</dimen>
+    <dimen name="baseline_card">8dp</dimen>
+
+    <dimen name="fab_margin">@dimen/baseline</dimen>
+
+    <dimen name="about_item_drawable_padding">24dp</dimen>
+
+    <dimen name="card_corner_radius">2dp</dimen>
+
+</resources>

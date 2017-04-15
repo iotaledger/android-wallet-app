@@ -1,0 +1,7 @@
+<resources>
+    <dimen name="baseline">24dp</dimen>
+    <dimen name="baseline_half">12dp</dimen>
+    <dimen name="baseline_dialog">28dp</dimen>
+    <dimen name="baseline_typo">12dp</dimen>
+    <dimen name="baseline_card">12dp</dimen>
+</resources>

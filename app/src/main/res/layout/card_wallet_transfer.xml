@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginLeft="@dimen/baseline_card"
+    android:layout_marginRight="@dimen/baseline_card"
+    android:layout_marginTop="@dimen/baseline_card"
+    app:cardCornerRadius="@dimen/card_corner_radius"
+    app:contentPadding="@dimen/baseline"
+    tools:ignore="contentDescription">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:clipChildren="false"
+            android:gravity="center_vertical"
+            android:paddingBottom="@dimen/baseline_typo">
+
+            <TextView
+                android:id="@+id/item_wt_value"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="@style/Base.TextAppearance.AppCompat.Headline"
+                android:textStyle="bold"
+                tools:text="3 i"
+                tools:textColor="@color/flatGreen" />
+
+            <android.support.v4.widget.Space
+                android:layout_width="@dimen/baseline"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:id="@+id/item_wt_alternate_value"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:textAppearance="@style/Base.TextAppearance.AppCompat.Body2"
+                tools:text="34,56 €" />
+
+            <android.support.v4.widget.Space
+                android:layout_width="@dimen/baseline_typo"
+                android:layout_height="wrap_content" />
+
+            <ImageButton
+                android:id="@+id/item_wt_expand_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="top"
+                android:layout_marginBottom="-6dp"
+                android:layout_marginEnd="-6dp"
+                android:layout_marginTop="-6dp"
+                android:background="?selectableItemBackgroundBorderless"
+                android:contentDescription="@string/air_label_device_info"
+                android:padding="@dimen/air_icon_padding"
+                app:srcCompat="@drawable/ic_expand_more" />
+
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="sans-serif-medium"
+            android:text="@string/card_label_time"
+            android:textAppearance="@style/Base.TextAppearance.AppCompat.Caption" />
+
+        <TextView
+            android:id="@+id/item_wt_time"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/baseline_typo"
+            android:textAppearance="@style/Base.TextAppearance.AppCompat.Body1"
+            tools:text="2017/01/04 22:02:43" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="sans-serif-medium"
+            android:text="@string/card_label_persistence"
+            android:textAppearance="@style/Base.TextAppearance.AppCompat.Caption" />
+
+        <TextView
+            android:id="@+id/item_wt_persistence"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/card_label_persistence_yes"
+            android:textAppearance="@style/Base.TextAppearance.AppCompat.Body1" />
+
+        <com.github.aakira.expandablelayout.ExpandableRelativeLayout
+            android:id="@+id/item_wt_expand_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingTop="@dimen/baseline_typo"
+            app:ael_expanded="false"
+            app:ael_interpolator="fastOutSlowIn">
+
+                <TextView
+                    android:id="@+id/item_wt_message_header"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="sans-serif-medium"
+                    android:text="@string/card_label_message"
+                    android:textAppearance="@style/Base.TextAppearance.AppCompat.Caption" />
+
+                <TextView
+                    android:id="@+id/item_wt_message"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/item_wt_message_header"
+                    android:layout_marginBottom="@dimen/baseline_typo"
+                    android:textAppearance="@style/Base.TextAppearance.AppCompat.Body1"
+                    tools:text="Bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla" />
+
+                <TextView
+                    android:id="@+id/item_wt_address_header"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="sans-serif-medium"
+                    android:layout_below="@+id/item_wt_message"
+                    android:text="@string/card_label_address"
+                    android:textAppearance="@style/Base.TextAppearance.AppCompat.Caption" />
+
+                <TextView
+                    android:id="@+id/item_wt_address"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/item_wt_address_header"
+                    android:layout_marginBottom="@dimen/baseline_typo"
+                    android:textAppearance="@style/Base.TextAppearance.AppCompat.Body1"
+                    tools:text="PFQIMSMFJZCXZEB99QTOMYDSKIFCXTLTVSWQFZMWKO9CZHZYA9VZRKQKMRDRVOVSGXWUULHD9MZK9HWAY" />
+
+                <TextView
+                    android:id="@+id/item_wt_tag_header"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="sans-serif-medium"
+                    android:layout_below="@+id/item_wt_address"
+                    android:text="@string/card_label_tag"
+                    android:textAppearance="@style/Base.TextAppearance.AppCompat.Caption" />
+
+                <TextView
+                    android:id="@+id/item_wt_tag"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/baseline_typo"
+                    android:layout_below="@+id/item_wt_tag_header"
+                    android:textAppearance="@style/Base.TextAppearance.AppCompat.Body1"
+                    tools:text="99999999999999999999999999999" />
+
+                <TextView
+                    android:id="@+id/item_wt_hash_header"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="sans-serif-medium"
+                    android:layout_below="@+id/item_wt_tag"
+                    android:text="@string/card_label_hash"
+                    android:textAppearance="@style/Base.TextAppearance.AppCompat.Caption" />
+
+                <TextView
+                    android:id="@+id/item_wt_hash"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/item_wt_hash_header"
+                    android:textAppearance="@style/Base.TextAppearance.AppCompat.Body1"
+                    tools:text="PFQIMSMFJZCXZEB99QTOMYDSKIFCXTLTVSWQFZMWKO9CZHZYA9VZRKQKMRDRV" />
+
+        </com.github.aakira.expandablelayout.ExpandableRelativeLayout>
+
+    </LinearLayout>
+
+</android.support.v7.widget.CardView>
