@@ -1,12 +1,39 @@
 language: android
+
+#sudo: false # Use container based build mechanism
+
+env:
+  global:
+    - BUILD_TOOLS=25.0.2
+    - ANDROID_SDK=25
+
+# JDK version
+jdk:
+  - oraclejdk8
+
+# Android build system
 android:
   components:
-  - tools
-  - platform-tools
-  - build-tools-25.0.1
-  - android-25
-  - extra-google-google_play_services
-  - extra-google-m2repository
-  - extra-android-m2repository
-jdk:
-- oraclejdk8
+    # Platform tools
+    - tools
+    - platform-tools
+    # Gradle build tools version
+    - build-tools-$BUILD_TOOLS
+    # Target SDK version
+    - android-$ANDROID_SDK
+    - extra-google-m2repository
+    - extra-android-m2repository
+  licenses:
+    # Accept all licenses per default
+    - android-sdk-preview-license-.+
+    - android-sdk-license-.+
+    - google-gdk-license-.+
+
+# Scripts to run before installation
+before_install:
+  #- android list sdk --no-ui --all --extended
+  - mkdir "${ANDROID_HOME}/licenses" || true
+  - echo -e "\n8933bad161af4178b1185d1a37fbf41ea5269c55" > "${ANDROID_HOME}/licenses/android-sdk-license"
+  - echo -e "\n84831b9409646a918e30573bab4c9c91346d8abd" > "${ANDROID_HOME}/licenses/android-sdk-preview-license"
+  - sleep 10
+  - chmod +x gradlew
