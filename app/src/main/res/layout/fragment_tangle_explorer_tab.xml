@@ -45,6 +45,6 @@
         app:srcCompat="@drawable/ic_add"
         android:visibility="gone"
         app:fabSize="normal"
-        app:layout_behavior="org.iota.wallet.animation.ScrollAwareFABBehavior" />
+        app:layout_behavior="org.iota.wallet.ui.animation.ScrollAwareFABBehavior" />
 
 </android.support.design.widget.CoordinatorLayout>
