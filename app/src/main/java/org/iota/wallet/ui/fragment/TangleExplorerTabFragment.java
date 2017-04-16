@@ -33,7 +33,7 @@ import android.view.ViewGroup;
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.iota.wallet.R;
-import org.iota.wallet.adapter.TangleExplorerPagerAdapter;
+import org.iota.wallet.ui.adapter.TangleExplorerPagerAdapter;
 import org.iota.wallet.helper.Constants;
 import org.iota.wallet.helper.price.AlternateValueManager;
 

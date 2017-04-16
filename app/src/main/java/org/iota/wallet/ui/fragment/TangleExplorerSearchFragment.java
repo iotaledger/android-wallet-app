@@ -42,7 +42,7 @@ import android.widget.TextView;
 
 import org.greenrobot.eventbus.Subscribe;
 import org.iota.wallet.R;
-import org.iota.wallet.adapter.TangleExplorerSearchCardAdapter;
+import org.iota.wallet.ui.adapter.TangleExplorerSearchCardAdapter;
 import org.iota.wallet.api.TaskManager;
 import org.iota.wallet.databinding.FragmentTangleExplorerSearchBinding;
 import org.iota.wallet.helper.Constants;

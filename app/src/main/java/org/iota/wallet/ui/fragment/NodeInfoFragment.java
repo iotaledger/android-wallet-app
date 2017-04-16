@@ -52,7 +52,7 @@ import com.github.mikephil.charting.utils.ColorTemplate;
 
 import org.greenrobot.eventbus.Subscribe;
 import org.iota.wallet.R;
-import org.iota.wallet.adapter.NodeInfoListAdapter;
+import org.iota.wallet.ui.adapter.NodeInfoListAdapter;
 import org.iota.wallet.api.TaskManager;
 import org.iota.wallet.helper.Utils;
 import org.iota.wallet.model.NodeInfo;

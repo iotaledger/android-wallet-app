@@ -17,7 +17,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package org.iota.wallet.adapter;
+package org.iota.wallet.ui.adapter;
 
 import android.app.Activity;
 import android.content.Context;

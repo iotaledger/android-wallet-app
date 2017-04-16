@@ -39,7 +39,7 @@ import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.iota.wallet.IOTA;
 import org.iota.wallet.R;
-import org.iota.wallet.adapter.WalletPagerAdapter;
+import org.iota.wallet.ui.adapter.WalletPagerAdapter;
 import org.iota.wallet.api.TaskManager;
 import org.iota.wallet.helper.Constants;
 import org.iota.wallet.helper.Utils;

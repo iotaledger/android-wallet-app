@@ -33,7 +33,7 @@ import android.view.ViewGroup;
 import org.greenrobot.eventbus.Subscribe;
 import org.iota.wallet.IOTA;
 import org.iota.wallet.R;
-import org.iota.wallet.adapter.WalletAddressCardAdapter;
+import org.iota.wallet.ui.adapter.WalletAddressCardAdapter;
 import org.iota.wallet.api.TaskManager;
 import org.iota.wallet.databinding.FragmentWalletAddressesBinding;
 import org.iota.wallet.helper.Constants;

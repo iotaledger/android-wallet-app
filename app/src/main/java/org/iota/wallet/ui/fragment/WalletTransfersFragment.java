@@ -35,7 +35,7 @@ import android.view.ViewGroup;
 
 import org.greenrobot.eventbus.Subscribe;
 import org.iota.wallet.R;
-import org.iota.wallet.adapter.WalletTransfersCardAdapter;
+import org.iota.wallet.ui.adapter.WalletTransfersCardAdapter;
 import org.iota.wallet.api.TaskManager;
 import org.iota.wallet.databinding.FragmentWalletTransfersBinding;
 import org.iota.wallet.model.Transfer;

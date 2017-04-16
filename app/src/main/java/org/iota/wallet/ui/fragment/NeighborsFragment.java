@@ -57,7 +57,7 @@ import com.hudomju.swipe.adapter.RecyclerViewAdapter;
 import org.greenrobot.eventbus.Subscribe;
 import org.iota.wallet.R;
 import org.iota.wallet.ui.activity.MainActivity;
-import org.iota.wallet.adapter.NeighborsListAdapter;
+import org.iota.wallet.ui.adapter.NeighborsListAdapter;
 import org.iota.wallet.api.TaskManager;
 import org.iota.wallet.databinding.FragmentNeighborsBinding;
 import org.iota.wallet.helper.Constants;

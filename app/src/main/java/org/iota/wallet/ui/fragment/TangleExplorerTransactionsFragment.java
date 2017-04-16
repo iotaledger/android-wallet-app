@@ -44,7 +44,7 @@ import com.simplecityapps.recyclerview_fastscroll.views.FastScrollRecyclerView;
 
 import org.greenrobot.eventbus.Subscribe;
 import org.iota.wallet.R;
-import org.iota.wallet.adapter.TangleExplorerTransactionsCardAdapter;
+import org.iota.wallet.ui.adapter.TangleExplorerTransactionsCardAdapter;
 import org.iota.wallet.api.TaskManager;
 import org.iota.wallet.databinding.FragmentTangleExplorerTransactionsBinding;
 import org.iota.wallet.model.Transaction;
