@@ -26,12 +26,20 @@ import android.support.v7.preference.PreferenceManager;
 import android.widget.AbsListView;
 import android.widget.ListView;
 
+import com.google.gson.Gson;
+
 import org.knowm.xchange.currency.Currency;
 
 import java.io.File;
+import java.lang.reflect.Type;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.Locale;
+
+import static com.google.gson.internal.$Gson$Types.newParameterizedTypeWithOwner;
+
 
 /**
  * This class provides some utility method used across the app
@@ -71,6 +79,25 @@ public class Utils {
         SimpleDateFormat df = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss", Locale.getDefault());
         Date date = new Date(timestamp * 1000);
         return df.format(date);
+    }
+
+    public static <T> List<T> getCachedList(Context context, Class<T> clazz, String prefs) {
+        String string = PreferenceManager.getDefaultSharedPreferences(context).getString(prefs, "");
+        String encSeed = PreferenceManager.getDefaultSharedPreferences(context).getString(Constants.PREFERENCE_ENC_SEED, "");
+
+        Type type = newParameterizedTypeWithOwner(null, ArrayList.class, clazz);
+        List<T> list = new ArrayList<>();
+        if (!string.isEmpty() && !encSeed.isEmpty()) {
+            list = (new Gson()).fromJson(string, type);
+        }
+        return list;
+    }
+
+    public static void setCachedList(Context context, String prefs, List list) {
+        String encSeed = PreferenceManager.getDefaultSharedPreferences(context).getString(Constants.PREFERENCE_ENC_SEED, "");
+
+        if (!encSeed.isEmpty())
+            PreferenceManager.getDefaultSharedPreferences(context).edit().putString(prefs, (new Gson()).toJson(list)).apply();
     }
 
     public static File getExternalIotaDirectory(Context context) {

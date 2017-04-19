@@ -55,6 +55,8 @@ public class ForgotPasswordDialog extends DialogFragment implements DialogInterf
             case AlertDialog.BUTTON_POSITIVE:
                 SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getActivity());
                 prefs.edit().remove(Constants.PREFERENCE_ENC_SEED).apply();
+                prefs.edit().remove(Constants.PREFERENCES_TRANSFER_CACHING).apply();
+                prefs.edit().remove(Constants.PREFERENCES_ADDRESS_CACHING).apply();
                 getDialog().dismiss();
                 Intent intent = new Intent(getActivity().getIntent());
                 getActivity().startActivityForResult(intent, Constants.REQUEST_CODE_LOGIN);

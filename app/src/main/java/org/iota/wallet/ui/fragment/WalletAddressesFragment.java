@@ -33,10 +33,10 @@ import android.view.ViewGroup;
 import org.greenrobot.eventbus.Subscribe;
 import org.iota.wallet.IOTA;
 import org.iota.wallet.R;
-import org.iota.wallet.ui.adapter.WalletAddressCardAdapter;
 import org.iota.wallet.api.TaskManager;
 import org.iota.wallet.databinding.FragmentWalletAddressesBinding;
 import org.iota.wallet.helper.Constants;
+import org.iota.wallet.helper.Utils;
 import org.iota.wallet.model.api.requests.GetNewAddressRequest;
 import org.iota.wallet.model.api.requests.NodeInfoRequest;
 import org.iota.wallet.model.api.requests.SendTransferRequest;
@@ -44,6 +44,7 @@ import org.iota.wallet.model.api.responses.GetNewAddressResponse;
 import org.iota.wallet.model.api.responses.NodeInfoResponse;
 import org.iota.wallet.model.api.responses.SendTransferResponse;
 import org.iota.wallet.model.api.responses.error.NetworkError;
+import org.iota.wallet.ui.adapter.WalletAddressCardAdapter;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -73,6 +74,7 @@ public class WalletAddressesFragment extends BaseSwipeRefreshLayoutFragment impl
     private void setAdapter() {
         if (addresses == null) {
             addresses = new ArrayList<>();
+            addresses = Utils.getCachedList(getActivity(), String.class, Constants.PREFERENCES_ADDRESS_CACHING);
         }
 
         WalletAddressCardAdapter adapter = new WalletAddressCardAdapter(getActivity(), addresses);
@@ -118,7 +120,10 @@ public class WalletAddressesFragment extends BaseSwipeRefreshLayoutFragment impl
             addresses.remove(addresses.size() - 1);
             //reverse to show lat added first
             Collections.reverse(addresses);
+
             setAdapter();
+
+            Utils.setCachedList(getActivity(), Constants.PREFERENCES_ADDRESS_CACHING, addresses);
         }
     }
 

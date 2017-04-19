@@ -55,6 +55,10 @@ import org.greenrobot.eventbus.Subscribe;
 import org.iota.wallet.IOTA;
 import org.iota.wallet.R;
 import org.iota.wallet.api.TaskManager;
+import org.iota.wallet.helper.Constants;
+import org.iota.wallet.helper.RootDetector;
+import org.iota.wallet.model.QRCode;
+import org.iota.wallet.model.api.responses.error.NetworkError;
 import org.iota.wallet.ui.dialog.RootDetectedDialog;
 import org.iota.wallet.ui.fragment.AboutFragment;
 import org.iota.wallet.ui.fragment.GenerateQRCodeFragment;
@@ -69,10 +73,6 @@ import org.iota.wallet.ui.fragment.TangleExplorerTabFragment;
 import org.iota.wallet.ui.fragment.WalletAddressesFragment;
 import org.iota.wallet.ui.fragment.WalletTabFragment;
 import org.iota.wallet.ui.fragment.WalletTransfersFragment;
-import org.iota.wallet.helper.Constants;
-import org.iota.wallet.helper.RootDetector;
-import org.iota.wallet.model.QRCode;
-import org.iota.wallet.model.api.responses.error.NetworkError;
 
 import java.util.Arrays;
 
@@ -347,6 +347,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                             public void onClick(DialogInterface dialog, int which) {
 
                                 prefs.edit().remove(Constants.PREFERENCE_ENC_SEED).apply();
+                                prefs.edit().remove(Constants.PREFERENCES_TRANSFER_CACHING).apply();
+                                prefs.edit().remove(Constants.PREFERENCES_ADDRESS_CACHING).apply();
                                 IOTA.seed = null;
                                 TaskManager.stopAndDestroyAllTasks(MainActivity.this);
                                 killFragments = true;

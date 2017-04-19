@@ -62,7 +62,7 @@ public class ExchangeRateStorage implements IExchangeRateProvider {
     }
 
     private String getKey(CurrencyPair currencyPair) {
-        return Constants.PRICE_STORAGE_PREFIX + "_" + currencyPair.toString();
+        return Constants.PREFERENCE_PRICE_STORAGE_PREFIX + "_" + currencyPair.toString();
     }
 
     private String getTimeStampKey(CurrencyPair currencyPair) {

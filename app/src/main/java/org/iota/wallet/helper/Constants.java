@@ -31,7 +31,9 @@ public class Constants {
     public static final String PREFERENCE_RUN_WITH_ROOT = "preference_run_with_root";
     public static final String PREFERENCES_CURRENT_IOTA_BALANCE = "preference_current_iota_balance";
     public static final String PREFERENCE_ISSUE_REPORTER = "preference_issue_reporter";
-    public static final String PRICE_STORAGE_PREFIX = "exchange_rate_storage";
+    public static final String PREFERENCE_PRICE_STORAGE_PREFIX = "preference_exchange_rate_storage";
+    public static final String PREFERENCES_ADDRESS_CACHING = "preference_address_caching";
+    public static final String PREFERENCES_TRANSFER_CACHING = "preference_transfer_caching";
 
     //Preferences defaults
     public static final String PREFERENCE_NODE_DEFAULT_IP = "node.iotawallet.info";
