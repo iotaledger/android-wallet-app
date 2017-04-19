@@ -35,9 +35,10 @@ import android.view.ViewGroup;
 
 import org.greenrobot.eventbus.Subscribe;
 import org.iota.wallet.R;
-import org.iota.wallet.ui.adapter.WalletTransfersCardAdapter;
 import org.iota.wallet.api.TaskManager;
 import org.iota.wallet.databinding.FragmentWalletTransfersBinding;
+import org.iota.wallet.helper.Constants;
+import org.iota.wallet.helper.Utils;
 import org.iota.wallet.model.Transfer;
 import org.iota.wallet.model.api.requests.GetTransfersRequest;
 import org.iota.wallet.model.api.requests.NodeInfoRequest;
@@ -46,6 +47,7 @@ import org.iota.wallet.model.api.responses.GetTransferResponse;
 import org.iota.wallet.model.api.responses.NodeInfoResponse;
 import org.iota.wallet.model.api.responses.SendTransferResponse;
 import org.iota.wallet.model.api.responses.error.NetworkError;
+import org.iota.wallet.ui.adapter.WalletTransfersCardAdapter;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -127,6 +129,8 @@ public class WalletTransfersFragment extends BaseSwipeRefreshLayoutFragment impl
         adapter.setAdapterList(transfers);
 
         setAdapter();
+
+        Utils.setCachedList(getActivity(), Constants.PREFERENCES_TRANSFER_CACHING, transfers);
     }
 
     @Subscribe
@@ -150,6 +154,7 @@ public class WalletTransfersFragment extends BaseSwipeRefreshLayoutFragment impl
     private void setAdapter() {
         if (transfers == null) {
             transfers = new ArrayList<>();
+            transfers = Utils.getCachedList(getActivity(), Transfer.class, Constants.PREFERENCES_TRANSFER_CACHING);
         }
 
         adapter = new WalletTransfersCardAdapter(getActivity(), transfers);
