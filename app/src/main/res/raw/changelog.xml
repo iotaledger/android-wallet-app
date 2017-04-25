@@ -2,10 +2,11 @@
 <changelog bulletedList="true">
 
     <changelogversion
-        changeDate="April 16, 2017"
+        changeDate="April 25, 2017"
         versionName="0.4">
         <changelogtext>Security bug fixes</changelogtext>
         <changelogtext>Performance improvements</changelogtext>
+        <changelogtext>Fixed the app crashes on Pre-Lollipop devices</changelogtext>
     </changelogversion>
 
     <changelogversion
