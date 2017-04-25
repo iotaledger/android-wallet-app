@@ -55,7 +55,7 @@
                 android:padding="@dimen/baseline"
                 android:scaleType="fitCenter"
                 android:tint="@color/colorPrimary"
-                app:srcCompat="@drawable/menu_neighbors" />
+                android:src="@drawable/menu_neighbors" />
 
             <FrameLayout
                 android:id="@+id/reavel_linearlayout"
@@ -113,7 +113,7 @@
             app:layout_constraintBottom_toBottomOf="@+id/connected_neighbors"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/connected_neighbors"
-            app:srcCompat="@drawable/ic_add" />
+            android:src="@drawable/ic_add" />
 
         <TextView
             android:layout_width="match_parent"

@@ -127,7 +127,7 @@
         android:layout_gravity="end|bottom"
         android:layout_margin="@dimen/fab_margin"
         android:padding="16dp"
-        app:srcCompat="@drawable/ic_done"
+        android:src="@drawable/ic_done"
         app:fabSize="normal" />
 
 </android.support.design.widget.CoordinatorLayout>

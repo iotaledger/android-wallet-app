@@ -22,7 +22,7 @@ android {
         multiDexEnabled true
 
         // VectorDrawable
-        vectorDrawables.useSupportLibrary = true
+        vectorDrawables.useSupportLibrary = false
 
     }
 

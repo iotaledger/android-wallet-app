@@ -37,7 +37,7 @@
                 android:layout_height="120dp"
                 android:layout_gravity="center_horizontal"
                 android:scaleType="fitCenter"
-                app:srcCompat="@drawable/logo"
+                android:src="@drawable/logo"
                 android:tint="@color/colorPrimary" />
 
             <android.support.design.widget.TextInputLayout

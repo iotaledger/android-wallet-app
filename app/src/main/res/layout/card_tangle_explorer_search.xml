@@ -59,7 +59,7 @@
                 android:background="?selectableItemBackgroundBorderless"
                 android:contentDescription="@string/air_label_device_info"
                 android:padding="@dimen/air_icon_padding"
-                app:srcCompat="@drawable/ic_expand_more" />
+                android:src="@drawable/ic_expand_more" />
 
         </LinearLayout>
 

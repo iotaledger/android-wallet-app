@@ -22,7 +22,7 @@
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                app:srcCompat="@drawable/ic_address" />
+                android:src="@drawable/ic_address" />
 
             <android.support.v4.widget.Space
                 android:layout_width="@dimen/baseline"
