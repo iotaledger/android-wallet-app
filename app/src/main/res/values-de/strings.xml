@@ -56,8 +56,8 @@
     <string name="messages_no_chart_data">Keine Daten zum Anzeigen vorhanden.</string>
     <string name="messages_store_seed">Seed speichern?</string>
     <string name="messages_empty_seed">Bitte gibt einen gültigen seed ein.</string>
-    <string name="messages_seed_to_short">Dein Seed ist auch zu lang.</string>
-    <string name="messages_seed_to_long">Dein Seed ist auch zu kurz.</string>
+    <string name="messages_seed_to_short">Dein Seed ist auch zu kurz.</string>
+    <string name="messages_seed_to_long">Dein Seed ist auch zu lang.</string>
     <string name="messages_mixed_seed">Dein Seed besteht Groß- und Kleinbuchstaben. Kleinbuchstaben werden in Großbuchstabne konvertiert.</string>
     <string name="messages_invalid_characters_seed">Dein Seed enthält ungültige Zeichen. Nur Großbuchstaben von A-Z und die Nummer 9 werden akzeptiert.</string>
     <string name="messages_to_long_seed">Dein Seed enthält mehr wie 81 Zeichen. Dein Seed wird gekürzt.</string>
