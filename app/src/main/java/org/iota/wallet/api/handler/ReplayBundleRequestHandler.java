@@ -29,6 +29,7 @@ import org.iota.wallet.model.api.requests.ReplayBundleRequest;
 import org.iota.wallet.model.api.responses.ApiResponse;
 import org.iota.wallet.model.api.responses.ReplayBundleResponse;
 import org.iota.wallet.model.api.responses.error.NetworkError;
+import org.iota.wallet.model.api.responses.error.NetworkErrorType;
 
 import java.util.Arrays;
 
@@ -61,14 +62,15 @@ public class ReplayBundleRequestHandler extends IotaRequestHandler {
                     ((ReplayBundleRequest) request).getDepth(),
                     ((ReplayBundleRequest) request).getMinWeightMagnitude()));
         } catch (InvalidBundleException | ArgumentException | InvalidSignatureException | InvalidTrytesException e) {
-            response = new NetworkError();
+            NetworkError error = new NetworkError();
+            error.setErrorType(NetworkErrorType.INVALID_HASH_ERROR);
+            response = error;
         }
 
         if (response instanceof ReplayBundleResponse && Arrays.asList(((ReplayBundleResponse) response).getSuccessfully()).contains(true))
             NotificationHelper.responseNotification(context, R.drawable.ic_replay, context.getString(R.string.notification_replay_bundle_response_succeeded_title), notificationId);
-        else if(response instanceof ReplayBundleResponse)
+        else if (response instanceof NetworkError)
             NotificationHelper.responseNotification(context, R.drawable.ic_replay, context.getString(R.string.notification_replay_bundle_response_failed_title), notificationId);
-
         return response;
     }
 }

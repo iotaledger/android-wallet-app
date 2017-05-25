@@ -27,5 +27,6 @@ public enum NetworkErrorType {
     REMOTE_NODE_ERROR,
     IOTA_NETWORK_ERROR,
     NETWORK_ERROR,
-    ACCESS_ERROR
+    ACCESS_ERROR,
+    INVALID_HASH_ERROR
 }

@@ -53,6 +53,7 @@
     <string name="messages_network_access_error">Nicht autorisiert, das Kommando steht auf dem Knoten nicht zur Verfügung.</string>
     <string name="messages_network_iota_error">Verbindungsfehler, es konnte keine Verbindung zu dem IOTA Netzwerk hergestellt werden.</string>
     <string name="messages_network_error">Verbindungsfehler, keine Verbindung zum Internet.</string>
+    <string name="messages_invalid_hash_error">Ungültiger Hash, die Transaktion konnte nicht gefunden werden.</string>
     <string name="messages_no_chart_data">Keine Daten zum Anzeigen vorhanden.</string>
     <string name="messages_store_seed">Seed speichern?</string>
     <string name="messages_empty_seed">Bitte gibt einen gültigen seed ein.</string>

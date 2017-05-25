@@ -78,8 +78,15 @@ public class SendTransferRequestHandler extends IotaRequestHandler {
             response = new NetworkError();
             NotificationManager mNotificationManager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
             mNotificationManager.cancel(notificationId);
-        }
 
+            if (((SendTransferRequest) request).getValue().equals("0")
+                    && ((SendTransferRequest) request).getTag().equals(Constants.NEW_ADDRESS_TAG)) {
+                NotificationHelper.responseNotification(context, R.drawable.ic_address, context.getString(R.string.notification_attaching_new_address_response_failed_title), notificationId);
+
+            } else {
+                NotificationHelper.responseNotification(context, R.drawable.ic_fab_send, context.getString(R.string.notification_send_transfer_response_failed_title), notificationId);
+            }
+        }
 
         if (response instanceof SendTransferResponse && ((SendTransferRequest) request).getValue().equals("0")
                 && ((SendTransferRequest) request).getTag().equals(Constants.NEW_ADDRESS_TAG)) {

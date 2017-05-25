@@ -55,6 +55,10 @@ import org.greenrobot.eventbus.Subscribe;
 import org.iota.wallet.IOTA;
 import org.iota.wallet.R;
 import org.iota.wallet.api.TaskManager;
+import org.iota.wallet.helper.Constants;
+import org.iota.wallet.helper.RootDetector;
+import org.iota.wallet.model.QRCode;
+import org.iota.wallet.model.api.responses.error.NetworkError;
 import org.iota.wallet.ui.dialog.RootDetectedDialog;
 import org.iota.wallet.ui.fragment.AboutFragment;
 import org.iota.wallet.ui.fragment.GenerateQRCodeFragment;
@@ -69,10 +73,6 @@ import org.iota.wallet.ui.fragment.TangleExplorerTabFragment;
 import org.iota.wallet.ui.fragment.WalletAddressesFragment;
 import org.iota.wallet.ui.fragment.WalletTabFragment;
 import org.iota.wallet.ui.fragment.WalletTransfersFragment;
-import org.iota.wallet.helper.Constants;
-import org.iota.wallet.helper.RootDetector;
-import org.iota.wallet.model.QRCode;
-import org.iota.wallet.model.api.responses.error.NetworkError;
 
 import java.util.Arrays;
 
@@ -188,6 +188,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 break;
             case ACCESS_ERROR:
                 errorMessage = getString(R.string.messages_network_access_error);
+                break;
+            case INVALID_HASH_ERROR:
+                errorMessage = getString(R.string.messages_invalid_hash_error);
                 break;
         }
         Snackbar.make(findViewById(R.id.drawer_layout), errorMessage, Snackbar.LENGTH_LONG)
