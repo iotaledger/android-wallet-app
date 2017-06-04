@@ -26,7 +26,7 @@ package org.iota.wallet.model.api.requests;
 public class ReplayBundleRequest extends ApiRequest {
 
     private String hash;
-    private int minWeightMagnitude = 18;
+    private int minWeightMagnitude = 13;
     private int depth = 9;
 
     public ReplayBundleRequest(String hash) {
