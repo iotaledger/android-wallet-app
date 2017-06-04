@@ -31,13 +31,16 @@ public class GetNeighborsResponse extends ApiResponse {
     public GetNeighborsResponse(jota.dto.response.GetNeighborsResponse apiResponse) {
 
         for (jota.model.Neighbor neighbor : apiResponse.getNeighbors()) {
-
             String address = neighbor.getAddress();
             Integer numberOfAllTransactions = neighbor.getNumberOfAllTransactions();
             Integer numberOfInvalidTransactions = neighbor.getNumberOfInvalidTransactions();
             Integer numberOfNewTransactions = neighbor.getNumberOfNewTransactions();
+            Integer numberOfRandomTransactionRequests = neighbor.getNumberOfRandomTransactionRequests();
+            Integer numberOfSentTransactions = neighbor.getNumberOfSentTransactions();
+            String connectionType = neighbor.getConnectionType();
 
-            neighbors.add(new Neighbor(address, numberOfAllTransactions, numberOfInvalidTransactions, numberOfNewTransactions));
+
+            neighbors.add(new Neighbor(address, numberOfAllTransactions, numberOfInvalidTransactions, numberOfNewTransactions, numberOfRandomTransactionRequests, numberOfSentTransactions, connectionType));
         }
         setDuration(apiResponse.getDuration());
     }

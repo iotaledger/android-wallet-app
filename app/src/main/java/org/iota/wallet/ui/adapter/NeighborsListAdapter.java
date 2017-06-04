@@ -63,23 +63,40 @@ public class NeighborsListAdapter extends RecyclerView.Adapter<RecyclerView.View
                 if (vh.ipAddressTextView != null) {
                     vh.ipAddressTextView.setText(neighbor.getAddress());
                 }
-                if (vh.numberOfAllTransactionsTextView != null && vh.numberOfInvalidTransactionsTextView != null && vh.numberOfNewTransactionsTextView != null) {
+                if (vh.numberOfAllTransactionsTextView != null
+                        && vh.numberOfInvalidTransactionsTextView != null
+                        && vh.numberOfNewTransactionsTextView != null
+                        && vh.numberOfRandomTransactionRequestsTextView != null
+                        && vh.numberOfSentTransactionsTextView != null
+                        && vh.connectionTypeTextView != null) {
                     if (neighbor.isOnline()) {
                         vh.statusView.setImageDrawable(ResourcesCompat.getDrawable(context.getResources(), R.drawable.indicator_online, null));
                         if (neighbor.getNumberOfAllTransactions() != null && neighbor.getNumberOfInvalidTransactions() != null && neighbor.getNumberOfNewTransactions() != null) {
                             vh.numberOfAllTransactionsTextView.setText(context.getString(R.string.all_transactions) + " " + neighbor.getNumberOfAllTransactions());
                             vh.numberOfInvalidTransactionsTextView.setText(context.getString(R.string.invalid_transactions) + " " + neighbor.getNumberOfInvalidTransactions());
                             vh.numberOfNewTransactionsTextView.setText(context.getString(R.string.new_transactions) + " " + neighbor.getNumberOfNewTransactions());
+                            vh.numberOfRandomTransactionRequestsTextView.setText(context.getString(R.string.random_transaction_requests) + " " + neighbor.getNumberOfRandomTransactionRequests());
+                            vh.numberOfSentTransactionsTextView.setText(context.getString(R.string.sent_transactions) + " " + neighbor.getNumberOfSentTransactions());
+                            vh.connectionTypeTextView.setText(context.getString(R.string.connection_type) + " " + neighbor.getConnectionType());
 
                         } else {
                             vh.numberOfAllTransactionsTextView.setText(context.getString(R.string.all_transactions) + " " + context.getString(R.string.na));
                             vh.numberOfInvalidTransactionsTextView.setText(context.getString(R.string.invalid_transactions) + " " + context.getString(R.string.na));
+                            vh.numberOfNewTransactionsTextView.setText(context.getString(R.string.new_transactions) + " " + context.getString(R.string.na));
+                            vh.numberOfRandomTransactionRequestsTextView.setText(context.getString(R.string.random_transaction_requests) + " " + context.getString(R.string.na));
+                            vh.numberOfSentTransactionsTextView.setText(context.getString(R.string.sent_transactions) + " " + context.getString(R.string.na));
+                            vh.connectionTypeTextView.setText(context.getString(R.string.connection_type) + " " + context.getString(R.string.na));
+
                         }
                     } else {
                         vh.statusView.setImageDrawable(ResourcesCompat.getDrawable(context.getResources(), R.drawable.indicator_offline, null));
                         vh.numberOfInvalidTransactionsTextView.setText("-");
                         vh.numberOfAllTransactionsTextView.setText("-");
                         vh.numberOfNewTransactionsTextView.setText("-");
+                        vh.numberOfRandomTransactionRequestsTextView.setText("-");
+                        vh.numberOfSentTransactionsTextView.setText("-");
+                        vh.connectionTypeTextView.setText("-");
+
                     }
                 }
             }
@@ -142,6 +159,10 @@ public class NeighborsListAdapter extends RecyclerView.Adapter<RecyclerView.View
         final TextView numberOfAllTransactionsTextView;
         final TextView numberOfInvalidTransactionsTextView;
         final TextView numberOfNewTransactionsTextView;
+        final TextView numberOfRandomTransactionRequestsTextView;
+        final TextView numberOfSentTransactionsTextView;
+        final TextView connectionTypeTextView;
+
         final ImageView statusView;
 
         private ViewHolder(View itemView) {
@@ -151,6 +172,10 @@ public class NeighborsListAdapter extends RecyclerView.Adapter<RecyclerView.View
             this.numberOfAllTransactionsTextView = (TextView) itemView.findViewById(R.id.item_neighbor_number_of_all_transactions);
             this.numberOfInvalidTransactionsTextView = (TextView) itemView.findViewById(R.id.item_neighbor_number_of_invalid_transactions);
             this.numberOfNewTransactionsTextView = (TextView) itemView.findViewById(R.id.item_neighbor_number_of_new_transactions);
+            this.numberOfRandomTransactionRequestsTextView = (TextView) itemView.findViewById(R.id.item_neighbor_number_of_random_transaction_request);
+            this.numberOfSentTransactionsTextView = (TextView) itemView.findViewById(R.id.item_neighbor_number_of_sent_transactions);
+            this.connectionTypeTextView = (TextView) itemView.findViewById(R.id.item_neighbor_connection_type);
+
             this.statusView = (ImageView) itemView.findViewById(R.id.item_neighbor_status);
         }
     }

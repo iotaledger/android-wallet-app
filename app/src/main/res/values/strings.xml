@@ -8,6 +8,9 @@
     <string name="all_transactions">All transactions:</string>
     <string name="invalid_transactions">Invalid transactions:</string>
     <string name="new_transactions">New transactions:</string>
+    <string name="random_transaction_requests">Random transaction requests:</string>
+    <string name="sent_transactions">Sent transactions:</string>
+    <string name="connection_type">Connection type:</string>
     <string name="na">N/A</string>
     <string name="seed">Seed:</string>
     <string name="password">Password:</string>

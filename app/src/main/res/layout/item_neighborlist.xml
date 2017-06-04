@@ -69,11 +69,50 @@
             android:layout_marginTop="8dp"
             android:textAppearance="@style/TextAppearance.AppCompat.Body1"
             android:textColor="?android:textColorSecondary"
-            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toLeftOf="@+id/item_neighbor_number_of_invalid_transactions"
             app:layout_constraintRight_toRightOf="@+id/item_neighbor_number_of_invalid_transactions"
             app:layout_constraintTop_toBottomOf="@+id/item_neighbor_number_of_invalid_transactions"
             tools:text="Number of new transactions: N/A" />
+
+        <TextView
+            android:id="@+id/item_neighbor_number_of_random_transaction_request"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:layout_marginTop="8dp"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+            android:textColor="?android:textColorSecondary"
+            app:layout_constraintLeft_toLeftOf="@+id/item_neighbor_number_of_new_transactions"
+            app:layout_constraintRight_toRightOf="@+id/item_neighbor_number_of_new_transactions"
+            app:layout_constraintTop_toBottomOf="@+id/item_neighbor_number_of_new_transactions"
+            tools:text="Number of random transaction requests: N/A" />
+
+        <TextView
+            android:id="@+id/item_neighbor_number_of_sent_transactions"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:layout_marginTop="8dp"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+            android:textColor="?android:textColorSecondary"
+            app:layout_constraintLeft_toLeftOf="@+id/item_neighbor_number_of_random_transaction_request"
+            app:layout_constraintRight_toRightOf="@+id/item_neighbor_number_of_random_transaction_request"
+            app:layout_constraintTop_toBottomOf="@+id/item_neighbor_number_of_random_transaction_request"
+            tools:text="Number of sent transactions: N/A" />
+
+        <TextView
+            android:id="@+id/item_neighbor_connection_type"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:layout_marginTop="8dp"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+            android:textColor="?android:textColorSecondary"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="@+id/item_neighbor_number_of_sent_transactions"
+            app:layout_constraintRight_toRightOf="@+id/item_neighbor_number_of_sent_transactions"
+            app:layout_constraintTop_toBottomOf="@+id/item_neighbor_number_of_sent_transactions"
+            tools:text="Connection type: N/A" />
 
 
         <View

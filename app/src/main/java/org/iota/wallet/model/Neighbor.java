@@ -35,18 +35,27 @@ public class Neighbor implements Parcelable {
             return new Neighbor[size];
         }
     };
+
     private String address;
     private Integer numberOfAllTransactions;
     private Integer numberOfInvalidTransactions;
     private Integer numberOfNewTransactions;
+    private Integer numberOfRandomTransactionRequests;
+    private Integer numberOfSentTransactions;
+    private String connectionType;
     private Boolean online = false;
+
     public Neighbor() {
     }
+
     private Neighbor(Parcel in) {
         address = in.readString();
         numberOfAllTransactions = in.readInt();
         numberOfInvalidTransactions = in.readInt();
         numberOfNewTransactions = in.readInt();
+        numberOfRandomTransactionRequests = in.readInt();
+        numberOfSentTransactions = in.readInt();
+        connectionType = in.readString();
         online = in.readInt() != 0;
 
     }
@@ -55,11 +64,15 @@ public class Neighbor implements Parcelable {
         setAddress(ipAddress);
     }
 
-    public Neighbor(String address, Integer numberOfAllTransactions, Integer numberOfInvalidTransactions, Integer numberOfNewTransactions) {
+    public Neighbor(String address, Integer numberOfAllTransactions, Integer numberOfInvalidTransactions, Integer numberOfNewTransactions, Integer numberOfRandomTransactionRequests, Integer numberOfSentTransactions, String connectionType) {
         this.address = address;
         this.numberOfAllTransactions = numberOfAllTransactions;
         this.numberOfInvalidTransactions = numberOfInvalidTransactions;
         this.numberOfNewTransactions = numberOfNewTransactions;
+        this.numberOfRandomTransactionRequests = numberOfRandomTransactionRequests;
+        this.numberOfSentTransactions = numberOfSentTransactions;
+        this.connectionType = connectionType;
+
     }
 
     @Override
@@ -73,6 +86,9 @@ public class Neighbor implements Parcelable {
         dest.writeInt(numberOfAllTransactions);
         dest.writeInt(numberOfInvalidTransactions);
         dest.writeInt(numberOfNewTransactions);
+        dest.writeInt(numberOfRandomTransactionRequests);
+        dest.writeInt(numberOfSentTransactions);
+        dest.writeString(connectionType);
         dest.writeInt((online != null ? online : false) ? 1 : 0);
     }
 
@@ -116,4 +132,31 @@ public class Neighbor implements Parcelable {
         this.numberOfNewTransactions = numberOfNewTransactions;
     }
 
+    public Integer getNumberOfRandomTransactionRequests() {
+        return numberOfRandomTransactionRequests;
+    }
+
+    public void setNumberOfRandomTransactionRequests(Integer numberOfRandomTransactionRequests) {
+        this.numberOfRandomTransactionRequests = numberOfRandomTransactionRequests;
+    }
+
+    public Integer getNumberOfSentTransactions() {
+        return numberOfSentTransactions;
+    }
+
+    public void setNumberOfSentTransactions(Integer numberOfSentTransactions) {
+        this.numberOfSentTransactions = numberOfSentTransactions;
+    }
+
+    public String getConnectionType() {
+        return connectionType;
+    }
+
+    public void setConnectionType(String connectionType) {
+        this.connectionType = connectionType;
+    }
+
+    public Boolean getOnline() {
+        return online;
+    }
 }

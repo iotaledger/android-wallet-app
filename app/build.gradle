@@ -119,5 +119,5 @@ dependencies {
     compile 'org.knowm.xchange:xchange-bitfinex:4.1.0'
     compile 'org.knowm.xchange:xchange-okcoin:4.1.0'
 
-    compile 'com.github.iotaledger:iota.lib.java:v0.9.1'
+    compile 'com.github.iotaledger:iota.lib.java:ebe81b2'
 }
