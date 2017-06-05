@@ -180,9 +180,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             case REMOTE_NODE_ERROR:
                 errorMessage = getString(R.string.messages_network_remote_error);
                 break;
-            case IOTA_NETWORK_ERROR:
-                errorMessage = getString(R.string.messages_network_iota_error);
-                break;
             case NETWORK_ERROR:
                 errorMessage = getString(R.string.messages_network_error);
                 break;
@@ -194,6 +191,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 break;
             case EXCHANGE_RATE_ERROR:
                 errorMessage = getString(R.string.messages_exchange_rate_error);
+                break;
+            case IOTA_COOL_NETWORK_ERROR:
+                errorMessage = getString(R.string.messages_network_iota_cool_error);
                 break;
         }
 

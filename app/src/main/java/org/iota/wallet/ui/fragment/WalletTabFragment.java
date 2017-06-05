@@ -177,7 +177,7 @@ public class WalletTabFragment extends Fragment implements View.OnClickListener 
     public void onEvent(NetworkError error) {
         switch (error.getErrorType()) {
             case REMOTE_NODE_ERROR:
-            case IOTA_NETWORK_ERROR:
+            case IOTA_COOL_NETWORK_ERROR:
             case NETWORK_ERROR:
         isConnected = false;
         currentPagerPosition = viewPager.getCurrentItem();

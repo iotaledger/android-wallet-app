@@ -44,13 +44,13 @@ import com.simplecityapps.recyclerview_fastscroll.views.FastScrollRecyclerView;
 
 import org.greenrobot.eventbus.Subscribe;
 import org.iota.wallet.R;
-import org.iota.wallet.ui.adapter.TangleExplorerTransactionsCardAdapter;
 import org.iota.wallet.api.TaskManager;
 import org.iota.wallet.databinding.FragmentTangleExplorerTransactionsBinding;
 import org.iota.wallet.model.Transaction;
 import org.iota.wallet.model.api.requests.CoolTransationsRequest;
 import org.iota.wallet.model.api.responses.CoolTransactionResponse;
 import org.iota.wallet.model.api.responses.error.NetworkError;
+import org.iota.wallet.ui.adapter.TangleExplorerTransactionsCardAdapter;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
@@ -146,10 +146,10 @@ public class TangleExplorerTransactionsFragment extends BaseSwipeRefreshLayoutFr
     @Subscribe
     public void onEvent(NetworkError error) {
         swipeRefreshLayout.setRefreshing(false);
-        /*if (coolTransactions != null) coolTransactions.clear();
-        setAdapter();*/
+
         switch (error.getErrorType()) {
             case NETWORK_ERROR:
+            case IOTA_COOL_NETWORK_ERROR:
                 transactions.clear();
                 break;
             default:

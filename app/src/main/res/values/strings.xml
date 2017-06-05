@@ -54,7 +54,7 @@
     <string name="messages_neighbor_address_forgiven">Ip-Address already added.</string>
     <string name="messages_network_remote_error">Network error, could not connect to the remote node.</string>
     <string name="messages_network_access_error">Unauthorized, the command is not available on this node.</string>
-    <string name="messages_network_iota_error">Network error, could not connect to iota network.</string>
+    <string name="messages_network_iota_cool_error">Network error, could not connect to iota.cool network.</string>
     <string name="messages_network_error">Network error, could not connect network.</string>
     <string name="messages_invalid_hash_error">Invalid hash error, could not found transaction.</string>
     <string name="messages_exchange_rate_error">No exchange rate data available.</string>

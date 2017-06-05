@@ -42,7 +42,6 @@ import android.widget.TextView;
 
 import org.greenrobot.eventbus.Subscribe;
 import org.iota.wallet.R;
-import org.iota.wallet.ui.adapter.TangleExplorerSearchCardAdapter;
 import org.iota.wallet.api.TaskManager;
 import org.iota.wallet.databinding.FragmentTangleExplorerSearchBinding;
 import org.iota.wallet.helper.Constants;
@@ -52,6 +51,7 @@ import org.iota.wallet.model.api.requests.GetBundleRequest;
 import org.iota.wallet.model.api.responses.FindTransactionResponse;
 import org.iota.wallet.model.api.responses.GetBundleResponse;
 import org.iota.wallet.model.api.responses.error.NetworkError;
+import org.iota.wallet.ui.adapter.TangleExplorerSearchCardAdapter;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -216,10 +216,17 @@ public class TangleExplorerSearchFragment extends BaseSwipeRefreshLayoutFragment
     public void onEvent(NetworkError error) {
         swipeRefreshLayout.setRefreshing(false);
 
-        if (transactions != null)
-            transactions.clear();
-        if (adapter != null)
-        adapter.notifyDataSetChanged();
+        switch (error.getErrorType()) {
+            case NETWORK_ERROR:
+            case IOTA_COOL_NETWORK_ERROR:
+                if (transactions != null)
+                    transactions.clear();
+                if (adapter != null)
+                    adapter.notifyDataSetChanged();
+                break;
+            default:
+                break;
+        }
     }
 
     @Override

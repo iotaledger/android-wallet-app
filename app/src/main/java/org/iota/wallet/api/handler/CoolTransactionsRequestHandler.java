@@ -30,6 +30,7 @@ import org.iota.wallet.model.api.requests.CoolTransationsRequest;
 import org.iota.wallet.model.api.responses.ApiResponse;
 import org.iota.wallet.model.api.responses.CoolTransactionResponse;
 import org.iota.wallet.model.api.responses.error.NetworkError;
+import org.iota.wallet.model.api.responses.error.NetworkErrorType;
 
 import java.io.IOException;
 
@@ -66,6 +67,8 @@ public class CoolTransactionsRequestHandler extends IotaRequestHandler {
                 e.printStackTrace();
             }
         }
-        return new NetworkError();
+        NetworkError error = new NetworkError();
+        error.setErrorType(NetworkErrorType.IOTA_COOL_NETWORK_ERROR);
+        return error;
     }
 }

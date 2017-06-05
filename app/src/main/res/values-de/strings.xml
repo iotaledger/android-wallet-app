@@ -54,7 +54,7 @@
     <string name="messages_neighbor_address_forgiven">Ip Adresse bereits hinzugefügt.</string>
     <string name="messages_network_remote_error">Verbindungsfehler, der Remote-Knoten konnte nicht erreicht werden.</string>
     <string name="messages_network_access_error">Nicht autorisiert, das Kommando steht auf dem Knoten nicht zur Verfügung.</string>
-    <string name="messages_network_iota_error">Verbindungsfehler, es konnte keine Verbindung zu dem IOTA Netzwerk hergestellt werden.</string>
+    <string name="messages_network_iota_cool_error">Verbindungsfehler, es konnte keine Verbindung zu dem iota.cool Netzwerk hergestellt werden.</string>
     <string name="messages_network_error">Verbindungsfehler, keine Verbindung zum Internet.</string>
     <string name="messages_invalid_hash_error">Ungültiger Hash, die Transaktion konnte nicht gefunden werden.</string>
     <string name="messages_exchange_rate_error">Keine Wechselkursdaten verfügbar.</string>
