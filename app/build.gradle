@@ -114,7 +114,6 @@ dependencies {
     compile 'com.google.code.gson:gson:2.7'
 
     compile 'org.knowm.xchange:xchange-core:4.1.0'
-    compile 'org.knowm.xchange:xchange-poloniex:4.1.0'
     compile 'org.knowm.xchange:xchange-btce:4.1.0'
     compile 'org.knowm.xchange:xchange-bitfinex:4.1.0'
     compile 'org.knowm.xchange:xchange-okcoin:4.1.0'

@@ -255,24 +255,6 @@
                 android:textAppearance="@style/Base.TextAppearance.AppCompat.Body1"
                 tools:text="PFQIMSMFJZCXZEB99QTOMYDSKIFCXTLTVSWQFZMWKO9CZHZYA9VZRKQKMRDRV" />
 
-            <TextView
-                android:id="@+id/item_es_signatureFragments_header"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/item_es_nonce"
-                android:fontFamily="sans-serif-medium"
-                android:text="@string/card_label_signature"
-                android:textAppearance="@style/Base.TextAppearance.AppCompat.Caption" />
-
-            <TextView
-                android:id="@+id/item_es_signatureFragments"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/item_es_signatureFragments_header"
-                android:layout_marginBottom="@dimen/baseline_typo"
-                android:textAppearance="@style/Base.TextAppearance.AppCompat.Body1"
-                tools:text="PFQIMSMFJZCXZEB99QTOMYDSKIPFQIMSMFJZCXZEB99QTOMYDSKIFCPFQIMSMFJZCXZEB99QTOMYDSKIFCXTLTVSWQFZMWKO9CZHZYA9VZRKQKMRDRVOVSGXWUULHD9MZK9HWAYXTLTVSWQPFQIMSMFJZCXZEB99QTOMYDSKIFCXTLTVSWQFZMWKO9CZHZYA9VZRKQKMRDRVOVSGXWUULHD9MZK9HWAYFZMWKO9CZHZYA9VZRKQKMRDRVOVSGXWUULHD9MZK9HWAYFCXTLTVSWQFZMWKO9CZHZYA9VZRKQKMRDRVOVSGXWUULHD9MZK9HWAY" />
-
         </com.github.aakira.expandablelayout.ExpandableRelativeLayout>
 
     </LinearLayout>

@@ -192,7 +192,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             case INVALID_HASH_ERROR:
                 errorMessage = getString(R.string.messages_invalid_hash_error);
                 break;
+            case EXCHANGE_RATE_ERROR:
+                errorMessage = getString(R.string.messages_exchange_rate_error);
+                break;
         }
+
         Snackbar.make(findViewById(R.id.drawer_layout), errorMessage, Snackbar.LENGTH_LONG)
                 .setAction(null, null).show();
     }

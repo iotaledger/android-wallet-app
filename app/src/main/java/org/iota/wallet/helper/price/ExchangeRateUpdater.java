@@ -27,7 +27,6 @@ import org.knowm.xchange.btce.v3.BTCEExchange;
 import org.knowm.xchange.currency.Currency;
 import org.knowm.xchange.currency.CurrencyPair;
 import org.knowm.xchange.okcoin.OkCoinExchange;
-import org.knowm.xchange.poloniex.PoloniexExchange;
 
 import java.io.IOException;
 import java.math.BigDecimal;
@@ -46,7 +45,7 @@ class ExchangeRateUpdater {
         this.baseCurrencyBtcPair = new CurrencyPair(baseCurrency, Currency.BTC);
 
         exchanges = new HashMap<>();
-        exchanges.put(baseCurrencyBtcPair, ExchangeFactory.INSTANCE.createExchange(PoloniexExchange.class.getName()));
+        exchanges.put(baseCurrencyBtcPair, ExchangeFactory.INSTANCE.createExchange(BitfinexExchange.class.getName()));
         exchanges.put(CurrencyPair.BTC_USD, ExchangeFactory.INSTANCE.createExchange(BitfinexExchange.class.getName()));
         exchanges.put(CurrencyPair.BTC_EUR, ExchangeFactory.INSTANCE.createExchange(BTCEExchange.class.getName()));
         exchanges.put(CurrencyPair.BTC_CNY, ExchangeFactory.INSTANCE.createExchange(OkCoinExchange.class.getName()));

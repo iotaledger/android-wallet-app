@@ -79,7 +79,7 @@ public class ExchangeRateUpdateTaskHandler extends AsyncTask<ExchangeRateStorage
 
         if (networkError) {
             NetworkError error = new NetworkError();
-            error.setErrorType(NetworkErrorType.NETWORK_ERROR);
+            error.setErrorType(NetworkErrorType.EXCHANGE_RATE_ERROR);
             bus.post(error);
         } else
             bus.post(new ExchangeRateUpdateCompleted());

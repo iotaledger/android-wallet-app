@@ -57,6 +57,7 @@
     <string name="messages_network_iota_error">Network error, could not connect to iota network.</string>
     <string name="messages_network_error">Network error, could not connect network.</string>
     <string name="messages_invalid_hash_error">Invalid hash error, could not found transaction.</string>
+    <string name="messages_exchange_rate_error">No exchange rate data available.</string>
     <string name="messages_no_chart_data">No chart data available.</string>
     <string name="messages_copy_seed">Keep it secure and don\'t share it with anyone. If someone has access to your seed they can access your account. You want copy to clipboard?</string>
     <string name="messages_store_seed">Store seed?</string>

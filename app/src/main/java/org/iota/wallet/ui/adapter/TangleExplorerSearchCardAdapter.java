@@ -73,7 +73,6 @@ public class TangleExplorerSearchCardAdapter extends RecyclerView.Adapter<Tangle
         holder.setIsRecyclable(true);
 
         holder.hashLabel.setText(transaction.getHash());
-        holder.signatureFragmentsLabel.setText(transaction.getSignatureFragments());
         holder.addressLabel.setText(transaction.getAddress());
         if (NumberUtils.isNumber(String.valueOf(transaction.getValue()))) {
             holder.valueLabel.setText(IotaUnitConverter.convertRawIotaAmountToDisplayText(transaction.getValue(), false));
@@ -139,7 +138,6 @@ public class TangleExplorerSearchCardAdapter extends RecyclerView.Adapter<Tangle
 
     class ViewHolder extends RecyclerView.ViewHolder {
         final TextView hashLabel;
-        final TextView signatureFragmentsLabel;
         final TextView addressLabel;
         final TextView valueLabel;
         final TextView alternativeValueLabel;
@@ -159,7 +157,6 @@ public class TangleExplorerSearchCardAdapter extends RecyclerView.Adapter<Tangle
             super(itemView);
 
             hashLabel = (TextView) itemView.findViewById(R.id.item_es_hash);
-            signatureFragmentsLabel = (TextView) itemView.findViewById(R.id.item_es_signatureFragments);
             addressLabel = (TextView) itemView.findViewById(R.id.item_es_address);
             valueLabel = (TextView) itemView.findViewById(R.id.item_es_value);
             alternativeValueLabel = (TextView) itemView.findViewById(R.id.item_es_alternate_value);

@@ -57,9 +57,7 @@ public class Utils {
      * @return the currency of the wallet
      */
     public static Currency getBaseCurrency() {
-        // TODO: replace with when iota is available at poloniex
-        // return new Currency("IOTA"));
-        return new Currency("XMR");
+        return new Currency("IOT");
     }
 
     public static Currency getConfiguredAlternateCurrency(Context context) {

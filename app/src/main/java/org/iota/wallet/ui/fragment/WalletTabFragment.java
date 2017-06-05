@@ -39,7 +39,6 @@ import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.iota.wallet.IOTA;
 import org.iota.wallet.R;
-import org.iota.wallet.ui.adapter.WalletPagerAdapter;
 import org.iota.wallet.api.TaskManager;
 import org.iota.wallet.helper.Constants;
 import org.iota.wallet.helper.Utils;
@@ -52,6 +51,7 @@ import org.iota.wallet.model.api.requests.GetInputsRequest;
 import org.iota.wallet.model.api.responses.GetBalancesAndFormatResponse;
 import org.iota.wallet.model.api.responses.GetTransferResponse;
 import org.iota.wallet.model.api.responses.error.NetworkError;
+import org.iota.wallet.ui.adapter.WalletPagerAdapter;
 import org.knowm.xchange.currency.Currency;
 
 import java.util.ArrayList;
@@ -175,9 +175,15 @@ public class WalletTabFragment extends Fragment implements View.OnClickListener 
 
     @Subscribe
     public void onEvent(NetworkError error) {
+        switch (error.getErrorType()) {
+            case REMOTE_NODE_ERROR:
+            case IOTA_NETWORK_ERROR:
+            case NETWORK_ERROR:
         isConnected = false;
         currentPagerPosition = viewPager.getCurrentItem();
         updateFab();
+                break;
+        }
     }
 
     @Subscribe
