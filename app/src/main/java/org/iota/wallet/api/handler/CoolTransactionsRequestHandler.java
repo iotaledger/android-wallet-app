@@ -53,7 +53,7 @@ public class CoolTransactionsRequestHandler extends IotaRequestHandler {
     public ApiResponse handle(ApiRequest apiRequest) {
         OkHttpClient client = new OkHttpClient();
         Request request = new Request.Builder()
-                .url("http://iota.cool/load/current_transactions_v2?max=500&tag=&spam=false&mst=false&nonzero=true&uncut=true")
+                .url("http://iota.cool/load/current_transactions?max=500&tag=&spam=false&mst=false&nonzero=true&uncut=true")
                 .build();
         try {
             Response response = client.newCall(request).execute();
