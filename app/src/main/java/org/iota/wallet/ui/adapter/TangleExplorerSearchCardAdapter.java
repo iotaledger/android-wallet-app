@@ -95,12 +95,7 @@ public class TangleExplorerSearchCardAdapter extends RecyclerView.Adapter<Tangle
         }
         holder.tagLabel.setText(transaction.getTag());
         holder.timestampLabel.setText(Utils.timeStampToDate(transaction.getTimestamp()));
-        holder.currentIndexLabel.setText(String.valueOf(transaction.getCurrentIndex()));
-        holder.lastIndexLabel.setText(String.valueOf(transaction.getLastIndex()));
         holder.bundleLabel.setText(transaction.getBundle());
-        holder.trunkTransactionLabel.setText(transaction.getTrunkTransaction());
-        holder.branchTransactionLabel.setText(transaction.getBranchTransaction());
-        holder.nonceLabel.setText(transaction.getNonce());
         if (transaction.getPersistence() == null) {
             holder.persistenceLabel.setVisibility(View.GONE);
         } else {
@@ -143,12 +138,7 @@ public class TangleExplorerSearchCardAdapter extends RecyclerView.Adapter<Tangle
         final TextView alternativeValueLabel;
         final TextView tagLabel;
         final TextView timestampLabel;
-        final TextView currentIndexLabel;
-        final TextView lastIndexLabel;
         final TextView bundleLabel;
-        final TextView trunkTransactionLabel;
-        final TextView branchTransactionLabel;
-        final TextView nonceLabel;
         final TextView persistenceLabel;
         final ImageButton expandButton;
         final ExpandableRelativeLayout expandableLayout;
@@ -162,12 +152,7 @@ public class TangleExplorerSearchCardAdapter extends RecyclerView.Adapter<Tangle
             alternativeValueLabel = (TextView) itemView.findViewById(R.id.item_es_alternate_value);
             tagLabel = (TextView) itemView.findViewById(R.id.item_es_tag);
             timestampLabel = (TextView) itemView.findViewById(R.id.item_es_timestamp);
-            currentIndexLabel = (TextView) itemView.findViewById(R.id.item_es_currentIndex);
-            lastIndexLabel = (TextView) itemView.findViewById(R.id.item_es_lastIndex);
             bundleLabel = (TextView) itemView.findViewById(R.id.item_es_bundle);
-            trunkTransactionLabel = (TextView) itemView.findViewById(R.id.item_es_trunkTransaction);
-            branchTransactionLabel = (TextView) itemView.findViewById(R.id.item_es_branchTransaction);
-            nonceLabel = (TextView) itemView.findViewById(R.id.item_es_nonce);
             persistenceLabel = (TextView) itemView.findViewById(R.id.item_es_persistence);
             expandButton = (ImageButton) itemView.findViewById(R.id.item_es_expand_button);
             expandableLayout = (ExpandableRelativeLayout) itemView.findViewById(R.id.item_es_expand_layout);

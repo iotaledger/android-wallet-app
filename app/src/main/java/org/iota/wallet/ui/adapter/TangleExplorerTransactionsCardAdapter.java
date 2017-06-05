@@ -87,7 +87,6 @@ public class TangleExplorerTransactionsCardAdapter extends RecyclerView.Adapter<
         holder.setIsRecyclable(true);
 
         holder.hashLabel.setText(transaction.getHash());
-        holder.signatureFragmentsLabel.setText(transaction.getSignatureFragments());
         holder.addressLabel.setText(transaction.getAddress());
         if (NumberUtils.isNumber(String.valueOf(transaction.getValue()))) {
             holder.valueLabel.setText(IotaUnitConverter.convertRawIotaAmountToDisplayText(transaction.getValue(), false));
@@ -110,12 +109,7 @@ public class TangleExplorerTransactionsCardAdapter extends RecyclerView.Adapter<
         }
         holder.tagLabel.setText(transaction.getTag());
         holder.timestampLabel.setText(Utils.timeStampToDate(transaction.getTimestamp()));
-        holder.currentIndexLabel.setText(String.valueOf(transaction.getCurrentIndex()));
-        holder.lastIndexLabel.setText(String.valueOf(transaction.getLastIndex()));
         holder.bundleLabel.setText(transaction.getBundle());
-        holder.trunkTransactionLabel.setText(transaction.getTrunkTransaction());
-        holder.branchTransactionLabel.setText(transaction.getBranchTransaction());
-        holder.nonceLabel.setText(transaction.getNonce());
 
         if (transaction.getPersistence() == null) {
             holder.persistenceLabel.setVisibility(View.GONE);
@@ -201,18 +195,12 @@ public class TangleExplorerTransactionsCardAdapter extends RecyclerView.Adapter<
 
     class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         final TextView hashLabel;
-        final TextView signatureFragmentsLabel;
         final TextView addressLabel;
         final TextView valueLabel;
         final TextView alternativeValueLabel;
         final TextView tagLabel;
         final TextView timestampLabel;
-        final TextView currentIndexLabel;
-        final TextView lastIndexLabel;
         final TextView bundleLabel;
-        final TextView trunkTransactionLabel;
-        final TextView branchTransactionLabel;
-        final TextView nonceLabel;
         final TextView persistenceLabel;
         final ImageButton expandButton;
         final ExpandableRelativeLayout expandableLayout;
@@ -221,18 +209,12 @@ public class TangleExplorerTransactionsCardAdapter extends RecyclerView.Adapter<
             super(itemView);
 
             hashLabel = (TextView) itemView.findViewById(R.id.item_et_hash);
-            signatureFragmentsLabel = (TextView) itemView.findViewById(R.id.item_et_signatureFragments);
             addressLabel = (TextView) itemView.findViewById(R.id.item_et_address);
             valueLabel = (TextView) itemView.findViewById(R.id.item_et_value);
             alternativeValueLabel = (TextView) itemView.findViewById(R.id.item_et_alternate_value);
             tagLabel = (TextView) itemView.findViewById(R.id.item_et_tag);
             timestampLabel = (TextView) itemView.findViewById(R.id.item_et_timestamp);
-            currentIndexLabel = (TextView) itemView.findViewById(R.id.item_et_currentIndex);
-            lastIndexLabel = (TextView) itemView.findViewById(R.id.item_et_lastIndex);
             bundleLabel = (TextView) itemView.findViewById(R.id.item_et_bundle);
-            trunkTransactionLabel = (TextView) itemView.findViewById(R.id.item_et_trunkTransaction);
-            branchTransactionLabel = (TextView) itemView.findViewById(R.id.item_et_branchTransaction);
-            nonceLabel = (TextView) itemView.findViewById(R.id.item_et_nonce);
             persistenceLabel = (TextView) itemView.findViewById(R.id.item_et_persistence);
 
             itemView.setOnClickListener(this);

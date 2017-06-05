@@ -154,44 +154,10 @@
                 tools:text="PFQIMSMFJZCXZEB99QTOMYDSKIFCXTLTVSWQFZMWKO9CZHZYA9VZRKQKMRDRV" />
 
             <TextView
-                android:id="@+id/item_et_currentIndex_header"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/item_et_hash"
-                android:fontFamily="sans-serif-medium"
-                android:text="@string/card_label_current_index"
-                android:textAppearance="@style/Base.TextAppearance.AppCompat.Caption" />
-
-            <TextView
-                android:id="@+id/item_et_currentIndex"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/item_et_currentIndex_header"
-                android:textAppearance="@style/Base.TextAppearance.AppCompat.Body1"
-                tools:text="2" />
-
-            <TextView
-                android:id="@+id/item_et_lastIndex_header"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/item_et_currentIndex"
-                android:fontFamily="sans-serif-medium"
-                android:text="@string/card_label_last_index"
-                android:textAppearance="@style/Base.TextAppearance.AppCompat.Caption" />
-
-            <TextView
-                android:id="@+id/item_et_lastIndex"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/item_et_lastIndex_header"
-                android:textAppearance="@style/Base.TextAppearance.AppCompat.Body1"
-                tools:text="4" />
-
-            <TextView
                 android:id="@+id/item_et_bundle_header"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/item_et_lastIndex"
+                android:layout_below="@+id/item_et_hash"
                 android:fontFamily="sans-serif-medium"
                 android:text="@string/card_label_bundle"
                 android:textAppearance="@style/Base.TextAppearance.AppCompat.Caption" />
@@ -203,75 +169,6 @@
                 android:layout_below="@+id/item_et_bundle_header"
                 android:textAppearance="@style/Base.TextAppearance.AppCompat.Body1"
                 tools:text="PFQIMSMFJZCXZEB99QTOMYDSKIFCXTLTVSWQFZMWKO9CZHZYA9VZRKQKMRDRV" />
-
-            <TextView
-                android:id="@+id/item_et_trunkTransaction_header"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/item_et_bundle"
-                android:fontFamily="sans-serif-medium"
-                android:text="@string/card_label_trunk_transaction"
-                android:textAppearance="@style/Base.TextAppearance.AppCompat.Caption" />
-
-            <TextView
-                android:id="@+id/item_et_trunkTransaction"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/item_et_trunkTransaction_header"
-                android:textAppearance="@style/Base.TextAppearance.AppCompat.Body1"
-                tools:text="PFQIMSMFJZCXZEB99QTOMYDSKIFCXTLTVSWQFZMWKO9CZHZYA9VZRKQKMRDRV" />
-
-            <TextView
-                android:id="@+id/item_et_branchTransaction_header"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/item_et_trunkTransaction"
-                android:fontFamily="sans-serif-medium"
-                android:text="@string/card_label_branch_transaction"
-                android:textAppearance="@style/Base.TextAppearance.AppCompat.Caption" />
-
-            <TextView
-                android:id="@+id/item_et_branchTransaction"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/item_et_branchTransaction_header"
-                android:textAppearance="@style/Base.TextAppearance.AppCompat.Body1"
-                tools:text="PFQIMSMFJZCXZEB99QTOMYDSKIFCXTLTVSWQFZMWKO9CZHZYA9VZRKQKMRDRV" />
-
-            <TextView
-                android:id="@+id/item_et_nonce_header"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/item_et_branchTransaction"
-                android:fontFamily="sans-serif-medium"
-                android:text="@string/card_label_nonce"
-                android:textAppearance="@style/Base.TextAppearance.AppCompat.Caption" />
-
-            <TextView
-                android:id="@+id/item_et_nonce"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/item_et_nonce_header"
-                android:textAppearance="@style/Base.TextAppearance.AppCompat.Body1"
-                tools:text="PFQIMSMFJZCXZEB99QTOMYDSKIFCXTLTVSWQFZMWKO9CZHZYA9VZRKQKMRDRV" />
-
-            <TextView
-                android:id="@+id/item_et_signatureFragments_header"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/item_et_nonce"
-                android:fontFamily="sans-serif-medium"
-                android:text="@string/card_label_signature"
-                android:textAppearance="@style/Base.TextAppearance.AppCompat.Caption" />
-
-            <TextView
-                android:id="@+id/item_et_signatureFragments"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/item_et_signatureFragments_header"
-                android:layout_marginBottom="@dimen/baseline_typo"
-                android:textAppearance="@style/Base.TextAppearance.AppCompat.Body1"
-                tools:text="PFQIMSMFJZCXZEB99QTOMYDSKIPFQIMSMFJZCXZEB99QTOMYDSKIFCPFQIMSMFJZCXZEB99QTOMYDSKIFCXTLTVSWQFZMWKO9CZHZYA9VZRKQKMRDRVOVSGXWUULHD9MZK9HWAYXTLTVSWQPFQIMSMFJZCXZEB99QTOMYDSKIFCXTLTVSWQFZMWKO9CZHZYA9VZRKQKMRDRVOVSGXWUULHD9MZK9HWAYFZMWKO9CZHZYA9VZRKQKMRDRVOVSGXWUULHD9MZK9HWAYFCXTLTVSWQFZMWKO9CZHZYA9VZRKQKMRDRVOVSGXWUULHD9MZK9HWAY" />
 
         </com.github.aakira.expandablelayout.ExpandableRelativeLayout>
 
