@@ -39,10 +39,10 @@ import android.widget.TextView;
 
 import org.iota.wallet.IOTA;
 import org.iota.wallet.R;
-import org.iota.wallet.ui.dialog.CopySeedDialog;
-import org.iota.wallet.ui.dialog.EncryptSeedDialog;
 import org.iota.wallet.helper.Constants;
 import org.iota.wallet.helper.SeedValidator;
+import org.iota.wallet.ui.dialog.CopySeedDialog;
+import org.iota.wallet.ui.dialog.EncryptSeedDialog;
 
 import jota.utils.SeedRandomGenerator;
 
@@ -135,9 +135,6 @@ public class SeedLoginFragment extends Fragment implements View.OnClickListener,
                 CopySeedDialog dialog = new CopySeedDialog();
                 dialog.setArguments(bundle);
                 dialog.show(getFragmentManager(), null);
-                break;
-
-            default:
                 break;
         }
     }

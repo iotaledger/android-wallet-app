@@ -52,13 +52,13 @@ import com.github.mikephil.charting.utils.ColorTemplate;
 
 import org.greenrobot.eventbus.Subscribe;
 import org.iota.wallet.R;
-import org.iota.wallet.ui.adapter.NodeInfoListAdapter;
 import org.iota.wallet.api.TaskManager;
 import org.iota.wallet.helper.Utils;
 import org.iota.wallet.model.NodeInfo;
 import org.iota.wallet.model.api.requests.NodeInfoRequest;
 import org.iota.wallet.model.api.responses.NodeInfoResponse;
 import org.iota.wallet.model.api.responses.error.NetworkError;
+import org.iota.wallet.ui.adapter.NodeInfoListAdapter;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -144,14 +144,12 @@ public class NodeInfoFragment extends BaseSwipeRefreshLayoutFragment implements 
 
     @Subscribe
     public void onEvent(NetworkError error) {
-        swipeRefreshLayout.setRefreshing(false);
         switch (error.getErrorType()){
             case REMOTE_NODE_ERROR:
+                swipeRefreshLayout.setRefreshing(false);
                 chart.setVisibility(View.INVISIBLE);
                 nodeInfos.clear();
                 setAdapter();
-                break;
-            default:
                 break;
         }
     }

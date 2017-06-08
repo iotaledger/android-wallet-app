@@ -34,11 +34,11 @@ import android.support.v7.app.AlertDialog;
 
 import org.greenrobot.eventbus.EventBus;
 import org.iota.wallet.R;
+import org.iota.wallet.helper.Constants;
+import org.iota.wallet.model.QRCode;
 import org.iota.wallet.ui.activity.MainActivity;
 import org.iota.wallet.ui.fragment.GenerateQRCodeFragment;
 import org.iota.wallet.ui.fragment.TangleExplorerTabFragment;
-import org.iota.wallet.helper.Constants;
-import org.iota.wallet.model.QRCode;
 
 public class WalletAddressesItemDialog extends DialogFragment implements DialogInterface.OnClickListener {
 
@@ -100,8 +100,6 @@ public class WalletAddressesItemDialog extends DialogFragment implements DialogI
                         .replace(R.id.container, fragment, null)
                         .addToBackStack(null)
                         .commit();
-                break;
-            default:
                 break;
         }
     }

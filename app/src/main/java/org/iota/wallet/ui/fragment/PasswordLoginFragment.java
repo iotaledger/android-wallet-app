@@ -41,9 +41,9 @@ import android.widget.TextView;
 
 import org.iota.wallet.IOTA;
 import org.iota.wallet.R;
-import org.iota.wallet.ui.dialog.ForgotPasswordDialog;
 import org.iota.wallet.helper.AESCrypt;
 import org.iota.wallet.helper.Constants;
+import org.iota.wallet.ui.dialog.ForgotPasswordDialog;
 
 public class PasswordLoginFragment extends Fragment implements View.OnClickListener, TextView.OnEditorActionListener {
 
@@ -94,8 +94,6 @@ public class PasswordLoginFragment extends Fragment implements View.OnClickListe
             case R.id.password_forgot:
                 ForgotPasswordDialog forgotPasswordDialog = new ForgotPasswordDialog();
                 forgotPasswordDialog.show(getActivity().getFragmentManager(), null);
-                break;
-            default:
                 break;
         }
     }

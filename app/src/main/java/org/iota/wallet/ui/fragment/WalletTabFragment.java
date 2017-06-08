@@ -151,8 +151,6 @@ public class WalletTabFragment extends Fragment implements View.OnClickListener 
                 case 1:
                     fabWallet.setImageResource(R.drawable.ic_add);
                     break;
-                default:
-                    break;
             }
         }
     }

@@ -61,8 +61,6 @@ public class RootDetectedDialog extends DialogFragment implements DialogInterfac
                 prefs.edit().putBoolean(Constants.PREFERENCE_RUN_WITH_ROOT, true).apply();
                 getDialog().dismiss();
                 break;
-            default:
-                break;
         }
     }
 }

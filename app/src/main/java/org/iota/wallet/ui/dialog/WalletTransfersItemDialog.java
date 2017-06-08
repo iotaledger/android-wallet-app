@@ -34,13 +34,13 @@ import android.support.v7.app.AlertDialog;
 
 import org.greenrobot.eventbus.EventBus;
 import org.iota.wallet.R;
-import org.iota.wallet.ui.activity.MainActivity;
 import org.iota.wallet.api.TaskManager;
-import org.iota.wallet.ui.fragment.GenerateQRCodeFragment;
-import org.iota.wallet.ui.fragment.TangleExplorerTabFragment;
 import org.iota.wallet.helper.Constants;
 import org.iota.wallet.model.QRCode;
 import org.iota.wallet.model.api.requests.ReplayBundleRequest;
+import org.iota.wallet.ui.activity.MainActivity;
+import org.iota.wallet.ui.fragment.GenerateQRCodeFragment;
+import org.iota.wallet.ui.fragment.TangleExplorerTabFragment;
 
 public class WalletTransfersItemDialog extends DialogFragment implements DialogInterface.OnClickListener {
 
@@ -112,8 +112,6 @@ public class WalletTransfersItemDialog extends DialogFragment implements DialogI
                 ReplayBundleRequest rtr = new ReplayBundleRequest(hash);
                 TaskManager rt = new TaskManager(getActivity());
                 rt.startNewRequestTask(rtr);
-                break;
-            default:
                 break;
         }
     }

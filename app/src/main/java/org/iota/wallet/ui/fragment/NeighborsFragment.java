@@ -56,8 +56,6 @@ import com.hudomju.swipe.adapter.RecyclerViewAdapter;
 
 import org.greenrobot.eventbus.Subscribe;
 import org.iota.wallet.R;
-import org.iota.wallet.ui.activity.MainActivity;
-import org.iota.wallet.ui.adapter.NeighborsListAdapter;
 import org.iota.wallet.api.TaskManager;
 import org.iota.wallet.databinding.FragmentNeighborsBinding;
 import org.iota.wallet.helper.Constants;
@@ -68,6 +66,8 @@ import org.iota.wallet.model.api.responses.AddNeighborsResponse;
 import org.iota.wallet.model.api.responses.GetNeighborsResponse;
 import org.iota.wallet.model.api.responses.RemoveNeighborsResponse;
 import org.iota.wallet.model.api.responses.error.NetworkError;
+import org.iota.wallet.ui.activity.MainActivity;
+import org.iota.wallet.ui.adapter.NeighborsListAdapter;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -247,20 +247,19 @@ public class NeighborsFragment extends BaseSwipeRefreshLayoutFragment implements
 
     @Subscribe
     public void onEvent(NetworkError error) {
-        swipeRefreshLayout.setRefreshing(false);
         switch (error.getErrorType()) {
             case ACCESS_ERROR:
+                swipeRefreshLayout.setRefreshing(false);
                 if (neighbors != null)
                     neighbors.clear();
                 if (adapter != null)
                     adapter.notifyDataSetChanged();
                 break;
             case REMOTE_NODE_ERROR:
+                swipeRefreshLayout.setRefreshing(false);
                 if (neighbors != null)
                     neighbors.clear();
                 setAdapter();
-                break;
-            default:
                 break;
         }
     }

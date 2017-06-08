@@ -95,8 +95,6 @@ public class WalletPagerAdapter extends FragmentPagerAdapter {
                     addressesFragment.onFabClick();
                 }
                 break;
-            default:
-                break;
         }
     }
 }

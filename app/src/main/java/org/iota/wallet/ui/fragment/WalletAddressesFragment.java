@@ -33,7 +33,6 @@ import android.view.ViewGroup;
 import org.greenrobot.eventbus.Subscribe;
 import org.iota.wallet.IOTA;
 import org.iota.wallet.R;
-import org.iota.wallet.ui.adapter.WalletAddressCardAdapter;
 import org.iota.wallet.api.TaskManager;
 import org.iota.wallet.databinding.FragmentWalletAddressesBinding;
 import org.iota.wallet.helper.Constants;
@@ -44,6 +43,7 @@ import org.iota.wallet.model.api.responses.GetNewAddressResponse;
 import org.iota.wallet.model.api.responses.NodeInfoResponse;
 import org.iota.wallet.model.api.responses.SendTransferResponse;
 import org.iota.wallet.model.api.responses.error.NetworkError;
+import org.iota.wallet.ui.adapter.WalletAddressCardAdapter;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -168,16 +168,15 @@ public class WalletAddressesFragment extends BaseSwipeRefreshLayoutFragment impl
 
     @Subscribe
     public void onEvent(NetworkError error) {
-        swipeRefreshLayout.setRefreshing(false);
         switch (error.getErrorType()) {
             case ACCESS_ERROR:
+                swipeRefreshLayout.setRefreshing(false);
                 getNodeInfo();
                 break;
             case REMOTE_NODE_ERROR:
+                swipeRefreshLayout.setRefreshing(false);
                 addresses.clear();
                 setAdapter();
-                break;
-            default:
                 break;
         }
     }

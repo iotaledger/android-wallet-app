@@ -145,14 +145,11 @@ public class TangleExplorerTransactionsFragment extends BaseSwipeRefreshLayoutFr
 
     @Subscribe
     public void onEvent(NetworkError error) {
-        swipeRefreshLayout.setRefreshing(false);
-
         switch (error.getErrorType()) {
             case NETWORK_ERROR:
             case IOTA_COOL_NETWORK_ERROR:
+                swipeRefreshLayout.setRefreshing(false);
                 transactions.clear();
-                break;
-            default:
                 break;
         }
     }

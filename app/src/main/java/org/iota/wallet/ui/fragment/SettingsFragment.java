@@ -60,8 +60,6 @@ public class SettingsFragment extends PreferenceFragment implements Preference.O
             case PREFERENCE_SCREEN_MISC:
                 fragment = new SettingsMiscFragment();
                 break;
-            default:
-                break;
         }
         if (fragment != null) {
             getFragmentManager()

@@ -35,7 +35,6 @@ import android.view.ViewGroup;
 
 import org.greenrobot.eventbus.Subscribe;
 import org.iota.wallet.R;
-import org.iota.wallet.ui.adapter.WalletTransfersCardAdapter;
 import org.iota.wallet.api.TaskManager;
 import org.iota.wallet.databinding.FragmentWalletTransfersBinding;
 import org.iota.wallet.model.Transfer;
@@ -46,6 +45,7 @@ import org.iota.wallet.model.api.responses.GetTransferResponse;
 import org.iota.wallet.model.api.responses.NodeInfoResponse;
 import org.iota.wallet.model.api.responses.SendTransferResponse;
 import org.iota.wallet.model.api.responses.error.NetworkError;
+import org.iota.wallet.ui.adapter.WalletTransfersCardAdapter;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -74,16 +74,15 @@ public class WalletTransfersFragment extends BaseSwipeRefreshLayoutFragment impl
 
     @Subscribe
     public void onEvent(NetworkError error) {
-        swipeRefreshLayout.setRefreshing(false);
         switch (error.getErrorType()) {
             case ACCESS_ERROR:
+                swipeRefreshLayout.setRefreshing(false);
                 getNodeInfo();
                 break;
             case REMOTE_NODE_ERROR:
+                swipeRefreshLayout.setRefreshing(false);
                 transfers.clear();
                 setAdapter();
-                break;
-            default:
                 break;
         }
     }

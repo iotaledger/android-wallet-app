@@ -69,8 +69,6 @@ public class SettingsNodeFragment extends PreferenceFragment implements SharedPr
                         Snackbar.make(getView(), R.string.settings_messages_empty_node_port, Snackbar.LENGTH_LONG).show();
                 }
                 break;
-            default:
-                break;
         }
     }
 }
