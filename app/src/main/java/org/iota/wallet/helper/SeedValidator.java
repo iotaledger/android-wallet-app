@@ -30,29 +30,26 @@ public class SeedValidator {
     private static final int SEED_LENGTH_MAX = 81;
 
     public static String isSeedValid(Context context, String seed) {
-        if (!seed.matches("^[A-Z9]+$") && seed.length() != 0) {
+        if (!seed.matches("^[A-Z9a-z]+$")) {
             if (seed.length() > SEED_LENGTH_MAX)
                 return context.getString(R.string.messages_invalid_characters_seed) + " " + context.getString(R.string.messages_seed_to_long);
             else if (seed.length() < SEED_LENGTH_MIN)
                 return context.getString(R.string.messages_invalid_characters_seed) + " " + context.getString(R.string.messages_seed_to_short);
             else
             return context.getString(R.string.messages_invalid_characters_seed);
-        }
 
-        if (seed.matches("^[A-Za-z]+$")) {
+        } else if (seed.matches(".*[A-Z].*") && seed.matches(".*[a-z].*")) {
             if (seed.length() > SEED_LENGTH_MAX)
                 return context.getString(R.string.messages_mixed_seed) + " " + context.getString(R.string.messages_seed_to_long);
             else if (seed.length() < SEED_LENGTH_MIN)
                 return context.getString(R.string.messages_mixed_seed) + " " + context.getString(R.string.messages_seed_to_short);
             else
                 return context.getString(R.string.messages_mixed_seed);
-        }
 
-        if (seed.length() > SEED_LENGTH_MAX) {
+        } else if (seed.length() > SEED_LENGTH_MAX) {
             return context.getString(R.string.messages_to_long_seed);
-        }
 
-        if (seed.length() < SEED_LENGTH_MIN) {
+        } else if (seed.length() < SEED_LENGTH_MIN) {
             return context.getString(R.string.messages_to_short_seed);
         }
 
