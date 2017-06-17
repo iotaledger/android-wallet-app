@@ -40,9 +40,9 @@ public class AlternateValueManager {
         AlternateValueCalculator calculator = new AlternateValueCalculator(baseCurrency,
                 new ExchangeRateStorage(PreferenceManager.getDefaultSharedPreferences(context)));
 
-        // convert the iota to Giga iota assuming that iota will be traded in giga iotas
+        // convert the iota to mega iota assuming that iota will be traded in mega iotas
 
-        double walletBalanceGigaIota = jota.utils.IotaUnitConverter.convertUnits(iotaAmount, IotaUnits.IOTA, IotaUnits.GIGA_IOTA);
+        double walletBalanceGigaIota = jota.utils.IotaUnitConverter.convertUnits(iotaAmount, IotaUnits.IOTA, IotaUnits.MEGA_IOTA);
         return calculator.calculateValue((float) walletBalanceGigaIota, currency);
     }
 
