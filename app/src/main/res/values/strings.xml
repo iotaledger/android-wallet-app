@@ -197,7 +197,7 @@
     <string name="message_confirm_transfer">Are you sure you want to send the transfer?</string>
 
     <!-- Confirm logout dialog -->
-    <string name="message_confirm_logout">Are you sure you want to log out now?\nPlease note that you may loose your seed if you don\'t have a backup!</string>
+    <string name="message_confirm_logout">Are you sure you want to log out now?\nPlease note that you may lose your seed if you don\'t have a backup!</string>
 
     <!-- Fragment title -->
     <string name="fragment_about_title">About</string>
