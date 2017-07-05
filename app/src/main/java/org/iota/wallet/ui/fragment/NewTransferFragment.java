@@ -221,6 +221,9 @@ public class NewTransferFragment extends Fragment implements View.OnClickListene
             case R.id.new_transfer_send_fab_button:
                 SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getActivity());
 
+                final String msg = getMessage().toUpperCase();
+                final String tag = getTaG().toUpperCase();
+                
                 addressEditTextInputLayout.setError(null);
                 tagEditTextInputLayout.setError(null);
                 amountEditTextInputLayout.setError(null);
@@ -235,13 +238,13 @@ public class NewTransferFragment extends Fragment implements View.OnClickListene
                 } else if (prefs.getLong(Constants.PREFERENCES_CURRENT_IOTA_BALANCE, 0) < Long.parseLong(amountInSelectedUnit())) {
                     amountEditTextInputLayout.setError(getString(R.string.messages_not_enough_balance));
 
-                } else if (!InputValidator.isTrytes(getMessage(), getMessage().length()) && !getMessage().equals(getMessage().toUpperCase())) {
+                } else if (!InputValidator.isTrytes(msg, msg.length())) {
                     messageEditTextInputLayout.setError(getString(R.string.messages_invalid_characters));
 
-                } else if (!InputValidator.isTrytes(getTaG(), getTaG().length()) && !getTaG().equals(getTaG().toUpperCase())) {
+                } else if (!InputValidator.isTrytes(tag, tag.length())) {
                     tagEditTextInputLayout.setError(getString(R.string.messages_invalid_characters));
 
-                } else if (getTaG().length() > 27) {
+                } else if (tag.length() > 27) {
                     tagEditTextInputLayout.setError(getString(R.string.messages_tag_to_long));
 
                 } else {
@@ -256,7 +259,7 @@ public class NewTransferFragment extends Fragment implements View.OnClickListene
                             new DialogInterface.OnClickListener() {
                                 public void onClick(DialogInterface dialog, int which) {
                                     SendTransferRequest tir = new SendTransferRequest(getAddress(),
-                                            amountInSelectedUnit(), getMessage(), getTaG());
+                                            amountInSelectedUnit(), msg, tag);
 
                                     TaskManager rt = new TaskManager(getActivity());
                                     rt.startNewRequestTask(tir);
@@ -317,7 +320,6 @@ public class NewTransferFragment extends Fragment implements View.OnClickListene
                         Constants.REQUEST_CAMERA_PERMISSION);
 
             } else {
-
                 //Camera permissions have not been granted yet so request them directly
                 this.requestPermissions(new String[]{Manifest.permission.CAMERA},
                         Constants.REQUEST_CAMERA_PERMISSION);

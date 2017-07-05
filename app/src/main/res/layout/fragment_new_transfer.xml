@@ -98,7 +98,9 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="@string/message_optional"
-                    android:inputType="text" />
+                    android:inputType="text" 
+                    android:digits="abddefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ9"
+                    />
 
             </android.support.design.widget.TextInputLayout>
 
@@ -116,7 +118,9 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="@string/tag_optional"
-                    android:inputType="text" />
+                    android:inputType="text" 
+                    android:digits="abddefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ9"
+                    />
 
             </android.support.design.widget.TextInputLayout>
 
