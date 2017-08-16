@@ -25,7 +25,6 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.Snackbar;
 import android.support.v4.view.MenuItemCompat;
-import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SearchView;
@@ -81,8 +80,8 @@ public class TangleExplorerSearchFragment extends BaseSwipeRefreshLayoutFragment
         searchBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_tangle_explorer_search, container, false);
         View view = searchBinding.getRoot();
 
-        swipeRefreshLayout = (SwipeRefreshLayout) view.findViewById(R.id.tangle_explorer_search_swipe_container);
-        recyclerView = (RecyclerView) view.findViewById(R.id.tangle_explorer_search_recycler_view);
+        swipeRefreshLayout = view.findViewById(R.id.tangle_explorer_search_swipe_container);
+        recyclerView = view.findViewById(R.id.tangle_explorer_search_recycler_view);
 
         inputManager = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
 
@@ -90,7 +89,7 @@ public class TangleExplorerSearchFragment extends BaseSwipeRefreshLayoutFragment
     }
 
     @Subscribe
-    public void onEvent(Bundle bundle){
+    public void onEvent(Bundle bundle) {
         hash = bundle.getString(Constants.TANGLE_EXPLORER_SEARCH_ITEM);
         searchBinding.setTransactions(this.transactions);
         if (this.transactions != null) this.transactions.clear();
@@ -104,7 +103,7 @@ public class TangleExplorerSearchFragment extends BaseSwipeRefreshLayoutFragment
         MenuItem searchItem = menu.findItem(R.id.action_search);
         this.searchView = (SearchView) MenuItemCompat.getActionView(searchItem);
         searchView.setOnQueryTextListener(this);
-        if(trigger){
+        if (trigger) {
             searchItem.expandActionView();
             searchView.setQuery(hash, false);
             trigger = false;
@@ -153,7 +152,7 @@ public class TangleExplorerSearchFragment extends BaseSwipeRefreshLayoutFragment
             rt.startNewRequestTask(gtr);
         } else {
             swipeRefreshLayout.setRefreshing(false);
-            Snackbar.make(getActivity().findViewById(R.id.drawer_layout), getString(R.string.messages_bundle_not_found), Snackbar.LENGTH_LONG).show();
+            Snackbar.make(getActivity().findViewById(R.id.drawer_layout), getString(R.string.messages_trx_not_found), Snackbar.LENGTH_LONG).show();
         }
     }
 
@@ -199,8 +198,13 @@ public class TangleExplorerSearchFragment extends BaseSwipeRefreshLayoutFragment
 
         TaskManager rt = new TaskManager(getActivity());
 
-        FindTransactionRequest ftr = new FindTransactionRequest(searchView.getQuery().toString());
-        rt.startNewRequestTask(ftr);
+        if (!trigger) {
+            GetBundleRequest gbr = new GetBundleRequest(searchView.getQuery().toString());
+            rt.startNewRequestTask(gbr);
+        } else {
+            FindTransactionRequest ftr = new FindTransactionRequest(searchView.getQuery().toString());
+            rt.startNewRequestTask(ftr);
+        }
 
         if (!swipeRefreshLayout.isRefreshing()) {
             swipeRefreshLayout.post(new Runnable() {
@@ -216,6 +220,7 @@ public class TangleExplorerSearchFragment extends BaseSwipeRefreshLayoutFragment
     public void onEvent(NetworkError error) {
         switch (error.getErrorType()) {
             case NETWORK_ERROR:
+            case INVALID_HASH_ERROR:
             case IOTA_COOL_NETWORK_ERROR:
                 swipeRefreshLayout.setRefreshing(false);
                 if (transactions != null)

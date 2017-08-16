@@ -50,10 +50,8 @@ public class GetNewAddressRequestHandler extends IotaRequestHandler {
         ApiResponse response;
         int notificationId = Utils.createNewID();
 
-        if (((GetNewAddressRequest) request).shouldAttachAddress()) {
             NotificationHelper.requestNotification(context,
                     R.drawable.ic_address, context.getString(R.string.notification_generate_new_address_request_title), notificationId);
-        }
         try {
             response = new GetNewAddressResponse(apiProxy.getNewAddress(((GetNewAddressRequest) request).getSeed(),
                     ((GetNewAddressRequest) request).getSecurity(),
@@ -67,7 +65,7 @@ public class GetNewAddressRequestHandler extends IotaRequestHandler {
             mNotificationManager.cancel(notificationId);
         }
 
-        if (response instanceof GetNewAddressResponse && ((GetNewAddressRequest) request).shouldAttachAddress()) {
+        if (response instanceof GetNewAddressResponse) {
             NotificationHelper.responseNotification(context, R.drawable.ic_address, context.getString(R.string.notification_generating_new_address_response_succeeded_title), notificationId);
         }
         return response;

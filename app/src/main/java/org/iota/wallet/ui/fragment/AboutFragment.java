@@ -37,9 +37,9 @@ import android.widget.TextView;
 
 import org.iota.wallet.IOTA;
 import org.iota.wallet.R;
-import org.iota.wallet.ui.dialog.ChangelogDialog;
 import org.iota.wallet.helper.Constants;
 import org.iota.wallet.model.QRCode;
+import org.iota.wallet.ui.dialog.ChangelogDialog;
 
 import de.psdev.licensesdialog.LicensesDialog;
 
@@ -57,15 +57,15 @@ public class AboutFragment extends Fragment implements View.OnClickListener {
         View view = inflater.inflate(R.layout.fragment_about, container, false);
         ((AppCompatActivity) getActivity()).setSupportActionBar((Toolbar) view.findViewById(R.id.about_toolbar));
 
-        versionTextView = (TextView) view.findViewById(R.id.about_version);
-        TextView changelogTextView = (TextView) view.findViewById(R.id.about_changelog);
-        TextView licensesTextView = (TextView) view.findViewById(R.id.about_licenses);
+        versionTextView = view.findViewById(R.id.about_version);
+        TextView changelogTextView = view.findViewById(R.id.about_changelog);
+        TextView licensesTextView = view.findViewById(R.id.about_licenses);
 
-        TextView donationBtcTextView = (TextView) view.findViewById(R.id.about_donation_btc);
-        TextView donationIotaTextView = (TextView) view.findViewById(R.id.about_donation_iota);
-        TextView donationWebsiteTextView = (TextView) view.findViewById(R.id.about_donation_website);
+        TextView donationBtcTextView = view.findViewById(R.id.about_donation_btc);
+        TextView donationIotaTextView = view.findViewById(R.id.about_donation_iota);
+        TextView donationWebsiteTextView = view.findViewById(R.id.about_donation_website);
 
-        TextView faqWebsiteTextView = (TextView) view.findViewById(R.id.about_faq);
+        TextView faqWebsiteTextView = view.findViewById(R.id.about_faq);
 
         changelogTextView.setOnClickListener(this);
         licensesTextView.setOnClickListener(this);

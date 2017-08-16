@@ -24,7 +24,6 @@ import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.view.MenuItemCompat;
-import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.preference.PreferenceManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.SearchView;
@@ -96,10 +95,10 @@ public class TangleExplorerTransactionsFragment extends BaseSwipeRefreshLayoutFr
         coolTransactionsBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_tangle_explorer_transactions, container, false);
         View view = coolTransactionsBinding.getRoot();
 
-        swipeRefreshLayout = (SwipeRefreshLayout) view.findViewById(R.id.tangle_explorer_transactions_swipe_container);
+        swipeRefreshLayout = view.findViewById(R.id.tangle_explorer_transactions_swipe_container);
         swipeRefreshLayout.setEnabled(false);
 
-        recyclerView = (FastScrollRecyclerView) view.findViewById(R.id.tangle_explorer_transactions_fast_recycler_view);
+        recyclerView = view.findViewById(R.id.tangle_explorer_transactions_fast_recycler_view);
 
         return view;
     }

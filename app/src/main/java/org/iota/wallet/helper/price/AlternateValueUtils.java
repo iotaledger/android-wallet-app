@@ -38,8 +38,6 @@ public class AlternateValueUtils {
             return "€";
         else if (currency.equals(Currency.CNY))
             return "¥";
-        else if (currency.equals(Currency.RUR))
-            return "\u20BD";
 
         // should never happen:
         return "";

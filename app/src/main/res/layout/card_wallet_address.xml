@@ -12,33 +12,33 @@
     tools:ignore="contentDescription">
 
 
-        <LinearLayout
-            android:layout_width="match_parent"
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:clipChildren="false"
+        android:gravity="center_vertical"
+        android:paddingBottom="@dimen/baseline_typo">
+
+        <ImageView
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:clipChildren="false"
-            android:gravity="center_vertical"
-            android:paddingBottom="@dimen/baseline_typo">
+            android:src="@drawable/ic_address" />
 
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/ic_address" />
+        <android.support.v4.widget.Space
+            android:layout_width="@dimen/baseline"
+            android:layout_height="wrap_content" />
 
-            <android.support.v4.widget.Space
-                android:layout_width="@dimen/baseline"
-                android:layout_height="wrap_content" />
+        <TextView
+            android:id="@+id/item_wa_address"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:textAppearance="@style/Base.TextAppearance.AppCompat.Body1"
+            tools:text="PFQIMSMFJZCXZEB99QTOMYDSKIFCXTLTVSWQFZMWKO9CZHZYA9VZRKQKMRDRVOVSGXWUULHD9MZK9HWAY" />
 
-            <TextView
-                android:id="@+id/item_wa_address"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:textAppearance="@style/Base.TextAppearance.AppCompat.Body1"
-                tools:text="PFQIMSMFJZCXZEB99QTOMYDSKIFCXTLTVSWQFZMWKO9CZHZYA9VZRKQKMRDRVOVSGXWUULHD9MZK9HWAY" />
-
-            <android.support.v4.widget.Space
-                android:layout_width="@dimen/baseline_typo"
-                android:layout_height="wrap_content" />
+        <android.support.v4.widget.Space
+            android:layout_width="@dimen/baseline_typo"
+            android:layout_height="wrap_content" />
 
     </LinearLayout>
 

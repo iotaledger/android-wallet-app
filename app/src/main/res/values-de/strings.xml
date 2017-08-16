@@ -71,12 +71,13 @@
     <string name="messages_not_fully_synced_yet">Der Knoten ist noch nicht vollständig synchronisiert.</string>
     <string name="messages_no_data_available">Keine Daten verfügbar</string>
     <string name="messages_not_yet_implemented">Die Funktion ist noch nicht implementiert</string>
-    <string name="messages_enter_txaddress">Bitte eine gültige Empfängeradresse eingeben</string>
+    <string name="messages_enter_txaddress_with_checksum">Bitte eine gültige Empfängeradresse mit Prüfsumme eingeben</string>
     <string name="messages_enter_amount">Bitte einen Betrag angeben</string>
     <string name="messages_not_enough_balance">Nicht genügend Guthaben</string>
     <string name="messages_invalid_characters">Nur Großbuchstaben von A-Z und die Nummer 9 werden akzeptiert.</string>
     <string name="messages_tag_to_long">Bitte ein gültiges Tag eingeben. Maximal 27 Trytes sind erlaubt</string>
-    <string name="messages_bundle_not_found">Bundle oder Adresse nicht gefunden</string>
+    <string name="messages_trx_not_found">Bundle oder Adresse nicht gefunden</string>
+    <string name="messages_bundle_not_found">Bundle nicht gefunden</string>
     <string name="messages_permission_camera">Für das lesen von QR Codes muss der Kamerazugriff erlaubt werden.</string>
     <string name="messages_invalid_password">Falsches Passwort</string>
     <string name="messages_match_password">Passwort stimmt nicht überein</string>

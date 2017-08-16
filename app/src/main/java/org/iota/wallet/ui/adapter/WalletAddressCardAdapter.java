@@ -36,7 +36,7 @@ import java.util.List;
 
 public class WalletAddressCardAdapter extends RecyclerView.Adapter<WalletAddressCardAdapter.ViewHolder> {
 
-    private final List<String> addresses;
+    private List<String> addresses;
     private final Context context;
 
     public WalletAddressCardAdapter(Context context, List<String> listItems) {
@@ -64,6 +64,11 @@ public class WalletAddressCardAdapter extends RecyclerView.Adapter<WalletAddress
         return addresses.get(position + 1);
     }
 
+    public void setAdapterList(List<String> transfers) {
+        this.addresses = addresses;
+        notifyDataSetChanged();
+    }
+
     @Override
     public int getItemCount() {
         return addresses.size();
@@ -75,7 +80,7 @@ public class WalletAddressCardAdapter extends RecyclerView.Adapter<WalletAddress
         private ViewHolder(View itemView) {
             super(itemView);
 
-            addressLabel = (TextView) itemView.findViewById(R.id.item_wa_address);
+            addressLabel = itemView.findViewById(R.id.item_wa_address);
 
             itemView.setOnClickListener(this);
             itemView.setOnLongClickListener(this);

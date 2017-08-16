@@ -37,10 +37,10 @@
 
             <!--  Address Label -->
             <android.support.design.widget.TextInputLayout
-                android:paddingTop="72dp"
                 android:id="@+id/new_transfer_address_text_input_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:paddingTop="72dp"
                 app:errorEnabled="true"
                 app:hintTextAppearance="@style/TextLabel">
 

@@ -5,7 +5,6 @@
         <item>USD</item>
         <item>EUR</item>
         <item>CNY</item>
-        <item>RUR</item>
     </string-array>
 
     <string-array name="listValues">
@@ -13,7 +12,6 @@
         <item>USD</item>
         <item>EUR</item>
         <item>CNY</item>
-        <item>RUR</item>
     </string-array>
 
     <string-array name="listOnWalletTransfersRecyclerViewClickDialog">

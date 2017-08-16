@@ -19,23 +19,27 @@
 
 package org.iota.wallet.model.api.requests;
 
-import java.util.List;
+import org.iota.wallet.IOTA;
 
 /**
- * Created by pinpong on 31.12.16.
+ * Created by Adrian on 29.04.2016.
  */
-
-public class GetInputsRequest extends ApiRequest {
+public class GetAccountDataRequest extends ApiRequest {
 
     private String seed;
     private int security = 2;
-    private List<String> balances;
+    private int index = 0;
+    private boolean checksum = true;
+    private int total = 0;
+    private boolean returnAll = true;
     private int start = 0;
     private int end = 0;
-    private int threshold = 0;
+    private boolean inclusionState = true;
+    private long threshold = 0;
 
-    public GetInputsRequest(String seed) {
-        this.seed = seed;
+
+    public GetAccountDataRequest() {
+        this.seed = String.valueOf(IOTA.seed);
     }
 
     public String getSeed() {
@@ -54,20 +58,36 @@ public class GetInputsRequest extends ApiRequest {
         this.security = security;
     }
 
-    public int getEnd() {
-        return end;
+    public int getIndex() {
+        return index;
     }
 
-    public void setEnd(int end) {
-        this.end = end;
+    public void setIndex(int index) {
+        this.index = index;
     }
 
-    public List<String> getBalances() {
-        return balances;
+    public boolean isChecksum() {
+        return checksum;
     }
 
-    public void setBalances(List<String> balances) {
-        this.balances = balances;
+    public void setChecksum(boolean checksum) {
+        this.checksum = checksum;
+    }
+
+    public int getTotal() {
+        return total;
+    }
+
+    public void setTotal(int total) {
+        this.total = total;
+    }
+
+    public boolean isReturnAll() {
+        return returnAll;
+    }
+
+    public void setReturnAll(boolean returnAll) {
+        this.returnAll = returnAll;
     }
 
     public int getStart() {
@@ -78,11 +98,27 @@ public class GetInputsRequest extends ApiRequest {
         this.start = start;
     }
 
-    public int getThreshold() {
+    public int getEnd() {
+        return end;
+    }
+
+    public void setEnd(int end) {
+        this.end = end;
+    }
+
+    public boolean isInclusionState() {
+        return inclusionState;
+    }
+
+    public void setInclusionState(boolean inclusionState) {
+        this.inclusionState = inclusionState;
+    }
+
+    public long getThreshold() {
         return threshold;
     }
 
-    public void setThreshold(int threshold) {
+    public void setThreshold(long threshold) {
         this.threshold = threshold;
     }
 }

@@ -71,12 +71,13 @@
     <string name="messages_not_fully_synced_yet">The connected node ist not fully synced yet</string>
     <string name="messages_no_data_available">No data available</string>
     <string name="messages_not_yet_implemented">Not yet implemented</string>
-    <string name="messages_enter_txaddress">Please enter a valid recipient address</string>
+    <string name="messages_enter_txaddress_with_checksum">Please enter a valid recipient address with checksum</string>
     <string name="messages_enter_amount">Please enter a amount</string>
     <string name="messages_not_enough_balance">Not enough credit</string>
     <string name="messages_invalid_characters">Only uppercase characters from A-Z and the number 9 are accepted.</string>
     <string name="messages_tag_to_long">Please enter a valid tag. Maximum 27 trytes allowed.</string>
-    <string name="messages_bundle_not_found">Bundle or address not found</string>
+    <string name="messages_trx_not_found">Bundle or address not found</string>
+    <string name="messages_bundle_not_found">Bundle not found</string>
     <string name="messages_permission_camera">Reading QR code required camera permission. Allow it, to read QR codes.</string>
     <string name="messages_invalid_password">Invalid password</string>
     <string name="messages_match_password">Password not match</string>

@@ -37,12 +37,12 @@ import com.github.aakira.expandablelayout.ExpandableLayoutListenerAdapter;
 import com.github.aakira.expandablelayout.ExpandableRelativeLayout;
 
 import org.iota.wallet.R;
-import org.iota.wallet.ui.dialog.WalletTransfersItemDialog;
 import org.iota.wallet.helper.Utils;
 import org.iota.wallet.helper.price.AlternateValueManager;
 import org.iota.wallet.helper.price.AlternateValueUtils;
 import org.iota.wallet.helper.price.ExchangeRateNotAvailableException;
 import org.iota.wallet.model.Transfer;
+import org.iota.wallet.ui.dialog.WalletTransfersItemDialog;
 import org.knowm.xchange.currency.Currency;
 
 import java.util.List;
@@ -146,16 +146,16 @@ public class WalletTransfersCardAdapter extends RecyclerView.Adapter<WalletTrans
         private ViewHolder(View itemView) {
             super(itemView);
 
-            valueLabel = (TextView) itemView.findViewById(R.id.item_wt_value);
-            alternativeValueLabel = (TextView) itemView.findViewById(R.id.item_wt_alternate_value);
-            addressLabel = (TextView) itemView.findViewById(R.id.item_wt_address);
-            messageLabel = (TextView) itemView.findViewById(R.id.item_wt_message);
-            tagLabel = (TextView) itemView.findViewById(R.id.item_wt_tag);
-            timeLabel = (TextView) itemView.findViewById(R.id.item_wt_time);
-            hashLabel = (TextView) itemView.findViewById(R.id.item_wt_hash);
-            persistenceLabel = (TextView) itemView.findViewById(R.id.item_wt_persistence);
-            expandButton = (ImageButton) itemView.findViewById(R.id.item_wt_expand_button);
-            expandableLayout = (ExpandableRelativeLayout) itemView.findViewById(R.id.item_wt_expand_layout);
+            valueLabel = itemView.findViewById(R.id.item_wt_value);
+            alternativeValueLabel = itemView.findViewById(R.id.item_wt_alternate_value);
+            addressLabel = itemView.findViewById(R.id.item_wt_address);
+            messageLabel = itemView.findViewById(R.id.item_wt_message);
+            tagLabel = itemView.findViewById(R.id.item_wt_tag);
+            timeLabel = itemView.findViewById(R.id.item_wt_time);
+            hashLabel = itemView.findViewById(R.id.item_wt_hash);
+            persistenceLabel = itemView.findViewById(R.id.item_wt_persistence);
+            expandButton = itemView.findViewById(R.id.item_wt_expand_button);
+            expandableLayout = itemView.findViewById(R.id.item_wt_expand_layout);
             expandableLayout.collapse();
 
             itemView.setOnClickListener(this);

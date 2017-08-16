@@ -59,9 +59,9 @@ public class ShowSeedDialog extends DialogFragment implements TextView.OnEditorA
 
         LayoutInflater inflater = LayoutInflater.from(getActivity());
         @SuppressLint("InflateParams") final View dialogView = inflater.inflate(R.layout.dialog_show_seed, null);
-        textInputLayoutPassword = (TextInputLayout) dialogView.findViewById(R.id.password_input_layout);
-        textInputEditTextPassword = (TextInputEditText) dialogView.findViewById(R.id.password);
-        textViewSeed = (TextView) dialogView.findViewById(R.id.decrypted_seed);
+        textInputLayoutPassword = dialogView.findViewById(R.id.password_input_layout);
+        textInputEditTextPassword = dialogView.findViewById(R.id.password);
+        textViewSeed = dialogView.findViewById(R.id.decrypted_seed);
         textInputEditTextPassword.setOnEditorActionListener(this);
 
         final AlertDialog alertDialog = new AlertDialog.Builder(getActivity())

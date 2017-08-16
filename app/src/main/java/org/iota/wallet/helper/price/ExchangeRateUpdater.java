@@ -23,7 +23,7 @@ package org.iota.wallet.helper.price;
 import org.knowm.xchange.Exchange;
 import org.knowm.xchange.ExchangeFactory;
 import org.knowm.xchange.bitfinex.v1.BitfinexExchange;
-import org.knowm.xchange.btce.v3.BTCEExchange;
+import org.knowm.xchange.bitstamp.BitstampExchange;
 import org.knowm.xchange.currency.Currency;
 import org.knowm.xchange.currency.CurrencyPair;
 import org.knowm.xchange.okcoin.OkCoinExchange;
@@ -47,9 +47,8 @@ class ExchangeRateUpdater {
         exchanges = new HashMap<>();
         exchanges.put(baseCurrencyBtcPair, ExchangeFactory.INSTANCE.createExchange(BitfinexExchange.class.getName()));
         exchanges.put(CurrencyPair.BTC_USD, ExchangeFactory.INSTANCE.createExchange(BitfinexExchange.class.getName()));
-        exchanges.put(CurrencyPair.BTC_EUR, ExchangeFactory.INSTANCE.createExchange(BTCEExchange.class.getName()));
+        exchanges.put(CurrencyPair.BTC_EUR, ExchangeFactory.INSTANCE.createExchange(BitstampExchange.class.getName()));
         exchanges.put(CurrencyPair.BTC_CNY, ExchangeFactory.INSTANCE.createExchange(OkCoinExchange.class.getName()));
-        exchanges.put(CurrencyPair.BTC_RUR, ExchangeFactory.INSTANCE.createExchange(BTCEExchange.class.getName()));
 
         // add more currencies/exchange pairs (btc/fiat) here
     }
@@ -64,7 +63,7 @@ class ExchangeRateUpdater {
         try {
             if (exchanges.containsKey(currencyPair)) {
                 BigDecimal price = exchanges.get(currencyPair)
-                        .getPollingMarketDataService()
+                        .getMarketDataService()
                         .getTicker(currencyPair)
                         .getLast();
 

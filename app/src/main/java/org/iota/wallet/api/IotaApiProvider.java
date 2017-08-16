@@ -24,12 +24,10 @@ import android.content.Context;
 import org.iota.wallet.api.handler.AddNeighborsRequestHandler;
 import org.iota.wallet.api.handler.CoolTransactionsRequestHandler;
 import org.iota.wallet.api.handler.FindTransactionsRequestHandler;
-import org.iota.wallet.api.handler.GetBalancesRequestHandler;
+import org.iota.wallet.api.handler.GetAccountDataRequestHandler;
 import org.iota.wallet.api.handler.GetBundleRequestHandler;
-import org.iota.wallet.api.handler.GetInputsRequestHandler;
 import org.iota.wallet.api.handler.GetNeighborsRequestHandler;
 import org.iota.wallet.api.handler.GetNewAddressRequestHandler;
-import org.iota.wallet.api.handler.GetTransferRequestHandler;
 import org.iota.wallet.api.handler.NodeInfoRequestHandler;
 import org.iota.wallet.api.handler.RemoveNeighborsRequestHandler;
 import org.iota.wallet.api.handler.ReplayBundleRequestHandler;
@@ -44,7 +42,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 import jota.IotaAPI;
-import jota.pow.JCurl;
 
 public class IotaApiProvider implements ApiProvider {
     private final IotaAPI iotaApi;
@@ -52,8 +49,7 @@ public class IotaApiProvider implements ApiProvider {
     private Map<Class<? extends ApiRequest>, RequestHandler> requestHandlerMap;
 
     public IotaApiProvider(String host, int port, Context context) {
-        JCurl curl = new JCurl();
-        this.iotaApi = new IotaAPI.Builder().protocol("http").host(host).port(((Integer) port).toString()).withCustomCurl(curl).build();
+        this.iotaApi = new IotaAPI.Builder().protocol("http").host(host).port(((Integer) port).toString()).build();
         this.context = context;
         loadRequestMap();
     }
@@ -64,12 +60,10 @@ public class IotaApiProvider implements ApiProvider {
         AddNeighborsRequestHandler addNeighborsAction = new AddNeighborsRequestHandler(iotaApi, context);
         CoolTransactionsRequestHandler coolTransactionsAction = new CoolTransactionsRequestHandler(iotaApi, context);
         FindTransactionsRequestHandler findTransactionsAction = new FindTransactionsRequestHandler(iotaApi, context);
-        GetBalancesRequestHandler getBalancesAction = new GetBalancesRequestHandler(iotaApi, context);
         GetBundleRequestHandler getBundleAction = new GetBundleRequestHandler(iotaApi, context);
-        GetInputsRequestHandler getInputsAction = new GetInputsRequestHandler(iotaApi, context);
         GetNeighborsRequestHandler getNeighborsAction = new GetNeighborsRequestHandler(iotaApi, context);
         GetNewAddressRequestHandler getNewAddressAction = new GetNewAddressRequestHandler(iotaApi, context);
-        GetTransferRequestHandler getTransferAction = new GetTransferRequestHandler(iotaApi, context);
+        GetAccountDataRequestHandler getAccountDataAction = new GetAccountDataRequestHandler(iotaApi, context);
         RemoveNeighborsRequestHandler removeNeighborsAction = new RemoveNeighborsRequestHandler(iotaApi, context);
         ReplayBundleRequestHandler replayBundleAction = new ReplayBundleRequestHandler(iotaApi, context);
         SendTransferRequestHandler sendTransferAction = new SendTransferRequestHandler(iotaApi, context);
@@ -78,12 +72,10 @@ public class IotaApiProvider implements ApiProvider {
         requestHandlerMap.put(addNeighborsAction.getType(), addNeighborsAction);
         requestHandlerMap.put(coolTransactionsAction.getType(), coolTransactionsAction);
         requestHandlerMap.put(findTransactionsAction.getType(), findTransactionsAction);
-        requestHandlerMap.put(getBalancesAction.getType(), getBalancesAction);
         requestHandlerMap.put(getBundleAction.getType(), getBundleAction);
-        requestHandlerMap.put(getInputsAction.getType(), getInputsAction);
         requestHandlerMap.put(getNeighborsAction.getType(), getNeighborsAction);
         requestHandlerMap.put(getNewAddressAction.getType(), getNewAddressAction);
-        requestHandlerMap.put(getTransferAction.getType(), getTransferAction);
+        requestHandlerMap.put(getAccountDataAction.getType(), getAccountDataAction);
         requestHandlerMap.put(removeNeighborsAction.getType(), removeNeighborsAction);
         requestHandlerMap.put(replayBundleAction.getType(), replayBundleAction);
         requestHandlerMap.put(sendTransferAction.getType(), sendTransferAction);

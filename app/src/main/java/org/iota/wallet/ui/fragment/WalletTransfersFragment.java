@@ -26,7 +26,6 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.Snackbar;
-import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -38,10 +37,10 @@ import org.iota.wallet.R;
 import org.iota.wallet.api.TaskManager;
 import org.iota.wallet.databinding.FragmentWalletTransfersBinding;
 import org.iota.wallet.model.Transfer;
-import org.iota.wallet.model.api.requests.GetTransfersRequest;
+import org.iota.wallet.model.api.requests.GetAccountDataRequest;
 import org.iota.wallet.model.api.requests.NodeInfoRequest;
 import org.iota.wallet.model.api.requests.SendTransferRequest;
-import org.iota.wallet.model.api.responses.GetTransferResponse;
+import org.iota.wallet.model.api.responses.GetAccountDataResponse;
 import org.iota.wallet.model.api.responses.NodeInfoResponse;
 import org.iota.wallet.model.api.responses.SendTransferResponse;
 import org.iota.wallet.model.api.responses.error.NetworkError;
@@ -64,10 +63,10 @@ public class WalletTransfersFragment extends BaseSwipeRefreshLayoutFragment impl
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         transferBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_wallet_transfers, container, false);
         View view = transferBinding.getRoot();
-        swipeRefreshLayout = (SwipeRefreshLayout) view.findViewById(R.id.wallet_transfers_swipe_container);
-        NavigationView navigationView = (NavigationView) getActivity().findViewById(R.id.nav_view);
+        swipeRefreshLayout = view.findViewById(R.id.wallet_transfers_swipe_container);
+        NavigationView navigationView = getActivity().findViewById(R.id.nav_view);
         navigationView.getMenu().findItem(R.id.nav_wallet).setChecked(true);
-        recyclerView = (RecyclerView) view.findViewById(R.id.wallet_transfers_recycler_view);
+        recyclerView = view.findViewById(R.id.wallet_transfers_recycler_view);
 
         return view;
     }
@@ -87,9 +86,9 @@ public class WalletTransfersFragment extends BaseSwipeRefreshLayoutFragment impl
         }
     }
 
-    private void getTransfers() {
+    private void getAccountData() {
         TaskManager rt = new TaskManager(getActivity());
-        GetTransfersRequest gtr = new GetTransfersRequest();
+        GetAccountDataRequest gtr = new GetAccountDataRequest();
         rt.startNewRequestTask(gtr);
 
         if (!swipeRefreshLayout.isRefreshing()) {
@@ -117,11 +116,11 @@ public class WalletTransfersFragment extends BaseSwipeRefreshLayoutFragment impl
     }
 
     @Subscribe
-    public void onEvent(GetTransferResponse transferResponse) {
+    public void onEvent(GetAccountDataResponse gad) {
         swipeRefreshLayout.setRefreshing(false);
 
         //TODO show a bundle card instead of all transfers as a card
-        transfers = transferResponse.getTransfers();
+        transfers = gad.getTransfers();
 
         adapter.setAdapterList(transfers);
 
@@ -129,16 +128,16 @@ public class WalletTransfersFragment extends BaseSwipeRefreshLayoutFragment impl
     }
 
     @Subscribe
-    public void onEvent(SendTransferResponse sendTransferResponse) {
-        if (Arrays.asList(sendTransferResponse.getSuccessfully()).contains(true))
-            getTransfers();
+    public void onEvent(SendTransferResponse str) {
+        if (Arrays.asList(str.getSuccessfully()).contains(true))
+            getAccountData();
     }
 
     @Subscribe
     public void onEvent(NodeInfoResponse nodeInfoResponse) {
 
         if (nodeInfoResponse.getLatestMilestoneIndex() == (nodeInfoResponse.getLatestSolidSubtangleMilestoneIndex())) {
-            getTransfers();
+            getAccountData();
 
         } else {
             swipeRefreshLayout.setRefreshing(false);

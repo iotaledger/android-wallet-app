@@ -26,6 +26,7 @@ import org.iota.wallet.model.api.requests.GetBundleRequest;
 import org.iota.wallet.model.api.responses.ApiResponse;
 import org.iota.wallet.model.api.responses.GetBundleResponse;
 import org.iota.wallet.model.api.responses.error.NetworkError;
+import org.iota.wallet.model.api.responses.error.NetworkErrorType;
 
 import jota.IotaAPI;
 import jota.error.ArgumentException;
@@ -48,9 +49,10 @@ public class GetBundleRequestHandler extends IotaRequestHandler {
         try {
             response =  new GetBundleResponse(apiProxy.getBundle(((GetBundleRequest) request).getTransaction()));
         } catch (ArgumentException|InvalidBundleException|InvalidSignatureException e) {
-            response =  new NetworkError();
+            NetworkError error = new NetworkError();
+            error.setErrorType(NetworkErrorType.INVALID_HASH_ERROR);
+            response = error;
         }
-
         return response;
     }
 }

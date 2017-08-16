@@ -56,10 +56,10 @@ public class PasswordLoginFragment extends Fragment implements View.OnClickListe
         View view = inflater.inflate(R.layout.fragment_password_login, container, false);
         ((AppCompatActivity) getActivity()).setSupportActionBar((Toolbar) view.findViewById(R.id.password_login_toolbar));
 
-        AppCompatButton buttonPasswordLogin = (AppCompatButton) view.findViewById(R.id.password_login_button);
-        textInputLayoutPassword = (TextInputLayout) view.findViewById(R.id.password_forgot_text_input_layout);
-        textInputEditTextPassword = (TextInputEditText) view.findViewById(R.id.password_login);
-        TextView textViewForgotPassword = (TextView) view.findViewById(R.id.password_forgot);
+        AppCompatButton buttonPasswordLogin = view.findViewById(R.id.password_login_button);
+        textInputLayoutPassword = view.findViewById(R.id.password_forgot_text_input_layout);
+        textInputEditTextPassword = view.findViewById(R.id.password_login);
+        TextView textViewForgotPassword = view.findViewById(R.id.password_forgot);
         buttonPasswordLogin.setOnClickListener(this);
         textViewForgotPassword.setOnClickListener(this);
         textInputEditTextPassword.setOnEditorActionListener(this);

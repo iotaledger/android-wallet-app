@@ -26,17 +26,12 @@ public class GetNewAddressRequest extends ApiRequest {
 
     private String seed;
     private int security = 2;
-    private int index;
-    private boolean checksum;
-    private int total;
-    private boolean returnAll;
-    private boolean attaching = true;
+    private int index = 0;
+    private boolean checksum = false;
+    private int total = 0;
+    private boolean returnAll = false;
 
-    public GetNewAddressRequest(int index, boolean checksum, int total, boolean returnAll) {
-        this.index = index;
-        this.checksum = checksum;
-        this.total = total;
-        this.returnAll = returnAll;
+    public GetNewAddressRequest() {
     }
 
     public String getSeed() {
@@ -86,13 +81,4 @@ public class GetNewAddressRequest extends ApiRequest {
     public void setReturnAll(boolean returnAll) {
         this.returnAll = returnAll;
     }
-
-    public boolean shouldAttachAddress() {
-        return attaching;
-    }
-
-    public void setShouldAttachAddress(boolean attaching) {
-        this.attaching = attaching;
-    }
-
 }

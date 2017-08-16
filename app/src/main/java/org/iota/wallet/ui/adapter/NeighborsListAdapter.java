@@ -168,15 +168,15 @@ public class NeighborsListAdapter extends RecyclerView.Adapter<RecyclerView.View
         private ViewHolder(View itemView) {
             super(itemView);
 
-            this.ipAddressTextView = (TextView) itemView.findViewById(R.id.item_neighbor_address);
-            this.numberOfAllTransactionsTextView = (TextView) itemView.findViewById(R.id.item_neighbor_number_of_all_transactions);
-            this.numberOfInvalidTransactionsTextView = (TextView) itemView.findViewById(R.id.item_neighbor_number_of_invalid_transactions);
-            this.numberOfNewTransactionsTextView = (TextView) itemView.findViewById(R.id.item_neighbor_number_of_new_transactions);
-            this.numberOfRandomTransactionRequestsTextView = (TextView) itemView.findViewById(R.id.item_neighbor_number_of_random_transaction_request);
-            this.numberOfSentTransactionsTextView = (TextView) itemView.findViewById(R.id.item_neighbor_number_of_sent_transactions);
-            this.connectionTypeTextView = (TextView) itemView.findViewById(R.id.item_neighbor_connection_type);
+            this.ipAddressTextView = itemView.findViewById(R.id.item_neighbor_address);
+            this.numberOfAllTransactionsTextView = itemView.findViewById(R.id.item_neighbor_number_of_all_transactions);
+            this.numberOfInvalidTransactionsTextView = itemView.findViewById(R.id.item_neighbor_number_of_invalid_transactions);
+            this.numberOfNewTransactionsTextView = itemView.findViewById(R.id.item_neighbor_number_of_new_transactions);
+            this.numberOfRandomTransactionRequestsTextView = itemView.findViewById(R.id.item_neighbor_number_of_random_transaction_request);
+            this.numberOfSentTransactionsTextView = itemView.findViewById(R.id.item_neighbor_number_of_sent_transactions);
+            this.connectionTypeTextView = itemView.findViewById(R.id.item_neighbor_connection_type);
 
-            this.statusView = (ImageView) itemView.findViewById(R.id.item_neighbor_status);
+            this.statusView = itemView.findViewById(R.id.item_neighbor_status);
         }
     }
 }

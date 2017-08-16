@@ -59,6 +59,8 @@ import org.iota.wallet.helper.PermissionRequestHelper;
 import org.iota.wallet.model.QRCode;
 import org.iota.wallet.model.api.requests.SendTransferRequest;
 
+import jota.error.InvalidAddressException;
+import jota.utils.Checksum;
 import jota.utils.InputValidator;
 import jota.utils.IotaUnitConverter;
 import jota.utils.IotaUnits;
@@ -89,16 +91,16 @@ public class NewTransferFragment extends Fragment implements View.OnClickListene
 
         ((AppCompatActivity) getActivity()).setSupportActionBar((Toolbar) view.findViewById(R.id.new_transfer_toolbar));
 
-        amountEditText = (TextInputEditText) view.findViewById(R.id.new_transfer_amount_input);
-        addressEditText = (TextInputEditText) view.findViewById(R.id.new_transfer_address_input);
-        messageEditText = (TextInputEditText) view.findViewById(R.id.new_transfer_message_input);
-        tagEditText = (TextInputEditText) view.findViewById(R.id.new_transfer_tag_input);
-        addressEditTextInputLayout = (TextInputLayout) view.findViewById(R.id.new_transfer_address_text_input_layout);
-        amountEditTextInputLayout = (TextInputLayout) view.findViewById(R.id.new_transfer_amount_text_input_layout);
-        messageEditTextInputLayout = (TextInputLayout) view.findViewById(R.id.new_transfer_message_text_input_layout);
-        tagEditTextInputLayout = (TextInputLayout) view.findViewById(R.id.new_transfer_tag_input_layout);
-        FloatingActionButton sendTransferFabButton = (FloatingActionButton) view.findViewById(R.id.new_transfer_send_fab_button);
-        unitsSpinner = (Spinner) view.findViewById(R.id.new_transfer_units_spinner);
+        amountEditText = view.findViewById(R.id.new_transfer_amount_input);
+        addressEditText = view.findViewById(R.id.new_transfer_address_input);
+        messageEditText = view.findViewById(R.id.new_transfer_message_input);
+        tagEditText = view.findViewById(R.id.new_transfer_tag_input);
+        addressEditTextInputLayout = view.findViewById(R.id.new_transfer_address_text_input_layout);
+        amountEditTextInputLayout = view.findViewById(R.id.new_transfer_amount_text_input_layout);
+        messageEditTextInputLayout = view.findViewById(R.id.new_transfer_message_text_input_layout);
+        tagEditTextInputLayout = view.findViewById(R.id.new_transfer_tag_input_layout);
+        FloatingActionButton sendTransferFabButton = view.findViewById(R.id.new_transfer_send_fab_button);
+        unitsSpinner = view.findViewById(R.id.new_transfer_units_spinner);
         inputManager = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
         sendTransferFabButton.setOnClickListener(this);
 
@@ -226,8 +228,7 @@ public class NewTransferFragment extends Fragment implements View.OnClickListene
                 amountEditTextInputLayout.setError(null);
                 messageEditTextInputLayout.setError(null);
 
-                if (!InputValidator.isAddress(getAddress())) {
-                    addressEditTextInputLayout.setError(getString(R.string.messages_enter_txaddress));
+                if (!isValidAddress()) {
 
                 } else if (getAmount().isEmpty() || getAmount().equals("0")) {
                     amountEditTextInputLayout.setError(getString(R.string.messages_enter_amount));
@@ -347,8 +348,25 @@ public class NewTransferFragment extends Fragment implements View.OnClickListene
         }
     }
 
+    private boolean isValidAddress() {
+        String address = addressEditText.getText().toString();
+        try {
+            if (Checksum.isAddressWithoutChecksum(address)) {
+            }
+        } catch (InvalidAddressException e) {
+            addressEditTextInputLayout.setError(getString(R.string.messages_enter_txaddress_with_checksum));
+            return false;
+        }
+        return true;
+    }
+
     private String getAddress() {
-        return addressEditText.getText().toString();
+        try {
+            return Checksum.removeChecksum(addressEditText.getText().toString());
+        } catch (InvalidAddressException e) {
+            e.printStackTrace();
+        }
+        return "";
     }
 
     private String getAmount() {

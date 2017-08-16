@@ -4,8 +4,8 @@ language: android
 
 env:
   global:
-    - BUILD_TOOLS=25.0.2
-    - ANDROID_SDK=25
+    - BUILD_TOOLS=26.0.0
+    - ANDROID_SDK=26
 
 # JDK version
 jdk:

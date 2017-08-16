@@ -33,9 +33,9 @@ import android.view.ViewGroup;
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.iota.wallet.R;
-import org.iota.wallet.ui.adapter.TangleExplorerPagerAdapter;
 import org.iota.wallet.helper.Constants;
 import org.iota.wallet.helper.price.AlternateValueManager;
+import org.iota.wallet.ui.adapter.TangleExplorerPagerAdapter;
 
 public class TangleExplorerTabFragment extends Fragment {
 
@@ -52,8 +52,8 @@ public class TangleExplorerTabFragment extends Fragment {
         final View view = inflater.inflate(R.layout.fragment_tangle_explorer_tab, container, false);
         ((AppCompatActivity) getActivity()).setSupportActionBar((Toolbar) view.findViewById(R.id.tangle_explorer_toolbar));
 
-        TabLayout tabLayout = (TabLayout) view.findViewById(R.id.tangle_explorer_tabs);
-        viewPager = (ViewPager) view.findViewById(R.id.tangle_explorer_tab_viewpager);
+        TabLayout tabLayout = view.findViewById(R.id.tangle_explorer_tabs);
+        viewPager = view.findViewById(R.id.tangle_explorer_tab_viewpager);
         adapter = new TangleExplorerPagerAdapter(getActivity(), getChildFragmentManager());
 
         alternateValueManager = new AlternateValueManager(getActivity());

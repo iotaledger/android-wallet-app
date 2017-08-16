@@ -63,12 +63,12 @@ public class ChangeSeedPasswordDialog extends DialogFragment implements TextView
         LayoutInflater inflater = LayoutInflater.from(getActivity());
         @SuppressLint("InflateParams") View view = inflater.inflate(R.layout.dialog_change_seed_password, null);
 
-        textInputLayoutPasswordCurrent = (TextInputLayout) view.findViewById(R.id.password_current_text_input_layout);
-        textInputLayoutPasswordNew = (TextInputLayout) view.findViewById(R.id.password_new_text_input_layout);
-        textInputLayoutPasswordNewConfirm = (TextInputLayout) view.findViewById(R.id.password_new_confirm_input_layout);
-        textInputEditTextPasswordCurrent = (TextInputEditText) view.findViewById(R.id.password_current);
-        textInputEditTextPasswordNew = (TextInputEditText) view.findViewById(R.id.password_new);
-        textInputEditTextPasswordNewConfirm = (TextInputEditText) view.findViewById(R.id.password_new_confirm);
+        textInputLayoutPasswordCurrent = view.findViewById(R.id.password_current_text_input_layout);
+        textInputLayoutPasswordNew = view.findViewById(R.id.password_new_text_input_layout);
+        textInputLayoutPasswordNewConfirm = view.findViewById(R.id.password_new_confirm_input_layout);
+        textInputEditTextPasswordCurrent = view.findViewById(R.id.password_current);
+        textInputEditTextPasswordNew = view.findViewById(R.id.password_new);
+        textInputEditTextPasswordNewConfirm = view.findViewById(R.id.password_new_confirm);
 
         textInputEditTextPasswordNewConfirm.setOnEditorActionListener(this);
 

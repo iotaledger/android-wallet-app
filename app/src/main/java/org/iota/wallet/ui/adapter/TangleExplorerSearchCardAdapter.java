@@ -146,16 +146,16 @@ public class TangleExplorerSearchCardAdapter extends RecyclerView.Adapter<Tangle
         private ViewHolder(View itemView) {
             super(itemView);
 
-            hashLabel = (TextView) itemView.findViewById(R.id.item_es_hash);
-            addressLabel = (TextView) itemView.findViewById(R.id.item_es_address);
-            valueLabel = (TextView) itemView.findViewById(R.id.item_es_value);
-            alternativeValueLabel = (TextView) itemView.findViewById(R.id.item_es_alternate_value);
-            tagLabel = (TextView) itemView.findViewById(R.id.item_es_tag);
-            timestampLabel = (TextView) itemView.findViewById(R.id.item_es_timestamp);
-            bundleLabel = (TextView) itemView.findViewById(R.id.item_es_bundle);
-            persistenceLabel = (TextView) itemView.findViewById(R.id.item_es_persistence);
-            expandButton = (ImageButton) itemView.findViewById(R.id.item_es_expand_button);
-            expandableLayout = (ExpandableRelativeLayout) itemView.findViewById(R.id.item_es_expand_layout);
+            hashLabel = itemView.findViewById(R.id.item_es_hash);
+            addressLabel = itemView.findViewById(R.id.item_es_address);
+            valueLabel = itemView.findViewById(R.id.item_es_value);
+            alternativeValueLabel = itemView.findViewById(R.id.item_es_alternate_value);
+            tagLabel = itemView.findViewById(R.id.item_es_tag);
+            timestampLabel = itemView.findViewById(R.id.item_es_timestamp);
+            bundleLabel = itemView.findViewById(R.id.item_es_bundle);
+            persistenceLabel = itemView.findViewById(R.id.item_es_persistence);
+            expandButton = itemView.findViewById(R.id.item_es_expand_button);
+            expandableLayout = itemView.findViewById(R.id.item_es_expand_layout);
             expandableLayout.collapse();
             expandButton.setOnClickListener(new View.OnClickListener() {
                 @Override

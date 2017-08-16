@@ -24,7 +24,6 @@ import android.graphics.Paint;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.content.ContextCompat;
-import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.text.Spannable;
@@ -76,9 +75,9 @@ public class NodeInfoFragment extends BaseSwipeRefreshLayoutFragment implements 
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_node_info, container, false);
         ((AppCompatActivity) getActivity()).setSupportActionBar((Toolbar) view.findViewById(R.id.node_info_toolbar));
-        list = (ListView) view.findViewById(R.id.iri_info_list);
-        swipeRefreshLayout = (SwipeRefreshLayout) view.findViewById(R.id.node_info_swipe_container);
-        chart = (PieChart) view.findViewById(R.id.node_info_chart);
+        list = view.findViewById(R.id.iri_info_list);
+        swipeRefreshLayout = view.findViewById(R.id.node_info_swipe_container);
+        chart = view.findViewById(R.id.node_info_chart);
         chart.setNoDataText(getString(R.string.messages_no_chart_data));
         chart.setNoDataTextColor(ContextCompat.getColor(getActivity(), R.color.colorPrimary));
         chart.setEntryLabelColor(ContextCompat.getColor(getActivity(), R.color.colorPrimary));

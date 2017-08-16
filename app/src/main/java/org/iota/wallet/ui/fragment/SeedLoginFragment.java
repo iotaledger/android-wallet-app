@@ -59,9 +59,9 @@ public class SeedLoginFragment extends Fragment implements View.OnClickListener,
         View view = inflater.inflate(R.layout.fragment_seed_login, container, false);
         ((AppCompatActivity) getActivity()).setSupportActionBar((Toolbar) view.findViewById(R.id.login_toolbar));
 
-        seedEditTextLayout = (TextInputLayout) view.findViewById(R.id.seed_login_seed_text_input_layout);
-        seedEditText = (TextInputEditText) view.findViewById(R.id.seed_login_seed_input);
-        storeSeedCheckBox = (CheckBox) view.findViewById(R.id.seed_login_store_seed_check_box);
+        seedEditTextLayout = view.findViewById(R.id.seed_login_seed_text_input_layout);
+        seedEditText = view.findViewById(R.id.seed_login_seed_input);
+        storeSeedCheckBox = view.findViewById(R.id.seed_login_store_seed_check_box);
         view.findViewById(R.id.seed_login_button).setOnClickListener(this);
         view.findViewById(R.id.seed_login_generate_seed).setOnClickListener(this);
         seedEditText.setOnEditorActionListener(this);

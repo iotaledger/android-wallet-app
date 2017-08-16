@@ -52,8 +52,8 @@ public class NodeInfoListAdapter extends ArrayAdapter<NodeInfo> {
             vi = LayoutInflater.from(getContext());
             v = vi.inflate(R.layout.item_node_info, parent, false);
             viewHolder = new ViewHolderItem();
-            viewHolder.paramTextView = (TextView) v.findViewById(R.id.item_info_label);
-            viewHolder.valueTextView = (TextView) v.findViewById(R.id.item_info_value);
+            viewHolder.paramTextView = v.findViewById(R.id.item_info_label);
+            viewHolder.valueTextView = v.findViewById(R.id.item_info_value);
             v.setTag(viewHolder);
         } else {
             viewHolder = (ViewHolderItem) convertView.getTag();

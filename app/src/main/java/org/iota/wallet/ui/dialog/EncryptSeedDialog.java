@@ -61,10 +61,10 @@ public class EncryptSeedDialog extends DialogFragment implements TextView.OnEdit
         LayoutInflater inflater = LayoutInflater.from(getActivity());
         @SuppressLint("InflateParams") View view = inflater.inflate(R.layout.dialog_encrypt_seed_password, null);
 
-        textInputLayoutPassword = (TextInputLayout) view.findViewById(R.id.password_input_layout);
-        textInputLayoutPasswordConfirm = (TextInputLayout) view.findViewById(R.id.password_confirm_input_layout);
-        textInputEditTextPassword = (TextInputEditText) view.findViewById(R.id.password);
-        textInputEditTextPasswordConfirm = (TextInputEditText) view.findViewById(R.id.password_confirm);
+        textInputLayoutPassword = view.findViewById(R.id.password_input_layout);
+        textInputLayoutPasswordConfirm = view.findViewById(R.id.password_confirm_input_layout);
+        textInputEditTextPassword = view.findViewById(R.id.password);
+        textInputEditTextPasswordConfirm = view.findViewById(R.id.password_confirm);
 
         textInputEditTextPasswordConfirm.setOnEditorActionListener(this);
 

@@ -34,10 +34,10 @@
 
             <!--  Address Label -->
             <android.support.design.widget.TextInputLayout
-                android:paddingTop="72dp"
                 android:id="@+id/generate_qr_code_address_input_aylout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:paddingTop="72dp"
                 app:errorEnabled="true"
                 app:hintTextAppearance="@style/TextLabel">
 

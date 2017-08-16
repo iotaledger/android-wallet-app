@@ -208,19 +208,19 @@ public class TangleExplorerTransactionsCardAdapter extends RecyclerView.Adapter<
         private ViewHolder(View itemView) {
             super(itemView);
 
-            hashLabel = (TextView) itemView.findViewById(R.id.item_et_hash);
-            addressLabel = (TextView) itemView.findViewById(R.id.item_et_address);
-            valueLabel = (TextView) itemView.findViewById(R.id.item_et_value);
-            alternativeValueLabel = (TextView) itemView.findViewById(R.id.item_et_alternate_value);
-            tagLabel = (TextView) itemView.findViewById(R.id.item_et_tag);
-            timestampLabel = (TextView) itemView.findViewById(R.id.item_et_timestamp);
-            bundleLabel = (TextView) itemView.findViewById(R.id.item_et_bundle);
-            persistenceLabel = (TextView) itemView.findViewById(R.id.item_et_persistence);
+            hashLabel = itemView.findViewById(R.id.item_et_hash);
+            addressLabel = itemView.findViewById(R.id.item_et_address);
+            valueLabel = itemView.findViewById(R.id.item_et_value);
+            alternativeValueLabel = itemView.findViewById(R.id.item_et_alternate_value);
+            tagLabel = itemView.findViewById(R.id.item_et_tag);
+            timestampLabel = itemView.findViewById(R.id.item_et_timestamp);
+            bundleLabel = itemView.findViewById(R.id.item_et_bundle);
+            persistenceLabel = itemView.findViewById(R.id.item_et_persistence);
 
             itemView.setOnClickListener(this);
 
-            expandButton = (ImageButton) itemView.findViewById(R.id.item_et_expand_button);
-            expandableLayout = (ExpandableRelativeLayout) itemView.findViewById(R.id.item_et_expand_layout);
+            expandButton = itemView.findViewById(R.id.item_et_expand_button);
+            expandableLayout = itemView.findViewById(R.id.item_et_expand_layout);
             expandableLayout.collapse();
 
             expandButton.setOnClickListener(new View.OnClickListener() {
@@ -233,7 +233,7 @@ public class TangleExplorerTransactionsCardAdapter extends RecyclerView.Adapter<
 
         @Override
         public void onClick(final View v) {
-            ViewPager viewPager = (ViewPager) ((Activity) context).findViewById(R.id.tangle_explorer_tab_viewpager);
+            ViewPager viewPager = ((Activity) context).findViewById(R.id.tangle_explorer_tab_viewpager);
             viewPager.setCurrentItem(1);
             Bundle bundle = new Bundle();
             bundle.putString(Constants.TANGLE_EXPLORER_SEARCH_ITEM, hashLabel.getText().toString());

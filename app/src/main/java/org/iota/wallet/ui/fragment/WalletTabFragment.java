@@ -37,7 +37,6 @@ import android.widget.TextView;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
-import org.iota.wallet.IOTA;
 import org.iota.wallet.R;
 import org.iota.wallet.api.TaskManager;
 import org.iota.wallet.helper.Constants;
@@ -47,9 +46,8 @@ import org.iota.wallet.helper.price.AlternateValueUtils;
 import org.iota.wallet.helper.price.ExchangeRateNotAvailableException;
 import org.iota.wallet.helper.price.ExchangeRateUpdateTaskHandler;
 import org.iota.wallet.model.Transfer;
-import org.iota.wallet.model.api.requests.GetInputsRequest;
-import org.iota.wallet.model.api.responses.GetBalancesAndFormatResponse;
-import org.iota.wallet.model.api.responses.GetTransferResponse;
+import org.iota.wallet.model.api.requests.GetAccountDataRequest;
+import org.iota.wallet.model.api.responses.GetAccountDataResponse;
 import org.iota.wallet.model.api.responses.error.NetworkError;
 import org.iota.wallet.ui.adapter.WalletPagerAdapter;
 import org.knowm.xchange.currency.Currency;
@@ -82,11 +80,11 @@ public class WalletTabFragment extends Fragment implements View.OnClickListener 
         super.onCreateView(inflater, container, savedInstanceState);
         final View view = inflater.inflate(R.layout.fragment_wallet_tab, container, false);
         ((AppCompatActivity) getActivity()).setSupportActionBar((Toolbar) view.findViewById(R.id.wallet_toolbar));
-        balanceTextView = (TextView) view.findViewById(R.id.toolbar_title_layout_balance);
-        alternateBalanceTextView = (TextView) view.findViewById(R.id.toolbar_title_layout_alternate_balance);
-        fabWallet = (FloatingActionButton) view.findViewById(R.id.fab_wallet);
-        tabLayout = (TabLayout) view.findViewById(R.id.wallet_tabs);
-        viewPager = (ViewPager) view.findViewById(R.id.wallet_tab_viewpager);
+        balanceTextView = view.findViewById(R.id.toolbar_title_layout_balance);
+        alternateBalanceTextView = view.findViewById(R.id.toolbar_title_layout_alternate_balance);
+        fabWallet = view.findViewById(R.id.fab_wallet);
+        tabLayout = view.findViewById(R.id.wallet_tabs);
+        viewPager = view.findViewById(R.id.wallet_tab_viewpager);
 
         alternateValueManager = new AlternateValueManager(getActivity());
         fabWallet.setOnClickListener(this);
@@ -120,10 +118,21 @@ public class WalletTabFragment extends Fragment implements View.OnClickListener 
     }
 
     @Subscribe
-    public void onEvent(GetBalancesAndFormatResponse getBalancesAndFormatResponse) {
+    public void onEvent(GetAccountDataResponse gad) {
+        if (transfers == null) {
+            transfers = new ArrayList<>();
+        }
+
+        transfers = gad.getTransfers();
+
+        isConnected = true;
+
+        currentPagerPosition = viewPager.getCurrentItem();
+        updateFab();
+
         walletBalanceIota = 0;
 
-        walletBalanceIota = walletBalanceIota + getBalancesAndFormatResponse.getTotalBalance();
+        walletBalanceIota = walletBalanceIota + gad.getBalance();
 
         String balanceText = IotaUnitConverter.convertRawIotaAmountToDisplayText(walletBalanceIota, false);
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getActivity());
@@ -153,22 +162,6 @@ public class WalletTabFragment extends Fragment implements View.OnClickListener 
                     break;
             }
         }
-    }
-
-    @Subscribe
-    public void onEvent(GetTransferResponse transferResponse) {
-        if (transfers == null) {
-            transfers = new ArrayList<>();
-        }
-
-        transfers = transferResponse.getTransfers();
-
-        isConnected = true;
-
-        updateIotaWalletBalance();
-
-        currentPagerPosition = viewPager.getCurrentItem();
-        updateFab();
     }
 
     @Subscribe
@@ -230,9 +223,9 @@ public class WalletTabFragment extends Fragment implements View.OnClickListener 
         }
     }
 
-    private void updateIotaWalletBalance() {
+    private void getAccountData() {
         TaskManager rt = new TaskManager(getActivity());
-        GetInputsRequest gir = new GetInputsRequest(String.valueOf(IOTA.seed));
+        GetAccountDataRequest gir = new GetAccountDataRequest();
         rt.startNewRequestTask(gir);
         requestExchangeRateUpdate();
     }
@@ -241,7 +234,7 @@ public class WalletTabFragment extends Fragment implements View.OnClickListener 
     public void onResume() {
         super.onResume();
         EventBus.getDefault().register(this);
-        updateIotaWalletBalance();
+        getAccountData();
     }
 
     @Override
@@ -249,7 +242,7 @@ public class WalletTabFragment extends Fragment implements View.OnClickListener 
         super.onHiddenChanged(hidden);
         if (!hidden){
             if (isConnected) {
-                updateIotaWalletBalance();
+                getAccountData();
             }
         }
     }

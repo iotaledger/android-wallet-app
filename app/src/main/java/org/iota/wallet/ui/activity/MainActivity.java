@@ -290,8 +290,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         showFragment(fragment, false);
     }
 
-    private void showLogoutNavigationItem(boolean enabled) {
-        navigationView.getMenu().findItem(R.id.nav_logout).setVisible(enabled);
+    private void showLogoutNavigationItem() {
+        navigationView.getMenu().findItem(R.id.nav_logout).setVisible(IOTA.seed != null);
     }
 
     @Override
@@ -303,15 +303,15 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             case R.id.nav_wallet:
                 String encSeed = prefs.getString(Constants.PREFERENCE_ENC_SEED, "");
                 if (!encSeed.isEmpty() && IOTA.seed == null) {
-                    showLogoutNavigationItem(true);
+                    showLogoutNavigationItem();
                     fragment = new PasswordLoginFragment();
                     killFragments = true;
                 } else if (IOTA.seed == null) {
-                    showLogoutNavigationItem(false);
+                    showLogoutNavigationItem();
                     fragment = new SeedLoginFragment();
                     killFragments = true;
                 } else {
-                    showLogoutNavigationItem(true);
+                    showLogoutNavigationItem();
                     fragment = getFragmentManager().findFragmentById(R.id.container);
                     if (fragment != null && fragment instanceof PasswordLoginFragment || fragment instanceof SeedLoginFragment)
                         killFragments = true;
@@ -486,6 +486,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     public void onResume() {
         super.onResume();
         EventBus.getDefault().register(this);
+        showLogoutNavigationItem();
         updateDynamicShortcuts();
     }
 

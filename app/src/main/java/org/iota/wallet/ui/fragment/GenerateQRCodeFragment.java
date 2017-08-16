@@ -45,13 +45,15 @@ import org.greenrobot.eventbus.Subscribe;
 import org.iota.wallet.IOTA;
 import org.iota.wallet.R;
 import org.iota.wallet.api.TaskManager;
-import org.iota.wallet.ui.dialog.GeneratedQRCodeDialog;
 import org.iota.wallet.helper.Constants;
 import org.iota.wallet.model.QRCode;
 import org.iota.wallet.model.api.requests.GetNewAddressRequest;
 import org.iota.wallet.model.api.requests.SendTransferRequest;
 import org.iota.wallet.model.api.responses.GetNewAddressResponse;
+import org.iota.wallet.ui.dialog.GeneratedQRCodeDialog;
 
+import jota.error.InvalidAddressException;
+import jota.utils.Checksum;
 import jota.utils.InputValidator;
 import jota.utils.IotaUnits;
 
@@ -77,18 +79,18 @@ public class GenerateQRCodeFragment extends Fragment implements View.OnClickList
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_generate_qr, container, false);
         ((AppCompatActivity) getActivity()).setSupportActionBar((Toolbar) view.findViewById(R.id.generate_qr_code_toolbar));
-        amountEditText = (TextInputEditText) view.findViewById(R.id.generate_qr_code_amount_input);
-        addressEditText = (TextInputEditText) view.findViewById(R.id.generate_qr_code_address_input);
-        messageEditText = (TextInputEditText) view.findViewById(R.id.generate_qr_code_message_input);
-        tagEditText = (TextInputEditText) view.findViewById(R.id.generate_qr_code_tag_input);
+        amountEditText = view.findViewById(R.id.generate_qr_code_amount_input);
+        addressEditText = view.findViewById(R.id.generate_qr_code_address_input);
+        messageEditText = view.findViewById(R.id.generate_qr_code_message_input);
+        tagEditText = view.findViewById(R.id.generate_qr_code_tag_input);
 
-        addressEditTextInputLayout = (TextInputLayout) view.findViewById(R.id.generate_qr_code_address_input_aylout);
-        messageEditTextInputLayout = (TextInputLayout) view.findViewById(R.id.generate_qr_code_message_input_aylout);
-        tagEditTextInputLayout = (TextInputLayout) view.findViewById(R.id.generate_qr_code_tag_input_aylout);
+        addressEditTextInputLayout = view.findViewById(R.id.generate_qr_code_address_input_aylout);
+        messageEditTextInputLayout = view.findViewById(R.id.generate_qr_code_message_input_aylout);
+        tagEditTextInputLayout = view.findViewById(R.id.generate_qr_code_tag_input_aylout);
 
         inputManager = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
-        FloatingActionButton generateFabButton = (FloatingActionButton) view.findViewById(R.id.generate_qr_code_fab_button);
-        unitsSpinner = (Spinner) view.findViewById(R.id.generate_qr_code_units_spinner);
+        FloatingActionButton generateFabButton = view.findViewById(R.id.generate_qr_code_fab_button);
+        unitsSpinner = view.findViewById(R.id.generate_qr_code_units_spinner);
 
         generateFabButton.setOnClickListener(this);
 
@@ -118,8 +120,7 @@ public class GenerateQRCodeFragment extends Fragment implements View.OnClickList
                 messageEditTextInputLayout.setError(null);
                 tagEditTextInputLayout.setError(null);
 
-                if (!InputValidator.isAddress(getAddress())) {
-                    addressEditTextInputLayout.setError(getString(R.string.messages_enter_txaddress));
+                if (!isValidAddress()) {
 
                 } else if (!InputValidator.isTrytes(getMessage(), getMessage().length()) && !getMessage().equals(getMessage().toUpperCase())) {
                     messageEditTextInputLayout.setError(getString(R.string.messages_invalid_characters));
@@ -208,7 +209,7 @@ public class GenerateQRCodeFragment extends Fragment implements View.OnClickList
 
     private void generateNewAddress() {
         TaskManager rt = new TaskManager(getActivity());
-        GetNewAddressRequest gtr = new GetNewAddressRequest(0, false, 0, false);
+        GetNewAddressRequest gtr = new GetNewAddressRequest();
         gtr.setSeed(String.valueOf(IOTA.seed));
         rt.startNewRequestTask(gtr);
     }
@@ -260,10 +261,26 @@ public class GenerateQRCodeFragment extends Fragment implements View.OnClickList
         }
     }
 
-    private String getAddress() {
-        return addressEditText.getText().toString();
+    private boolean isValidAddress() {
+        String address = addressEditText.getText().toString();
+        try {
+            if (Checksum.isAddressWithoutChecksum(address)) {
+            }
+        } catch (InvalidAddressException e) {
+            addressEditTextInputLayout.setError(getString(R.string.messages_enter_txaddress_with_checksum));
+            return false;
+        }
+        return true;
     }
 
+    private String getAddress() {
+        try {
+            return Checksum.removeChecksum(addressEditText.getText().toString());
+        } catch (InvalidAddressException e) {
+            e.printStackTrace();
+        }
+        return "";
+    }
     private String getAmount() {
         return amountEditText.getText().toString();
     }
