@@ -33,8 +33,8 @@
     <string name="address">Address</string>
     <string name="hash">Hash</string>
     <string name="amount">Amount</string>
-    <string name="message_optional">Message (optional)</string>
-    <string name="tag_optional">Tag (optional)</string>
+    <string name="message_optional">Message (optional, A-Z and 9 only)</string>
+    <string name="tag_optional">Tag (optional, A-Z and 9 only)</string>
     <string name="neighbor_ip">Neighbor IP:</string>
 
     <!-- Buttons-->

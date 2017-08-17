@@ -115,6 +115,9 @@ public class GenerateQRCodeFragment extends Fragment implements View.OnClickList
         switch (view.getId()) {
             case R.id.generate_qr_code_fab_button:
 
+                final String msg = getMessage().toUpperCase();
+                final String tag = getTaG().toUpperCase();
+
                 //reset errors
                 addressEditTextInputLayout.setError(null);
                 messageEditTextInputLayout.setError(null);
@@ -122,10 +125,10 @@ public class GenerateQRCodeFragment extends Fragment implements View.OnClickList
 
                 if (!isValidAddress()) {
 
-                } else if (!InputValidator.isTrytes(getMessage(), getMessage().length()) && !getMessage().equals(getMessage().toUpperCase())) {
+                } else if (!InputValidator.isTrytes(msg, msg.length())) {
                     messageEditTextInputLayout.setError(getString(R.string.messages_invalid_characters));
 
-                } else if (!InputValidator.isTrytes(getTaG(), getTaG().length()) && !getTaG().equals(getTaG().toUpperCase())) {
+                } else if (!InputValidator.isTrytes(tag, tag.length())) {
                     tagEditTextInputLayout.setError(getString(R.string.messages_invalid_characters));
 
                 } else {
