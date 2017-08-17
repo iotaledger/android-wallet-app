@@ -73,7 +73,8 @@ public class SendTransferRequestHandler extends IotaRequestHandler {
                     ((SendTransferRequest) request).prepareTransfer(),
                     //inputs
                     null,
-                    ((SendTransferRequest) request).getAddress()));
+                    //remainder address
+                    null));
         } catch (NotEnoughBalanceException | InvalidSecurityLevelException | InvalidTrytesException | InvalidAddressException | InvalidTransferException e) {
             response = new NetworkError();
             NotificationManager mNotificationManager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
