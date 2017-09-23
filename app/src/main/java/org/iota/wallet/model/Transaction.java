@@ -40,7 +40,11 @@ public class Transaction implements Parcelable {
     private String address;
     private long value;
     private String tag;
+    private String obsoleteTag;
     private long timestamp;
+    private long attachmentTimestamp;
+    private long attachmentTimestampLowerBound;
+    private long attachmentTimestampUpperBound;
     private long currentIndex;
     private long lastIndex;
     private String bundle;
@@ -49,14 +53,20 @@ public class Transaction implements Parcelable {
     private String nonce;
     private Boolean persistence;
 
-    public Transaction(String hash, String signatureFragments, String address, long value, String tag, long timestamp, long currentIndex, long lastIndex, String bundle, String trunkTransaction, String branchTransaction, String nonce, Boolean persistence) {
+    public Transaction(String hash, String signatureFragments, String address, long value, String tag, String obsoleteTag, long timestamp,
+                       long attachmentTimestamp, long attachmentTimestampLowerBound, long attachmentTimestampUpperBound, long currentIndex,
+                       long lastIndex, String bundle, String trunkTransaction, String branchTransaction, String nonce, Boolean persistence) {
 
         this.hash = hash;
         this.signatureFragments = signatureFragments;
         this.address = address;
         this.value = value;
         this.tag = tag;
+        this.obsoleteTag = obsoleteTag;
         this.timestamp = timestamp;
+        this.attachmentTimestamp = attachmentTimestamp;
+        this.attachmentTimestampLowerBound = attachmentTimestampLowerBound;
+        this.attachmentTimestampUpperBound = attachmentTimestampUpperBound;
         this.currentIndex = currentIndex;
         this.lastIndex = lastIndex;
         this.bundle = bundle;
@@ -79,7 +89,11 @@ public class Transaction implements Parcelable {
         address = in.readString();
         value = in.readLong();
         tag = in.readString();
+        obsoleteTag = in.readString();
         timestamp = in.readLong();
+        attachmentTimestamp = in.readLong();
+        attachmentTimestampLowerBound = in.readLong();
+        attachmentTimestampUpperBound = in.readLong();
         currentIndex = in.readLong();
         lastIndex = in.readLong();
         bundle = in.readString();
@@ -137,12 +151,44 @@ public class Transaction implements Parcelable {
         this.tag = tag;
     }
 
+    public String getObsoleteTag() {
+        return obsoleteTag;
+    }
+
+    public void setObsoleteTag(String obsoleteTag) {
+        this.obsoleteTag = obsoleteTag;
+    }
+
     public long getTimestamp() {
         return timestamp;
     }
 
     public void setTimestamp(long timestamp) {
         this.timestamp = timestamp;
+    }
+
+    public long getAttachmentTimestamp() {
+        return attachmentTimestamp;
+    }
+
+    public void setAttachmentTimestamp(long attachmentTimestamp) {
+        this.attachmentTimestamp = attachmentTimestamp;
+    }
+
+    public long getAttachmentTimestampLowerBound() {
+        return attachmentTimestampLowerBound;
+    }
+
+    public void setAttachmentTimestampLowerBound(long attachmentTimestampLowerBound) {
+        this.attachmentTimestampLowerBound = attachmentTimestampLowerBound;
+    }
+
+    public long getAttachmentTimestampUpperBound() {
+        return attachmentTimestampUpperBound;
+    }
+
+    public void setAttachmentTimestampUpperBound(long attachmentTimestampUpperBound) {
+        this.attachmentTimestampUpperBound = attachmentTimestampUpperBound;
     }
 
     public long getCurrentIndex() {
@@ -200,7 +246,11 @@ public class Transaction implements Parcelable {
         dest.writeString(address);
         dest.writeLong(value);
         dest.writeString(tag);
+        dest.writeString(obsoleteTag);
         dest.writeLong(timestamp);
+        dest.writeLong(attachmentTimestamp);
+        dest.writeLong(attachmentTimestampLowerBound);
+        dest.writeLong(attachmentTimestampUpperBound);
         dest.writeLong(currentIndex);
         dest.writeLong(lastIndex);
         dest.writeString(bundle);

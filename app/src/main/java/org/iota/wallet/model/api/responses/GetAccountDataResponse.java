@@ -68,7 +68,7 @@ public class GetAccountDataResponse extends ApiResponse {
                         totalValue += value;
 
                     if (trx.getCurrentIndex() == 0) {
-                        timestamp = trx.getTimestamp();
+                        timestamp = trx.getAttachmentTimestamp();
                         tag = trx.getTag();
                         destinationAddress = address;
                         hash = trx.getHash();

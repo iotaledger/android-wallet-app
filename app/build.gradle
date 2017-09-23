@@ -1,8 +1,8 @@
 apply plugin: 'com.android.application'
 
 def versionMajor = 0
-def versionMinor = 6
-def versionPatch = 5
+def versionMinor = 7
+def versionPatch = 0
 def versionBuild = 0 // bump for dogfood builds, public betas, etc.
 
 //TODO edit the changelog as well
@@ -73,15 +73,15 @@ dependencies {
     testCompile 'junit:junit:4.12'
     //Support libraries
     compile 'com.android.support:multidex:1.0.1'
-    compile 'com.android.support:appcompat-v7:26.0.1'
-    compile 'com.android.support:cardview-v7:26.0.1'
-    compile 'com.android.support:recyclerview-v7:26.0.1'
-    compile 'com.android.support:preference-v7:26.0.1'
-    compile 'com.android.support:preference-v14:26.0.1'
-    compile 'com.android.support:design:26.0.1'
-    compile 'com.android.support:support-annotations:26.0.1'
-    compile 'com.android.support:design:26.0.1'
-    compile 'com.android.support:support-v13:26.0.1'
+    compile 'com.android.support:appcompat-v7:26.0.2'
+    compile 'com.android.support:cardview-v7:26.0.2'
+    compile 'com.android.support:recyclerview-v7:26.0.2'
+    compile 'com.android.support:preference-v7:26.0.2'
+    compile 'com.android.support:preference-v14:26.0.2'
+    compile 'com.android.support:design:26.0.2'
+    compile 'com.android.support:support-annotations:26.0.2'
+    compile 'com.android.support:design:26.0.2'
+    compile 'com.android.support:support-v13:26.0.2'
     compile 'com.android.support.constraint:constraint-layout:1.0.2'
     //UI libraries
     compile 'com.github.PhilJay:MPAndroidChart:v3.0.1'
@@ -101,6 +101,5 @@ dependencies {
     compile 'org.knowm.xchange:xchange-bitstamp:4.2.1'
     compile 'org.knowm.xchange:xchange-bitfinex:4.2.1'
     compile 'org.knowm.xchange:xchange-okcoin:4.2.1'
-
-    compile 'com.github.iotaledger:iota.lib.java:f43d606'
+    compile 'com.github.iotaledger:iota.lib.java:c891d41'
 }

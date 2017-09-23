@@ -38,7 +38,7 @@ public class SendTransferRequest extends ApiRequest {
     private String value = "";
     private String message = "";
     private String tag = "";
-    private int minWeightMagnitude = 15;
+    private int minWeightMagnitude = 14;
     private int depth = 9;
 
     public SendTransferRequest(String address, String value, String message, String tag) {

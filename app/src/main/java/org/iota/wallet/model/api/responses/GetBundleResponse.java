@@ -42,7 +42,11 @@ public class GetBundleResponse extends ApiResponse {
             String address = transaction.getAddress();
             long value = transaction.getValue();
             String tag = transaction.getTag();
+            String obsoleteTag = transaction.getObsoleteTag();
             long timestamp = transaction.getTimestamp();
+            long attachmentTimestamp = transaction.getAttachmentTimestamp();
+            long attachmentTimestampLowerBound = transaction.getAttachmentTimestampLowerBound();
+            long attachmentTimestampUpperBound = transaction.getAttachmentTimestampUpperBound();
             long currentIndex = transaction.getCurrentIndex();
             long lastIndex = transaction.getLastIndex();
             String bundle = transaction.getBundle();
@@ -51,7 +55,7 @@ public class GetBundleResponse extends ApiResponse {
             String nonce = transaction.getNonce();
             Boolean persistence = transaction.getPersistence();
 
-            transactions.add(new Transaction(hash, signatureFragments, address, value, tag, timestamp, currentIndex, lastIndex, bundle, trunkTransaction, branchTransaction, nonce, persistence));
+            transactions.add(new Transaction(hash, signatureFragments, address, value, tag, obsoleteTag, timestamp, attachmentTimestamp, attachmentTimestampLowerBound, attachmentTimestampUpperBound, currentIndex, lastIndex, bundle, trunkTransaction, branchTransaction, nonce, persistence));
         }
         Collections.reverse(transactions);
 
