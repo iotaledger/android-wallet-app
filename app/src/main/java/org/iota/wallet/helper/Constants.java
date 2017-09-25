@@ -24,6 +24,7 @@ public class Constants {
     // global constants
 
     //Preferences
+    public static final String PREFERENCE_NODE_PROTOCOL = "preference_node_protocol";
     public static final String PREFERENCE_NODE_IP = "preference_node_ip";
     public static final String PREFERENCE_NODE_PORT = "preference_node_port";
     public static final String PREFERENCE_ENC_SEED = "preference_enc_seed";
@@ -34,6 +35,7 @@ public class Constants {
     public static final String PRICE_STORAGE_PREFIX = "exchange_rate_storage";
 
     //Preferences defaults
+    public static final String PREFERENCE_NODE_DEFAULT_PROTOCOL = "http";
     public static final String PREFERENCE_NODE_DEFAULT_IP = "node.iotawallet.info";
     public static final String PREFERENCE_NODE_DEFAULT_PORT = "14265";
 

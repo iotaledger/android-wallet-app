@@ -48,8 +48,8 @@ public class IotaApiProvider implements ApiProvider {
     private final Context context;
     private Map<Class<? extends ApiRequest>, RequestHandler> requestHandlerMap;
 
-    public IotaApiProvider(String host, int port, Context context) {
-        this.iotaApi = new IotaAPI.Builder().protocol("http").host(host).port(((Integer) port).toString()).build();
+    public IotaApiProvider(String protocol, String host, int port, Context context) {
+        this.iotaApi = new IotaAPI.Builder().protocol(protocol).host(host).port(((Integer) port).toString()).build();
         this.context = context;
         loadRequestMap();
     }
