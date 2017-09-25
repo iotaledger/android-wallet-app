@@ -152,7 +152,10 @@
     <string name="settings_encrypt_seed_summary">Passwort-Schutz festlegen</string>
 
     <string name="settings_header_misc_title">Sonstiges</string>
-    <string name="settings_header_misc_summary">Fehlerbericht, Währung</string>
+    <string name="settings_header_misc_summary">Fehlerbericht, Währung, PoW</string>
+
+    <string name="settings_local_pow_title">Lokaler PoW</string>
+    <string name="settings_local_pow_summary">Proof of work lokal ausführen</string>
 
     <string name="settings_issue_reporter_title">Fehlerbericht</string>
     <string name="settings_issue_reporter_summary">Fehler melden oder Feedback geben</string>

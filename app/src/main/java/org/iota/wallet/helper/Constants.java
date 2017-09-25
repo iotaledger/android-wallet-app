@@ -31,6 +31,7 @@ public class Constants {
     public static final String PREFERENCE_WALLET_VALUE_CURRENCY = "preference_wallet_currency";
     public static final String PREFERENCE_RUN_WITH_ROOT = "preference_run_with_root";
     public static final String PREFERENCES_CURRENT_IOTA_BALANCE = "preference_current_iota_balance";
+    public static final String PREFERENCES_LOCAL_POW = "preference_local_pow";
     public static final String PREFERENCE_ISSUE_REPORTER = "preference_issue_reporter";
     public static final String PRICE_STORAGE_PREFIX = "exchange_rate_storage";
 

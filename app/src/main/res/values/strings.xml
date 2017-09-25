@@ -152,7 +152,10 @@
     <string name="settings_encrypt_seed_summary">Set-up password protection</string>
 
     <string name="settings_header_misc_title">Misc</string>
-    <string name="settings_header_misc_summary">Bug report, currency</string>
+    <string name="settings_header_misc_summary">Bug report, currency, PoW</string>
+
+    <string name="settings_local_pow_title">Local PoW</string>
+    <string name="settings_local_pow_summary">Doing the Proof of work locally</string>
 
     <string name="settings_issue_reporter_title">Report issue</string>
     <string name="settings_issue_reporter_summary">Report issue or submit feedback</string>
