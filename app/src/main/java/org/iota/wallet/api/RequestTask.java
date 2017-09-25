@@ -51,6 +51,7 @@ class RequestTask extends AsyncTask<ApiRequest, String, ApiResponse> {
     protected ApiResponse doInBackground(ApiRequest... params) {
 
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
+        String protocol = prefs.getString(Constants.PREFERENCE_NODE_PROTOCOL, Constants.PREFERENCE_NODE_DEFAULT_PROTOCOL);
         String host = prefs.getString(Constants.PREFERENCE_NODE_IP, Constants.PREFERENCE_NODE_DEFAULT_IP);
         int port = Integer.parseInt(prefs.getString(Constants.PREFERENCE_NODE_PORT, Constants.PREFERENCE_NODE_DEFAULT_PORT));
 
@@ -63,7 +64,7 @@ class RequestTask extends AsyncTask<ApiRequest, String, ApiResponse> {
         ApiRequest apiRequest = params[0];
         tag = apiRequest.getClass().getName();
 
-        ApiProvider apiProvider = new IotaApiProvider(host, port, context); /* lol */
+        ApiProvider apiProvider = new IotaApiProvider(protocol, host, port, context);
 
         return apiProvider.processRequest(apiRequest);
     }

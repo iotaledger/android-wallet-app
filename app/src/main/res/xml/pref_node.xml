@@ -1,6 +1,11 @@
 <?xml version="1.0"?>
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
 
+    <EditTextPreference
+        android:defaultValue="http"
+        android:key="preference_node_protocol"
+        android:summary="@string/settings_node_protocol_summary"
+        android:title="@string/settings_node_protocol_title" />
 
     <EditTextPreference
         android:defaultValue="node.iotawallet.info"

@@ -130,6 +130,9 @@
     <string name="settings_header_node_title">Node</string>
     <string name="settings_header_node_summary">Node settings</string>
 
+    <string name="settings_node_protocol_title">Node protocol</string>
+    <string name="settings_node_protocol_summary">The protocol of the (hopefully trusty) node you would like connect to</string>
+
     <string name="settings_node_ip_title">Node IP</string>
     <string name="settings_node_ip_summary">The IP address of the (hopefully trusty) node you would like connect to</string>
 
@@ -157,8 +160,9 @@
     <string name="settings_wallet_currency_title">Currency</string>
     <string name="settings_wallet_currency_summary">The currency in which the wallet value is displayed</string>
 
-    <string name="settings_messages_empty_node_ip">Empty node IP now allowed.</string>
-    <string name="settings_messages_empty_node_port">Empty node port now allowed.</string>
+    <string name="settings_messages_empty_node_protocol">Empty node protocol not allowed.</string>
+    <string name="settings_messages_empty_node_ip">Empty node IP not allowed.</string>
+    <string name="settings_messages_empty_node_port">Empty node port not allowed.</string>
 
     <!-- Info -->
     <string name="info_app_name">App name:</string>
