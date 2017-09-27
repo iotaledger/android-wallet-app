@@ -19,12 +19,8 @@
 
 package org.iota.wallet.api.handler;
 
-import android.app.NotificationManager;
 import android.content.Context;
 
-import org.iota.wallet.R;
-import org.iota.wallet.helper.NotificationHelper;
-import org.iota.wallet.helper.Utils;
 import org.iota.wallet.model.api.requests.ApiRequest;
 import org.iota.wallet.model.api.requests.GetNewAddressRequest;
 import org.iota.wallet.model.api.responses.ApiResponse;
@@ -48,10 +44,7 @@ public class GetNewAddressRequestHandler extends IotaRequestHandler {
     @Override
     public ApiResponse handle(ApiRequest request) {
         ApiResponse response;
-        int notificationId = Utils.createNewID();
 
-            NotificationHelper.requestNotification(context,
-                    R.drawable.ic_address, context.getString(R.string.notification_generate_new_address_request_title), notificationId);
         try {
             response = new GetNewAddressResponse(apiProxy.getNewAddress(((GetNewAddressRequest) request).getSeed(),
                     ((GetNewAddressRequest) request).getSecurity(),
@@ -61,12 +54,6 @@ public class GetNewAddressRequestHandler extends IotaRequestHandler {
                     ((GetNewAddressRequest) request).isReturnAll()));
         } catch (InvalidSecurityLevelException | InvalidAddressException e) {
             response = new NetworkError();
-            NotificationManager mNotificationManager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
-            mNotificationManager.cancel(notificationId);
-        }
-
-        if (response instanceof GetNewAddressResponse) {
-            NotificationHelper.responseNotification(context, R.drawable.ic_address, context.getString(R.string.notification_generating_new_address_response_succeeded_title), notificationId);
         }
         return response;
     }

@@ -31,6 +31,7 @@ import org.iota.wallet.model.api.requests.SendTransferRequest;
 import org.iota.wallet.model.api.responses.ApiResponse;
 import org.iota.wallet.model.api.responses.SendTransferResponse;
 import org.iota.wallet.model.api.responses.error.NetworkError;
+import org.iota.wallet.model.api.responses.error.NetworkErrorType;
 
 import java.util.Arrays;
 
@@ -75,8 +76,9 @@ public class SendTransferRequestHandler extends IotaRequestHandler {
                     null,
                     //remainder address
                     null));
-        } catch (NotEnoughBalanceException | InvalidSecurityLevelException | InvalidTrytesException | InvalidAddressException | InvalidTransferException e) {
-            response = new NetworkError();
+        } catch (NotEnoughBalanceException | InvalidSecurityLevelException | InvalidTrytesException | InvalidAddressException | InvalidTransferException | IllegalAccessError e) {
+            NetworkError error = new NetworkError();
+
             NotificationManager mNotificationManager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
             mNotificationManager.cancel(notificationId);
 
@@ -87,6 +89,18 @@ public class SendTransferRequestHandler extends IotaRequestHandler {
             } else {
                 NotificationHelper.responseNotification(context, R.drawable.ic_fab_send, context.getString(R.string.notification_send_transfer_response_failed_title), notificationId);
             }
+
+            if (e instanceof IllegalAccessError) {
+                error.setErrorType(NetworkErrorType.ACCESS_ERROR);
+                mNotificationManager.cancel(notificationId);
+                if (((SendTransferRequest) request).getTag().equals(Constants.NEW_ADDRESS_TAG))
+                    NotificationHelper.responseNotification(context, R.drawable.ic_error, context.getString(R.string.notification_address_attach_to_tangle_blocked_title), notificationId);
+                else
+                    NotificationHelper.responseNotification(context, R.drawable.ic_error, context.getString(R.string.notification_transfer_attach_to_tangle_blocked_title), notificationId);
+            } else
+                error.setErrorType(NetworkErrorType.NETWORK_ERROR);
+
+            response = error;
         }
 
         if (response instanceof SendTransferResponse && ((SendTransferRequest) request).getValue().equals("0")
@@ -102,6 +116,7 @@ public class SendTransferRequestHandler extends IotaRequestHandler {
             else
                 NotificationHelper.responseNotification(context, R.drawable.ic_fab_send, context.getString(R.string.notification_send_transfer_response_failed_title), notificationId);
         }
+
         return response;
     }
 }

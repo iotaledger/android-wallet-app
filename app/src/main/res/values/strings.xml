@@ -114,6 +114,9 @@
     <string name="notification_replay_bundle_response_succeeded_title">Replay executed</string>
     <string name="notification_replay_bundle_response_failed_title">Replay failed</string>
 
+    <string name="notification_address_attach_to_tangle_blocked_title">Attaching new address failed, please enable local PoW</string>
+    <string name="notification_transfer_attach_to_tangle_blocked_title">Transaction failed, please enable local PoW</string>
+
     <!-- About-->
     <string name="about_version">Version %1$s</string>
     <string name="about_version_unknown">Version unknown</string>
