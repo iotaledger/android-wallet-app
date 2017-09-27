@@ -24,10 +24,6 @@ import android.os.Parcelable;
 
 import jota.dto.response.AbstractResponse;
 
-/**
- * Created by Adrian on 08.01.2017.
- */
-
 public class CoolDetailsResponse extends AbstractResponse implements Parcelable {
 
     public final static Parcelable.Creator<CoolDetailsResponse> CREATOR = new Creator<CoolDetailsResponse>() {

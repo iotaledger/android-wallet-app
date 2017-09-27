@@ -19,9 +19,6 @@
 
 package org.iota.wallet.model.api.responses;
 
-/**
- * Created by Adrian on 28.04.2016.
- */
 public class ApiResponse {
     private Long duration;
 

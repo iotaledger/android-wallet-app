@@ -19,10 +19,6 @@
 
 package org.iota.wallet.model.api.responses;
 
-/**
- * Created by Adrian on 07.01.2017.
- */
-
 public class FindTransactionResponse extends ApiResponse {
     private String[] hashes;
 

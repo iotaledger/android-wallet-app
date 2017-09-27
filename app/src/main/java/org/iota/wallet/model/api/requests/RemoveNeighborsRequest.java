@@ -19,10 +19,6 @@
 
 package org.iota.wallet.model.api.requests;
 
-/**
- * Created by pinpong on 21.10.16.
- */
-
 public class RemoveNeighborsRequest extends ApiRequest {
 
     private String[] uris;

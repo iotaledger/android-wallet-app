@@ -25,10 +25,6 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-/**
- * Created by pinpong on 26.09.16.
- */
-
 public class GetBundleResponse extends ApiResponse {
 
     private List<Transaction> transactions = new ArrayList<>();

@@ -19,9 +19,6 @@
 
 package org.iota.wallet.model.api.requests;
 
-/**
- * Created by Adrian on 28.04.2016.
- */
 public class ApiRequest {
 
     ApiRequest() {

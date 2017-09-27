@@ -26,9 +26,6 @@ import java.util.List;
 
 import jota.model.Transfer;
 
-/**
- * Created by Adrian on 01.05.2016.
- */
 public class SendTransferRequest extends ApiRequest {
 
     private String seed;

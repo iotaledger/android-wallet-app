@@ -21,9 +21,6 @@ package org.iota.wallet.model.api.requests;
 
 import org.iota.wallet.IOTA;
 
-/**
- * Created by Adrian on 29.04.2016.
- */
 public class GetAccountDataRequest extends ApiRequest {
 
     private String seed;

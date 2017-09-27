@@ -19,9 +19,5 @@
 
 package org.iota.wallet.model.api.requests;
 
-/**
- * Created by Adrian on 08.01.2017.
- */
-
 public class CoolTransationsRequest extends ApiRequest {
 }

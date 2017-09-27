@@ -19,9 +19,6 @@
 
 package org.iota.wallet.model.api.responses.error;
 
-/**
- * Created by Adrian on 28.04.2016.
- */
 public enum NetworkErrorType {
 
     REMOTE_NODE_ERROR,

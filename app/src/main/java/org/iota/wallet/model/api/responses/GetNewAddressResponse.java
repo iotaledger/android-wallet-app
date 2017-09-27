@@ -22,9 +22,6 @@ package org.iota.wallet.model.api.responses;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created by Adrian on 01.05.2016.
- */
 public class GetNewAddressResponse extends ApiResponse {
 
     private List<String> addresses = new ArrayList<>();

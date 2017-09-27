@@ -21,10 +21,6 @@ package org.iota.wallet.model.api.responses;
 
 import org.iota.wallet.model.Transaction;
 
-/**
- * Created by Adrian on 08.01.2017.
- */
-
 public class CoolTransactionResponse extends ApiResponse {
     private Transaction[] transactions;
 

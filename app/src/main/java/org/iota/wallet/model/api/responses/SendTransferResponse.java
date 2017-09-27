@@ -19,9 +19,6 @@
 
 package org.iota.wallet.model.api.responses;
 
-/**
- * Created by Adrian on 01.05.2016.
- */
 public class SendTransferResponse extends ApiResponse {
 
     private Boolean[] successfully;

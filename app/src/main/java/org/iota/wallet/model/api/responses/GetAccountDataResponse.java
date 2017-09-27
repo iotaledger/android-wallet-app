@@ -30,9 +30,6 @@ import jota.model.Bundle;
 import jota.model.Transaction;
 import jota.utils.Checksum;
 
-/**
- * Created by Adrian on 28.04.2016.
- */
 public class GetAccountDataResponse extends ApiResponse {
 
     private List<String> addresses = new ArrayList<>();

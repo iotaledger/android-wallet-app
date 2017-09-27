@@ -19,9 +19,6 @@
 
 package org.iota.wallet.model.api.responses;
 
-/**
- * Created by pinpong on 01.01.2017.
- */
 public class ReplayBundleResponse extends ApiResponse {
 
     private Boolean[] successfully;
