@@ -8,7 +8,7 @@
         <!--suppress AndroidDomInspection -->
         <variable
             name="addresses"
-            type="java.util.List&lt;String&gt;" />
+            type="java.util.List&lt;org.iota.wallet.model.Address&gt;" />
     </data>
 
     <RelativeLayout

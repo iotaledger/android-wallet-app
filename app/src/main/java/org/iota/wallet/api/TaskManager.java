@@ -45,7 +45,7 @@ public class TaskManager {
         if (!runningTasks.containsKey(tag)) {
             runningTasks.put(tag, requestTask);
             if (BuildConfig.DEBUG)
-                Log.i("Adding Task ", tag);
+                Log.i("Added Task ", tag);
             requestTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, ir);
         }
     }
@@ -53,7 +53,7 @@ public class TaskManager {
     public static synchronized void removeTask(String tag) {
         if (runningTasks.containsKey(tag)) {
             if (BuildConfig.DEBUG)
-                Log.i("Removing Task ", tag);
+                Log.i("Removed Task ", tag);
             runningTasks.remove(tag);
         }
     }

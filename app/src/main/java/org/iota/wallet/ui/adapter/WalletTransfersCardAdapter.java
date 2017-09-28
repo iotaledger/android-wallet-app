@@ -107,7 +107,8 @@ public class WalletTransfersCardAdapter extends RecyclerView.Adapter<WalletTrans
             holder.valueLabel.setTextColor(ContextCompat.getColor(context, R.color.flatRed));
         } else if (transfer.getValue() > 0) {
             holder.valueLabel.setTextColor(ContextCompat.getColor(context, R.color.flatGreen));
-        }
+        } else
+            holder.valueLabel.setTextColor(ContextCompat.getColor(context, R.color.textColorPrimary));
 
         holder.expandableLayout.setExpanded(expandState.get(position));
         holder.expandableLayout.setListener(new ExpandableLayoutListenerAdapter() {

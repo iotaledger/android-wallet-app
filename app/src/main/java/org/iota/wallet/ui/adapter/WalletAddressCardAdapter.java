@@ -21,25 +21,29 @@ package org.iota.wallet.ui.adapter;
 
 import android.app.Activity;
 import android.content.Context;
+import android.graphics.Paint;
 import android.os.Bundle;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import org.iota.wallet.R;
+import org.iota.wallet.model.Address;
 import org.iota.wallet.ui.dialog.WalletAddressesItemDialog;
 
 import java.util.List;
 
 public class WalletAddressCardAdapter extends RecyclerView.Adapter<WalletAddressCardAdapter.ViewHolder> {
 
-    private List<String> addresses;
     private final Context context;
+    private List<Address> addresses;
 
-    public WalletAddressCardAdapter(Context context, List<String> listItems) {
+    public WalletAddressCardAdapter(Context context, List<Address> listItems) {
         this.context = context;
         this.addresses = listItems;
     }
@@ -53,18 +57,25 @@ public class WalletAddressCardAdapter extends RecyclerView.Adapter<WalletAddress
 
     @Override
     public void onBindViewHolder(final ViewHolder holder, int position) {
-        String transfer = getItem(position - 1);
+        Address address = getItem(position - 1);
 
         holder.setIsRecyclable(false);
 
-        holder.addressLabel.setText(transfer);
+        holder.addressLabel.setText(address.getAddress());
+
+        if (address.isUsed()) {
+            holder.addressImage.setColorFilter(ContextCompat.getColor(context, R.color.flatRed));
+            holder.addressLabel.setPaintFlags(holder.addressLabel.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
+        } else if (!address.isUsed()) {
+            holder.addressImage.setColorFilter(ContextCompat.getColor(context, R.color.flatGreen));
+        }
     }
 
-    private String getItem(int position) {
+    private Address getItem(int position) {
         return addresses.get(position + 1);
     }
 
-    public void setAdapterList(List<String> transfers) {
+    public void setAdapterList(List<Address> addresses) {
         this.addresses = addresses;
         notifyDataSetChanged();
     }
@@ -76,12 +87,13 @@ public class WalletAddressCardAdapter extends RecyclerView.Adapter<WalletAddress
 
     class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener, View.OnLongClickListener {
         final TextView addressLabel;
+        final ImageView addressImage;
 
         private ViewHolder(View itemView) {
             super(itemView);
 
             addressLabel = itemView.findViewById(R.id.item_wa_address);
-
+            addressImage = itemView.findViewById(R.id.item_wa_address_image);
             itemView.setOnClickListener(this);
             itemView.setOnLongClickListener(this);
 

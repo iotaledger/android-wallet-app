@@ -35,6 +35,7 @@ import org.iota.wallet.R;
 import org.iota.wallet.api.TaskManager;
 import org.iota.wallet.databinding.FragmentWalletAddressesBinding;
 import org.iota.wallet.helper.Constants;
+import org.iota.wallet.model.Address;
 import org.iota.wallet.model.api.requests.GetAccountDataRequest;
 import org.iota.wallet.model.api.requests.GetNewAddressRequest;
 import org.iota.wallet.model.api.requests.NodeInfoRequest;
@@ -56,7 +57,7 @@ public class WalletAddressesFragment extends BaseSwipeRefreshLayoutFragment impl
     private FragmentWalletAddressesBinding addressBinding;
     private WalletAddressCardAdapter adapter;
     private RecyclerView recyclerView;
-    private List<String> addresses;
+    private List<Address> addresses;
 
     @Nullable
     @Override
@@ -179,7 +180,7 @@ public class WalletAddressesFragment extends BaseSwipeRefreshLayoutFragment impl
     public void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
         if (addresses != null)
-            outState.putStringArrayList(ADDRESSES_LIST, (ArrayList<String>) addresses);
+            outState.putParcelableArrayList(ADDRESSES_LIST, (ArrayList<Address>) addresses);
     }
 
     @Override
@@ -189,7 +190,7 @@ public class WalletAddressesFragment extends BaseSwipeRefreshLayoutFragment impl
             if (addresses == null) {
                 addresses = new ArrayList<>();
             }
-            addresses = savedInstanceState.getStringArrayList(ADDRESSES_LIST);
+            addresses = savedInstanceState.getParcelableArrayList(ADDRESSES_LIST);
         }
         setAdapter();
     }

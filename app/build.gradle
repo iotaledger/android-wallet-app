@@ -101,5 +101,5 @@ dependencies {
     compile 'org.knowm.xchange:xchange-bitstamp:4.2.1'
     compile 'org.knowm.xchange:xchange-bitfinex:4.2.1'
     compile 'org.knowm.xchange:xchange-okcoin:4.2.1'
-    compile 'com.github.iotaledger:iota.lib.java:master-SNAPSHOT'
+    compile 'com.github.iotaledger:iota.lib.java:fdeb8d'
 }
