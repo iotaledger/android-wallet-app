@@ -17,10 +17,21 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package org.iota.wallet.model.api.requests;
+package org.iota.wallet.api.requests;
 
-public class NodeInfoRequest extends ApiRequest {
+public class RemoveNeighborsRequest extends ApiRequest {
 
-    public NodeInfoRequest() {
+    private String[] uris;
+
+    public RemoveNeighborsRequest(String[] uris) {
+        this.uris = uris;
+    }
+
+    public String[] getUris() {
+        return uris;
+    }
+
+    public void setUris(String[] uris) {
+        this.uris = uris;
     }
 }

@@ -17,22 +17,11 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package org.iota.wallet.model.api.responses;
+package org.iota.wallet.api.requests;
 
-public class SendTransferResponse extends ApiResponse {
+public class ApiRequest {
 
-    private Boolean[] successfully;
+    ApiRequest() {
 
-    public SendTransferResponse(jota.dto.response.SendTransferResponse apiResponse) {
-        successfully = apiResponse.getSuccessfully();
-        setDuration(apiResponse.getDuration());
-    }
-
-    public Boolean[] getSuccessfully() {
-        return successfully;
-    }
-
-    public void setSuccessfully(Boolean[] successfully) {
-        this.successfully = successfully;
     }
 }

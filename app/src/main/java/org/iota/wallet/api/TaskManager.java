@@ -25,7 +25,7 @@ import android.os.AsyncTask;
 import android.util.Log;
 
 import org.iota.wallet.BuildConfig;
-import org.iota.wallet.model.api.requests.ApiRequest;
+import org.iota.wallet.api.requests.ApiRequest;
 
 import java.util.HashMap;
 import java.util.Iterator;

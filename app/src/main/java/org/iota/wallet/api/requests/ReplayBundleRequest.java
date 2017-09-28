@@ -17,14 +17,39 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package org.iota.wallet.model.api.responses.error;
+package org.iota.wallet.api.requests;
 
-public enum NetworkErrorType {
+public class ReplayBundleRequest extends ApiRequest {
 
-    REMOTE_NODE_ERROR,
-    EXCHANGE_RATE_ERROR,
-    NETWORK_ERROR,
-    IOTA_COOL_NETWORK_ERROR,
-    ACCESS_ERROR,
-    INVALID_HASH_ERROR
+    private String hash;
+    private int minWeightMagnitude = 14;
+    private int depth = 9;
+
+    public ReplayBundleRequest(String hash) {
+        this.hash = hash;
+    }
+
+    public String getHash() {
+        return hash;
+    }
+
+    public void setHash(String hash) {
+        this.hash = hash;
+    }
+
+    public int getMinWeightMagnitude() {
+        return minWeightMagnitude;
+    }
+
+    public void setMinWeightMagnitude(int minWeightMagnitude) {
+        this.minWeightMagnitude = minWeightMagnitude;
+    }
+
+    public int getDepth() {
+        return depth;
+    }
+
+    public void setDepth(int depth) {
+        this.depth = depth;
+    }
 }

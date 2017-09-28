@@ -21,11 +21,11 @@ package org.iota.wallet.api.handler;
 
 import android.content.Context;
 
-import org.iota.wallet.model.api.requests.ApiRequest;
-import org.iota.wallet.model.api.requests.GetAccountDataRequest;
-import org.iota.wallet.model.api.responses.ApiResponse;
-import org.iota.wallet.model.api.responses.GetAccountDataResponse;
-import org.iota.wallet.model.api.responses.error.NetworkError;
+import org.iota.wallet.api.requests.ApiRequest;
+import org.iota.wallet.api.requests.GetAccountDataRequest;
+import org.iota.wallet.api.responses.ApiResponse;
+import org.iota.wallet.api.responses.GetAccountDataResponse;
+import org.iota.wallet.api.responses.error.NetworkError;
 
 import jota.IotaAPI;
 import jota.error.ArgumentException;
@@ -44,7 +44,7 @@ public class GetAccountDataRequestHandler extends IotaRequestHandler {
 
     @Override
     public Class<? extends ApiRequest> getType() {
-        return org.iota.wallet.model.api.requests.GetAccountDataRequest.class;
+        return org.iota.wallet.api.requests.GetAccountDataRequest.class;
     }
 
     @Override
@@ -53,15 +53,15 @@ public class GetAccountDataRequestHandler extends IotaRequestHandler {
 
         try {
             response = new GetAccountDataResponse(apiProxy.getAccountData(((GetAccountDataRequest) request).getSeed(),
-                    ((org.iota.wallet.model.api.requests.GetAccountDataRequest) request).getSecurity(),
-                    ((org.iota.wallet.model.api.requests.GetAccountDataRequest) request).getIndex(),
-                    ((org.iota.wallet.model.api.requests.GetAccountDataRequest) request).isChecksum(),
-                    ((org.iota.wallet.model.api.requests.GetAccountDataRequest) request).getTotal(),
-                    ((org.iota.wallet.model.api.requests.GetAccountDataRequest) request).isReturnAll(),
-                    ((org.iota.wallet.model.api.requests.GetAccountDataRequest) request).getStart(),
-                    ((org.iota.wallet.model.api.requests.GetAccountDataRequest) request).getEnd(),
-                    ((org.iota.wallet.model.api.requests.GetAccountDataRequest) request).isInclusionState(),
-                    ((org.iota.wallet.model.api.requests.GetAccountDataRequest) request).getThreshold()));
+                    ((org.iota.wallet.api.requests.GetAccountDataRequest) request).getSecurity(),
+                    ((org.iota.wallet.api.requests.GetAccountDataRequest) request).getIndex(),
+                    ((org.iota.wallet.api.requests.GetAccountDataRequest) request).isChecksum(),
+                    ((org.iota.wallet.api.requests.GetAccountDataRequest) request).getTotal(),
+                    ((org.iota.wallet.api.requests.GetAccountDataRequest) request).isReturnAll(),
+                    ((org.iota.wallet.api.requests.GetAccountDataRequest) request).getStart(),
+                    ((org.iota.wallet.api.requests.GetAccountDataRequest) request).getEnd(),
+                    ((org.iota.wallet.api.requests.GetAccountDataRequest) request).isInclusionState(),
+                    ((org.iota.wallet.api.requests.GetAccountDataRequest) request).getThreshold()));
         } catch (ArgumentException | InvalidSecurityLevelException | InvalidAddressException | InvalidBundleException | InvalidSignatureException | NoNodeInfoException | InvalidTrytesException | NoInclusionStatesException e) {
             response = new NetworkError();
         }

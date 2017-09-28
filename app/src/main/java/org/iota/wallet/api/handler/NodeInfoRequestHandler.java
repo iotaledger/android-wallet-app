@@ -21,10 +21,10 @@ package org.iota.wallet.api.handler;
 
 import android.content.Context;
 
-import org.iota.wallet.model.api.requests.ApiRequest;
-import org.iota.wallet.model.api.requests.NodeInfoRequest;
-import org.iota.wallet.model.api.responses.ApiResponse;
-import org.iota.wallet.model.api.responses.NodeInfoResponse;
+import org.iota.wallet.api.requests.ApiRequest;
+import org.iota.wallet.api.requests.NodeInfoRequest;
+import org.iota.wallet.api.responses.ApiResponse;
+import org.iota.wallet.api.responses.NodeInfoResponse;
 
 import jota.IotaAPI;
 

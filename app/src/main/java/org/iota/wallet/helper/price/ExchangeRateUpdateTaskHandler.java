@@ -24,8 +24,8 @@ import android.util.Log;
 
 import org.greenrobot.eventbus.EventBus;
 import org.iota.wallet.BuildConfig;
-import org.iota.wallet.model.api.responses.error.NetworkError;
-import org.iota.wallet.model.api.responses.error.NetworkErrorType;
+import org.iota.wallet.api.responses.error.NetworkError;
+import org.iota.wallet.api.responses.error.NetworkErrorType;
 import org.knowm.xchange.currency.Currency;
 import org.knowm.xchange.currency.CurrencyPair;
 

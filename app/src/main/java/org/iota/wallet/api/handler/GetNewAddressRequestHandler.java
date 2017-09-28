@@ -21,11 +21,11 @@ package org.iota.wallet.api.handler;
 
 import android.content.Context;
 
-import org.iota.wallet.model.api.requests.ApiRequest;
-import org.iota.wallet.model.api.requests.GetNewAddressRequest;
-import org.iota.wallet.model.api.responses.ApiResponse;
-import org.iota.wallet.model.api.responses.GetNewAddressResponse;
-import org.iota.wallet.model.api.responses.error.NetworkError;
+import org.iota.wallet.api.requests.ApiRequest;
+import org.iota.wallet.api.requests.GetNewAddressRequest;
+import org.iota.wallet.api.responses.ApiResponse;
+import org.iota.wallet.api.responses.GetNewAddressResponse;
+import org.iota.wallet.api.responses.error.NetworkError;
 
 import jota.IotaAPI;
 import jota.error.InvalidAddressException;

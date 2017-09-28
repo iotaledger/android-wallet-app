@@ -17,22 +17,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package org.iota.wallet.model.api.responses;
+package org.iota.wallet.api.requests;
 
-import org.iota.wallet.model.Transaction;
-
-public class CoolTransactionResponse extends ApiResponse {
-    private Transaction[] transactions;
-
-    public CoolTransactionResponse(Transaction[] transactions) {
-        this.transactions = transactions;
-    }
-
-    public Transaction[] getTransactions() {
-        return transactions;
-    }
-
-    public void setTransactions(Transaction[] transactions) {
-        this.transactions = transactions;
-    }
+public class CoolTransationsRequest extends ApiRequest {
 }

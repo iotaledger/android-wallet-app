@@ -54,10 +54,10 @@ import android.widget.Spinner;
 import org.apache.commons.lang3.StringUtils;
 import org.iota.wallet.R;
 import org.iota.wallet.api.TaskManager;
+import org.iota.wallet.api.requests.SendTransferRequest;
 import org.iota.wallet.helper.Constants;
 import org.iota.wallet.helper.PermissionRequestHelper;
 import org.iota.wallet.model.QRCode;
-import org.iota.wallet.model.api.requests.SendTransferRequest;
 
 import jota.error.InvalidAddressException;
 import jota.utils.Checksum;

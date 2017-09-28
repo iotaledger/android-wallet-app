@@ -17,22 +17,20 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package org.iota.wallet.model.api.responses;
+package org.iota.wallet.api.requests;
 
-public class RemoveNeighborsResponse extends ApiResponse {
+public class FindTransactionRequest extends ApiRequest {
+    private String searchText;
 
-    private Integer removedNeighbors;
-
-    public RemoveNeighborsResponse(jota.dto.response.RemoveNeighborsResponse apiResponse) {
-        removedNeighbors = apiResponse.getRemovedNeighbors();
-        setDuration(apiResponse.getDuration());
+    public FindTransactionRequest(String searchText) {
+        this.searchText = searchText;
     }
 
-    public Integer getRemovedNeighbors() {
-        return removedNeighbors;
+    public String getSearchText() {
+        return searchText;
     }
 
-    public void setRemovedNeighbors(Integer removedNeighbors) {
-        this.removedNeighbors = removedNeighbors;
+    public void setSearchText(String searchText) {
+        this.searchText = searchText;
     }
 }

@@ -17,16 +17,14 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package org.iota.wallet.model.api.responses;
+package org.iota.wallet.api.responses.error;
 
-public class ApiResponse {
-    private Long duration;
+public enum NetworkErrorType {
 
-    public Long getDuration() {
-        return duration;
-    }
-
-    void setDuration(Long duration) {
-        this.duration = duration;
-    }
+    REMOTE_NODE_ERROR,
+    EXCHANGE_RATE_ERROR,
+    NETWORK_ERROR,
+    IOTA_COOL_NETWORK_ERROR,
+    ACCESS_ERROR,
+    INVALID_HASH_ERROR
 }

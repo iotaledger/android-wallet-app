@@ -29,9 +29,9 @@ import com.google.gson.Gson;
 
 import org.greenrobot.eventbus.EventBus;
 import org.iota.wallet.BuildConfig;
+import org.iota.wallet.api.requests.ApiRequest;
+import org.iota.wallet.api.responses.ApiResponse;
 import org.iota.wallet.helper.Constants;
-import org.iota.wallet.model.api.requests.ApiRequest;
-import org.iota.wallet.model.api.responses.ApiResponse;
 
 import java.util.Date;
 

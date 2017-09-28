@@ -17,22 +17,21 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package org.iota.wallet.model.api.requests;
+package org.iota.wallet.api.requests;
 
-public class AddNeighborsRequest extends ApiRequest {
+public class GetBundleRequest extends ApiRequest {
 
-    private String[] uris;
+    private String transaction = "";
 
-    public AddNeighborsRequest(String[] uris) {
-        super();
-        this.uris = uris;
+    public GetBundleRequest(String transaction) {
+        this.transaction = transaction;
     }
 
-    public String[] getUris() {
-        return uris;
+    public String getTransaction() {
+        return transaction;
     }
 
-    public void setUris(String[] uris) {
-        this.uris = uris;
+    public void setTransaction(String transaction) {
+        this.transaction = transaction;
     }
 }

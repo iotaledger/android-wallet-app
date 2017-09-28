@@ -17,7 +17,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package org.iota.wallet.model.api.responses;
+package org.iota.wallet.api.responses;
 
 import org.iota.wallet.model.Address;
 import org.iota.wallet.model.Transfer;

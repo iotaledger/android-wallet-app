@@ -44,11 +44,11 @@ import com.simplecityapps.recyclerview_fastscroll.views.FastScrollRecyclerView;
 import org.greenrobot.eventbus.Subscribe;
 import org.iota.wallet.R;
 import org.iota.wallet.api.TaskManager;
+import org.iota.wallet.api.requests.CoolTransationsRequest;
+import org.iota.wallet.api.responses.CoolTransactionResponse;
+import org.iota.wallet.api.responses.error.NetworkError;
 import org.iota.wallet.databinding.FragmentTangleExplorerTransactionsBinding;
 import org.iota.wallet.model.Transaction;
-import org.iota.wallet.model.api.requests.CoolTransationsRequest;
-import org.iota.wallet.model.api.responses.CoolTransactionResponse;
-import org.iota.wallet.model.api.responses.error.NetworkError;
 import org.iota.wallet.ui.adapter.TangleExplorerTransactionsCardAdapter;
 
 import java.lang.reflect.Type;

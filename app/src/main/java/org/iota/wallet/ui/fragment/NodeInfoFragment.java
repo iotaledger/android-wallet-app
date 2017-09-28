@@ -52,11 +52,11 @@ import com.github.mikephil.charting.utils.ColorTemplate;
 import org.greenrobot.eventbus.Subscribe;
 import org.iota.wallet.R;
 import org.iota.wallet.api.TaskManager;
+import org.iota.wallet.api.requests.NodeInfoRequest;
+import org.iota.wallet.api.responses.NodeInfoResponse;
+import org.iota.wallet.api.responses.error.NetworkError;
 import org.iota.wallet.helper.Utils;
 import org.iota.wallet.model.NodeInfo;
-import org.iota.wallet.model.api.requests.NodeInfoRequest;
-import org.iota.wallet.model.api.responses.NodeInfoResponse;
-import org.iota.wallet.model.api.responses.error.NetworkError;
 import org.iota.wallet.ui.adapter.NodeInfoListAdapter;
 
 import java.text.SimpleDateFormat;

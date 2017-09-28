@@ -45,11 +45,11 @@ import org.greenrobot.eventbus.Subscribe;
 import org.iota.wallet.IOTA;
 import org.iota.wallet.R;
 import org.iota.wallet.api.TaskManager;
+import org.iota.wallet.api.requests.GetNewAddressRequest;
+import org.iota.wallet.api.requests.SendTransferRequest;
+import org.iota.wallet.api.responses.GetNewAddressResponse;
 import org.iota.wallet.helper.Constants;
 import org.iota.wallet.model.QRCode;
-import org.iota.wallet.model.api.requests.GetNewAddressRequest;
-import org.iota.wallet.model.api.requests.SendTransferRequest;
-import org.iota.wallet.model.api.responses.GetNewAddressResponse;
 import org.iota.wallet.ui.dialog.GeneratedQRCodeDialog;
 
 import jota.error.InvalidAddressException;

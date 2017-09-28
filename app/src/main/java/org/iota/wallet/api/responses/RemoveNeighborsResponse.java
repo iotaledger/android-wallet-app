@@ -17,26 +17,22 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package org.iota.wallet.model.api.responses;
+package org.iota.wallet.api.responses;
 
-import java.util.ArrayList;
-import java.util.List;
+public class RemoveNeighborsResponse extends ApiResponse {
 
-public class GetNewAddressResponse extends ApiResponse {
+    private Integer removedNeighbors;
 
-    private List<String> addresses = new ArrayList<>();
-
-    public GetNewAddressResponse(jota.dto.response.GetNewAddressResponse apiResponse) {
-        addresses = apiResponse.getAddresses();
+    public RemoveNeighborsResponse(jota.dto.response.RemoveNeighborsResponse apiResponse) {
+        removedNeighbors = apiResponse.getRemovedNeighbors();
         setDuration(apiResponse.getDuration());
     }
 
-    public List<String> getAddresses() {
-        return addresses;
+    public Integer getRemovedNeighbors() {
+        return removedNeighbors;
     }
 
-    public void setAddresses(List<String> addresses) {
-        this.addresses = addresses;
+    public void setRemovedNeighbors(Integer removedNeighbors) {
+        this.removedNeighbors = removedNeighbors;
     }
-
 }

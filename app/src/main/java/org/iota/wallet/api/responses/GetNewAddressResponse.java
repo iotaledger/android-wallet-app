@@ -17,20 +17,26 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package org.iota.wallet.model.api.responses;
+package org.iota.wallet.api.responses;
 
-public class FindTransactionResponse extends ApiResponse {
-    private String[] hashes;
+import java.util.ArrayList;
+import java.util.List;
 
-    public FindTransactionResponse(String[] hashes) {
-        this.hashes = hashes;
+public class GetNewAddressResponse extends ApiResponse {
+
+    private List<String> addresses = new ArrayList<>();
+
+    public GetNewAddressResponse(jota.dto.response.GetNewAddressResponse apiResponse) {
+        addresses = apiResponse.getAddresses();
+        setDuration(apiResponse.getDuration());
     }
 
-    public String[] getHashes() {
-        return hashes;
+    public List<String> getAddresses() {
+        return addresses;
     }
 
-    public void setHashes(String[] hashes) {
-        this.hashes = hashes;
+    public void setAddresses(List<String> addresses) {
+        this.addresses = addresses;
     }
+
 }

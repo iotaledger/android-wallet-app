@@ -17,21 +17,16 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package org.iota.wallet.model.api.requests;
+package org.iota.wallet.api.responses;
 
-public class GetBundleRequest extends ApiRequest {
+public class ApiResponse {
+    private Long duration;
 
-    private String transaction = "";
-
-    public GetBundleRequest(String transaction) {
-        this.transaction = transaction;
+    public Long getDuration() {
+        return duration;
     }
 
-    public String getTransaction() {
-        return transaction;
-    }
-
-    public void setTransaction(String transaction) {
-        this.transaction = transaction;
+    void setDuration(Long duration) {
+        this.duration = duration;
     }
 }

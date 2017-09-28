@@ -17,39 +17,22 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package org.iota.wallet.model.api.requests;
+package org.iota.wallet.api.responses;
 
-public class ReplayBundleRequest extends ApiRequest {
+public class AddNeighborsResponse extends ApiResponse {
 
-    private String hash;
-    private int minWeightMagnitude = 14;
-    private int depth = 9;
+    private Integer addedNeighbors;
 
-    public ReplayBundleRequest(String hash) {
-        this.hash = hash;
+    public AddNeighborsResponse(jota.dto.response.AddNeighborsResponse apiResponse) {
+        addedNeighbors = apiResponse.getAddedNeighbors();
+        setDuration(apiResponse.getDuration());
     }
 
-    public String getHash() {
-        return hash;
+    public Integer getAddedNeighbors() {
+        return addedNeighbors;
     }
 
-    public void setHash(String hash) {
-        this.hash = hash;
-    }
-
-    public int getMinWeightMagnitude() {
-        return minWeightMagnitude;
-    }
-
-    public void setMinWeightMagnitude(int minWeightMagnitude) {
-        this.minWeightMagnitude = minWeightMagnitude;
-    }
-
-    public int getDepth() {
-        return depth;
-    }
-
-    public void setDepth(int depth) {
-        this.depth = depth;
+    public void setAddedNeighbors(Integer addedNeighbors) {
+        this.addedNeighbors = addedNeighbors;
     }
 }

@@ -17,7 +17,20 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package org.iota.wallet.model.api.requests;
+package org.iota.wallet.api.responses;
 
-public class CoolTransationsRequest extends ApiRequest {
+public class FindTransactionResponse extends ApiResponse {
+    private String[] hashes;
+
+    public FindTransactionResponse(String[] hashes) {
+        this.hashes = hashes;
+    }
+
+    public String[] getHashes() {
+        return hashes;
+    }
+
+    public void setHashes(String[] hashes) {
+        this.hashes = hashes;
+    }
 }

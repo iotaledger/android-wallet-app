@@ -17,10 +17,22 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package org.iota.wallet.model.api.requests;
+package org.iota.wallet.api.responses;
 
-public class GetNeighborsRequest extends ApiRequest {
+import org.iota.wallet.model.Transaction;
 
-    public GetNeighborsRequest() {
+public class CoolTransactionResponse extends ApiResponse {
+    private Transaction[] transactions;
+
+    public CoolTransactionResponse(Transaction[] transactions) {
+        this.transactions = transactions;
+    }
+
+    public Transaction[] getTransactions() {
+        return transactions;
+    }
+
+    public void setTransactions(Transaction[] transactions) {
+        this.transactions = transactions;
     }
 }

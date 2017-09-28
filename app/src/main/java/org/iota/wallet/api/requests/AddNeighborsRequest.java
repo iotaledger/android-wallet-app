@@ -17,22 +17,22 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package org.iota.wallet.model.api.responses;
+package org.iota.wallet.api.requests;
 
-public class AddNeighborsResponse extends ApiResponse {
+public class AddNeighborsRequest extends ApiRequest {
 
-    private Integer addedNeighbors;
+    private String[] uris;
 
-    public AddNeighborsResponse(jota.dto.response.AddNeighborsResponse apiResponse) {
-        addedNeighbors = apiResponse.getAddedNeighbors();
-        setDuration(apiResponse.getDuration());
+    public AddNeighborsRequest(String[] uris) {
+        super();
+        this.uris = uris;
     }
 
-    public Integer getAddedNeighbors() {
-        return addedNeighbors;
+    public String[] getUris() {
+        return uris;
     }
 
-    public void setAddedNeighbors(Integer addedNeighbors) {
-        this.addedNeighbors = addedNeighbors;
+    public void setUris(String[] uris) {
+        this.uris = uris;
     }
 }

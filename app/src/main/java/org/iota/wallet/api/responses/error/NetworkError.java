@@ -17,22 +17,23 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package org.iota.wallet.model.api.responses;
+package org.iota.wallet.api.responses.error;
 
-public class ReplayBundleResponse extends ApiResponse {
+import org.iota.wallet.api.responses.ApiResponse;
 
-    private Boolean[] successfully;
+public class NetworkError extends ApiResponse {
 
-    public ReplayBundleResponse(jota.dto.response.ReplayBundleResponse apiResponse) {
-        successfully = apiResponse.getSuccessfully();
-        setDuration(apiResponse.getDuration());
+    private NetworkErrorType errorType;
+
+    public NetworkError() {
+        errorType = NetworkErrorType.REMOTE_NODE_ERROR;
     }
 
-    public Boolean[] getSuccessfully() {
-        return successfully;
+    public NetworkErrorType getErrorType() {
+        return errorType;
     }
 
-    public void setSuccessfully(Boolean[] successfully) {
-        this.successfully = successfully;
+    public void setErrorType(NetworkErrorType errorType) {
+        this.errorType = errorType;
     }
 }

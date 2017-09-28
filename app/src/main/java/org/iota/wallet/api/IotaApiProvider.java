@@ -35,11 +35,11 @@ import org.iota.wallet.api.handler.RemoveNeighborsRequestHandler;
 import org.iota.wallet.api.handler.ReplayBundleRequestHandler;
 import org.iota.wallet.api.handler.RequestHandler;
 import org.iota.wallet.api.handler.SendTransferRequestHandler;
+import org.iota.wallet.api.requests.ApiRequest;
+import org.iota.wallet.api.responses.ApiResponse;
+import org.iota.wallet.api.responses.error.NetworkError;
+import org.iota.wallet.api.responses.error.NetworkErrorType;
 import org.iota.wallet.helper.Constants;
-import org.iota.wallet.model.api.requests.ApiRequest;
-import org.iota.wallet.model.api.responses.ApiResponse;
-import org.iota.wallet.model.api.responses.error.NetworkError;
-import org.iota.wallet.model.api.responses.error.NetworkErrorType;
 
 import java.util.HashMap;
 import java.util.Map;

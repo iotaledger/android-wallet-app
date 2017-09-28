@@ -21,12 +21,12 @@ package org.iota.wallet.api.handler;
 
 import android.content.Context;
 
-import org.iota.wallet.model.api.requests.ApiRequest;
-import org.iota.wallet.model.api.requests.GetBundleRequest;
-import org.iota.wallet.model.api.responses.ApiResponse;
-import org.iota.wallet.model.api.responses.GetBundleResponse;
-import org.iota.wallet.model.api.responses.error.NetworkError;
-import org.iota.wallet.model.api.responses.error.NetworkErrorType;
+import org.iota.wallet.api.requests.ApiRequest;
+import org.iota.wallet.api.requests.GetBundleRequest;
+import org.iota.wallet.api.responses.ApiResponse;
+import org.iota.wallet.api.responses.GetBundleResponse;
+import org.iota.wallet.api.responses.error.NetworkError;
+import org.iota.wallet.api.responses.error.NetworkErrorType;
 
 import jota.IotaAPI;
 import jota.error.ArgumentException;

@@ -24,13 +24,13 @@ import android.content.Context;
 import com.google.gson.Gson;
 
 import org.iota.wallet.BuildConfig;
+import org.iota.wallet.api.requests.ApiRequest;
+import org.iota.wallet.api.requests.CoolTransationsRequest;
+import org.iota.wallet.api.responses.ApiResponse;
+import org.iota.wallet.api.responses.CoolTransactionResponse;
+import org.iota.wallet.api.responses.error.NetworkError;
+import org.iota.wallet.api.responses.error.NetworkErrorType;
 import org.iota.wallet.model.Transaction;
-import org.iota.wallet.model.api.requests.ApiRequest;
-import org.iota.wallet.model.api.requests.CoolTransationsRequest;
-import org.iota.wallet.model.api.responses.ApiResponse;
-import org.iota.wallet.model.api.responses.CoolTransactionResponse;
-import org.iota.wallet.model.api.responses.error.NetworkError;
-import org.iota.wallet.model.api.responses.error.NetworkErrorType;
 
 import java.io.IOException;
 

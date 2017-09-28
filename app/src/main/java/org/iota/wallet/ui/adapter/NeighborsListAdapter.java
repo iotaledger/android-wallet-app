@@ -31,9 +31,9 @@ import android.widget.TextView;
 
 import org.iota.wallet.R;
 import org.iota.wallet.api.TaskManager;
+import org.iota.wallet.api.requests.RemoveNeighborsRequest;
 import org.iota.wallet.helper.Constants;
 import org.iota.wallet.model.Neighbor;
-import org.iota.wallet.model.api.requests.RemoveNeighborsRequest;
 
 import java.util.ArrayList;
 import java.util.List;

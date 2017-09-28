@@ -22,14 +22,14 @@ package org.iota.wallet.api.handler;
 import android.content.Context;
 
 import org.iota.wallet.R;
+import org.iota.wallet.api.requests.ApiRequest;
+import org.iota.wallet.api.requests.ReplayBundleRequest;
+import org.iota.wallet.api.responses.ApiResponse;
+import org.iota.wallet.api.responses.ReplayBundleResponse;
+import org.iota.wallet.api.responses.error.NetworkError;
+import org.iota.wallet.api.responses.error.NetworkErrorType;
 import org.iota.wallet.helper.NotificationHelper;
 import org.iota.wallet.helper.Utils;
-import org.iota.wallet.model.api.requests.ApiRequest;
-import org.iota.wallet.model.api.requests.ReplayBundleRequest;
-import org.iota.wallet.model.api.responses.ApiResponse;
-import org.iota.wallet.model.api.responses.ReplayBundleResponse;
-import org.iota.wallet.model.api.responses.error.NetworkError;
-import org.iota.wallet.model.api.responses.error.NetworkErrorType;
 
 import java.util.Arrays;
 
