@@ -2,6 +2,14 @@
 <changelog bulletedList="true">
 
     <changelogversion
+        changeDate="September 29, 2017"
+        versionName="0.7.1">
+        <changelogtext>Added local PoW support</changelogtext>
+        <changelogtext>Fixed reattachment</changelogtext>
+        <changelogtext>Updated wallet screen</changelogtext>
+    </changelogversion>
+
+    <changelogversion
         changeDate="September 24, 2017"
         versionName="0.7">
         <changelogtext>Fixed notifications on Android O</changelogtext>
