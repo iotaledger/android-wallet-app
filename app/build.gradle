@@ -2,7 +2,7 @@ apply plugin: 'com.android.application'
 
 def versionMajor = 0
 def versionMinor = 7
-def versionPatch = 2
+def versionPatch = 3
 def versionBuild = 0 // bump for dogfood builds, public betas, etc.
 
 //TODO edit the changelog as well
@@ -101,5 +101,5 @@ dependencies {
     compile 'org.knowm.xchange:xchange-bitstamp:4.2.1'
     compile 'org.knowm.xchange:xchange-bitfinex:4.2.1'
     compile 'org.knowm.xchange:xchange-okcoin:4.2.1'
-    compile 'com.github.iotaledger:iota.lib.java:c29cfa0'
+    compile 'com.github.iotaledger:iota.lib.java:v0.9.5'
 }

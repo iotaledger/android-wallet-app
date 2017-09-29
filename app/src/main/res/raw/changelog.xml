@@ -1,6 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <changelog bulletedList="true">
 
+
+    <changelogversion
+        changeDate="September 29, 2017"
+        versionName="0.7.3">
+        <changelogtext>Updated dependencies</changelogtext>
+    </changelogversion>
+
     <changelogversion
         changeDate="September 29, 2017"
         versionName="0.7.2">
