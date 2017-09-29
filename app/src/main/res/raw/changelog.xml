@@ -3,6 +3,12 @@
 
     <changelogversion
         changeDate="September 29, 2017"
+        versionName="0.7.2">
+        <changelogtext>Updated dependencies</changelogtext>
+    </changelogversion>
+
+    <changelogversion
+        changeDate="September 29, 2017"
         versionName="0.7.1">
         <changelogtext>Added local PoW support</changelogtext>
         <changelogtext>Fixed reattachment</changelogtext>
