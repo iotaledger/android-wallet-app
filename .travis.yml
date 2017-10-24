@@ -1,7 +1,7 @@
 language: android
 env:
   global:
-  - BUILD_TOOLS=26.0.1
+  - BUILD_TOOLS=26.0.2
   - ANDROID_SDK=26
   - secure: 2DKJSx0H9YSrvkGuF3nGTXA4qZZZs0Mnj3axD12CvE4AUXPMiwQheSeh5Dwd3W0LV6XfmUI6/nZhZf8I+BJObpBTMV6+Swgt1OR/5A8uksJCbUnsOEHBvhdaZgj9tnbM6KfNUqtJnd/E+/iz8XmuU7CJLT7mR750ERqTwj3aTeFZ7yAJn2tD0Zio+CH9V3Vrs3mTIPYkwFpcdcuikKA0Ix04t1K+3+nEeUPusp8/v+v2ViKYEGdfmxFsHcKHAAVpqgXQzGSfkCMEMpfGP+8T4Y7vfPzgO1KyJm6+3FPMN6+6qJBHcvQz77y9ZQE6z/b29ih4xhxHtyhH8R8l2IT6v46JPuQzg+4YkHpDYJye4ffpmYFqgZaTwYaNcktX2ia6bQgqPtvIDfyGJQ0XMClQhZyOlR5ksClYeypGgZgA6i3V2Zrlsc89a8TgmD6UUEUd28utghuBERff9pBML267eZQ1ylex497Fpt6/YXZATuZG7mPWGMJx3Dr/IhKIbvEcZiqM3JsE7+gnOi7LK9UCXC56jzXhvYt5TH8pWJvZ2w3yL4okKuF4OXDgSG5StCJUlMY0YyJ148LdxAPsF3uxkCYDXuKQK+3J7qA4gGoURlta/KPNNJTvurOkxZXKr+HPPMNwwwo1ofPDQx0JtgmbH6te6yZ/LeuQ2d/ZS/LFjh8=
   - secure: UIs6ZiHdo2KP3+6n2VRKLb1sTQELexQG4Lk34/Dlxj7tGLYTmW7gVQqNnFMuHZAfZvx72cBEC/X5XiVb38fp9saj23AStqokVmEz2ACH0MWXPZzYpfz/cY0oxFoI+TiOiShzbdTh/E6av7rhjmvssqa4bEkECHxFOYtRKm41lMM8vBFK6IHj45uqCl4NxavLtTvvT1gRBpsmILmjh4B25W3HAPdW2+twitR5hS4pYxhm1BEjJRNvFMSqzQFywgZqE2ViMa47KHAE1KV2mMsluguLJzy4u3vvpYB2nhIX8qT294ozzokoy5vPst2TGL9etIyERqO+SlizReFe6JORByOCa9nZmxhYjwZADwGtUHeS9+fy+s9AS7JihC4V5yAwypMIZxVeRmiOz88Z53YnnIn4p6Gi8ZGJUmWBV05cg6MHC8T3J0hMh4WqGBag2nhOXMBZ+Tmu38CVEkHN83x8spbjE4ZuUi77m3fXVdIIRcb/YkVrdidXbg5gDmlh18POHya5garPn9lRPkc9gmIZi9sNBuBAbRu1BOkDXrJjoL7NTlUJwP6RMnL1EzXeAD2KnOOLN4jGOD/uUF2CA12KYmug5Y43ER9TUd/6rDGgT2ZI2uEiTJ6Vbqx8lAcUCJ6JY9m/4sU3sTAvf+z7B6/N1ixh4hlkwb1/TAk1eNb2U60=
@@ -33,7 +33,7 @@ before_deploy:
 - jarsigner -verbose -sigalg SHA1withRSA -digestalg SHA1 -keystore $HOME/keystore.jks
   -storepass $storepass -keypass $keypass app-release-unsigned.apk iotaKey
 - jarsigner -verify app-release-unsigned.apk
-- "${ANDROID_HOME}/build-tools/26.0.1/zipalign -v 4 app-release-unsigned.apk app-release.apk"
+- "${ANDROID_HOME}/build-tools/26.0.2/zipalign -v 4 app-release-unsigned.apk app-release.apk"
 deploy:
   provider: releases
   api_key:

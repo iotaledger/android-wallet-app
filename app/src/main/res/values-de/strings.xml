@@ -168,6 +168,7 @@
     <string name="settings_wallet_currency_summary">Währung, in der das Wallet-Guthaben angezeigt wird</string>
 
     <string name="settings_messages_empty_node_protocol">Es muss ein Knoten Protokoll angegeben werden.</string>
+    <string name="settings_messages_wrong_node_protocol">Knoten Protokoll nicht erlaubt.</string>
     <string name="settings_messages_empty_node_ip">Es muss eine Knoten IP angegeben werden.</string>
     <string name="settings_messages_empty_node_port">Es muss ein Knoten Port angegeben werden.</string>
 

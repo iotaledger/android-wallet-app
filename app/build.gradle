@@ -1,15 +1,15 @@
 apply plugin: 'com.android.application'
 
 def versionMajor = 0
-def versionMinor = 7
-def versionPatch = 4
+def versionMinor = 8
+def versionPatch = 0
 def versionBuild = 0 // bump for dogfood builds, public betas, etc.
 
 //TODO edit the changelog as well
 
 android {
     compileSdkVersion 26
-    buildToolsVersion '26.0.1'
+    buildToolsVersion '26.0.2'
 
     defaultConfig {
         applicationId "org.iota.wallet"
@@ -97,9 +97,9 @@ dependencies {
     //Other libraries
     compile 'org.greenrobot:eventbus:3.0.0'
     compile 'com.google.code.gson:gson:2.8.2'
-    compile 'org.knowm.xchange:xchange-core:4.2.2'
-    compile 'org.knowm.xchange:xchange-bitstamp:4.2.2'
-    compile 'org.knowm.xchange:xchange-bitfinex:4.2.2'
-    compile 'org.knowm.xchange:xchange-okcoin:4.2.2'
-    compile 'com.github.iotaledger:iota.lib.java:v0.9.5'
+    compile 'org.knowm.xchange:xchange-core:4.2.3'
+    compile 'org.knowm.xchange:xchange-bitstamp:4.2.3'
+    compile 'org.knowm.xchange:xchange-bitfinex:4.2.3'
+    compile 'org.knowm.xchange:xchange-okcoin:4.2.3'
+    compile 'com.github.iotaledger:iota.lib.java:0012376'
 }

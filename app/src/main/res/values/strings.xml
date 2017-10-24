@@ -167,6 +167,7 @@
     <string name="settings_wallet_currency_summary">The currency in which the wallet value is displayed</string>
 
     <string name="settings_messages_empty_node_protocol">Empty node protocol not allowed.</string>
+    <string name="settings_messages_wrong_node_protocol">Node protocol not allowed.</string>
     <string name="settings_messages_empty_node_ip">Empty node IP not allowed.</string>
     <string name="settings_messages_empty_node_port">Empty node port not allowed.</string>
 
