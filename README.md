@@ -40,7 +40,7 @@ Miscellaneous:
 ./gradlew clean build
 ```
 <h2>Supporting the project</h2>
-If you like our work please feel free to constribute by posting bug report or push a pull request.
+If you like our work please feel free to contribute by posting a bug report or push a pull request.
 Also a donation is very welcome too.
 
 - Bitcoin: `1MyCJP3yZtSJ3bMVEoQRPSY3D6Ev7CTvzo`
