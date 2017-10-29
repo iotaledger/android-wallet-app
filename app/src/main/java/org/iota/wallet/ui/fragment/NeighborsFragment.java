@@ -28,7 +28,6 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
-import android.support.v4.view.MenuItemCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -139,7 +138,7 @@ public class NeighborsFragment extends BaseSwipeRefreshLayoutFragment implements
 
         inflater.inflate(R.menu.neighbors, menu);
         MenuItem searchItem = menu.findItem(R.id.action_search);
-        this.searchView = (SearchView) MenuItemCompat.getActionView(searchItem);
+        this.searchView = (SearchView) searchItem.getActionView();
 
         searchView.setOnQueryTextListener(this);
 
@@ -151,23 +150,24 @@ public class NeighborsFragment extends BaseSwipeRefreshLayoutFragment implements
             searchView.clearFocus();
         }
 
-        MenuItemCompat.setOnActionExpandListener(searchItem,
-                new MenuItemCompat.OnActionExpandListener() {
-                    @Override
-                    public boolean onMenuItemActionCollapse(MenuItem item) {
-                        adapter.setAdapterList(neighbors);
-                        frameLayout.setVisibility(View.VISIBLE);
-                        fabAddButton.setVisibility(View.VISIBLE);
-                        return true;
-                    }
+        searchItem.setOnActionExpandListener(new MenuItem.OnActionExpandListener() {
 
-                    @Override
-                    public boolean onMenuItemActionExpand(MenuItem item) {
-                        frameLayout.setVisibility(View.GONE);
-                        fabAddButton.setVisibility(View.GONE);
-                        return true;
-                    }
-                });
+            @Override
+            public boolean onMenuItemActionExpand(MenuItem item) {
+                frameLayout.setVisibility(View.GONE);
+                fabAddButton.setVisibility(View.GONE);
+                return true;
+            }
+
+            @Override
+            public boolean onMenuItemActionCollapse(MenuItem item) {
+                adapter.setAdapterList(neighbors);
+                frameLayout.setVisibility(View.VISIBLE);
+                fabAddButton.setVisibility(View.VISIBLE);
+                return true;
+
+            }
+        });
     }
 
     @Override

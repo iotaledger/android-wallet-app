@@ -16,6 +16,7 @@
 package org.iota.wallet.ui.animation;
 
 import android.content.Context;
+import android.support.annotation.NonNull;
 import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.FloatingActionButton;
@@ -36,14 +37,14 @@ public class ScrollAwareFABBehavior extends FloatingActionButton.Behavior {
     }
 
     @Override
-    public boolean onStartNestedScroll(CoordinatorLayout coordinatorLayout, FloatingActionButton child, View directTargetChild, View target, int nestedScrollAxes) {
+    public boolean onStartNestedScroll(@NonNull CoordinatorLayout coordinatorLayout, @NonNull FloatingActionButton child, @NonNull View directTargetChild, @NonNull View target, int nestedScrollAxes, int type) {
         return nestedScrollAxes == ViewCompat.SCROLL_AXIS_VERTICAL ||
                 super.onStartNestedScroll(coordinatorLayout, child, directTargetChild, target,
-                        nestedScrollAxes);
+                        nestedScrollAxes, type);
     }
 
     @Override
-    public void onNestedScroll(CoordinatorLayout coordinatorLayout, FloatingActionButton child, View target, int dxConsumed, int dyConsunmed, int dxUnconsumed, int dyUnconsumed) {
+    public void onNestedScroll(@NonNull CoordinatorLayout coordinatorLayout, @NonNull FloatingActionButton child, @NonNull View target, int dxConsumed, int dyConsunmed, int dxUnconsumed, int dyUnconsumed, int type) {
         if (dyConsunmed > 0 && child.getVisibility() == View.VISIBLE) {
             child.hide();
         } else if (dyConsunmed < 0 && child.getVisibility() != View.VISIBLE) {

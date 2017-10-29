@@ -24,7 +24,6 @@ import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.Snackbar;
-import android.support.v4.view.MenuItemCompat;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SearchView;
@@ -101,7 +100,7 @@ public class TangleExplorerSearchFragment extends BaseSwipeRefreshLayoutFragment
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         inflater.inflate(R.menu.tangle_explorer_search, menu);
         MenuItem searchItem = menu.findItem(R.id.action_search);
-        this.searchView = (SearchView) MenuItemCompat.getActionView(searchItem);
+        this.searchView = (SearchView) searchItem.getActionView();
         searchView.setOnQueryTextListener(this);
         if (trigger) {
             searchItem.expandActionView();
@@ -128,20 +127,20 @@ public class TangleExplorerSearchFragment extends BaseSwipeRefreshLayoutFragment
             searchView.clearFocus();
         }
 
-        MenuItemCompat.setOnActionExpandListener(searchItem,
-                new MenuItemCompat.OnActionExpandListener() {
-                    @Override
-                    public boolean onMenuItemActionCollapse(MenuItem item) {
 
-                        return true;
-                    }
+        searchItem.setOnActionExpandListener(new MenuItem.OnActionExpandListener() {
 
-                    @Override
-                    public boolean onMenuItemActionExpand(MenuItem item) {
+            @Override
+            public boolean onMenuItemActionExpand(MenuItem item) {
+                return true;
+            }
 
-                        return true;
-                    }
-                });
+            @Override
+            public boolean onMenuItemActionCollapse(MenuItem item) {
+                return true;
+
+            }
+        });
     }
 
     @Subscribe

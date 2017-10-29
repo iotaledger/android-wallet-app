@@ -74,7 +74,7 @@ public class TangleExplorerSearchCardAdapter extends RecyclerView.Adapter<Tangle
 
         holder.hashLabel.setText(transaction.getHash());
         holder.addressLabel.setText(transaction.getAddress());
-        if (NumberUtils.isNumber(String.valueOf(transaction.getValue()))) {
+        if (NumberUtils.isCreatable(String.valueOf(transaction.getValue()))) {
             holder.valueLabel.setText(IotaUnitConverter.convertRawIotaAmountToDisplayText(transaction.getValue(), false));
             try {
                 Currency currency = Utils.getConfiguredAlternateCurrency(context);

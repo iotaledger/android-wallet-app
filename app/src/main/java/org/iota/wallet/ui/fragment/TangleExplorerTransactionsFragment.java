@@ -23,7 +23,6 @@ import android.content.SharedPreferences;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v4.view.MenuItemCompat;
 import android.support.v7.preference.PreferenceManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.SearchView;
@@ -111,7 +110,7 @@ public class TangleExplorerTransactionsFragment extends BaseSwipeRefreshLayoutFr
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         inflater.inflate(R.menu.tangle_explorer_transactions, menu);
         final MenuItem searchItem = menu.findItem(R.id.action_search);
-        final SearchView searchView = (SearchView) MenuItemCompat.getActionView(searchItem);
+        final SearchView searchView = (SearchView) searchItem.getActionView();
         searchView.setOnQueryTextListener(this);
 
         searchView.setOnQueryTextListener(this);
@@ -125,21 +124,22 @@ public class TangleExplorerTransactionsFragment extends BaseSwipeRefreshLayoutFr
             searchView.clearFocus();
         }
 
-        MenuItemCompat.setOnActionExpandListener(searchItem,
-                new MenuItemCompat.OnActionExpandListener() {
-                    @Override
-                    public boolean onMenuItemActionCollapse(MenuItem item) {
-                        adapter.setAdapterList(transactions);
-                        addExecutor();
-                        return true;
-                    }
+        searchItem.setOnActionExpandListener(new MenuItem.OnActionExpandListener() {
 
-                    @Override
-                    public boolean onMenuItemActionExpand(MenuItem item) {
-                        removeExecutor();
-                        return true;
-                    }
-                });
+            @Override
+            public boolean onMenuItemActionExpand(MenuItem item) {
+                removeExecutor();
+                return true;
+            }
+
+            @Override
+            public boolean onMenuItemActionCollapse(MenuItem item) {
+                adapter.setAdapterList(transactions);
+                addExecutor();
+                return true;
+
+            }
+        });
     }
 
     @Subscribe
