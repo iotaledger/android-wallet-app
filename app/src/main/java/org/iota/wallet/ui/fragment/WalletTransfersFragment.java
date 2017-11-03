@@ -21,7 +21,6 @@ package org.iota.wallet.ui.fragment;
 
 import android.app.Fragment;
 import android.app.FragmentTransaction;
-import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.NavigationView;
@@ -31,6 +30,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import org.greenrobot.eventbus.Subscribe;
 import org.iota.wallet.R;
@@ -42,7 +42,6 @@ import org.iota.wallet.api.responses.GetAccountDataResponse;
 import org.iota.wallet.api.responses.NodeInfoResponse;
 import org.iota.wallet.api.responses.SendTransferResponse;
 import org.iota.wallet.api.responses.error.NetworkError;
-import org.iota.wallet.databinding.FragmentWalletTransfersBinding;
 import org.iota.wallet.model.Transfer;
 import org.iota.wallet.ui.adapter.WalletTransfersCardAdapter;
 
@@ -50,25 +49,45 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.Unbinder;
+
 public class WalletTransfersFragment extends BaseSwipeRefreshLayoutFragment implements WalletTabFragment.OnFabClickListener {
 
     private static final String TRANSFERS_LIST = "transfers";
-    private FragmentWalletTransfersBinding transferBinding;
     private WalletTransfersCardAdapter adapter;
-    private RecyclerView recyclerView;
     private List<Transfer> transfers;
+    @BindView(R.id.wallet_transfers_recycler_view)
+    RecyclerView recyclerView;
+    @BindView(R.id.tv_empty)
+    TextView tvEmpty;
+
+    private Unbinder unbinder;
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        transferBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_wallet_transfers, container, false);
-        View view = transferBinding.getRoot();
+        View view = inflater.inflate(R.layout.fragment_wallet_transfers, container, false);
+        unbinder = ButterKnife.bind(this, view);
         swipeRefreshLayout = view.findViewById(R.id.wallet_transfers_swipe_container);
+        return view;
+    }
+
+    @Override
+    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
         NavigationView navigationView = getActivity().findViewById(R.id.nav_view);
         navigationView.getMenu().findItem(R.id.nav_wallet).setChecked(true);
-        recyclerView = view.findViewById(R.id.wallet_transfers_recycler_view);
+    }
 
-        return view;
+    @Override
+    public void onDestroyView() {
+        if (unbinder != null) {
+            unbinder.unbind();
+            unbinder = null;
+        }
+        super.onDestroyView();
     }
 
     @Subscribe
@@ -157,7 +176,7 @@ public class WalletTransfersFragment extends BaseSwipeRefreshLayoutFragment impl
 
         adapter.setAdapterList(transfers);
 
-        transferBinding.setTransfers(transfers);
+        tvEmpty.setVisibility(transfers.size() == 0 ? View.VISIBLE : View.GONE);
     }
 
     private void getNodeInfo() {

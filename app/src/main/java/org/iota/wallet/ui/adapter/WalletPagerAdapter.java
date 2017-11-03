@@ -27,30 +27,28 @@ import android.view.ViewGroup;
 
 import org.iota.wallet.R;
 import org.iota.wallet.ui.fragment.WalletAddressesFragment;
+import org.iota.wallet.ui.fragment.WalletTabFragment;
 import org.iota.wallet.ui.fragment.WalletTransfersFragment;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class WalletPagerAdapter extends FragmentPagerAdapter {
 
     private static final int TAB_COUNT = 2;
     private final Context context;
-    private WalletTransfersFragment transfersFragment;
-    private WalletAddressesFragment addressesFragment;
+    private List<Fragment> fragments = new ArrayList<>();
 
     public WalletPagerAdapter(Context context, FragmentManager fm) {
         super(fm);
         this.context = context;
+        fragments.add(new WalletTransfersFragment());
+        fragments.add(new WalletAddressesFragment());
     }
 
     @Override
     public Fragment getItem(int position) {
-        switch (position) {
-            case 0:
-                return transfersFragment = new WalletTransfersFragment();
-            case 1:
-                return addressesFragment = new WalletAddressesFragment();
-            default:
-                return null;
-        }
+        return fragments.get(position);
     }
 
     @Override
@@ -69,32 +67,11 @@ public class WalletPagerAdapter extends FragmentPagerAdapter {
         return null;
     }
 
-    @Override
-    public Object instantiateItem(ViewGroup container, int position) {
-        Fragment fragment = (Fragment) super.instantiateItem(container, position);
-        switch (position) {
-            case 0:
-                transfersFragment = (WalletTransfersFragment) fragment;
-                break;
-            case 1:
-                addressesFragment = (WalletAddressesFragment) fragment;
-                break;
-        }
-        return fragment;
-    }
 
     public void performFabClick(int position) {
-        switch (position) {
-            case 0:
-                if (transfersFragment != null) {
-                    transfersFragment.onFabClick();
-                }
-                break;
-            case 1:
-                if (addressesFragment != null) {
-                    addressesFragment.onFabClick();
-                }
-                break;
+        Fragment fragment = fragments.get(position);
+        if (fragment != null && fragment instanceof WalletTabFragment.OnFabClickListener) {
+            ((WalletTabFragment.OnFabClickListener) fragment).onFabClick();
         }
     }
 }

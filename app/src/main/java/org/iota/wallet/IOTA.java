@@ -19,11 +19,11 @@
 
 package org.iota.wallet;
 
+import android.app.Application;
 import android.content.Context;
 import android.support.multidex.MultiDex;
-import android.support.multidex.MultiDexApplication;
 
-public class IOTA extends MultiDexApplication {
+public class IOTA extends Application {
     public static char[] seed = null;
 
     @Override

@@ -59,13 +59,17 @@ import org.iota.wallet.helper.Constants;
 import org.iota.wallet.helper.PermissionRequestHelper;
 import org.iota.wallet.model.QRCode;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.OnClick;
+import butterknife.Unbinder;
 import jota.error.InvalidAddressException;
 import jota.utils.Checksum;
 import jota.utils.InputValidator;
 import jota.utils.IotaUnitConverter;
 import jota.utils.IotaUnits;
 
-public class NewTransferFragment extends Fragment implements View.OnClickListener {
+public class NewTransferFragment extends Fragment {
 
     private static final String ADDRESS = "address";
     private static final String AMOUNT = "amount";
@@ -73,36 +77,49 @@ public class NewTransferFragment extends Fragment implements View.OnClickListene
     private static final String TAG = "tag";
     private static final String SPINNER_POISTION = "spinnerPosition";
     private InputMethodManager inputManager;
-    private TextInputEditText addressEditText;
-    private TextInputEditText amountEditText;
-    private TextInputEditText messageEditText;
-    private TextInputEditText tagEditText;
-    private TextInputLayout addressEditTextInputLayout;
-    private TextInputLayout amountEditTextInputLayout;
-    private TextInputLayout messageEditTextInputLayout;
-    private TextInputLayout tagEditTextInputLayout;
-    private Spinner unitsSpinner;
+
+    @BindView(R.id.new_transfer_toolbar)
+    Toolbar newTransferToolbar;
+    @BindView(R.id.new_transfer_amount_input)
+    TextInputEditText amountEditText;
+    @BindView(R.id.new_transfer_address_input)
+    TextInputEditText addressEditText;
+    @BindView(R.id.new_transfer_message_input)
+    TextInputEditText messageEditText;
+    @BindView(R.id.new_transfer_tag_input)
+    TextInputEditText tagEditText;
+    @BindView(R.id.new_transfer_address_text_input_layout)
+    TextInputLayout addressEditTextInputLayout;
+    @BindView(R.id.new_transfer_amount_text_input_layout)
+    TextInputLayout amountEditTextInputLayout;
+    @BindView(R.id.new_transfer_message_text_input_layout)
+    TextInputLayout messageEditTextInputLayout;
+    @BindView(R.id.new_transfer_tag_input_layout)
+    TextInputLayout tagEditTextInputLayout;
+    @BindView(R.id.new_transfer_units_spinner)
+    Spinner unitsSpinner;
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setHasOptionsMenu(true);
+        inputManager = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
+    }
+
+    private Unbinder unbinder;
 
     @Nullable
     @Override
     public View onCreateView(final LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_new_transfer, container, false);
-        super.setHasOptionsMenu(true);
+        unbinder = ButterKnife.bind(this, view);
+        return view;
+    }
 
-        ((AppCompatActivity) getActivity()).setSupportActionBar((Toolbar) view.findViewById(R.id.new_transfer_toolbar));
-
-        amountEditText = view.findViewById(R.id.new_transfer_amount_input);
-        addressEditText = view.findViewById(R.id.new_transfer_address_input);
-        messageEditText = view.findViewById(R.id.new_transfer_message_input);
-        tagEditText = view.findViewById(R.id.new_transfer_tag_input);
-        addressEditTextInputLayout = view.findViewById(R.id.new_transfer_address_text_input_layout);
-        amountEditTextInputLayout = view.findViewById(R.id.new_transfer_amount_text_input_layout);
-        messageEditTextInputLayout = view.findViewById(R.id.new_transfer_message_text_input_layout);
-        tagEditTextInputLayout = view.findViewById(R.id.new_transfer_tag_input_layout);
-        FloatingActionButton sendTransferFabButton = view.findViewById(R.id.new_transfer_send_fab_button);
-        unitsSpinner = view.findViewById(R.id.new_transfer_units_spinner);
-        inputManager = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
-        sendTransferFabButton.setOnClickListener(this);
+    @Override
+    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        ((AppCompatActivity) getActivity()).setSupportActionBar(newTransferToolbar);
 
         initUnitsSpinner();
 
@@ -136,8 +153,68 @@ public class NewTransferFragment extends Fragment implements View.OnClickListene
 
             }
         }
+    }
 
-        return view;
+    @Override
+    public void onDestroyView() {
+        if (unbinder != null) {
+            unbinder.unbind();
+            unbinder = null;
+        }
+        super.onDestroyView();
+    }
+
+    @OnClick(R.id.new_transfer_send_fab_button)
+    public void onNewTransferSendFabClick(FloatingActionButton fab) {
+        inputManager.hideSoftInputFromWindow(fab.getWindowToken(), 0);
+
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getActivity());
+
+        addressEditTextInputLayout.setError(null);
+        tagEditTextInputLayout.setError(null);
+        amountEditTextInputLayout.setError(null);
+        messageEditTextInputLayout.setError(null);
+
+        if (!isValidAddress()) {
+
+        } else if (getAmount().isEmpty() || getAmount().equals("0")) {
+            amountEditTextInputLayout.setError(getString(R.string.messages_enter_amount));
+
+        } else if (prefs.getLong(Constants.PREFERENCES_CURRENT_IOTA_BALANCE, 0) < Long.parseLong(amountInSelectedUnit())) {
+            amountEditTextInputLayout.setError(getString(R.string.messages_not_enough_balance));
+
+        } else if (!InputValidator.isTrytes(getMessage(), getMessage().length()) && !getMessage().equals(getMessage().toUpperCase())) {
+            messageEditTextInputLayout.setError(getString(R.string.messages_invalid_characters));
+
+        } else if (!InputValidator.isTrytes(getTaG(), getTaG().length()) && !getTaG().equals(getTaG().toUpperCase())) {
+            tagEditTextInputLayout.setError(getString(R.string.messages_invalid_characters));
+
+        } else if (getTaG().length() > 27) {
+            tagEditTextInputLayout.setError(getString(R.string.messages_tag_to_long));
+
+        } else {
+            AlertDialog alertDialog = new AlertDialog.Builder(getActivity())
+                    .setMessage(R.string.message_confirm_transfer)
+                    .setCancelable(false)
+                    .setPositiveButton(R.string.buttons_ok, null)
+                    .setNegativeButton(R.string.buttons_cancel, null)
+                    .create();
+
+            alertDialog.setButton(AlertDialog.BUTTON_POSITIVE, getString(R.string.buttons_ok),
+                    new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int which) {
+                            SendTransferRequest tir = new SendTransferRequest(getAddress(),
+                                    amountInSelectedUnit(), getMessage(), getTaG());
+
+                            TaskManager rt = new TaskManager(getActivity());
+                            rt.startNewRequestTask(tir);
+
+                            getActivity().onBackPressed();
+                        }
+                    });
+
+            alertDialog.show();
+        }
     }
 
     private String amountInSelectedUnit() {
@@ -213,62 +290,6 @@ public class NewTransferFragment extends Fragment implements View.OnClickListene
             public void onNothingSelected(AdapterView<?> parent) {
             }
         });
-    }
-
-    @Override
-    public void onClick(View view) {
-        inputManager.hideSoftInputFromWindow(view.getWindowToken(), 0);
-
-        switch (view.getId()) {
-            case R.id.new_transfer_send_fab_button:
-                SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getActivity());
-
-                addressEditTextInputLayout.setError(null);
-                tagEditTextInputLayout.setError(null);
-                amountEditTextInputLayout.setError(null);
-                messageEditTextInputLayout.setError(null);
-
-                if (!isValidAddress()) {
-
-                } else if (getAmount().isEmpty() || getAmount().equals("0")) {
-                    amountEditTextInputLayout.setError(getString(R.string.messages_enter_amount));
-
-                } else if (prefs.getLong(Constants.PREFERENCES_CURRENT_IOTA_BALANCE, 0) < Long.parseLong(amountInSelectedUnit())) {
-                    amountEditTextInputLayout.setError(getString(R.string.messages_not_enough_balance));
-
-                } else if (!InputValidator.isTrytes(getMessage(), getMessage().length()) && !getMessage().equals(getMessage().toUpperCase())) {
-                    messageEditTextInputLayout.setError(getString(R.string.messages_invalid_characters));
-
-                } else if (!InputValidator.isTrytes(getTaG(), getTaG().length()) && !getTaG().equals(getTaG().toUpperCase())) {
-                    tagEditTextInputLayout.setError(getString(R.string.messages_invalid_characters));
-
-                } else if (getTaG().length() > 27) {
-                    tagEditTextInputLayout.setError(getString(R.string.messages_tag_to_long));
-
-                } else {
-                    AlertDialog alertDialog = new AlertDialog.Builder(getActivity())
-                            .setMessage(R.string.message_confirm_transfer)
-                            .setCancelable(false)
-                            .setPositiveButton(R.string.buttons_ok, null)
-                            .setNegativeButton(R.string.buttons_cancel, null)
-                            .create();
-
-                    alertDialog.setButton(AlertDialog.BUTTON_POSITIVE, getString(R.string.buttons_ok),
-                            new DialogInterface.OnClickListener() {
-                                public void onClick(DialogInterface dialog, int which) {
-                                    SendTransferRequest tir = new SendTransferRequest(getAddress(),
-                                            amountInSelectedUnit(), getMessage(), getTaG());
-
-                                    TaskManager rt = new TaskManager(getActivity());
-                                    rt.startNewRequestTask(tir);
-
-                                    getActivity().onBackPressed();
-                                }
-                            });
-
-                    alertDialog.show();
-                }
-        }
     }
 
     @Override

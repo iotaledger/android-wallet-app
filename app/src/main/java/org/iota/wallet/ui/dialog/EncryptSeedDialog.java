@@ -43,12 +43,20 @@ import org.iota.wallet.R;
 import org.iota.wallet.helper.AESCrypt;
 import org.iota.wallet.helper.Constants;
 
-public class EncryptSeedDialog extends DialogFragment implements TextView.OnEditorActionListener {
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.OnEditorAction;
 
-    private TextInputLayout textInputLayoutPassword;
-    private TextInputLayout textInputLayoutPasswordConfirm;
-    private TextInputEditText textInputEditTextPassword;
-    private TextInputEditText textInputEditTextPasswordConfirm;
+public class EncryptSeedDialog extends DialogFragment {
+
+    @BindView(R.id.password_input_layout)
+    TextInputLayout textInputLayoutPassword;
+    @BindView(R.id.password_confirm_input_layout)
+    TextInputLayout textInputLayoutPasswordConfirm;
+    @BindView(R.id.password)
+    TextInputEditText textInputEditTextPassword;
+    @BindView(R.id.password_confirm)
+    TextInputEditText textInputEditTextPasswordConfirm;
     private String seed;
 
     public EncryptSeedDialog() {
@@ -59,14 +67,8 @@ public class EncryptSeedDialog extends DialogFragment implements TextView.OnEdit
     public Dialog onCreateDialog(Bundle savedInstanceState) {
 
         LayoutInflater inflater = LayoutInflater.from(getActivity());
-        @SuppressLint("InflateParams") View view = inflater.inflate(R.layout.dialog_encrypt_seed_password, null);
-
-        textInputLayoutPassword = view.findViewById(R.id.password_input_layout);
-        textInputLayoutPasswordConfirm = view.findViewById(R.id.password_confirm_input_layout);
-        textInputEditTextPassword = view.findViewById(R.id.password);
-        textInputEditTextPasswordConfirm = view.findViewById(R.id.password_confirm);
-
-        textInputEditTextPasswordConfirm.setOnEditorActionListener(this);
+        View view = inflater.inflate(R.layout.dialog_encrypt_seed_password, null, false);
+        ButterKnife.bind(this, view);
 
         Bundle bundle = getArguments();
         seed = bundle.getString("seed");
@@ -80,25 +82,23 @@ public class EncryptSeedDialog extends DialogFragment implements TextView.OnEdit
                 .setNegativeButton(R.string.buttons_cancel, null)
                 .create();
 
-        alertDialog.setOnShowListener(new DialogInterface.OnShowListener() {
-
-            @Override
-            public void onShow(final DialogInterface dialog) {
-
-                Button button = alertDialog.getButton(AlertDialog.BUTTON_POSITIVE);
-                button.setOnClickListener(new View.OnClickListener() {
-
-                    @Override
-                    public void onClick(View view) {
-                        encryptSeed();
-                    }
-                });
-            }
+        alertDialog.setOnShowListener(dialog -> {
+            Button button = alertDialog.getButton(AlertDialog.BUTTON_POSITIVE);
+            button.setOnClickListener(view1 -> encryptSeed());
         });
 
         alertDialog.show();
         return alertDialog;
 
+    }
+
+    @OnEditorAction(R.id.password_confirm)
+    public boolean onPasswordConfirmEditorAction(int actionId, KeyEvent event) {
+        if ((actionId == EditorInfo.IME_ACTION_DONE)
+                || ((event.getKeyCode() == KeyEvent.KEYCODE_ENTER) && (event.getAction() == KeyEvent.ACTION_DOWN))) {
+            encryptSeed();
+        }
+        return true;
     }
 
     private void encryptSeed() {
@@ -126,16 +126,6 @@ public class EncryptSeedDialog extends DialogFragment implements TextView.OnEdit
                 e.getStackTrace();
             }
         }
-    }
-
-
-    @Override
-    public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
-        if ((actionId == EditorInfo.IME_ACTION_DONE)
-                || ((event.getKeyCode() == KeyEvent.KEYCODE_ENTER) && (event.getAction() == KeyEvent.ACTION_DOWN))) {
-            encryptSeed();
-        }
-        return true;
     }
 
 }

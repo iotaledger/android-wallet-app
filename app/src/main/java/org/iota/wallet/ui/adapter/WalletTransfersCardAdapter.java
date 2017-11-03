@@ -47,6 +47,8 @@ import org.knowm.xchange.currency.Currency;
 
 import java.util.List;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
 import jota.utils.IotaUnitConverter;
 
 public class WalletTransfersCardAdapter extends RecyclerView.Adapter<WalletTransfersCardAdapter.ViewHolder> {
@@ -81,7 +83,8 @@ public class WalletTransfersCardAdapter extends RecyclerView.Adapter<WalletTrans
 
     @Override
     public void onBindViewHolder(final ViewHolder holder, int position) {
-        Transfer transfer = getItem(position - 1);
+        int adapterPosition = holder.getAdapterPosition();
+        Transfer transfer = getItem(adapterPosition - 1);
 
         holder.setIsRecyclable(true);
 
@@ -110,20 +113,7 @@ public class WalletTransfersCardAdapter extends RecyclerView.Adapter<WalletTrans
         } else
             holder.valueLabel.setTextColor(ContextCompat.getColor(context, R.color.textColorPrimary));
 
-        holder.expandableLayout.setExpanded(expandState.get(position));
-        holder.expandableLayout.setListener(new ExpandableLayoutListenerAdapter() {
-            @Override
-            public void onPreOpen() {
-                holder.expandButton.setImageResource(R.drawable.ic_expand_less);
-                expandState.put(holder.getAdapterPosition(), true);
-            }
-
-            @Override
-            public void onPreClose() {
-                holder.expandButton.setImageResource(R.drawable.ic_expand_more);
-                expandState.put(holder.getAdapterPosition(), false);
-            }
-        });
+        holder.expandableLayout.setExpanded(expandState.get(adapterPosition));
         holder.expandableLayout.invalidate();
     }
 
@@ -132,63 +122,69 @@ public class WalletTransfersCardAdapter extends RecyclerView.Adapter<WalletTrans
         return transfers.size();
     }
 
-    class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener, View.OnLongClickListener {
-        final TextView valueLabel;
-        final TextView alternativeValueLabel;
-        final TextView addressLabel;
-        final TextView messageLabel;
-        final TextView tagLabel;
-        final TextView timeLabel;
-        final TextView hashLabel;
-        final TextView persistenceLabel;
-        final ImageButton expandButton;
-        final ExpandableRelativeLayout expandableLayout;
+    class ViewHolder extends RecyclerView.ViewHolder {
+        @BindView(R.id.item_wt_value)
+        TextView valueLabel;
+        @BindView(R.id.item_wt_alternate_value)
+        TextView alternativeValueLabel;
+        @BindView(R.id.item_wt_address)
+        TextView addressLabel;
+        @BindView(R.id.item_wt_message)
+        TextView messageLabel;
+        @BindView(R.id.item_wt_tag)
+        TextView tagLabel;
+        @BindView(R.id.item_wt_time)
+        TextView timeLabel;
+        @BindView(R.id.item_wt_hash)
+        TextView hashLabel;
+        @BindView(R.id.item_wt_persistence)
+        TextView persistenceLabel;
+        @BindView(R.id.item_wt_expand_button)
+        ImageButton expandButton;
+        @BindView(R.id.item_wt_expand_layout)
+        ExpandableRelativeLayout expandableLayout;
 
         private ViewHolder(View itemView) {
             super(itemView);
+            ButterKnife.bind(this, itemView);
 
-            valueLabel = itemView.findViewById(R.id.item_wt_value);
-            alternativeValueLabel = itemView.findViewById(R.id.item_wt_alternate_value);
-            addressLabel = itemView.findViewById(R.id.item_wt_address);
-            messageLabel = itemView.findViewById(R.id.item_wt_message);
-            tagLabel = itemView.findViewById(R.id.item_wt_tag);
-            timeLabel = itemView.findViewById(R.id.item_wt_time);
-            hashLabel = itemView.findViewById(R.id.item_wt_hash);
-            persistenceLabel = itemView.findViewById(R.id.item_wt_persistence);
-            expandButton = itemView.findViewById(R.id.item_wt_expand_button);
-            expandableLayout = itemView.findViewById(R.id.item_wt_expand_layout);
             expandableLayout.collapse();
 
-            itemView.setOnClickListener(this);
-            itemView.setOnLongClickListener(this);
+            itemView.setOnClickListener(v -> {
+                Bundle bundle = new Bundle();
+                bundle.putString("address", addressLabel.getText().toString());
+                bundle.putString("hash", hashLabel.getText().toString());
 
-            expandButton.setOnClickListener(new View.OnClickListener() {
+                WalletTransfersItemDialog dialog = new WalletTransfersItemDialog();
+                dialog.setArguments(bundle);
+                dialog.show(((Activity) context).getFragmentManager(), null);
+            });
+
+            itemView.setOnLongClickListener(v -> {
+                int position = getAdapterPosition();
+                if (position != RecyclerView.NO_POSITION) {
+                    Toast.makeText(v.getContext(), context.getString(R.string.messages_not_yet_implemented), Toast.LENGTH_SHORT).show();
+
+                }
+                return true;
+            });
+
+            expandButton.setOnClickListener(view -> expandableLayout.toggle());
+
+            expandableLayout.setListener(new ExpandableLayoutListenerAdapter() {
                 @Override
-                public void onClick(View view) {
-                    expandableLayout.toggle();
+                public void onPreOpen() {
+                    expandButton.setImageResource(R.drawable.ic_expand_less);
+                    expandState.put(getAdapterPosition(), true);
+                }
+
+                @Override
+                public void onPreClose() {
+                    expandButton.setImageResource(R.drawable.ic_expand_more);
+                    expandState.put(getAdapterPosition(), false);
                 }
             });
         }
 
-        @Override
-        public void onClick(final View v) {
-            Bundle bundle = new Bundle();
-            bundle.putString("address", addressLabel.getText().toString());
-            bundle.putString("hash", hashLabel.getText().toString());
-
-            WalletTransfersItemDialog dialog = new WalletTransfersItemDialog();
-            dialog.setArguments(bundle);
-            dialog.show(((Activity) context).getFragmentManager(), null);
-        }
-
-        @Override
-        public boolean onLongClick(View v) {
-            int position = getAdapterPosition();
-            if (position != RecyclerView.NO_POSITION) {
-                Toast.makeText(v.getContext(), context.getString(R.string.messages_not_yet_implemented), Toast.LENGTH_SHORT).show();
-
-            }
-            return true;
-        }
     }
 }

@@ -1,5 +1,5 @@
 <resources>
-    <dimen name="nav_header_height">160dp</dimen>
+    <dimen name="nav_header_height">185dp</dimen>
 
     <dimen name="baseline">16dp</dimen>
     <dimen name="baseline_half">8dp</dimen>
@@ -12,5 +12,7 @@
     <dimen name="about_item_drawable_padding">24dp</dimen>
 
     <dimen name="card_corner_radius">2dp</dimen>
+
+    <dimen name="status_bar_height">25dp</dimen>
 
 </resources>

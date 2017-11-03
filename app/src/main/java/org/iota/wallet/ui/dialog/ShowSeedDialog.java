@@ -44,11 +44,18 @@ import org.iota.wallet.R;
 import org.iota.wallet.helper.AESCrypt;
 import org.iota.wallet.helper.Constants;
 
-public class ShowSeedDialog extends DialogFragment implements TextView.OnEditorActionListener {
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.OnEditorAction;
 
-    private TextInputLayout textInputLayoutPassword;
-    private TextInputEditText textInputEditTextPassword;
-    private TextView textViewSeed;
+public class ShowSeedDialog extends DialogFragment {
+
+    @BindView(R.id.password_input_layout)
+    TextInputLayout textInputLayoutPassword;
+    @BindView(R.id.password)
+    TextInputEditText textInputEditTextPassword;
+    @BindView(R.id.decrypted_seed)
+    TextView textViewSeed;
 
     public ShowSeedDialog() {
     }
@@ -58,11 +65,8 @@ public class ShowSeedDialog extends DialogFragment implements TextView.OnEditorA
     public Dialog onCreateDialog(Bundle savedInstanceState) {
 
         LayoutInflater inflater = LayoutInflater.from(getActivity());
-        @SuppressLint("InflateParams") final View dialogView = inflater.inflate(R.layout.dialog_show_seed, null);
-        textInputLayoutPassword = dialogView.findViewById(R.id.password_input_layout);
-        textInputEditTextPassword = dialogView.findViewById(R.id.password);
-        textViewSeed = dialogView.findViewById(R.id.decrypted_seed);
-        textInputEditTextPassword.setOnEditorActionListener(this);
+        View dialogView = inflater.inflate(R.layout.dialog_show_seed, null, false);
+        ButterKnife.bind(this, dialogView);
 
         final AlertDialog alertDialog = new AlertDialog.Builder(getActivity())
                 .setView(dialogView)
@@ -71,50 +75,51 @@ public class ShowSeedDialog extends DialogFragment implements TextView.OnEditorA
                 .setNegativeButton(R.string.buttons_cancel, null)
                 .create();
 
-        alertDialog.setOnShowListener(new DialogInterface.OnShowListener() {
+        alertDialog.setOnShowListener(dialog -> {
+            SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getActivity());
 
-            @Override
-            public void onShow(final DialogInterface dialog) {
-                SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getActivity());
+            final Button bPositive = alertDialog.getButton(AlertDialog.BUTTON_POSITIVE);
+            final Button bNegative = alertDialog.getButton(AlertDialog.BUTTON_NEGATIVE);
 
-                final Button bPositive = alertDialog.getButton(AlertDialog.BUTTON_POSITIVE);
-                final Button bNegative = alertDialog.getButton(AlertDialog.BUTTON_NEGATIVE);
+            // if seed is not password protected
+            if (prefs.getString(Constants.PREFERENCE_ENC_SEED, "").isEmpty()) {
 
-                // if seed is not password protected
-                if (prefs.getString(Constants.PREFERENCE_ENC_SEED, "").isEmpty()) {
+                textInputLayoutPassword.setVisibility(View.GONE);
+
+                if (IOTA.seed != null)
+                    textViewSeed.setText(String.valueOf(IOTA.seed));
+
+                // update the dialog
+                alertDialog.setTitle(getString(R.string.title_current_seed));
+                bNegative.setText(R.string.buttons_ok);
+                bPositive.setEnabled(false);
+            }
+
+            bPositive.setOnClickListener(view -> {
+                showPassword();
+                if (!textViewSeed.getText().toString().isEmpty()) {
 
                     textInputLayoutPassword.setVisibility(View.GONE);
-
-                    if (IOTA.seed != null)
-                        textViewSeed.setText(String.valueOf(IOTA.seed));
 
                     // update the dialog
                     alertDialog.setTitle(getString(R.string.title_current_seed));
                     bNegative.setText(R.string.buttons_ok);
                     bPositive.setEnabled(false);
                 }
-
-                bPositive.setOnClickListener(new View.OnClickListener() {
-
-                    @Override
-                    public void onClick(View view) {
-                        showPassword();
-                        if (!textViewSeed.getText().toString().isEmpty()) {
-
-                            textInputLayoutPassword.setVisibility(View.GONE);
-
-                            // update the dialog
-                            alertDialog.setTitle(getString(R.string.title_current_seed));
-                            bNegative.setText(R.string.buttons_ok);
-                            bPositive.setEnabled(false);
-                        }
-                    }
-                });
-            }
+            });
         });
 
         alertDialog.show();
         return alertDialog;
+    }
+
+    @OnEditorAction(R.id.password)
+    public boolean onPasswordEditorAction(int actionId, KeyEvent event) {
+        if ((actionId == EditorInfo.IME_ACTION_DONE)
+                || ((event.getKeyCode() == KeyEvent.KEYCODE_ENTER) && (event.getAction() == KeyEvent.ACTION_DOWN))) {
+            showPassword();
+        }
+        return true;
     }
 
     private void showPassword() {
@@ -137,12 +142,4 @@ public class ShowSeedDialog extends DialogFragment implements TextView.OnEditorA
         }
     }
 
-    @Override
-    public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
-        if ((actionId == EditorInfo.IME_ACTION_DONE)
-                || ((event.getKeyCode() == KeyEvent.KEYCODE_ENTER) && (event.getAction() == KeyEvent.ACTION_DOWN))) {
-            showPassword();
-        }
-        return true;
-    }
 }

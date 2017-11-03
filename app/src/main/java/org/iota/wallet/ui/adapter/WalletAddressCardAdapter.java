@@ -38,6 +38,9 @@ import org.iota.wallet.ui.dialog.WalletAddressesItemDialog;
 
 import java.util.List;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+
 public class WalletAddressCardAdapter extends RecyclerView.Adapter<WalletAddressCardAdapter.ViewHolder> {
 
     private final Context context;
@@ -51,13 +54,13 @@ public class WalletAddressCardAdapter extends RecyclerView.Adapter<WalletAddress
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.card_wallet_address, parent, false);
-
         return new ViewHolder(v);
     }
 
     @Override
     public void onBindViewHolder(final ViewHolder holder, int position) {
-        Address address = getItem(position - 1);
+        int adapterPosition = holder.getAdapterPosition();
+        Address address = getItem(adapterPosition - 1);
 
         holder.setIsRecyclable(false);
 
@@ -85,38 +88,33 @@ public class WalletAddressCardAdapter extends RecyclerView.Adapter<WalletAddress
         return addresses.size();
     }
 
-    class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener, View.OnLongClickListener {
-        final TextView addressLabel;
-        final ImageView addressImage;
+    class ViewHolder extends RecyclerView.ViewHolder {
+        @BindView(R.id.item_wa_address)
+        TextView addressLabel;
+        @BindView(R.id.item_wa_address_image)
+        ImageView addressImage;
 
         private ViewHolder(View itemView) {
             super(itemView);
+            ButterKnife.bind(this, itemView);
 
-            addressLabel = itemView.findViewById(R.id.item_wa_address);
-            addressImage = itemView.findViewById(R.id.item_wa_address_image);
-            itemView.setOnClickListener(this);
-            itemView.setOnLongClickListener(this);
+            itemView.setOnClickListener(v -> {
+                Bundle bundle = new Bundle();
+                bundle.putString("address", addressLabel.getText().toString());
 
-        }
+                WalletAddressesItemDialog dialog = new WalletAddressesItemDialog();
+                dialog.setArguments(bundle);
+                dialog.show(((Activity) context).getFragmentManager(), null);
+            });
 
-        @Override
-        public void onClick(final View v) {
+            itemView.setOnLongClickListener(v -> {
+                int position = getAdapterPosition();
+                if (position != RecyclerView.NO_POSITION) {
+                    Toast.makeText(v.getContext(), context.getString(R.string.messages_not_yet_implemented), Toast.LENGTH_SHORT).show();
+                }
+                return true;
+            });
 
-            Bundle bundle = new Bundle();
-            bundle.putString("address", addressLabel.getText().toString());
-
-            WalletAddressesItemDialog dialog = new WalletAddressesItemDialog();
-            dialog.setArguments(bundle);
-            dialog.show(((Activity) context).getFragmentManager(), null);
-        }
-
-        @Override
-        public boolean onLongClick(View v) {
-            int position = getAdapterPosition();
-            if (position != RecyclerView.NO_POSITION) {
-                Toast.makeText(v.getContext(), context.getString(R.string.messages_not_yet_implemented), Toast.LENGTH_SHORT).show();
-            }
-            return true;
         }
     }
 }

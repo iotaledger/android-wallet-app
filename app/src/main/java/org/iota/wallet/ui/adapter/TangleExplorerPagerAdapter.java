@@ -28,26 +28,25 @@ import org.iota.wallet.R;
 import org.iota.wallet.ui.fragment.TangleExplorerSearchFragment;
 import org.iota.wallet.ui.fragment.TangleExplorerTransactionsFragment;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class TangleExplorerPagerAdapter extends FragmentPagerAdapter {
     private static final int TAB_COUNT = 2;
 
     private final Context context;
+    private List<Fragment> fragments = new ArrayList<>();
 
     public TangleExplorerPagerAdapter(Context context, FragmentManager fm) {
         super(fm);
         this.context = context;
+        fragments.add(new TangleExplorerTransactionsFragment());
+        fragments.add(new TangleExplorerSearchFragment());
     }
 
     @Override
     public Fragment getItem(int position) {
-        switch (position) {
-            case 0:
-                return new TangleExplorerTransactionsFragment();
-            case 1:
-                return new TangleExplorerSearchFragment();
-            default:
-                return null;
-        }
+        return fragments.get(position);
     }
 
     @Override

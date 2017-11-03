@@ -1,45 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android">
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
 
-    <data>
+    <TextView
+        android:id="@+id/tv_empty"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:text="@string/messages_no_data_available"
+        android:textSize="26sp"
+        android:visibility="gone" />
 
-        <import type="android.view.View" />
-
-        <!--suppress AndroidDomInspection -->
-        <variable
-            name="transfers"
-            type="java.util.List&lt;org.iota.wallet.model.Transfer&gt;" />
-    </data>
-
-    <RelativeLayout
-
+    <android.support.v4.widget.SwipeRefreshLayout
+        android:id="@+id/wallet_transfers_swipe_container"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <TextView
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/wallet_transfers_recycler_view"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:gravity="center"
-            android:text="@string/messages_no_data_available"
-            android:textSize="26sp"
-            android:visibility="@{transfers.size() != 0 ? View.GONE : View.VISIBLE}" />
+            android:clipToPadding="false"
+            android:paddingBottom="@dimen/baseline_card">
 
-        <android.support.v4.widget.SwipeRefreshLayout
-            android:id="@+id/wallet_transfers_swipe_container"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
+        </android.support.v7.widget.RecyclerView>
 
-            <android.support.v7.widget.RecyclerView
-                android:id="@+id/wallet_transfers_recycler_view"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:clipToPadding="false"
-                android:paddingBottom="@dimen/baseline_card">
+    </android.support.v4.widget.SwipeRefreshLayout>
 
-            </android.support.v7.widget.RecyclerView>
+</RelativeLayout>
 
-        </android.support.v4.widget.SwipeRefreshLayout>
-
-    </RelativeLayout>
-
-</layout>

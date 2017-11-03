@@ -85,13 +85,7 @@ public class WalletTransfersItemDialog extends DialogFragment implements DialogI
                 mainActivity.showFragment(fragment);
 
                 final Handler handler = new Handler();
-                handler.postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                        EventBus.getDefault().post(bundle);
-
-                    }
-                }, 300);
+                handler.postDelayed(() -> EventBus.getDefault().post(bundle), 300);
 
                 break;
             case 3:

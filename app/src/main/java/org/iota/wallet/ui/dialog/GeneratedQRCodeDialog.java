@@ -72,7 +72,7 @@ public class GeneratedQRCodeDialog extends DialogFragment implements DialogInter
     public Dialog onCreateDialog(Bundle savedInstanceState) {
 
         LayoutInflater inflater = LayoutInflater.from(getActivity());
-        @SuppressLint("InflateParams") View view = inflater.inflate(R.layout.dialog_generated_qr_code, null);
+        View view = inflater.inflate(R.layout.dialog_generated_qr_code, null, false);
         ImageView imageView = view.findViewById(R.id.generated_qr_code_image);
 
         Bundle bundle = getArguments();

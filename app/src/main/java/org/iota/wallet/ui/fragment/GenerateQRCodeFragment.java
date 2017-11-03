@@ -52,47 +52,73 @@ import org.iota.wallet.helper.Constants;
 import org.iota.wallet.model.QRCode;
 import org.iota.wallet.ui.dialog.GeneratedQRCodeDialog;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.OnClick;
+import butterknife.Unbinder;
 import jota.error.InvalidAddressException;
 import jota.utils.Checksum;
 import jota.utils.InputValidator;
 import jota.utils.IotaUnits;
 
-public class GenerateQRCodeFragment extends Fragment implements View.OnClickListener {
+public class GenerateQRCodeFragment extends Fragment {
 
     private static final String ADDRESS = "address";
     private static final String AMOUNT = "amount";
     private static final String MESSAGE = "message";
     private static final String TAG = "tag";
     private static final String SPINNER_POISTION = "spinnerPosition";
+
     private InputMethodManager inputManager;
-    private TextInputEditText addressEditText;
-    private TextInputEditText amountEditText;
-    private TextInputEditText messageEditText;
-    private TextInputEditText tagEditText;
-    private TextInputLayout addressEditTextInputLayout;
-    private TextInputLayout messageEditTextInputLayout;
-    private TextInputLayout tagEditTextInputLayout;
-    private Spinner unitsSpinner;
+
+    @BindView(R.id.generate_qr_code_toolbar)
+    Toolbar generateQrCodeToolbar;
+    @BindView(R.id.generate_qr_code_address_input)
+    TextInputEditText addressEditText;
+    @BindView(R.id.generate_qr_code_amount_input)
+    TextInputEditText amountEditText;
+    @BindView(R.id.generate_qr_code_message_input)
+    TextInputEditText messageEditText;
+    @BindView(R.id.generate_qr_code_tag_input)
+    TextInputEditText tagEditText;
+    @BindView(R.id.generate_qr_code_address_input_aylout)
+    TextInputLayout addressEditTextInputLayout;
+    @BindView(R.id.generate_qr_code_message_input_aylout)
+    TextInputLayout messageEditTextInputLayout;
+    @BindView(R.id.generate_qr_code_tag_input_aylout)
+    TextInputLayout tagEditTextInputLayout;
+    @BindView(R.id.generate_qr_code_units_spinner)
+    Spinner unitsSpinner;
+
+    private Unbinder unbinder;
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        inputManager = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
+    }
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_generate_qr, container, false);
-        ((AppCompatActivity) getActivity()).setSupportActionBar((Toolbar) view.findViewById(R.id.generate_qr_code_toolbar));
-        amountEditText = view.findViewById(R.id.generate_qr_code_amount_input);
-        addressEditText = view.findViewById(R.id.generate_qr_code_address_input);
-        messageEditText = view.findViewById(R.id.generate_qr_code_message_input);
-        tagEditText = view.findViewById(R.id.generate_qr_code_tag_input);
+        unbinder = ButterKnife.bind(this, view);
+        return view;
+    }
 
-        addressEditTextInputLayout = view.findViewById(R.id.generate_qr_code_address_input_aylout);
-        messageEditTextInputLayout = view.findViewById(R.id.generate_qr_code_message_input_aylout);
-        tagEditTextInputLayout = view.findViewById(R.id.generate_qr_code_tag_input_aylout);
+    @Override
+    public void onDestroyView() {
+        if (unbinder != null) {
+            unbinder.unbind();
+            unbinder = null;
+        }
+        super.onDestroyView();
+    }
 
-        inputManager = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
-        FloatingActionButton generateFabButton = view.findViewById(R.id.generate_qr_code_fab_button);
-        unitsSpinner = view.findViewById(R.id.generate_qr_code_units_spinner);
-
-        generateFabButton.setOnClickListener(this);
+    @Override
+    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        ((AppCompatActivity) getActivity()).setSupportActionBar(generateQrCodeToolbar);
 
         Bundle bundle = getArguments();
         if (bundle != null) {
@@ -105,54 +131,49 @@ public class GenerateQRCodeFragment extends Fragment implements View.OnClickList
             generateNewAddress();
 
         initUnitsSpinner();
-
-        return view;
     }
 
-    @Override
-    public void onClick(View view) {
-        inputManager.hideSoftInputFromWindow(view.getWindowToken(), 0);
-        switch (view.getId()) {
-            case R.id.generate_qr_code_fab_button:
+    @OnClick(R.id.generate_qr_code_fab_button)
+    public void onGenerateQrCodeClick(FloatingActionButton fab) {
+        inputManager.hideSoftInputFromWindow(fab.getWindowToken(), 0);
+        //reset errors
+        addressEditTextInputLayout.setError(null);
+        messageEditTextInputLayout.setError(null);
+        tagEditTextInputLayout.setError(null);
 
-                //reset errors
-                addressEditTextInputLayout.setError(null);
-                messageEditTextInputLayout.setError(null);
-                tagEditTextInputLayout.setError(null);
+        if (!isValidAddress()) {
 
-                if (!isValidAddress()) {
+        } else if (!InputValidator.isTrytes(getMessage(), getMessage().length()) && !getMessage().equals(getMessage().toUpperCase())) {
+            messageEditTextInputLayout.setError(getString(R.string.messages_invalid_characters));
 
-                } else if (!InputValidator.isTrytes(getMessage(), getMessage().length()) && !getMessage().equals(getMessage().toUpperCase())) {
-                    messageEditTextInputLayout.setError(getString(R.string.messages_invalid_characters));
+        } else if (!InputValidator.isTrytes(getTaG(), getTaG().length()) && !getTaG().equals(getTaG().toUpperCase())) {
+            tagEditTextInputLayout.setError(getString(R.string.messages_invalid_characters));
 
-                } else if (!InputValidator.isTrytes(getTaG(), getTaG().length()) && !getTaG().equals(getTaG().toUpperCase())) {
-                    tagEditTextInputLayout.setError(getString(R.string.messages_invalid_characters));
+        } else {
 
-                } else {
+            QRCode qrCode = new QRCode();
+            qrCode.setAddress(addressEditText.getText().toString());
 
-                    QRCode qrCode = new QRCode();
-                    qrCode.setAddress(addressEditText.getText().toString());
+            if (getAmount().isEmpty())
+                qrCode.setAmount("");
+            else
+                qrCode.setAmount(amountInSelectedUnit());
 
-                    if (getAmount().isEmpty())
-                        qrCode.setAmount("");
-                    else
-                        qrCode.setAmount(amountInSelectedUnit());
+            qrCode.setMessage(messageEditText.getText().toString());
+            qrCode.setTag(tagEditText.getText().toString());
 
-                    qrCode.setMessage(messageEditText.getText().toString());
-                    qrCode.setTag(tagEditText.getText().toString());
+            String json = new Gson().toJson(qrCode);
 
-                    String json = new Gson().toJson(qrCode);
+            Bitmap bitmap = net.glxn.qrgen.android.QRCode.from(json).withSize(500, 500).bitmap();
 
-                    Bitmap bitmap = net.glxn.qrgen.android.QRCode.from(json).withSize(500, 500).bitmap();
-
-                    Bundle bundle = new Bundle();
-                    bundle.putParcelable("bitmap", bitmap);
-                    GeneratedQRCodeDialog fragment = new GeneratedQRCodeDialog();
-                    fragment.setArguments(bundle);
-                    fragment.show(getActivity().getFragmentManager(), null);
-                }
+            Bundle bundle = new Bundle();
+            bundle.putParcelable("bitmap", bitmap);
+            GeneratedQRCodeDialog fragment = new GeneratedQRCodeDialog();
+            fragment.setArguments(bundle);
+            fragment.show(getActivity().getFragmentManager(), null);
         }
     }
+
 
     private String amountInSelectedUnit() {
         String inputAmount = amountEditText.getText().toString();
@@ -192,7 +213,6 @@ public class GenerateQRCodeFragment extends Fragment implements View.OnClickList
     }
 
     private void initUnitsSpinner() {
-
         ArrayAdapter<String> adapter = new ArrayAdapter<>(getActivity(),
                 android.R.layout.simple_spinner_item, getResources().getStringArray(R.array.listIotaUnits));
         unitsSpinner.setAdapter(adapter);
@@ -281,6 +301,7 @@ public class GenerateQRCodeFragment extends Fragment implements View.OnClickList
         }
         return "";
     }
+
     private String getAmount() {
         return amountEditText.getText().toString();
     }

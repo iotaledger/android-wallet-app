@@ -44,7 +44,7 @@ public class GetAccountDataRequestHandler extends IotaRequestHandler {
 
     @Override
     public Class<? extends ApiRequest> getType() {
-        return org.iota.wallet.api.requests.GetAccountDataRequest.class;
+        return GetAccountDataRequest.class;
     }
 
     @Override
@@ -53,15 +53,15 @@ public class GetAccountDataRequestHandler extends IotaRequestHandler {
 
         try {
             response = new GetAccountDataResponse(apiProxy.getAccountData(((GetAccountDataRequest) request).getSeed(),
-                    ((org.iota.wallet.api.requests.GetAccountDataRequest) request).getSecurity(),
-                    ((org.iota.wallet.api.requests.GetAccountDataRequest) request).getIndex(),
-                    ((org.iota.wallet.api.requests.GetAccountDataRequest) request).isChecksum(),
-                    ((org.iota.wallet.api.requests.GetAccountDataRequest) request).getTotal(),
-                    ((org.iota.wallet.api.requests.GetAccountDataRequest) request).isReturnAll(),
-                    ((org.iota.wallet.api.requests.GetAccountDataRequest) request).getStart(),
-                    ((org.iota.wallet.api.requests.GetAccountDataRequest) request).getEnd(),
-                    ((org.iota.wallet.api.requests.GetAccountDataRequest) request).isInclusionState(),
-                    ((org.iota.wallet.api.requests.GetAccountDataRequest) request).getThreshold()));
+                    ((GetAccountDataRequest) request).getSecurity(),
+                    ((GetAccountDataRequest) request).getIndex(),
+                    ((GetAccountDataRequest) request).isChecksum(),
+                    ((GetAccountDataRequest) request).getTotal(),
+                    ((GetAccountDataRequest) request).isReturnAll(),
+                    ((GetAccountDataRequest) request).getStart(),
+                    ((GetAccountDataRequest) request).getEnd(),
+                    ((GetAccountDataRequest) request).isInclusionState(),
+                    ((GetAccountDataRequest) request).getThreshold()));
         } catch (ArgumentException | InvalidSecurityLevelException | InvalidAddressException | InvalidBundleException | InvalidSignatureException | NoNodeInfoException | InvalidTrytesException | NoInclusionStatesException e) {
             response = new NetworkError();
         }

@@ -45,26 +45,44 @@ import org.iota.wallet.helper.AESCrypt;
 import org.iota.wallet.helper.Constants;
 import org.iota.wallet.ui.dialog.ForgotPasswordDialog;
 
-public class PasswordLoginFragment extends Fragment implements View.OnClickListener, TextView.OnEditorActionListener {
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.OnClick;
+import butterknife.OnEditorAction;
+import butterknife.Unbinder;
+
+public class PasswordLoginFragment extends Fragment {
 
     private static final String PASSWORD = "password";
-    private TextInputLayout textInputLayoutPassword;
-    private TextInputEditText textInputEditTextPassword;
+    @BindView(R.id.password_login_toolbar)
+    Toolbar passwordLoginToolbar;
+    @BindView(R.id.password_forgot_text_input_layout)
+    TextInputLayout textInputLayoutPassword;
+    @BindView(R.id.password_login)
+    TextInputEditText textInputEditTextPassword;
+
+    private Unbinder unbinder;
 
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_password_login, container, false);
-        ((AppCompatActivity) getActivity()).setSupportActionBar((Toolbar) view.findViewById(R.id.password_login_toolbar));
-
-        AppCompatButton buttonPasswordLogin = view.findViewById(R.id.password_login_button);
-        textInputLayoutPassword = view.findViewById(R.id.password_forgot_text_input_layout);
-        textInputEditTextPassword = view.findViewById(R.id.password_login);
-        TextView textViewForgotPassword = view.findViewById(R.id.password_forgot);
-        buttonPasswordLogin.setOnClickListener(this);
-        textViewForgotPassword.setOnClickListener(this);
-        textInputEditTextPassword.setOnEditorActionListener(this);
-
+        unbinder = ButterKnife.bind(this, view);
         return view;
+    }
+
+    @Override
+    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        ((AppCompatActivity) getActivity()).setSupportActionBar(passwordLoginToolbar);
+    }
+
+    @Override
+    public void onDestroyView() {
+        if (unbinder != null) {
+            unbinder.unbind();
+            unbinder = null;
+        }
+        super.onDestroyView();
     }
 
     private void login() {
@@ -84,22 +102,19 @@ public class PasswordLoginFragment extends Fragment implements View.OnClickListe
         }
     }
 
-
-    @Override
-    public void onClick(View view) {
-        switch (view.getId()) {
-            case R.id.password_login_button:
-                login();
-                break;
-            case R.id.password_forgot:
-                ForgotPasswordDialog forgotPasswordDialog = new ForgotPasswordDialog();
-                forgotPasswordDialog.show(getActivity().getFragmentManager(), null);
-                break;
-        }
+    @OnClick(R.id.password_login_button)
+    public void onPasswordLoginButtonClick() {
+        login();
     }
 
-    @Override
-    public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+    @OnClick(R.id.password_forgot)
+    public void onPasswordForgotClick() {
+        ForgotPasswordDialog forgotPasswordDialog = new ForgotPasswordDialog();
+        forgotPasswordDialog.show(getActivity().getFragmentManager(), null);
+    }
+
+    @OnEditorAction(R.id.password_login)
+    public boolean onEditorAction(int actionId, KeyEvent event) {
         if ((actionId == EditorInfo.IME_ACTION_DONE)
                 || ((event.getKeyCode() == KeyEvent.KEYCODE_ENTER) && (event.getAction() == KeyEvent.ACTION_DOWN))) {
             login();

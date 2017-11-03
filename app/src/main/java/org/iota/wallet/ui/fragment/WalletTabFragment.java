@@ -55,45 +55,74 @@ import org.knowm.xchange.currency.Currency;
 import java.util.ArrayList;
 import java.util.List;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.OnClick;
+import butterknife.Unbinder;
 import jota.utils.IotaUnitConverter;
 
-public class WalletTabFragment extends Fragment implements View.OnClickListener {
+public class WalletTabFragment extends Fragment {
 
     private static final String BALANCE = "balance";
     private static final String ALTERNATE_BALANCE = "alternateBalance";
     private static final String WALLET_FAB_STATE = "walletFabState";
-    private ViewPager viewPager;
-    private TabLayout tabLayout;
-    private TextView balanceTextView;
-    private TextView alternateBalanceTextView;
+    @BindView(R.id.wallet_toolbar)
+    Toolbar walletToolbar;
+    @BindView(R.id.wallet_tab_viewpager)
+    ViewPager viewPager;
+    @BindView(R.id.wallet_tabs)
+    TabLayout tabLayout;
+    @BindView(R.id.toolbar_title_layout_balance)
+    TextView balanceTextView;
+    @BindView(R.id.toolbar_title_layout_alternate_balance)
+    TextView alternateBalanceTextView;
+    @BindView(R.id.fab_wallet)
+    FloatingActionButton fabWallet;
     private long walletBalanceIota;
-    private FloatingActionButton fabWallet;
     private List<Transfer> transfers;
     private AlternateValueManager alternateValueManager;
     private boolean isConnected = false;
     private WalletPagerAdapter adapter;
     private int currentPagerPosition = 0;
 
+    private Unbinder unbinder;
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        alternateValueManager = new AlternateValueManager(getActivity());
+    }
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        super.onCreateView(inflater, container, savedInstanceState);
-        final View view = inflater.inflate(R.layout.fragment_wallet_tab, container, false);
-        ((AppCompatActivity) getActivity()).setSupportActionBar((Toolbar) view.findViewById(R.id.wallet_toolbar));
-        balanceTextView = view.findViewById(R.id.toolbar_title_layout_balance);
-        alternateBalanceTextView = view.findViewById(R.id.toolbar_title_layout_alternate_balance);
-        fabWallet = view.findViewById(R.id.fab_wallet);
-        tabLayout = view.findViewById(R.id.wallet_tabs);
-        viewPager = view.findViewById(R.id.wallet_tab_viewpager);
-
-        alternateValueManager = new AlternateValueManager(getActivity());
-        fabWallet.setOnClickListener(this);
-
-        setViewPager();
-
+        View view = inflater.inflate(R.layout.fragment_wallet_tab, container, false);
+        unbinder = ButterKnife.bind(this, view);
         return view;
     }
 
+    @Override
+    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        ((AppCompatActivity) getActivity()).setSupportActionBar(walletToolbar);
+        setViewPager();
+    }
+
+    @Override
+    public void onDestroyView() {
+        if (unbinder != null) {
+            unbinder.unbind();
+            unbinder = null;
+        }
+        super.onDestroyView();
+    }
+
+    @OnClick(R.id.fab_wallet)
+    public void onFabWalletClick() {
+        if (isConnected && adapter != null) {
+            adapter.performFabClick(currentPagerPosition);
+        }
+    }
 
     private void setViewPager() {
         adapter = new WalletPagerAdapter(getActivity(), getChildFragmentManager());
@@ -170,9 +199,9 @@ public class WalletTabFragment extends Fragment implements View.OnClickListener 
             case REMOTE_NODE_ERROR:
             case IOTA_COOL_NETWORK_ERROR:
             case NETWORK_ERROR:
-        isConnected = false;
-        currentPagerPosition = viewPager.getCurrentItem();
-        updateFab();
+                isConnected = false;
+                currentPagerPosition = viewPager.getCurrentItem();
+                updateFab();
                 break;
         }
     }
@@ -240,7 +269,7 @@ public class WalletTabFragment extends Fragment implements View.OnClickListener 
     @Override
     public void onHiddenChanged(boolean hidden) {
         super.onHiddenChanged(hidden);
-        if (!hidden){
+        if (!hidden) {
             if (isConnected) {
                 getAccountData();
             }
@@ -251,13 +280,6 @@ public class WalletTabFragment extends Fragment implements View.OnClickListener 
     public void onPause() {
         super.onPause();
         EventBus.getDefault().unregister(this);
-    }
-
-    @Override
-    public void onClick(View view) {
-        if (isConnected && adapter != null) {
-            adapter.performFabClick(currentPagerPosition);
-        }
     }
 
     public interface OnFabClickListener {
