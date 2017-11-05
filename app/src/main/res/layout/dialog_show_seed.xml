@@ -21,8 +21,7 @@
             android:layout_height="wrap_content"
             android:hint="@string/password"
             android:imeOptions="actionDone"
-            android:inputType="textPassword"
-            android:minEms="6" />
+            android:inputType="textPassword" />
     </android.support.design.widget.TextInputLayout>
 
     <TextView

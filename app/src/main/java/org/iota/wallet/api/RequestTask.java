@@ -33,24 +33,26 @@ import org.iota.wallet.api.requests.ApiRequest;
 import org.iota.wallet.api.responses.ApiResponse;
 import org.iota.wallet.helper.Constants;
 
+import java.lang.ref.WeakReference;
 import java.util.Date;
 
 class RequestTask extends AsyncTask<ApiRequest, String, ApiResponse> {
 
-    private final Context context;
+    private WeakReference<Context> context;
     private EventBus bus;
     private Date start;
     private String tag = "";
 
+
     public RequestTask(Context context) {
-        this.context = context;
+        this.context = new WeakReference<>(context);
         this.bus = EventBus.getDefault();
     }
 
     @Override
     protected ApiResponse doInBackground(ApiRequest... params) {
 
-        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context.get().getApplicationContext());
         String protocol = prefs.getString(Constants.PREFERENCE_NODE_PROTOCOL, Constants.PREFERENCE_NODE_DEFAULT_PROTOCOL);
         String host = prefs.getString(Constants.PREFERENCE_NODE_IP, Constants.PREFERENCE_NODE_DEFAULT_IP);
         int port = Integer.parseInt(prefs.getString(Constants.PREFERENCE_NODE_PORT, Constants.PREFERENCE_NODE_DEFAULT_PORT));
@@ -64,7 +66,7 @@ class RequestTask extends AsyncTask<ApiRequest, String, ApiResponse> {
         ApiRequest apiRequest = params[0];
         tag = apiRequest.getClass().getName();
 
-        ApiProvider apiProvider = new IotaApiProvider(protocol, host, port, context);
+        ApiProvider apiProvider = new IotaApiProvider(protocol, host, port, context.get().getApplicationContext());
 
         return apiProvider.processRequest(apiRequest);
     }
