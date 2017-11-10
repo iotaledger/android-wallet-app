@@ -21,6 +21,7 @@ package org.iota.wallet.ui.fragment;
 
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.os.Build;
 import android.os.Bundle;
@@ -269,6 +270,7 @@ public class NeighborsFragment extends BaseSwipeRefreshLayoutFragment
         }
     }
 
+    @SuppressLint("SetTextI18n")
     @Subscribe
     public void onEvent(GetNeighborsResponse gpr) {
         swipeRefreshLayout.setRefreshing(false);
@@ -379,6 +381,7 @@ public class NeighborsFragment extends BaseSwipeRefreshLayoutFragment
         return false;
     }
 
+    @SuppressLint("SetTextI18n")
     @Override
     public boolean onQueryTextChange(String searchText) {
         adapter.filter(neighbors, searchText);
@@ -426,6 +429,7 @@ public class NeighborsFragment extends BaseSwipeRefreshLayoutFragment
             outState.putParcelableArrayList(NEIGHBORS_LIST, (ArrayList<Neighbor>) neighbors);
     }
 
+    @SuppressLint("SetTextI18n")
     @Override
     public void onActivityCreated(@Nullable final Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);

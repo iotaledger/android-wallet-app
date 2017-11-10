@@ -19,7 +19,7 @@
 
 package org.iota.wallet.ui.adapter;
 
-import android.content.Context;
+import android.app.Activity;
 import android.support.annotation.NonNull;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -32,49 +32,52 @@ import org.iota.wallet.model.NodeInfo;
 
 import java.util.List;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+
 public class NodeInfoListAdapter extends ArrayAdapter<NodeInfo> {
 
-    public NodeInfoListAdapter(Context context, int textViewResourceId) {
-        super(context, textViewResourceId);
-    }
+    private LayoutInflater inflator;
 
-    public NodeInfoListAdapter(Context context, int resource, List<NodeInfo> items) {
+    public NodeInfoListAdapter(Activity context, int resource, List<NodeInfo> items) {
         super(context, resource, items);
+        inflator = context.getLayoutInflater();
     }
 
     @NonNull
     @Override
-    public View getView(int position, View convertView, @NonNull ViewGroup parent) {
+    public View getView(int position, View view, @NonNull ViewGroup parent) {
         ViewHolderItem viewHolder;
-        View v = convertView;
-        if (v == null) {
-            LayoutInflater vi;
-            vi = LayoutInflater.from(getContext());
-            v = vi.inflate(R.layout.item_node_info, parent, false);
-            viewHolder = new ViewHolderItem();
-            viewHolder.paramTextView = v.findViewById(R.id.item_info_label);
-            viewHolder.valueTextView = v.findViewById(R.id.item_info_value);
-            v.setTag(viewHolder);
+        if (view == null) {
+            view = inflator.inflate(R.layout.item_node_info, parent, false);
+            viewHolder = new ViewHolderItem(view);
+            view.setTag(viewHolder);
         } else {
-            viewHolder = (ViewHolderItem) convertView.getTag();
+            viewHolder = (ViewHolderItem) view.getTag();
         }
 
         NodeInfo nodeInfo = getItem(position);
         if (nodeInfo != null) {
-            if (viewHolder.paramTextView != null) {
-                viewHolder.paramTextView.setText(nodeInfo.getParam());
+            if (viewHolder.label != null) {
+                viewHolder.label.setText(nodeInfo.getParam());
             }
-            if (viewHolder.valueTextView != null) {
+            if (viewHolder.value != null) {
                 if (nodeInfo.getValue() != null)
-                    viewHolder.valueTextView.setText(nodeInfo.getValue());
-                else viewHolder.valueTextView.setText(String.valueOf(nodeInfo.getIndex()));
+                    viewHolder.value.setText(nodeInfo.getValue());
+                else viewHolder.value.setText(String.valueOf(nodeInfo.getIndex()));
             }
         }
-        return v;
+        return view;
     }
 
-    private static class ViewHolderItem {
-        TextView paramTextView;
-        TextView valueTextView;
+    public static class ViewHolderItem {
+        @BindView(R.id.item_info_label)
+        TextView label;
+        @BindView(R.id.item_info_value)
+        TextView value;
+
+        private ViewHolderItem(View view) {
+            ButterKnife.bind(this, view);
+        }
     }
 }

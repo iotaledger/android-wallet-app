@@ -52,23 +52,31 @@ class RequestTask extends AsyncTask<ApiRequest, String, ApiResponse> {
     @Override
     protected ApiResponse doInBackground(ApiRequest... params) {
 
-        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context.get().getApplicationContext());
-        String protocol = prefs.getString(Constants.PREFERENCE_NODE_PROTOCOL, Constants.PREFERENCE_NODE_DEFAULT_PROTOCOL);
-        String host = prefs.getString(Constants.PREFERENCE_NODE_IP, Constants.PREFERENCE_NODE_DEFAULT_IP);
-        int port = Integer.parseInt(prefs.getString(Constants.PREFERENCE_NODE_PORT, Constants.PREFERENCE_NODE_DEFAULT_PORT));
+        Context context = this.context.get();
 
-        if (BuildConfig.DEBUG) {
-            Log.i("ApiRequest", params[0].toString());
-            start = new Date();
-            Log.i("started at", start.getTime() + "");
+        if (context != null) {
+            SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
+            String protocol = prefs.getString(Constants.PREFERENCE_NODE_PROTOCOL, Constants.PREFERENCE_NODE_DEFAULT_PROTOCOL);
+            String host = prefs.getString(Constants.PREFERENCE_NODE_IP, Constants.PREFERENCE_NODE_DEFAULT_IP);
+            int port = Integer.parseInt(prefs.getString(Constants.PREFERENCE_NODE_PORT, Constants.PREFERENCE_NODE_DEFAULT_PORT));
+
+            if (BuildConfig.DEBUG) {
+                Log.i("ApiRequest", params[0].toString());
+                start = new Date();
+                Log.i("started at", start.getTime() + "");
+            }
+
+            ApiRequest apiRequest = params[0];
+            tag = apiRequest.getClass().getName();
+
+            ApiProvider apiProvider = new IotaApiProvider(protocol, host, port, context);
+
+            return apiProvider.processRequest(apiRequest);
+
         }
 
-        ApiRequest apiRequest = params[0];
-        tag = apiRequest.getClass().getName();
-
-        ApiProvider apiProvider = new IotaApiProvider(protocol, host, port, context.get().getApplicationContext());
-
-        return apiProvider.processRequest(apiRequest);
+        TaskManager.removeTask(tag);
+        return null;
     }
 
     @Override

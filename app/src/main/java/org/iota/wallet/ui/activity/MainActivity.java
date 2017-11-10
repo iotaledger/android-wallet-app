@@ -108,12 +108,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         prefs = PreferenceManager.getDefaultSharedPreferences(this);
         inputManager = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
 
+        if (savedInstanceState != null && savedInstanceState.containsKey(STATE_CURRENT_FRAGMENT_TAG)) {
+                currentFragmentTag = savedInstanceState.getString(STATE_CURRENT_FRAGMENT_TAG);
+        }
+
         if (savedInstanceState == null || IOTA.seed == null) {
             navigationView.getMenu().performIdentifierAction(R.id.nav_wallet, 0);
-        } else {
-            if (savedInstanceState.containsKey(STATE_CURRENT_FRAGMENT_TAG)) {
-                currentFragmentTag = savedInstanceState.getString(STATE_CURRENT_FRAGMENT_TAG);
-            }
         }
 
         if (!prefs.getBoolean(Constants.PREFERENCE_RUN_WITH_ROOT, false)) {

@@ -40,7 +40,13 @@ import org.iota.wallet.helper.Utils;
 import java.io.File;
 import java.io.FileOutputStream;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+
 public class GeneratedQRCodeDialog extends DialogFragment implements DialogInterface.OnClickListener {
+
+    @BindView(R.id.generated_qr_code_image)
+    ImageView imageView;
 
     private Bitmap bitmap;
 
@@ -77,7 +83,7 @@ public class GeneratedQRCodeDialog extends DialogFragment implements DialogInter
 
         LayoutInflater inflater = LayoutInflater.from(getActivity());
         View view = inflater.inflate(R.layout.dialog_generated_qr_code, null, false);
-        ImageView imageView = view.findViewById(R.id.generated_qr_code_image);
+        ButterKnife.bind(this, view);
 
         Bundle bundle = getArguments();
         bitmap = bundle.getParcelable("bitmap");
