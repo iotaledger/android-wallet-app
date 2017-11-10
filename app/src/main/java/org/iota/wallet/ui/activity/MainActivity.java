@@ -88,12 +88,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private InputMethodManager inputManager;
     private String currentFragmentTag = null;
     private boolean killFragments = false;
-
     private OnBackPressedClickListener onBackPressedClickListener;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.activity_main);
 
         drawer =  findViewById(R.id.drawer_layout);
@@ -412,13 +412,15 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
             shortcutManager = getSystemService(ShortcutManager.class);
 
-            if (IOTA.seed != null) {
-                shortcutManager.setDynamicShortcuts(Arrays.asList(shortcutGenerateQrCode, shortcutTransferIotas));
-                shortcutManager.enableShortcuts(Arrays.asList(SHORTCUT_ID_GENERATE_QR_CODE, SHORTCUT_ID_SEND_TRANSFER));
-            } else {
-                // remove shortcuts if Iota.seed.isEmpty()
-                shortcutManager.disableShortcuts(Arrays.asList(SHORTCUT_ID_GENERATE_QR_CODE, SHORTCUT_ID_SEND_TRANSFER));
-                shortcutManager.removeAllDynamicShortcuts();
+            if (shortcutManager != null) {
+                if (IOTA.seed != null) {
+                    shortcutManager.setDynamicShortcuts(Arrays.asList(shortcutGenerateQrCode, shortcutTransferIotas));
+                    shortcutManager.enableShortcuts(Arrays.asList(SHORTCUT_ID_GENERATE_QR_CODE, SHORTCUT_ID_SEND_TRANSFER));
+                } else {
+                    // remove shortcuts if Iota.seed.isEmpty()
+                    shortcutManager.disableShortcuts(Arrays.asList(SHORTCUT_ID_GENERATE_QR_CODE, SHORTCUT_ID_SEND_TRANSFER));
+                    shortcutManager.removeAllDynamicShortcuts();
+                }
             }
         }
     }
@@ -501,6 +503,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     protected void onSaveInstanceState(Bundle outState) {
         outState.putString(STATE_CURRENT_FRAGMENT_TAG, currentFragmentTag);
         super.onSaveInstanceState(outState);
+    }
+
+    @Override
+    protected void onRestoreInstanceState(Bundle savedInstanceState) {
+        super.onRestoreInstanceState(savedInstanceState);
+        currentFragmentTag = savedInstanceState.getString(STATE_CURRENT_FRAGMENT_TAG);
     }
 
     @Override

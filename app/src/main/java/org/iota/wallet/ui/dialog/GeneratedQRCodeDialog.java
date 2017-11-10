@@ -28,6 +28,7 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.StrictMode;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AlertDialog;
 import android.view.LayoutInflater;
@@ -45,16 +46,20 @@ public class GeneratedQRCodeDialog extends DialogFragment implements DialogInter
     private Bitmap bitmap;
 
     public GeneratedQRCodeDialog() {
+        StrictMode.VmPolicy.Builder builder = new StrictMode.VmPolicy.Builder();
+        StrictMode.setVmPolicy(builder.build());
     }
 
     private static void shareQRCode(Context context, Bitmap bitmap) {
         try {
             File file = new File(Utils.getExternalIotaDirectory(context), "qr_code.png");
+
             FileOutputStream fileOutputStream = new FileOutputStream(file);
+
             bitmap.compress(Bitmap.CompressFormat.PNG, 100, fileOutputStream);
             fileOutputStream.flush();
             fileOutputStream.close();
-            if (file.mkdirs()) {
+            if (file.exists()) {
                 Intent shareIntent = new Intent();
                 shareIntent.setAction(Intent.ACTION_SEND);
                 shareIntent.putExtra(Intent.EXTRA_STREAM, Uri.fromFile(file));

@@ -72,10 +72,16 @@ public class Utils {
     }
 
     public static File getExternalIotaDirectory(Context context) {
-        File previewDir = new File(context.getExternalFilesDir(null), "iota");
-        if (!previewDir.exists() && previewDir.mkdir())
-            return previewDir;
-        else return null;
+        try {
+            File cacheDir = new File(context.getExternalCacheDir(), "iota");
+            if (!cacheDir.exists()) {
+                cacheDir.mkdirs();
+            }
+            return cacheDir;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 
     public static int createNewID(){
