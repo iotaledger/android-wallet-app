@@ -41,41 +41,30 @@ import org.iota.wallet.helper.Constants;
 import org.iota.wallet.model.QRCode;
 import org.iota.wallet.ui.dialog.ChangelogDialog;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.OnClick;
+import butterknife.Unbinder;
 import de.psdev.licensesdialog.LicensesDialog;
 
-public class AboutFragment extends Fragment implements View.OnClickListener {
+public class AboutFragment extends Fragment {
 
     public static final String IOTA_DONATION_ADDRESS = "TBH9CSFWUHACJSWGA9XDDMNPJ9USPRLJ9FCHDEYDYGOWPQTQUWXMUBCUKTFJRESNBHGJOISFJOLXTLZOBRLLGVTROD";
     private static final String IOTA_DONATION_TAG = "ANDROID9WALLET9DONATION9999";
     private static final String PACKAGE_WEBVIEW = "com.google.android.webview";
 
-    private TextView versionTextView;
+    @BindView(R.id.about_toolbar)
+    Toolbar aboutToolbar;
+    @BindView(R.id.about_version)
+    TextView versionTextView;
+
+    private Unbinder unbinder;
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_about, container, false);
-        ((AppCompatActivity) getActivity()).setSupportActionBar((Toolbar) view.findViewById(R.id.about_toolbar));
-
-        versionTextView = view.findViewById(R.id.about_version);
-        TextView changelogTextView = view.findViewById(R.id.about_changelog);
-        TextView licensesTextView = view.findViewById(R.id.about_licenses);
-
-        TextView donationBtcTextView = view.findViewById(R.id.about_donation_btc);
-        TextView donationIotaTextView = view.findViewById(R.id.about_donation_iota);
-        TextView donationWebsiteTextView = view.findViewById(R.id.about_donation_website);
-
-        TextView faqWebsiteTextView = view.findViewById(R.id.about_faq);
-
-        changelogTextView.setOnClickListener(this);
-        licensesTextView.setOnClickListener(this);
-
-        donationWebsiteTextView.setOnClickListener(this);
-        donationBtcTextView.setOnClickListener(this);
-        donationIotaTextView.setOnClickListener(this);
-        faqWebsiteTextView.setOnClickListener(this);
-        initAppVersion();
-
+        unbinder = ButterKnife.bind(this, view);
         return view;
     }
 
@@ -88,34 +77,21 @@ public class AboutFragment extends Fragment implements View.OnClickListener {
         }
     }
 
-    private void showChangelogDialog() {
-        ChangelogDialog changelogDialog = new ChangelogDialog();
-        changelogDialog.show(getActivity().getFragmentManager(), null);
+    @Override
+    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        ((AppCompatActivity) getActivity()).setSupportActionBar(aboutToolbar);
+        initAppVersion();
+
     }
 
-    private void showLicenseDialog() {
-        try {
-            new LicensesDialog.Builder(getActivity())
-                    .setNotices(R.raw.licenses)
-                    .setTitle(R.string.about_licenses)
-                    .setIncludeOwnLicense(true)
-                    .setCloseText(R.string.buttons_ok)
-                    .build()
-                    .showAppCompat();
-
-        } catch (AndroidRuntimeException e) {
-            View contentView = getActivity().getWindow().getDecorView();
-            Snackbar snackbar = Snackbar.make(contentView,
-                    R.string.message_open_licenses_error, Snackbar.LENGTH_LONG);
-            snackbar.setAction(R.string.message_install_web_view,
-                    new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
-                            openPlayStore();
-                        }
-                    });
-            snackbar.show();
+    @Override
+    public void onDestroyView() {
+        if (unbinder != null) {
+            unbinder.unbind();
+            unbinder = null;
         }
+        super.onDestroyView();
     }
 
     private void openPlayStore() {
@@ -126,54 +102,79 @@ public class AboutFragment extends Fragment implements View.OnClickListener {
         }
     }
 
-    @Override
-    public void onClick(View view) {
-        switch (view.getId()) {
-            case R.id.about_changelog:
-                showChangelogDialog();
-                break;
-            case R.id.about_licenses:
-                showLicenseDialog();
-                break;
-            case R.id.about_donation_website:
-                try {
-                    startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://iotawallet.info")));
-                } catch (android.content.ActivityNotFoundException ignored) {
-                }
-                break;
-            case R.id.about_donation_btc:
-                try {
-                    startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://blockchain.info/address/1MyCJP3yZtSJ3bMVEoQRPSY3D6Ev7CTvzo")));
-                } catch (android.content.ActivityNotFoundException ignored) {
-                }
-                break;
-            case R.id.about_donation_iota:
-                if (IOTA.seed != null) {
+    @OnClick(R.id.about_changelog)
+    public void onAboutChangeLogClick() {
+        ChangelogDialog changelogDialog = new ChangelogDialog();
+        changelogDialog.show(getActivity().getFragmentManager(), null);
+    }
 
-                    QRCode qrCode = new QRCode();
-                    qrCode.setAddress(IOTA_DONATION_ADDRESS);
-                    qrCode.setTag(IOTA_DONATION_TAG);
-
-                    Bundle bundle = new Bundle();
-                    bundle.putParcelable(Constants.QRCODE, qrCode);
-
-                    Fragment fragment = new NewTransferFragment();
-                    fragment.setArguments(bundle);
-
-                    getActivity().getFragmentManager().beginTransaction()
-                            .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
-                            .replace(R.id.container, fragment, null)
-                            .addToBackStack(null)
-                            .commit();
-                } else
-                    Snackbar.make(getActivity().findViewById(R.id.drawer_layout), getString(R.string.messages_iota_donation_require_login), Snackbar.LENGTH_LONG).show();
-                break;
-            case R.id.about_faq:
-                try {
-                    startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("http://iotasupport.com")));
-                } catch (android.content.ActivityNotFoundException ignored) {
-                }
-                break;
+    @OnClick(R.id.about_licenses)
+    public void onAboutLicensesClick() {
+        try {
+            new LicensesDialog.Builder(getActivity())
+                    .setNotices(R.raw.licenses)
+                    .setTitle(R.string.about_licenses)
+                    .setIncludeOwnLicense(true)
+                    .setCloseText(R.string.buttons_ok)
+                    .build()
+                    .showAppCompat();
+        } catch (AndroidRuntimeException e) {
+            View contentView = getActivity().getWindow().getDecorView();
+            Snackbar snackbar = Snackbar.make(contentView,
+                    R.string.message_open_licenses_error, Snackbar.LENGTH_LONG);
+            snackbar.setAction(R.string.message_install_web_view, v -> openPlayStore());
+            snackbar.show();
         }
     }
+
+    @OnClick(R.id.about_donation_btc)
+    public void onAboutDonationsBtcClick() {
+        Uri uri = Uri.parse("https://blockchain.info/address/1MyCJP3yZtSJ3bMVEoQRPSY3D6Ev7CTvzo");
+        Intent intent = new Intent(Intent.ACTION_VIEW, uri);
+        if (intent.resolveActivity(getActivity().getPackageManager()) != null) {
+            startActivity(intent);
+        }
+    }
+
+    @OnClick(R.id.about_donation_iota)
+    public void onAboutDonationIotaClick() {
+        if (IOTA.seed != null) {
+
+            QRCode qrCode = new QRCode();
+            qrCode.setAddress(IOTA_DONATION_ADDRESS);
+            qrCode.setTag(IOTA_DONATION_TAG);
+
+            Bundle bundle = new Bundle();
+            bundle.putParcelable(Constants.QRCODE, qrCode);
+
+            Fragment fragment = new NewTransferFragment();
+            fragment.setArguments(bundle);
+
+            getActivity().getFragmentManager().beginTransaction()
+                    .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
+                    .replace(R.id.container, fragment, null)
+                    .addToBackStack(null)
+                    .commit();
+        } else
+            Snackbar.make(getActivity().findViewById(R.id.drawer_layout), getString(R.string.messages_iota_donation_require_login), Snackbar.LENGTH_LONG).show();
+    }
+
+    @OnClick(R.id.about_donation_website)
+    public void onAboutDonationWebsite() {
+        Uri uri = Uri.parse("https://iotawallet.info");
+        Intent intent = new Intent(Intent.ACTION_VIEW, uri);
+        if (intent.resolveActivity(getActivity().getPackageManager()) != null) {
+            startActivity(intent);
+        }
+    }
+
+    @OnClick(R.id.about_faq)
+    public void onAboutFaqClick() {
+        Uri uri = Uri.parse("http://iotasupport.com");
+        Intent intent = new Intent(Intent.ACTION_VIEW, uri);
+        if (intent.resolveActivity(getActivity().getPackageManager()) != null) {
+            startActivity(intent);
+        }
+    }
+
 }

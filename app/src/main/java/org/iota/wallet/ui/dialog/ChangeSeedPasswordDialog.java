@@ -26,6 +26,7 @@ import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.design.widget.TextInputEditText;
 import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AlertDialog;
@@ -33,6 +34,7 @@ import android.support.v7.preference.PreferenceManager;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.view.inputmethod.EditorInfo;
@@ -44,14 +46,24 @@ import org.iota.wallet.R;
 import org.iota.wallet.helper.AESCrypt;
 import org.iota.wallet.helper.Constants;
 
-public class ChangeSeedPasswordDialog extends DialogFragment implements TextView.OnEditorActionListener {
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.OnEditorAction;
 
-    private TextInputLayout textInputLayoutPasswordCurrent;
-    private TextInputLayout textInputLayoutPasswordNew;
-    private TextInputLayout textInputLayoutPasswordNewConfirm;
-    private TextInputEditText textInputEditTextPasswordCurrent;
-    private TextInputEditText textInputEditTextPasswordNew;
-    private TextInputEditText textInputEditTextPasswordNewConfirm;
+public class ChangeSeedPasswordDialog extends DialogFragment {
+
+    @BindView(R.id.password_current_text_input_layout)
+    TextInputLayout textInputLayoutPasswordCurrent;
+    @BindView(R.id.password_new_text_input_layout)
+    TextInputLayout textInputLayoutPasswordNew;
+    @BindView(R.id.password_new_confirm_input_layout)
+    TextInputLayout textInputLayoutPasswordNewConfirm;
+    @BindView(R.id.password_current)
+    TextInputEditText textInputEditTextPasswordCurrent;
+    @BindView(R.id.password_new)
+    TextInputEditText textInputEditTextPasswordNew;
+    @BindView(R.id.password_new_confirm)
+    TextInputEditText textInputEditTextPasswordNewConfirm;
 
     public ChangeSeedPasswordDialog() {
     }
@@ -59,19 +71,8 @@ public class ChangeSeedPasswordDialog extends DialogFragment implements TextView
     @NonNull
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
-
-        LayoutInflater inflater = LayoutInflater.from(getActivity());
-        @SuppressLint("InflateParams") View view = inflater.inflate(R.layout.dialog_change_seed_password, null);
-
-        textInputLayoutPasswordCurrent = view.findViewById(R.id.password_current_text_input_layout);
-        textInputLayoutPasswordNew = view.findViewById(R.id.password_new_text_input_layout);
-        textInputLayoutPasswordNewConfirm = view.findViewById(R.id.password_new_confirm_input_layout);
-        textInputEditTextPasswordCurrent = view.findViewById(R.id.password_current);
-        textInputEditTextPasswordNew = view.findViewById(R.id.password_new);
-        textInputEditTextPasswordNewConfirm = view.findViewById(R.id.password_new_confirm);
-
-        textInputEditTextPasswordNewConfirm.setOnEditorActionListener(this);
-
+        View view = LayoutInflater.from(getActivity()).inflate(R.layout.dialog_change_seed_password, null, false);
+        ButterKnife.bind(this, view);
         final AlertDialog alertDialog = new AlertDialog.Builder(getActivity())
                 .setView(view)
                 .setTitle(R.string.title_new_password)
@@ -81,21 +82,9 @@ public class ChangeSeedPasswordDialog extends DialogFragment implements TextView
                 .create();
 
 
-        alertDialog.setOnShowListener(new DialogInterface.OnShowListener() {
-
-            @Override
-            public void onShow(final DialogInterface dialog) {
-
-                Button button = alertDialog.getButton(AlertDialog.BUTTON_POSITIVE);
-                button.setOnClickListener(new View.OnClickListener() {
-
-                    @Override
-                    public void onClick(View view) {
-                        changeSeedPassword();
-
-                    }
-                });
-            }
+        alertDialog.setOnShowListener(dialog -> {
+            Button button = alertDialog.getButton(AlertDialog.BUTTON_POSITIVE);
+            button.setOnClickListener(view1 -> changeSeedPassword());
         });
 
         alertDialog.show();
@@ -103,13 +92,23 @@ public class ChangeSeedPasswordDialog extends DialogFragment implements TextView
     }
 
 
+    @OnEditorAction(R.id.password_new_confirm)
+    public boolean onPasswordNewConfirmEditorAction(int actionId, KeyEvent event) {
+        if ((actionId == EditorInfo.IME_ACTION_DONE)
+                || ((event.getKeyCode() == KeyEvent.KEYCODE_ENTER) && (event.getAction() == KeyEvent.ACTION_DOWN))) {
+            changeSeedPassword();
+        }
+
+        return true;
+    }
+
     private void changeSeedPassword() {
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getActivity());
 
         String passwordCurrent = textInputEditTextPasswordCurrent.getText().toString();
         String passwordNew = textInputEditTextPasswordNew.getText().toString();
         String passwordNewConfirm = textInputEditTextPasswordNewConfirm.getText().toString();
-        
+
         //reset errors
         textInputLayoutPasswordCurrent.setError(null);
         textInputLayoutPasswordNew.setError(null);
@@ -141,12 +140,4 @@ public class ChangeSeedPasswordDialog extends DialogFragment implements TextView
             }
     }
 
-    @Override
-    public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
-        if ((actionId == EditorInfo.IME_ACTION_DONE)
-                || ((event.getKeyCode() == KeyEvent.KEYCODE_ENTER) && (event.getAction() == KeyEvent.ACTION_DOWN))) {
-            changeSeedPassword();
-        }
-        return true;
-    }
 }

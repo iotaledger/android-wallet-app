@@ -65,26 +65,49 @@ import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.Unbinder;
+
 public class NodeInfoFragment extends BaseSwipeRefreshLayoutFragment implements OnChartValueSelectedListener {
 
     private List<NodeInfo> nodeInfos;
-    private ListView list;
-    private PieChart chart;
+    @BindView(R.id.node_info_toolbar)
+    Toolbar nodeInfoToolbar;
+    @BindView(R.id.iri_info_list)
+    ListView list;
+    @BindView(R.id.node_info_chart)
+    PieChart chart;
+
+    private Unbinder unbinder;
 
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_node_info, container, false);
-        ((AppCompatActivity) getActivity()).setSupportActionBar((Toolbar) view.findViewById(R.id.node_info_toolbar));
-        list = view.findViewById(R.id.iri_info_list);
+        unbinder = ButterKnife.bind(this, view);
         swipeRefreshLayout = view.findViewById(R.id.node_info_swipe_container);
-        chart = view.findViewById(R.id.node_info_chart);
+        return view;
+    }
+
+    @Override
+    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        ((AppCompatActivity) getActivity()).setSupportActionBar(nodeInfoToolbar);
         chart.setNoDataText(getString(R.string.messages_no_chart_data));
         chart.setNoDataTextColor(ContextCompat.getColor(getActivity(), R.color.colorPrimary));
         chart.setEntryLabelColor(ContextCompat.getColor(getActivity(), R.color.colorPrimary));
         Paint p = chart.getPaint(Chart.PAINT_INFO);
         p.setColor(ContextCompat.getColor(getActivity(), R.color.colorAccent));
         initializeChart();
-        return view;
+    }
+
+    @Override
+    public void onDestroyView() {
+        if (unbinder != null) {
+            unbinder.unbind();
+            unbinder = null;
+        }
+        super.onDestroyView();
     }
 
     @Override
@@ -94,9 +117,9 @@ public class NodeInfoFragment extends BaseSwipeRefreshLayoutFragment implements 
     }
 
     @Override
-    public void onHiddenChanged(boolean hidden){
+    public void onHiddenChanged(boolean hidden) {
         super.onHiddenChanged(hidden);
-        if(!hidden)
+        if (!hidden)
             getNodeInfo();
     }
 
@@ -143,7 +166,7 @@ public class NodeInfoFragment extends BaseSwipeRefreshLayoutFragment implements 
 
     @Subscribe
     public void onEvent(NetworkError error) {
-        switch (error.getErrorType()){
+        switch (error.getErrorType()) {
             case REMOTE_NODE_ERROR:
                 swipeRefreshLayout.setRefreshing(false);
                 chart.setVisibility(View.INVISIBLE);

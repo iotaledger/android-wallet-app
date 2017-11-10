@@ -44,29 +44,73 @@ import org.iota.wallet.helper.SeedValidator;
 import org.iota.wallet.ui.dialog.CopySeedDialog;
 import org.iota.wallet.ui.dialog.EncryptSeedDialog;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.OnClick;
+import butterknife.OnEditorAction;
+import butterknife.Unbinder;
 import jota.utils.SeedRandomGenerator;
 
-public class SeedLoginFragment extends Fragment implements View.OnClickListener, TextView.OnEditorActionListener {
+public class SeedLoginFragment extends Fragment {
 
     private static final String SEED = "seed";
-    private TextInputLayout seedEditTextLayout;
-    private TextInputEditText seedEditText;
-    private CheckBox storeSeedCheckBox;
+    @BindView(R.id.login_toolbar)
+    Toolbar loginToolbar;
+    @BindView(R.id.seed_login_seed_text_input_layout)
+    TextInputLayout seedEditTextLayout;
+    @BindView(R.id.seed_login_seed_input)
+    TextInputEditText seedEditText;
+    @BindView(R.id.seed_login_store_seed_check_box)
+    CheckBox storeSeedCheckBox;
+
+    private Unbinder unbinder;
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_seed_login, container, false);
-        ((AppCompatActivity) getActivity()).setSupportActionBar((Toolbar) view.findViewById(R.id.login_toolbar));
-
-        seedEditTextLayout = view.findViewById(R.id.seed_login_seed_text_input_layout);
-        seedEditText = view.findViewById(R.id.seed_login_seed_input);
-        storeSeedCheckBox = view.findViewById(R.id.seed_login_store_seed_check_box);
-        view.findViewById(R.id.seed_login_button).setOnClickListener(this);
-        view.findViewById(R.id.seed_login_generate_seed).setOnClickListener(this);
-        seedEditText.setOnEditorActionListener(this);
-
+        unbinder = ButterKnife.bind(this, view);
         return view;
+    }
+
+    @Override
+    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        ((AppCompatActivity) getActivity()).setSupportActionBar(loginToolbar);
+    }
+
+    @Override
+    public void onDestroyView() {
+        if (unbinder != null) {
+            unbinder.unbind();
+            unbinder = null;
+        }
+        super.onDestroyView();
+    }
+
+    @OnClick(R.id.seed_login_button)
+    public void onSeedLoginClick() {
+        loginDialog();
+    }
+
+    @OnClick(R.id.seed_login_generate_seed)
+    public void onSeedLoginGenerateSeedClick() {
+        final String generatedSeed = SeedRandomGenerator.generateNewSeed();
+        seedEditText.setText(generatedSeed);
+        Bundle bundle = new Bundle();
+        bundle.putString("generatedSeed", generatedSeed);
+        CopySeedDialog dialog = new CopySeedDialog();
+        dialog.setArguments(bundle);
+        dialog.show(getFragmentManager(), null);
+    }
+
+    @OnEditorAction(R.id.seed_login_seed_input)
+    public boolean onSeedLoginSeedInputEditorAction(int actionId, KeyEvent event) {
+        if ((actionId == EditorInfo.IME_ACTION_DONE)
+                || ((event.getKeyCode() == KeyEvent.KEYCODE_ENTER) && (event.getAction() == KeyEvent.ACTION_DOWN))) {
+            loginDialog();
+        }
+        return true;
     }
 
     private void loginDialog() {
@@ -90,15 +134,7 @@ public class SeedLoginFragment extends Fragment implements View.OnClickListener,
                     .setNegativeButton(R.string.buttons_cancel, null)
                     .create();
 
-            loginDialog.setButton(AlertDialog.BUTTON_POSITIVE, getString(R.string.buttons_login),
-
-                    new DialogInterface.OnClickListener() {
-
-                        public void onClick(DialogInterface dialog, int which) {
-                            login();
-                        }
-                    }
-            );
+            loginDialog.setButton(AlertDialog.BUTTON_POSITIVE, getString(R.string.buttons_login), (dialog, which) -> login());
 
             loginDialog.show();
         }
@@ -106,7 +142,6 @@ public class SeedLoginFragment extends Fragment implements View.OnClickListener,
 
     private void login() {
         String seed = SeedValidator.getSeed(seedEditText.getText().toString());
-
         if (storeSeedCheckBox.isChecked()) {
             Bundle bundle = new Bundle();
             bundle.putString("seed", seed);
@@ -118,34 +153,6 @@ public class SeedLoginFragment extends Fragment implements View.OnClickListener,
             Intent intent = new Intent(getActivity().getIntent());
             getActivity().startActivityForResult(intent, Constants.REQUEST_CODE_LOGIN);
         }
-    }
-
-    @Override
-    public void onClick(View view) {
-        switch (view.getId()) {
-            case R.id.seed_login_button:
-                loginDialog();
-                break;
-
-            case R.id.seed_login_generate_seed:
-                final String generatedSeed = SeedRandomGenerator.generateNewSeed();
-                seedEditText.setText(generatedSeed);
-                Bundle bundle = new Bundle();
-                bundle.putString("generatedSeed", generatedSeed);
-                CopySeedDialog dialog = new CopySeedDialog();
-                dialog.setArguments(bundle);
-                dialog.show(getFragmentManager(), null);
-                break;
-        }
-    }
-
-    @Override
-    public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
-        if ((actionId == EditorInfo.IME_ACTION_DONE)
-                || ((event.getKeyCode() == KeyEvent.KEYCODE_ENTER) && (event.getAction() == KeyEvent.ACTION_DOWN))) {
-            loginDialog();
-        }
-        return true;
     }
 
     @Override

@@ -1,55 +1,44 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+<android.support.design.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
 
-    <data>
+    <RelativeLayout
 
-        <import type="android.view.View" />
-
-        <!--suppress AndroidDomInspection -->
-        <variable
-            name="transactions"
-            type="java.util.List&lt;org.iota.wallet.model.Transaction&gt;" />
-    </data>
-
-    <android.support.design.widget.CoordinatorLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <RelativeLayout
+        <TextView
+            android:id="@+id/tv_empty"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:text="@string/messages_no_data_available"
+            android:textSize="26sp"
+            android:visibility="gone" />
 
+        <android.support.v4.widget.SwipeRefreshLayout
+            android:id="@+id/tangle_explorer_transactions_swipe_container"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
-            <TextView
+            <com.simplecityapps.recyclerview_fastscroll.views.FastScrollRecyclerView
+                android:id="@+id/tangle_explorer_transactions_fast_recycler_view"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:gravity="center"
-                android:text="@string/messages_no_data_available"
-                android:textSize="26sp"
-                android:visibility="@{transactions.size() != 0 ? View.GONE : View.VISIBLE}" />
+                android:clipToPadding="false"
+                android:paddingBottom="@dimen/baseline_card"
+                app:fastScrollPopupBgColor="@color/colorAccent"
+                app:fastScrollPopupTextColor="@android:color/primary_text_dark"
+                app:fastScrollThumbColor="@color/colorAccent">
 
-            <android.support.v4.widget.SwipeRefreshLayout
-                android:id="@+id/tangle_explorer_transactions_swipe_container"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
+            </com.simplecityapps.recyclerview_fastscroll.views.FastScrollRecyclerView>
 
-                <com.simplecityapps.recyclerview_fastscroll.views.FastScrollRecyclerView
-                    android:id="@+id/tangle_explorer_transactions_fast_recycler_view"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:clipToPadding="false"
-                    android:paddingBottom="@dimen/baseline_card"
-                    app:fastScrollPopupBgColor="@color/colorAccent"
-                    app:fastScrollPopupTextColor="@android:color/primary_text_dark"
-                    app:fastScrollThumbColor="@color/colorAccent">
+        </android.support.v4.widget.SwipeRefreshLayout>
 
-                </com.simplecityapps.recyclerview_fastscroll.views.FastScrollRecyclerView>
+    </RelativeLayout>
 
-            </android.support.v4.widget.SwipeRefreshLayout>
+</android.support.design.widget.CoordinatorLayout>
 
-        </RelativeLayout>
-
-    </android.support.design.widget.CoordinatorLayout>
-
-</layout>

@@ -22,7 +22,6 @@ package org.iota.wallet.ui.fragment;
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.content.Context;
-import android.databinding.DataBindingUtil;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -61,7 +60,6 @@ import org.iota.wallet.api.responses.AddNeighborsResponse;
 import org.iota.wallet.api.responses.GetNeighborsResponse;
 import org.iota.wallet.api.responses.RemoveNeighborsResponse;
 import org.iota.wallet.api.responses.error.NetworkError;
-import org.iota.wallet.databinding.FragmentNeighborsBinding;
 import org.iota.wallet.helper.Constants;
 import org.iota.wallet.model.Neighbor;
 import org.iota.wallet.ui.activity.MainActivity;
@@ -70,55 +68,106 @@ import org.iota.wallet.ui.adapter.NeighborsListAdapter;
 import java.util.ArrayList;
 import java.util.List;
 
-public class NeighborsFragment extends BaseSwipeRefreshLayoutFragment implements View.OnClickListener, SearchView.OnQueryTextListener, TextView.OnEditorActionListener, MainActivity.OnBackPressedClickListener {
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.OnClick;
+import butterknife.Unbinder;
+
+public class NeighborsFragment extends BaseSwipeRefreshLayoutFragment
+        implements SearchView.OnQueryTextListener, TextView.OnEditorActionListener, MainActivity.OnBackPressedClickListener {
 
     private static final int AUTOMATICALLY_DISMISS_ITEM = 3000;
     private static final String SEARCH_TEXT = "searchText";
     private static final String NEIGHBORS_LIST = "neighbors";
     private static final String REAVEAL_VIEW_STATE = "revealViewState";
     private static final String NEW_ADDRESS_TEXT = "newAddress";
-    private FragmentNeighborsBinding neighborsBinding;
-    private TextView neighborsHeaderTextView;
-    private RecyclerView recyclerView;
-    private LinearLayoutManager layoutManager;
-    private NeighborsListAdapter adapter;
+
+    @BindView(R.id.neighbor_toolbar)
+    Toolbar neighborToolbar;
+    @BindView(R.id.connected_neighbors)
+    TextView neighborsHeaderTextView;
+    @BindView(R.id.neighbor_recycler_view)
+    RecyclerView recyclerView;
     private List<Neighbor> neighbors;
-    private FrameLayout frameLayout;
-    private FloatingActionButton fabAddButton;
-    private FrameLayout revealView;
-    private EditText editTextNewAddress;
+    @BindView(R.id.neighborImageFrameLayout)
+    FrameLayout frameLayout;
+    @BindView(R.id.fab_add_neighbor)
+    FloatingActionButton fabAddButton;
+    @BindView(R.id.reavel_linearlayout)
+    FrameLayout revealView;
+    @BindView(R.id.neighbor_edit_text_new_ip)
+    EditText editTextNewAddress;
+    @BindView(R.id.tv_empty)
+    TextView tvEmpty;
     private boolean isEditTextVisible;
     private InputMethodManager inputManager;
     private SearchView searchView;
     private String savedSearchText = "";
 
+    private NeighborsListAdapter adapter;
+
+    private Unbinder unbinder;
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        inputManager = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
+        setHasOptionsMenu(true);
+    }
+
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-
-        neighborsBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_neighbors, container, false);
-        View view = neighborsBinding.getRoot();
-
-        super.setHasOptionsMenu(true);
-        ((AppCompatActivity) getActivity()).setSupportActionBar((Toolbar) view.findViewById(R.id.neighbor_toolbar));
-        neighbors = new ArrayList<>();
-        fabAddButton = view.findViewById(R.id.fab_add_neighbor);
-        fabAddButton.setVisibility(View.VISIBLE);
-        revealView = view.findViewById(R.id.reavel_linearlayout);
-        editTextNewAddress = view.findViewById(R.id.neighbor_edit_text_new_ip);
-        fabAddButton.setOnClickListener(this);
-        neighborsHeaderTextView = view.findViewById(R.id.connected_neighbors);
+        View view = inflater.inflate(R.layout.fragment_neighbors, container, false);
+        unbinder = ButterKnife.bind(this, view);
         swipeRefreshLayout = view.findViewById(R.id.neighbors_swipe_container);
-        recyclerView = view.findViewById(R.id.neighbor_recycler_view);
-        layoutManager = new LinearLayoutManager(getActivity());
-        frameLayout = view.findViewById(R.id.neighborImageFrameLayout);
+        return view;
+    }
 
-        inputManager = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
+    @Override
+    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        ((AppCompatActivity) getActivity()).setSupportActionBar(neighborToolbar);
+        neighbors = new ArrayList<>();
+        fabAddButton.setVisibility(View.VISIBLE);
+
         revealView.setVisibility(View.INVISIBLE);
         isEditTextVisible = false;
 
         editTextNewAddress.setOnEditorActionListener(this);
+    }
 
-        return view;
+    @OnClick(R.id.fab_add_neighbor)
+    public void onFabAddNeighborClick(FloatingActionButton fab) {
+        if (!isEditTextVisible) {
+            showRevealEditText(revealView);
+            editTextNewAddress.requestFocus();
+            inputManager.showSoftInput(editTextNewAddress, InputMethodManager.SHOW_IMPLICIT);
+            fabAddButton.setImageResource(R.drawable.ic_done);
+        } else {
+            if (editTextNewAddress.getText().toString().isEmpty()) {
+                Snackbar.make(fab, getString(R.string.messages_enter_neighbor_address), Snackbar.LENGTH_LONG)
+                        .setAction(null, null).show();
+                return;
+            }
+            for (Neighbor neighbor : neighbors) {
+                String address = neighbor.getAddress();
+                if (address.equals(editTextNewAddress.getText().toString())) {
+                    Snackbar.make(fab, getString(R.string.messages_neighbor_address_forgiven), Snackbar.LENGTH_LONG)
+                            .setAction(null, null).show();
+                    return;
+                }
+            }
+            addNeighbor();
+        }
+    }
+
+    @Override
+    public void onDestroyView() {
+        if (unbinder != null) {
+            unbinder.unbind();
+            unbinder = null;
+        }
+        super.onDestroyView();
     }
 
     @Override
@@ -239,7 +288,7 @@ public class NeighborsFragment extends BaseSwipeRefreshLayoutFragment implements
                 neighbors.add(0, neighbor);
             }
         }
-        neighborsBinding.setNeighbors(neighbors);
+        tvEmpty.setVisibility(neighbors.size() == 0 ? View.VISIBLE : View.GONE);
         neighborsHeaderTextView.setText(getString(R.string.menu_neighbors) + " (" + gpr.getNeighbors().size() + ")");
         adapter.notifyDataSetChanged();
     }
@@ -278,12 +327,7 @@ public class NeighborsFragment extends BaseSwipeRefreshLayoutFragment implements
         TaskManager rt = new TaskManager(getActivity());
         rt.startNewRequestTask(nar);
         if (!swipeRefreshLayout.isRefreshing()) {
-            swipeRefreshLayout.post(new Runnable() {
-                @Override
-                public void run() {
-                    swipeRefreshLayout.setRefreshing(true);
-                }
-            });
+            swipeRefreshLayout.post(() -> swipeRefreshLayout.setRefreshing(true));
         }
     }
 
@@ -295,7 +339,6 @@ public class NeighborsFragment extends BaseSwipeRefreshLayoutFragment implements
     private void setAdapter() {
         if (adapter == null) {
             adapter = new NeighborsListAdapter(getActivity(), neighbors);
-            recyclerView.setLayoutManager(layoutManager);
             recyclerView.setAdapter(adapter);
             final SwipeToDismissTouchListener<RecyclerViewAdapter> touchListener =
                     new SwipeToDismissTouchListener<>(
@@ -320,17 +363,13 @@ public class NeighborsFragment extends BaseSwipeRefreshLayoutFragment implements
             // Setting this scroll listener is required to ensure that during ListView scrolling,
             // we don't look for swipes.
             recyclerView.addOnScrollListener((RecyclerView.OnScrollListener) touchListener.makeScrollListener());
-            recyclerView.addOnItemTouchListener(new SwipeableItemClickListener(getActivity(),
-                    new OnItemClickListener() {
-                        @Override
-                        public void onItemClick(View view, int position) {
-                            if (view.getId() == R.id.neighbor_item_delete) {
-                                touchListener.processPendingDismisses();
-                            } else if (view.getId() == R.id.neighbor_item_undo) {
-                                touchListener.undoPendingDismiss();
-                            }
-                        }
-                    }));
+            recyclerView.addOnItemTouchListener(new SwipeableItemClickListener(getActivity(), (view, position) -> {
+                if (view.getId() == R.id.neighbor_item_delete) {
+                    touchListener.processPendingDismisses();
+                } else if (view.getId() == R.id.neighbor_item_undo) {
+                    touchListener.undoPendingDismiss();
+                }
+            }));
         } else {
             adapter.notifyDataSetChanged();
         }
@@ -347,34 +386,6 @@ public class NeighborsFragment extends BaseSwipeRefreshLayoutFragment implements
         adapter.filter(neighbors, searchText);
         neighborsHeaderTextView.setText(getString(R.string.menu_neighbors) + " (" + neighbors.size() + ")");
         return true;
-    }
-
-    @Override
-    public void onClick(View v) {
-        switch (v.getId()) {
-            case R.id.fab_add_neighbor:
-                if (!isEditTextVisible) {
-                    showRevealEditText(revealView);
-                    editTextNewAddress.requestFocus();
-                    inputManager.showSoftInput(editTextNewAddress, InputMethodManager.SHOW_IMPLICIT);
-                    fabAddButton.setImageResource(R.drawable.ic_done);
-                } else {
-                    if (editTextNewAddress.getText().toString().isEmpty()) {
-                        Snackbar.make(v, getString(R.string.messages_enter_neighbor_address), Snackbar.LENGTH_LONG)
-                                .setAction(null, null).show();
-                        return;
-                    }
-                    for (Neighbor neighbor : neighbors) {
-                        String address = neighbor.getAddress();
-                        if (address.equals(editTextNewAddress.getText().toString())) {
-                            Snackbar.make(v, getString(R.string.messages_neighbor_address_forgiven), Snackbar.LENGTH_LONG)
-                                    .setAction(null, null).show();
-                            return;
-                        }
-                    }
-                    addNeighbor();
-                }
-        }
     }
 
     @Override
@@ -434,15 +445,12 @@ public class NeighborsFragment extends BaseSwipeRefreshLayoutFragment implements
 
                 final View view = getView();
                 if (view != null) {
-                    view.postDelayed(new Runnable() {
-                        @Override
-                        public void run() {
-                            showRevealEditText(revealView);
-                            editTextNewAddress.requestFocus();
-                            editTextNewAddress.setText(savedInstanceState.getString(NEW_ADDRESS_TEXT));
-                            inputManager.showSoftInput(editTextNewAddress, InputMethodManager.SHOW_IMPLICIT);
-                            fabAddButton.setImageResource(R.drawable.ic_done);
-                        }
+                    view.postDelayed(() -> {
+                        showRevealEditText(revealView);
+                        editTextNewAddress.requestFocus();
+                        editTextNewAddress.setText(savedInstanceState.getString(NEW_ADDRESS_TEXT));
+                        inputManager.showSoftInput(editTextNewAddress, InputMethodManager.SHOW_IMPLICIT);
+                        fabAddButton.setImageResource(R.drawable.ic_done);
                     }, 50);
                 }
             }

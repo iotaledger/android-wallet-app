@@ -52,9 +52,12 @@ import java.util.ArrayList;
 import java.util.ConcurrentModificationException;
 import java.util.List;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
 import jota.utils.IotaUnitConverter;
 
-public class TangleExplorerTransactionsCardAdapter extends RecyclerView.Adapter<TangleExplorerTransactionsCardAdapter.ViewHolder> implements FastScrollRecyclerView.SectionedAdapter {
+public class TangleExplorerTransactionsCardAdapter extends RecyclerView.Adapter<TangleExplorerTransactionsCardAdapter.ViewHolder>
+        implements FastScrollRecyclerView.SectionedAdapter {
 
     private final Context context;
     private final SparseBooleanArray expandState = new SparseBooleanArray();
@@ -82,7 +85,8 @@ public class TangleExplorerTransactionsCardAdapter extends RecyclerView.Adapter<
 
     @Override
     public void onBindViewHolder(final ViewHolder holder, int position) {
-        Transaction transaction = getItem(position - 1);
+        int adapterPosition = holder.getAdapterPosition();
+        Transaction transaction = getItem(adapterPosition - 1);
 
         holder.setIsRecyclable(true);
 
@@ -120,20 +124,7 @@ public class TangleExplorerTransactionsCardAdapter extends RecyclerView.Adapter<
                             R.string.card_label_persistence_no));
         }
 
-        holder.expandableLayout.setExpanded(expandState.get(position));
-        holder.expandableLayout.setListener(new ExpandableLayoutListenerAdapter() {
-            @Override
-            public void onPreOpen() {
-                holder.expandButton.setImageResource(R.drawable.ic_expand_less);
-                expandState.put(holder.getAdapterPosition(), true);
-            }
-
-            @Override
-            public void onPreClose() {
-                holder.expandButton.setImageResource(R.drawable.ic_expand_more);
-                expandState.put(holder.getAdapterPosition(), false);
-            }
-        });
+        holder.expandableLayout.setExpanded(expandState.get(adapterPosition));
         holder.expandableLayout.invalidate();
 
     }
@@ -156,15 +147,12 @@ public class TangleExplorerTransactionsCardAdapter extends RecyclerView.Adapter<
         final String sText = searchText.toLowerCase();
         final List<Transaction> filteredCoolTransactionList = new ArrayList<>();
 
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
+        new Thread(() -> {
+            try {
 
-                try {
+                for (Transaction coolTransaction : coolTransactions) {
 
-                    for (Transaction coolTransaction : coolTransactions) {
-
-                        List<String> list = new ArrayList<>();
+                    List<String> list = new ArrayList<>();
                     list.add(coolTransaction.getAddress().toLowerCase());
                     list.add(coolTransaction.getBundle().toLowerCase());
                     list.add(coolTransaction.getHash().toLowerCase());
@@ -178,66 +166,66 @@ public class TangleExplorerTransactionsCardAdapter extends RecyclerView.Adapter<
                         }
                     }
                 }
-                ((Activity) context).runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        setAdapterList(filteredCoolTransactionList);
-                    }
-                });
-                } catch (ConcurrentModificationException e) {
-                    e.printStackTrace();
-                }
+                ((Activity) context).runOnUiThread(() -> setAdapterList(filteredCoolTransactionList));
+            } catch (ConcurrentModificationException e) {
+                e.printStackTrace();
             }
         }).start();
 
     }
 
 
-    class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
-        final TextView hashLabel;
-        final TextView addressLabel;
-        final TextView valueLabel;
-        final TextView alternativeValueLabel;
-        final TextView tagLabel;
-        final TextView timestampLabel;
-        final TextView bundleLabel;
-        final TextView persistenceLabel;
-        final ImageButton expandButton;
-        final ExpandableRelativeLayout expandableLayout;
+    class ViewHolder extends RecyclerView.ViewHolder {
+        @BindView(R.id.item_et_hash)
+        TextView hashLabel;
+        @BindView(R.id.item_et_address)
+        TextView addressLabel;
+        @BindView(R.id.item_et_value)
+        TextView valueLabel;
+        @BindView(R.id.item_et_alternate_value)
+        TextView alternativeValueLabel;
+        @BindView(R.id.item_et_tag)
+        TextView tagLabel;
+        @BindView(R.id.item_et_timestamp)
+        TextView timestampLabel;
+        @BindView(R.id.item_et_bundle)
+        TextView bundleLabel;
+        @BindView(R.id.item_et_persistence)
+        TextView persistenceLabel;
+        @BindView(R.id.item_et_expand_button)
+        ImageButton expandButton;
+        @BindView(R.id.item_et_expand_layout)
+        ExpandableRelativeLayout expandableLayout;
 
         private ViewHolder(View itemView) {
             super(itemView);
+            ButterKnife.bind(this, itemView);
 
-            hashLabel = itemView.findViewById(R.id.item_et_hash);
-            addressLabel = itemView.findViewById(R.id.item_et_address);
-            valueLabel = itemView.findViewById(R.id.item_et_value);
-            alternativeValueLabel = itemView.findViewById(R.id.item_et_alternate_value);
-            tagLabel = itemView.findViewById(R.id.item_et_tag);
-            timestampLabel = itemView.findViewById(R.id.item_et_timestamp);
-            bundleLabel = itemView.findViewById(R.id.item_et_bundle);
-            persistenceLabel = itemView.findViewById(R.id.item_et_persistence);
+            itemView.setOnClickListener(v -> {
+                ViewPager viewPager = ((Activity) context).findViewById(R.id.tangle_explorer_tab_viewpager);
+                viewPager.setCurrentItem(1);
+                Bundle bundle = new Bundle();
+                bundle.putString(Constants.TANGLE_EXPLORER_SEARCH_ITEM, hashLabel.getText().toString());
+                EventBus.getDefault().post(bundle);
+            });
 
-            itemView.setOnClickListener(this);
-
-            expandButton = itemView.findViewById(R.id.item_et_expand_button);
-            expandableLayout = itemView.findViewById(R.id.item_et_expand_layout);
             expandableLayout.collapse();
+            expandButton.setOnClickListener(view -> expandableLayout.toggle());
 
-            expandButton.setOnClickListener(new View.OnClickListener() {
+            expandableLayout.setListener(new ExpandableLayoutListenerAdapter() {
                 @Override
-                public void onClick(View view) {
-                    expandableLayout.toggle();
+                public void onPreOpen() {
+                    expandButton.setImageResource(R.drawable.ic_expand_less);
+                    expandState.put(getAdapterPosition(), true);
+                }
+
+                @Override
+                public void onPreClose() {
+                    expandButton.setImageResource(R.drawable.ic_expand_more);
+                    expandState.put(getAdapterPosition(), false);
                 }
             });
         }
 
-        @Override
-        public void onClick(final View v) {
-            ViewPager viewPager = ((Activity) context).findViewById(R.id.tangle_explorer_tab_viewpager);
-            viewPager.setCurrentItem(1);
-            Bundle bundle = new Bundle();
-            bundle.putString(Constants.TANGLE_EXPLORER_SEARCH_ITEM, hashLabel.getText().toString());
-            EventBus.getDefault().post(bundle);
-        }
     }
 }

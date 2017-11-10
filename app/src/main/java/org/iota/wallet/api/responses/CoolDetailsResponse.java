@@ -26,7 +26,7 @@ import jota.dto.response.AbstractResponse;
 
 public class CoolDetailsResponse extends AbstractResponse implements Parcelable {
 
-    public final static Parcelable.Creator<CoolDetailsResponse> CREATOR = new Creator<CoolDetailsResponse>() {
+    public final static Creator<CoolDetailsResponse> CREATOR = new Creator<CoolDetailsResponse>() {
 
 
         @SuppressWarnings({

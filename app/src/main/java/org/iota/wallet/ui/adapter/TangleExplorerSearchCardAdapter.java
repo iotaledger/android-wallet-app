@@ -43,6 +43,8 @@ import org.knowm.xchange.currency.Currency;
 
 import java.util.List;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
 import jota.utils.IotaUnitConverter;
 
 public class TangleExplorerSearchCardAdapter extends RecyclerView.Adapter<TangleExplorerSearchCardAdapter.ViewHolder> {
@@ -68,7 +70,8 @@ public class TangleExplorerSearchCardAdapter extends RecyclerView.Adapter<Tangle
 
     @Override
     public void onBindViewHolder(final ViewHolder holder, int position) {
-        Transaction transaction = getItem(position - 1);
+        int adapterPosition = holder.getAdapterPosition();
+        Transaction transaction = getItem(adapterPosition - 1);
 
         holder.setIsRecyclable(true);
 
@@ -105,20 +108,7 @@ public class TangleExplorerSearchCardAdapter extends RecyclerView.Adapter<Tangle
                             R.string.card_label_persistence_no));
         }
 
-        holder.expandableLayout.setExpanded(expandState.get(position));
-        holder.expandableLayout.setListener(new ExpandableLayoutListenerAdapter() {
-            @Override
-            public void onPreOpen() {
-                holder.expandButton.setImageResource(R.drawable.ic_expand_less);
-                expandState.put(holder.getAdapterPosition(), true);
-            }
-
-            @Override
-            public void onPreClose() {
-                holder.expandButton.setImageResource(R.drawable.ic_expand_more);
-                expandState.put(holder.getAdapterPosition(), false);
-            }
-        });
+        holder.expandableLayout.setExpanded(expandState.get(adapterPosition));
         holder.expandableLayout.invalidate();
     }
 
@@ -132,35 +122,44 @@ public class TangleExplorerSearchCardAdapter extends RecyclerView.Adapter<Tangle
     }
 
     class ViewHolder extends RecyclerView.ViewHolder {
-        final TextView hashLabel;
-        final TextView addressLabel;
-        final TextView valueLabel;
-        final TextView alternativeValueLabel;
-        final TextView tagLabel;
-        final TextView timestampLabel;
-        final TextView bundleLabel;
-        final TextView persistenceLabel;
-        final ImageButton expandButton;
-        final ExpandableRelativeLayout expandableLayout;
+        @BindView(R.id.item_es_hash)
+        TextView hashLabel;
+        @BindView(R.id.item_es_address)
+        TextView addressLabel;
+        @BindView(R.id.item_es_value)
+        TextView valueLabel;
+        @BindView(R.id.item_es_alternate_value)
+        TextView alternativeValueLabel;
+        @BindView(R.id.item_es_tag)
+        TextView tagLabel;
+        @BindView(R.id.item_es_timestamp)
+        TextView timestampLabel;
+        @BindView(R.id.item_es_bundle)
+        TextView bundleLabel;
+        @BindView(R.id.item_es_persistence)
+        TextView persistenceLabel;
+        @BindView(R.id.item_es_expand_button)
+        ImageButton expandButton;
+        @BindView(R.id.item_es_expand_layout)
+        ExpandableRelativeLayout expandableLayout;
 
         private ViewHolder(View itemView) {
             super(itemView);
+            ButterKnife.bind(this, itemView);
 
-            hashLabel = itemView.findViewById(R.id.item_es_hash);
-            addressLabel = itemView.findViewById(R.id.item_es_address);
-            valueLabel = itemView.findViewById(R.id.item_es_value);
-            alternativeValueLabel = itemView.findViewById(R.id.item_es_alternate_value);
-            tagLabel = itemView.findViewById(R.id.item_es_tag);
-            timestampLabel = itemView.findViewById(R.id.item_es_timestamp);
-            bundleLabel = itemView.findViewById(R.id.item_es_bundle);
-            persistenceLabel = itemView.findViewById(R.id.item_es_persistence);
-            expandButton = itemView.findViewById(R.id.item_es_expand_button);
-            expandableLayout = itemView.findViewById(R.id.item_es_expand_layout);
             expandableLayout.collapse();
-            expandButton.setOnClickListener(new View.OnClickListener() {
+            expandButton.setOnClickListener(view -> expandableLayout.toggle());
+            expandableLayout.setListener(new ExpandableLayoutListenerAdapter() {
                 @Override
-                public void onClick(View view) {
-                    expandableLayout.toggle();
+                public void onPreOpen() {
+                    expandButton.setImageResource(R.drawable.ic_expand_less);
+                    expandState.put(getAdapterPosition(), true);
+                }
+
+                @Override
+                public void onPreClose() {
+                    expandButton.setImageResource(R.drawable.ic_expand_more);
+                    expandState.put(getAdapterPosition(), false);
                 }
             });
         }

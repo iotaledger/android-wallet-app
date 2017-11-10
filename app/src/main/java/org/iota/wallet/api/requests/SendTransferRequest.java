@@ -56,14 +56,14 @@ public class SendTransferRequest extends ApiRequest {
 
     public List<Transfer> prepareTransfer() {
         List<Transfer> transfers = new ArrayList<>();
-        transfers.add(new jota.model.Transfer(address, Long.valueOf(value), message, tag));
+        transfers.add(new Transfer(address, Long.valueOf(value), message, tag));
         return transfers;
     }
 
     public List<Transfer> prepareTransfers() {
         List<Transfer> transfers = new ArrayList<>();
         for (int i = 0; i < addresses.size(); i++) {
-            transfers.add(new jota.model.Transfer(addresses.get(i), Long.valueOf(value), message, tag));
+            transfers.add(new Transfer(addresses.get(i), Long.valueOf(value), message, tag));
         }
         return transfers;
     }

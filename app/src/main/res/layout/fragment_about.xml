@@ -33,7 +33,6 @@
             android:orientation="vertical"
             android:padding="@dimen/baseline_card">
 
-
             <include
                 layout="@layout/card_about_general"
                 android:layout_width="match_parent"

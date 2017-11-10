@@ -54,23 +54,15 @@ public class CopySeedDialog extends DialogFragment {
                 .setNegativeButton(R.string.buttons_cancel, null)
                 .create();
 
-        alertDialog.setOnShowListener(new DialogInterface.OnShowListener() {
+        alertDialog.setOnShowListener(dialog -> {
 
-            @Override
-            public void onShow(final DialogInterface dialog) {
-
-                Button button = alertDialog.getButton(AlertDialog.BUTTON_POSITIVE);
-                button.setOnClickListener(new View.OnClickListener() {
-
-                    @Override
-                    public void onClick(View view) {
-                        ClipboardManager clipboard = (ClipboardManager) getActivity().getSystemService(Context.CLIPBOARD_SERVICE);
-                        ClipData clip = ClipData.newPlainText(getActivity().getString(R.string.seed), generatedSeed);
-                        clipboard.setPrimaryClip(clip);
-                        dialog.dismiss();
-                    }
-                });
-            }
+            Button button = alertDialog.getButton(AlertDialog.BUTTON_POSITIVE);
+            button.setOnClickListener(view -> {
+                ClipboardManager clipboard = (ClipboardManager) getActivity().getSystemService(Context.CLIPBOARD_SERVICE);
+                ClipData clip = ClipData.newPlainText(getActivity().getString(R.string.seed), generatedSeed);
+                clipboard.setPrimaryClip(clip);
+                dialog.dismiss();
+            });
         });
 
         alertDialog.show();

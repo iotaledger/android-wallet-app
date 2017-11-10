@@ -37,46 +37,54 @@ import org.iota.wallet.helper.Constants;
 import org.iota.wallet.helper.price.AlternateValueManager;
 import org.iota.wallet.ui.adapter.TangleExplorerPagerAdapter;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.Unbinder;
+
 public class TangleExplorerTabFragment extends Fragment {
 
     private TangleExplorerPagerAdapter adapter;
-    private ViewPager viewPager;
+    @BindView(R.id.tangle_explorer_toolbar)
+    Toolbar tangleExplorerToolbar;
+    @BindView(R.id.tangle_explorer_tabs)
+    TabLayout tabs;
+    @BindView(R.id.tangle_explorer_tab_viewpager)
+    ViewPager viewPager;
 
     private AlternateValueManager alternateValueManager;
+
+    private Unbinder unbinder;
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        adapter = new TangleExplorerPagerAdapter(getActivity(), getChildFragmentManager());
+        alternateValueManager = new AlternateValueManager(getActivity());
+    }
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        super.onCreateView(inflater, container, savedInstanceState);
-
-        final View view = inflater.inflate(R.layout.fragment_tangle_explorer_tab, container, false);
-        ((AppCompatActivity) getActivity()).setSupportActionBar((Toolbar) view.findViewById(R.id.tangle_explorer_toolbar));
-
-        TabLayout tabLayout = view.findViewById(R.id.tangle_explorer_tabs);
-        viewPager = view.findViewById(R.id.tangle_explorer_tab_viewpager);
-        adapter = new TangleExplorerPagerAdapter(getActivity(), getChildFragmentManager());
-
-        alternateValueManager = new AlternateValueManager(getActivity());
-
-        viewPager.setAdapter(adapter);
-        tabLayout.setupWithViewPager(viewPager);
-
-        viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
-
-            @Override
-            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-            }
-
-            @Override
-            public void onPageSelected(int position) {
-            }
-
-            @Override
-            public void onPageScrollStateChanged(int state) {
-            }
-        });
-
+        View view = inflater.inflate(R.layout.fragment_tangle_explorer_tab, container, false);
+        unbinder = ButterKnife.bind(this, view);
         return view;
+    }
+
+    @Override
+    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        ((AppCompatActivity) getActivity()).setSupportActionBar(tangleExplorerToolbar);
+        viewPager.setAdapter(adapter);
+        tabs.setupWithViewPager(viewPager);
+    }
+
+    @Override
+    public void onDestroyView() {
+        if (unbinder != null) {
+            unbinder.unbind();
+            unbinder = null;
+        }
+        super.onDestroyView();
     }
 
     @Subscribe

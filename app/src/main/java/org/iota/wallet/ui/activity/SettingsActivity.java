@@ -25,6 +25,8 @@ import org.iota.wallet.R;
 import org.iota.wallet.ui.fragment.SettingsFragment;
 
 public class SettingsActivity extends AppCompatActivity {
+
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -32,7 +34,7 @@ public class SettingsActivity extends AppCompatActivity {
 
         getFragmentManager()
                 .beginTransaction()
-                .replace(R.id.content, new SettingsFragment())
+                .add(R.id.content, new SettingsFragment())
                 .commit();
 
         ActionBar actionBar = getSupportActionBar();

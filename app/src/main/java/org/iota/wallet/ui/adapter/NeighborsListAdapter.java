@@ -38,7 +38,10 @@ import org.iota.wallet.model.Neighbor;
 import java.util.ArrayList;
 import java.util.List;
 
-public class NeighborsListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
+import butterknife.BindView;
+import butterknife.ButterKnife;
+
+public class NeighborsListAdapter extends RecyclerView.Adapter<NeighborsListAdapter.NeighborViewHolder> {
 
     private final Context context;
     private List<Neighbor> neighbors;
@@ -49,58 +52,44 @@ public class NeighborsListAdapter extends RecyclerView.Adapter<RecyclerView.View
     }
 
     @Override
-    public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public NeighborViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_neighborlist, parent, false);
-        return new ViewHolder(v);
+        return new NeighborViewHolder(v);
     }
 
     @Override
-    public void onBindViewHolder(RecyclerView.ViewHolder holder, final int position) {
-        if (holder instanceof ViewHolder) {
-            ViewHolder vh = (ViewHolder) holder;
-            Neighbor neighbor = getItem(position);
-            if (neighbor != null) {
-                if (vh.ipAddressTextView != null) {
-                    vh.ipAddressTextView.setText(neighbor.getAddress());
+    public void onBindViewHolder(NeighborViewHolder holder, int position) {
+        int adapterPosition = holder.getAdapterPosition();
+        Neighbor neighbor = getItem(adapterPosition);
+        if (neighbor != null) {
+            holder.ipAddressTextView.setText(neighbor.getAddress());
+            if (neighbor.isOnline()) {
+                holder.statusView.setImageDrawable(ResourcesCompat.getDrawable(context.getResources(), R.drawable.indicator_online, null));
+                if (neighbor.getNumberOfAllTransactions() != null && neighbor.getNumberOfInvalidTransactions() != null && neighbor.getNumberOfNewTransactions() != null) {
+                    holder.numberOfAllTransactionsTextView.setText(context.getString(R.string.all_transactions) + " " + neighbor.getNumberOfAllTransactions());
+                    holder.numberOfInvalidTransactionsTextView.setText(context.getString(R.string.invalid_transactions) + " " + neighbor.getNumberOfInvalidTransactions());
+                    holder.numberOfNewTransactionsTextView.setText(context.getString(R.string.new_transactions) + " " + neighbor.getNumberOfNewTransactions());
+                    holder.numberOfRandomTransactionRequestsTextView.setText(context.getString(R.string.random_transaction_requests) + " " + neighbor.getNumberOfRandomTransactionRequests());
+                    holder.numberOfSentTransactionsTextView.setText(context.getString(R.string.sent_transactions) + " " + neighbor.getNumberOfSentTransactions());
+                    holder.connectionTypeTextView.setText(context.getString(R.string.connection_type) + " " + neighbor.getConnectionType());
+
+                } else {
+                    holder.numberOfAllTransactionsTextView.setText(context.getString(R.string.all_transactions) + " " + context.getString(R.string.na));
+                    holder.numberOfInvalidTransactionsTextView.setText(context.getString(R.string.invalid_transactions) + " " + context.getString(R.string.na));
+                    holder.numberOfNewTransactionsTextView.setText(context.getString(R.string.new_transactions) + " " + context.getString(R.string.na));
+                    holder.numberOfRandomTransactionRequestsTextView.setText(context.getString(R.string.random_transaction_requests) + " " + context.getString(R.string.na));
+                    holder.numberOfSentTransactionsTextView.setText(context.getString(R.string.sent_transactions) + " " + context.getString(R.string.na));
+                    holder.connectionTypeTextView.setText(context.getString(R.string.connection_type) + " " + context.getString(R.string.na));
                 }
-                if (vh.numberOfAllTransactionsTextView != null
-                        && vh.numberOfInvalidTransactionsTextView != null
-                        && vh.numberOfNewTransactionsTextView != null
-                        && vh.numberOfRandomTransactionRequestsTextView != null
-                        && vh.numberOfSentTransactionsTextView != null
-                        && vh.connectionTypeTextView != null) {
-                    if (neighbor.isOnline()) {
-                        vh.statusView.setImageDrawable(ResourcesCompat.getDrawable(context.getResources(), R.drawable.indicator_online, null));
-                        if (neighbor.getNumberOfAllTransactions() != null && neighbor.getNumberOfInvalidTransactions() != null && neighbor.getNumberOfNewTransactions() != null) {
-                            vh.numberOfAllTransactionsTextView.setText(context.getString(R.string.all_transactions) + " " + neighbor.getNumberOfAllTransactions());
-                            vh.numberOfInvalidTransactionsTextView.setText(context.getString(R.string.invalid_transactions) + " " + neighbor.getNumberOfInvalidTransactions());
-                            vh.numberOfNewTransactionsTextView.setText(context.getString(R.string.new_transactions) + " " + neighbor.getNumberOfNewTransactions());
-                            vh.numberOfRandomTransactionRequestsTextView.setText(context.getString(R.string.random_transaction_requests) + " " + neighbor.getNumberOfRandomTransactionRequests());
-                            vh.numberOfSentTransactionsTextView.setText(context.getString(R.string.sent_transactions) + " " + neighbor.getNumberOfSentTransactions());
-                            vh.connectionTypeTextView.setText(context.getString(R.string.connection_type) + " " + neighbor.getConnectionType());
-
-                        } else {
-                            vh.numberOfAllTransactionsTextView.setText(context.getString(R.string.all_transactions) + " " + context.getString(R.string.na));
-                            vh.numberOfInvalidTransactionsTextView.setText(context.getString(R.string.invalid_transactions) + " " + context.getString(R.string.na));
-                            vh.numberOfNewTransactionsTextView.setText(context.getString(R.string.new_transactions) + " " + context.getString(R.string.na));
-                            vh.numberOfRandomTransactionRequestsTextView.setText(context.getString(R.string.random_transaction_requests) + " " + context.getString(R.string.na));
-                            vh.numberOfSentTransactionsTextView.setText(context.getString(R.string.sent_transactions) + " " + context.getString(R.string.na));
-                            vh.connectionTypeTextView.setText(context.getString(R.string.connection_type) + " " + context.getString(R.string.na));
-
-                        }
-                    } else {
-                        vh.statusView.setImageDrawable(ResourcesCompat.getDrawable(context.getResources(), R.drawable.indicator_offline, null));
-                        vh.numberOfInvalidTransactionsTextView.setText("-");
-                        vh.numberOfAllTransactionsTextView.setText("-");
-                        vh.numberOfNewTransactionsTextView.setText("-");
-                        vh.numberOfRandomTransactionRequestsTextView.setText("-");
-                        vh.numberOfSentTransactionsTextView.setText("-");
-                        vh.connectionTypeTextView.setText("-");
-
-                    }
-                }
+            } else {
+                holder.statusView.setImageDrawable(ResourcesCompat.getDrawable(context.getResources(), R.drawable.indicator_offline, null));
+                holder.numberOfInvalidTransactionsTextView.setText("-");
+                holder.numberOfAllTransactionsTextView.setText("-");
+                holder.numberOfNewTransactionsTextView.setText("-");
+                holder.numberOfRandomTransactionRequestsTextView.setText("-");
+                holder.numberOfSentTransactionsTextView.setText("-");
+                holder.connectionTypeTextView.setText("-");
             }
-
         }
 
     }
@@ -131,52 +120,39 @@ public class NeighborsListAdapter extends RecyclerView.Adapter<RecyclerView.View
     public void filter(final List<Neighbor> neighbors, String searchText) {
         final String sText = searchText.toLowerCase();
 
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-
-                final List<Neighbor> filteredNeighborList = new ArrayList<>();
-                for (Neighbor neighbor : neighbors) {
-                    final String text = neighbor.getAddress().toLowerCase();
-                    if (text.contains(sText)) {
-                        filteredNeighborList.add(neighbor);
-                    }
+        new Thread(() -> {
+            final List<Neighbor> filteredNeighborList = new ArrayList<>();
+            for (Neighbor neighbor : neighbors) {
+                final String text = neighbor.getAddress().toLowerCase();
+                if (text.contains(sText)) {
+                    filteredNeighborList.add(neighbor);
                 }
-                ((Activity) context).runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        setAdapterList(filteredNeighborList);
-
-                    }
-                });
-
             }
+            ((Activity) context).runOnUiThread(() -> setAdapterList(filteredNeighborList));
         }).start();
     }
 
-    private class ViewHolder extends RecyclerView.ViewHolder {
-        final TextView ipAddressTextView;
-        final TextView numberOfAllTransactionsTextView;
-        final TextView numberOfInvalidTransactionsTextView;
-        final TextView numberOfNewTransactionsTextView;
-        final TextView numberOfRandomTransactionRequestsTextView;
-        final TextView numberOfSentTransactionsTextView;
-        final TextView connectionTypeTextView;
+    class NeighborViewHolder extends RecyclerView.ViewHolder {
+        @BindView(R.id.item_neighbor_address)
+        TextView ipAddressTextView;
+        @BindView(R.id.item_neighbor_number_of_all_transactions)
+        TextView numberOfAllTransactionsTextView;
+        @BindView(R.id.item_neighbor_number_of_invalid_transactions)
+        TextView numberOfInvalidTransactionsTextView;
+        @BindView(R.id.item_neighbor_number_of_new_transactions)
+        TextView numberOfNewTransactionsTextView;
+        @BindView(R.id.item_neighbor_number_of_random_transaction_request)
+        TextView numberOfRandomTransactionRequestsTextView;
+        @BindView(R.id.item_neighbor_number_of_sent_transactions)
+        TextView numberOfSentTransactionsTextView;
+        @BindView(R.id.item_neighbor_connection_type)
+        TextView connectionTypeTextView;
+        @BindView(R.id.item_neighbor_status)
+        ImageView statusView;
 
-        final ImageView statusView;
-
-        private ViewHolder(View itemView) {
+        private NeighborViewHolder(View itemView) {
             super(itemView);
-
-            this.ipAddressTextView = itemView.findViewById(R.id.item_neighbor_address);
-            this.numberOfAllTransactionsTextView = itemView.findViewById(R.id.item_neighbor_number_of_all_transactions);
-            this.numberOfInvalidTransactionsTextView = itemView.findViewById(R.id.item_neighbor_number_of_invalid_transactions);
-            this.numberOfNewTransactionsTextView = itemView.findViewById(R.id.item_neighbor_number_of_new_transactions);
-            this.numberOfRandomTransactionRequestsTextView = itemView.findViewById(R.id.item_neighbor_number_of_random_transaction_request);
-            this.numberOfSentTransactionsTextView = itemView.findViewById(R.id.item_neighbor_number_of_sent_transactions);
-            this.connectionTypeTextView = itemView.findViewById(R.id.item_neighbor_connection_type);
-
-            this.statusView = itemView.findViewById(R.id.item_neighbor_status);
+            ButterKnife.bind(this, itemView);
         }
     }
 }

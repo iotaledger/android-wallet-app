@@ -76,14 +76,21 @@ import org.iota.wallet.ui.fragment.WalletTransfersFragment;
 
 import java.util.Arrays;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
     private static final String STATE_CURRENT_FRAGMENT_TAG = "CURRENT_FRAGMENT_TAG";
     private static final String SHORTCUT_ID_GENERATE_QR_CODE = "generateQrCode";
     private static final String SHORTCUT_ID_SEND_TRANSFER = "sendTransfer";
     private static final int FRAGMENT_CONTAINER_ID = R.id.container;
-    private DrawerLayout drawer;
-    private NavigationView navigationView;
+
+    @BindView(R.id.drawer_layout)
+    DrawerLayout drawer;
+    @BindView(R.id.nav_view)
+    NavigationView navigationView;
+
     private SharedPreferences prefs;
     private InputMethodManager inputManager;
     private String currentFragmentTag = null;
@@ -95,9 +102,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_main);
+        ButterKnife.bind(this);
 
-        drawer =  findViewById(R.id.drawer_layout);
-        navigationView =  findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
         prefs = PreferenceManager.getDefaultSharedPreferences(this);
@@ -119,14 +125,19 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         }
 
         // shortcut intents
-        if (IOTA.seed != null) {
-            if (Constants.ACTION_GENERATE_QR_CODE.equals(getIntent().getAction())) {
-                showFragment(new GenerateQRCodeFragment());
-            } else if (Constants.ACTION_SEND_TRANSFER.equals(getIntent().getAction())) {
-                showFragment(new NewTransferFragment());
-            }
-        } else
-            Snackbar.make(this.findViewById(R.id.drawer_layout), getString(R.string.messages_shortcuts_not_available), Snackbar.LENGTH_LONG);
+        if (savedInstanceState == null) {
+            if (IOTA.seed != null) {
+                if (Constants.ACTION_GENERATE_QR_CODE.equals(getIntent().getAction())) {
+                    showFragment(new GenerateQRCodeFragment());
+                } else if (Constants.ACTION_SEND_TRANSFER.equals(getIntent().getAction())) {
+                    showFragment(new NewTransferFragment());
+                }
+            } else
+                Snackbar.make(this.findViewById(R.id.drawer_layout), getString(R.string.messages_shortcuts_not_available), Snackbar.LENGTH_LONG);
+        }
+
+
+        drawer.addDrawerListener(drawerListener);
     }
 
     @Override
@@ -137,27 +148,17 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                     this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
             drawer.addDrawerListener(toggle);
             toggle.syncState();
-
-            drawer.addDrawerListener(new DrawerLayout.DrawerListener() {
-                @Override
-                public void onDrawerSlide(View view, float v) {
-                }
-
-                @Override
-                public void onDrawerOpened(View view) {
-                    inputManager.hideSoftInputFromWindow(view.getWindowToken(), 0);
-                }
-
-                @Override
-                public void onDrawerClosed(View view) {
-                }
-
-                @Override
-                public void onDrawerStateChanged(int i) {
-                }
-            });
         }
     }
+
+    private DrawerLayout.DrawerListener drawerListener = new DrawerLayout.SimpleDrawerListener() {
+        @Override
+        public void onDrawerOpened(View drawerView) {
+            super.onDrawerOpened(drawerView);
+            inputManager.hideSoftInputFromWindow(drawerView.getWindowToken(), 0);
+        }
+    };
+
 
     @Override
     public void onBackPressed() {
@@ -349,26 +350,18 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                         .setNeutralButton(R.string.buttons_backup, null)
                         .create();
 
-                alertDialog.setButton(AlertDialog.BUTTON_POSITIVE, getString(R.string.buttons_ok),
-                        new DialogInterface.OnClickListener() {
-                            public void onClick(DialogInterface dialog, int which) {
-
-                                prefs.edit().remove(Constants.PREFERENCE_ENC_SEED).apply();
-                                IOTA.seed = null;
-                                TaskManager.stopAndDestroyAllTasks(MainActivity.this);
-                                killFragments = true;
-                                navigationView.getMenu().performIdentifierAction(R.id.nav_wallet, 0);
-                            }
+                alertDialog.setButton(AlertDialog.BUTTON_POSITIVE, getString(R.string.buttons_ok), (dialog, which) -> {
+                            prefs.edit().remove(Constants.PREFERENCE_ENC_SEED).apply();
+                            IOTA.seed = null;
+                            TaskManager.stopAndDestroyAllTasks(MainActivity.this);
+                            killFragments = true;
+                            navigationView.getMenu().performIdentifierAction(R.id.nav_wallet, 0);
                         });
 
-                alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, getString(R.string.buttons_backup),
-                        new DialogInterface.OnClickListener() {
-                            public void onClick(DialogInterface dialog, int which) {
-
-                                Intent settings = new Intent(MainActivity.this, SettingsActivity.class);
-                                startActivity(settings);
-                            }
-                        });
+                alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, getString(R.string.buttons_backup), (dialog, which) -> {
+                    Intent settings1 = new Intent(MainActivity.this, SettingsActivity.class);
+                    startActivity(settings1);
+                });
 
                 alertDialog.show();
 
@@ -443,14 +436,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                             Manifest.permission.CAMERA)) {
                         Snackbar.make(findViewById(R.id.drawer_layout), R.string.messages_permission_camera,
                                 Snackbar.LENGTH_LONG)
-                                .setAction(R.string.buttons_ok, new View.OnClickListener() {
-                                    @Override
-                                    public void onClick(View view) {
-                                        Intent intent = new Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS, Uri.parse("package:" + getPackageName()));
-                                        intent.addCategory(Intent.CATEGORY_DEFAULT);
-                                        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                                        startActivityForResult(intent, Constants.REQUEST_CAMERA_PERMISSION);
-                                    }
+                                .setAction(R.string.buttons_ok, view -> {
+                                    Intent intent = new Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS, Uri.parse("package:" + getPackageName()));
+                                    intent.addCategory(Intent.CATEGORY_DEFAULT);
+                                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                                    startActivityForResult(intent, Constants.REQUEST_CAMERA_PERMISSION);
                                 })
                                 .show();
                     }
@@ -513,6 +503,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     @Override
     public void onDestroy() {
+        drawer.removeDrawerListener(drawerListener);
         super.onDestroy();
     }
 
