@@ -20,7 +20,6 @@
 package org.iota.wallet.ui.fragment;
 
 import android.app.Fragment;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -35,7 +34,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.EditorInfo;
 import android.widget.CheckBox;
-import android.widget.TextView;
 
 import org.iota.wallet.IOTA;
 import org.iota.wallet.R;

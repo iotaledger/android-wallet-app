@@ -23,7 +23,6 @@ import android.app.Fragment;
 import android.app.FragmentManager;
 import android.content.Context;
 import android.support.v13.app.FragmentPagerAdapter;
-import android.view.ViewGroup;
 
 import org.iota.wallet.R;
 import org.iota.wallet.ui.fragment.WalletAddressesFragment;

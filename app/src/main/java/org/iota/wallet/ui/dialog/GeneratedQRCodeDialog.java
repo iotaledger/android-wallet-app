@@ -19,7 +19,6 @@
 
 package org.iota.wallet.ui.dialog;
 
-import android.annotation.SuppressLint;
 import android.app.Dialog;
 import android.app.DialogFragment;
 import android.content.Context;

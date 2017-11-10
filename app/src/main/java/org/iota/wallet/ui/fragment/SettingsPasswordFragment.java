@@ -28,10 +28,10 @@ import android.support.v7.preference.PreferenceManager;
 
 import org.iota.wallet.IOTA;
 import org.iota.wallet.R;
+import org.iota.wallet.helper.Constants;
 import org.iota.wallet.ui.dialog.ChangeSeedPasswordDialog;
 import org.iota.wallet.ui.dialog.EncryptSeedDialog;
 import org.iota.wallet.ui.dialog.ShowSeedDialog;
-import org.iota.wallet.helper.Constants;
 
 public class SettingsPasswordFragment extends PreferenceFragment {
 

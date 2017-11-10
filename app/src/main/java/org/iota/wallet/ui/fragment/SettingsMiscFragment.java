@@ -26,8 +26,8 @@ import android.preference.PreferenceFragment;
 import android.preference.PreferenceScreen;
 
 import org.iota.wallet.R;
-import org.iota.wallet.ui.activity.ReportIssueActivity;
 import org.iota.wallet.helper.Constants;
+import org.iota.wallet.ui.activity.ReportIssueActivity;
 
 public class SettingsMiscFragment extends PreferenceFragment {
 
