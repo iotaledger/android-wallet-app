@@ -37,7 +37,9 @@ Miscellaneous:
 
 
 ```bash
-./gradlew clean build
+$ git https://github.com/iotaledger/android-wallet-app
+$ cd android-wallet-app
+$ ./gradlew clean build
 ```
 <h2>Supporting the project</h2>
 If you like our work please feel free to contribute by posting a bug report or push a pull request.
