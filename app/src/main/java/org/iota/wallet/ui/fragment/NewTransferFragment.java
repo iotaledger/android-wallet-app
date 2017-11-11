@@ -63,7 +63,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import butterknife.Unbinder;
-import jota.error.InvalidAddressException;
+import jota.error.ArgumentException;
 import jota.utils.Checksum;
 import jota.utils.InputValidator;
 import jota.utils.IotaUnitConverter;
@@ -372,9 +372,10 @@ public class NewTransferFragment extends Fragment {
     private boolean isValidAddress() {
         String address = addressEditText.getText().toString();
         try {
+            //noinspection StatementWithEmptyBody
             if (Checksum.isAddressWithoutChecksum(address)) {
             }
-        } catch (InvalidAddressException e) {
+        } catch (ArgumentException e) {
             addressEditTextInputLayout.setError(getString(R.string.messages_enter_txaddress_with_checksum));
             return false;
         }
@@ -384,7 +385,7 @@ public class NewTransferFragment extends Fragment {
     private String getAddress() {
         try {
             return Checksum.removeChecksum(addressEditText.getText().toString());
-        } catch (InvalidAddressException e) {
+        } catch (ArgumentException e) {
             e.printStackTrace();
         }
         return "";

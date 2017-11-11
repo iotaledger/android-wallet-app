@@ -35,9 +35,6 @@ import java.util.Arrays;
 
 import jota.IotaAPI;
 import jota.error.ArgumentException;
-import jota.error.InvalidBundleException;
-import jota.error.InvalidSignatureException;
-import jota.error.InvalidTrytesException;
 
 public class ReplayBundleRequestHandler extends IotaRequestHandler {
     public ReplayBundleRequestHandler(IotaAPI apiProxy, Context context) {
@@ -61,7 +58,7 @@ public class ReplayBundleRequestHandler extends IotaRequestHandler {
             response = new ReplayBundleResponse(apiProxy.replayBundle(((ReplayBundleRequest) request).getHash(),
                     ((ReplayBundleRequest) request).getDepth(),
                     ((ReplayBundleRequest) request).getMinWeightMagnitude()));
-        } catch (InvalidBundleException | ArgumentException | InvalidSignatureException | InvalidTrytesException e) {
+        } catch (ArgumentException e) {
             NetworkError error = new NetworkError();
             error.setErrorType(NetworkErrorType.INVALID_HASH_ERROR);
             response = error;

@@ -2,7 +2,7 @@ apply plugin: 'com.android.application'
 
 def versionMajor = 0
 def versionMinor = 9
-def versionPatch = 0
+def versionPatch = 1
 def versionBuild = 0 // bump for dogfood builds, public betas, etc.
 
 //TODO edit the changelog as well
@@ -23,14 +23,7 @@ android {
             shrinkResources false
             minifyEnabled false
         }
-
-        beta {
-            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
-            shrinkResources false
-            minifyEnabled false
-            versionNameSuffix " BETA"
-        }
-
+        
         debug {
             versionNameSuffix " DEBUG"
         }
@@ -90,11 +83,11 @@ dependencies {
     // Other libraries
     implementation 'org.greenrobot:eventbus:3.0.0'
     implementation 'com.google.code.gson:gson:2.8.2'
-    implementation 'org.knowm.xchange:xchange-core:4.2.3'
-    implementation 'org.knowm.xchange:xchange-bitstamp:4.2.3'
-    implementation 'org.knowm.xchange:xchange-bitfinex:4.2.3'
-    implementation 'org.knowm.xchange:xchange-okcoin:4.2.3'
-    implementation 'com.github.iotaledger:iota.lib.java:0012376'
+    implementation 'org.knowm.xchange:xchange-core:4.3.0'
+    implementation 'org.knowm.xchange:xchange-bitstamp:4.3.0'
+    implementation 'org.knowm.xchange:xchange-bitfinex:4.3.0'
+    implementation 'org.knowm.xchange:xchange-okcoin:4.3.0'
     implementation 'com.jakewharton:butterknife:8.8.1'
     annotationProcessor 'com.jakewharton:butterknife-compiler:8.8.1'
+    implementation 'org.iota:jota:0.9.10'
 }

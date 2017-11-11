@@ -29,7 +29,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import jota.error.InvalidAddressException;
+import jota.error.ArgumentException;
 import jota.model.Bundle;
 import jota.model.Transaction;
 import jota.utils.Checksum;
@@ -51,7 +51,7 @@ public class GetAccountDataResponse extends ApiResponse {
     private String destinationAddress;
     private long balance;
 
-    public GetAccountDataResponse(jota.dto.response.GetAccountDataResponse apiResponse) throws InvalidAddressException {
+    public GetAccountDataResponse(jota.dto.response.GetAccountDataResponse apiResponse) throws ArgumentException {
 
         attachedAddresses = apiResponse.getAddresses();
         Collections.reverse(attachedAddresses);

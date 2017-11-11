@@ -28,8 +28,7 @@ import org.iota.wallet.api.responses.GetNewAddressResponse;
 import org.iota.wallet.api.responses.error.NetworkError;
 
 import jota.IotaAPI;
-import jota.error.InvalidAddressException;
-import jota.error.InvalidSecurityLevelException;
+import jota.error.ArgumentException;
 
 public class GetNewAddressRequestHandler extends IotaRequestHandler {
     public GetNewAddressRequestHandler(IotaAPI apiProxy, Context context) {
@@ -52,7 +51,7 @@ public class GetNewAddressRequestHandler extends IotaRequestHandler {
                     ((GetNewAddressRequest) request).isChecksum(),
                     ((GetNewAddressRequest) request).getTotal(),
                     ((GetNewAddressRequest) request).isReturnAll()));
-        } catch (InvalidSecurityLevelException | InvalidAddressException e) {
+        } catch (ArgumentException e) {
             response = new NetworkError();
         }
         return response;

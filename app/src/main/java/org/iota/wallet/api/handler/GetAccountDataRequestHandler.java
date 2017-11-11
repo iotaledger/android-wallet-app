@@ -29,13 +29,6 @@ import org.iota.wallet.api.responses.error.NetworkError;
 
 import jota.IotaAPI;
 import jota.error.ArgumentException;
-import jota.error.InvalidAddressException;
-import jota.error.InvalidBundleException;
-import jota.error.InvalidSecurityLevelException;
-import jota.error.InvalidSignatureException;
-import jota.error.InvalidTrytesException;
-import jota.error.NoInclusionStatesException;
-import jota.error.NoNodeInfoException;
 
 public class GetAccountDataRequestHandler extends IotaRequestHandler {
     public GetAccountDataRequestHandler(IotaAPI iotaApi, Context context) {
@@ -62,7 +55,7 @@ public class GetAccountDataRequestHandler extends IotaRequestHandler {
                     ((GetAccountDataRequest) request).getEnd(),
                     ((GetAccountDataRequest) request).isInclusionState(),
                     ((GetAccountDataRequest) request).getThreshold()));
-        } catch (ArgumentException | InvalidSecurityLevelException | InvalidAddressException | InvalidBundleException | InvalidSignatureException | NoNodeInfoException | InvalidTrytesException | NoInclusionStatesException e) {
+        } catch (ArgumentException e) {
             response = new NetworkError();
         }
         return response;

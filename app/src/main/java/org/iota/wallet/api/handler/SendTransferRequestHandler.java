@@ -36,11 +36,7 @@ import org.iota.wallet.helper.Utils;
 import java.util.Arrays;
 
 import jota.IotaAPI;
-import jota.error.InvalidAddressException;
-import jota.error.InvalidSecurityLevelException;
-import jota.error.InvalidTransferException;
-import jota.error.InvalidTrytesException;
-import jota.error.NotEnoughBalanceException;
+import jota.error.ArgumentException;
 
 public class SendTransferRequestHandler extends IotaRequestHandler {
     public SendTransferRequestHandler(IotaAPI apiProxy, Context context) {
@@ -75,8 +71,9 @@ public class SendTransferRequestHandler extends IotaRequestHandler {
                     //inputs
                     null,
                     //remainder address
-                    null));
-        } catch (NotEnoughBalanceException | InvalidSecurityLevelException | InvalidTrytesException | InvalidAddressException | InvalidTransferException | IllegalAccessError e) {
+                    null,
+                    false));
+        } catch (ArgumentException | IllegalAccessError e) {
             NetworkError error = new NetworkError();
 
             NotificationManager mNotificationManager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);

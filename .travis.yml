@@ -21,18 +21,19 @@ android:
   - google-gdk-license-.+
 before_install:
 - mkdir "${ANDROID_HOME}/licenses" || true
-- echo -e "\n8933bad161af4178b1185d1a37fbf41ea5269c55" > "${ANDROID_HOME}/licenses/android-sdk-license"
-- echo -e "\n84831b9409646a918e30573bab4c9c91346d8abd" > "${ANDROID_HOME}/licenses/android-sdk-preview-license"
+- echo -e "8933bad161af4178b1185d1a37fbf41ea5269c55" > "${ANDROID_HOME}/licenses/android-sdk-license"
+- echo -e "d56f5187479451eabf01fb78af6dfcb131a6481e" >> "${ANDROID_HOME}/licenses/android-sdk-license"
+- echo -e "84831b9409646a918e30573bab4c9c91346d8abd" > "${ANDROID_HOME}/licenses/android-sdk-preview-license"
 - sleep 10
 - chmod +x gradlew
 before_deploy:
 - openssl aes-256-cbc -K $encrypted_eee74906dbb4_key -iv $encrypted_eee74906dbb4_iv -in keystore.jks.enc -out keystore.jks -d
 - cp $TRAVIS_BUILD_DIR/keystore.jks $HOME
-- cd app/build/outputs/apk/
+- cd app/build/outputs/apk/release/
 - jarsigner -verbose -sigalg SHA1withRSA -digestalg SHA1 -keystore $HOME/keystore.jks
   -storepass $storepass -keypass $keypass app-release-unsigned.apk iotaKey
 - jarsigner -verify app-release-unsigned.apk
-- "${ANDROID_HOME}/build-tools/26.0.2/zipalign -v 4 app-release-unsigned.apk app-release.apk"
+- ${ANDROID_HOME}/build-tools/26.0.2/zipalign -v 4 app-release-unsigned.apk app-release.apk
 deploy:
   provider: releases
   api_key:
