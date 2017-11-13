@@ -162,6 +162,7 @@ public class WalletAddressesFragment extends BaseSwipeRefreshLayoutFragment impl
         }
     }
 
+    @Override
     public void onFabClick() {
         generateNewAddress();
     }

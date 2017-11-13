@@ -83,7 +83,6 @@ public class WalletTabFragment extends Fragment {
     private AlternateValueManager alternateValueManager;
     private boolean isConnected = false;
     private WalletPagerAdapter adapter;
-    private int currentPagerPosition = 0;
 
     private Unbinder unbinder;
 
@@ -91,6 +90,7 @@ public class WalletTabFragment extends Fragment {
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         alternateValueManager = new AlternateValueManager(getActivity());
+        adapter = new WalletPagerAdapter(getActivity(), getChildFragmentManager());
     }
 
     @Nullable
@@ -105,11 +105,14 @@ public class WalletTabFragment extends Fragment {
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         ((AppCompatActivity) getActivity()).setSupportActionBar(walletToolbar);
-        setViewPager();
+        viewPager.setAdapter(adapter);
+        tabLayout.setupWithViewPager(viewPager);
+        viewPager.addOnPageChangeListener(onPageChangeListener);
     }
 
     @Override
     public void onDestroyView() {
+        viewPager.removeOnPageChangeListener(onPageChangeListener);
         if (unbinder != null) {
             unbinder.unbind();
             unbinder = null;
@@ -120,30 +123,11 @@ public class WalletTabFragment extends Fragment {
     @OnClick(R.id.fab_wallet)
     public void onFabWalletClick() {
         if (isConnected && adapter != null) {
-            adapter.performFabClick(currentPagerPosition);
+            Fragment currentFragment = adapter.getItem(viewPager.getCurrentItem());
+            if (currentFragment != null && currentFragment instanceof WalletTabFragment.OnFabClickListener) {
+                ((OnFabClickListener) currentFragment).onFabClick();
+            }
         }
-    }
-
-    private void setViewPager() {
-        adapter = new WalletPagerAdapter(getActivity(), getChildFragmentManager());
-        viewPager.setAdapter(adapter);
-        tabLayout.setupWithViewPager(viewPager);
-        viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
-
-            @Override
-            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-            }
-
-            @Override
-            public void onPageSelected(int position) {
-                currentPagerPosition = position;
-                updateFab();
-            }
-
-            @Override
-            public void onPageScrollStateChanged(int state) {
-            }
-        });
     }
 
     @Subscribe
@@ -156,7 +140,6 @@ public class WalletTabFragment extends Fragment {
 
         isConnected = true;
 
-        currentPagerPosition = viewPager.getCurrentItem();
         updateFab();
 
         walletBalanceIota = 0;
@@ -182,7 +165,7 @@ public class WalletTabFragment extends Fragment {
             fabWallet.show();
             fabWallet.setEnabled(true);
 
-            switch (currentPagerPosition) {
+            switch (viewPager.getCurrentItem()) {
                 case 0:
                     fabWallet.setImageResource(R.drawable.ic_fab_send);
                     break;
@@ -200,7 +183,6 @@ public class WalletTabFragment extends Fragment {
             case IOTA_COOL_NETWORK_ERROR:
             case NETWORK_ERROR:
                 isConnected = false;
-                currentPagerPosition = viewPager.getCurrentItem();
                 updateFab();
                 break;
         }
@@ -285,4 +267,21 @@ public class WalletTabFragment extends Fragment {
     public interface OnFabClickListener {
         void onFabClick();
     }
+
+    private ViewPager.OnPageChangeListener onPageChangeListener = new ViewPager.OnPageChangeListener() {
+        @Override
+        public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+
+        }
+
+        @Override
+        public void onPageSelected(int position) {
+            updateFab();
+        }
+
+        @Override
+        public void onPageScrollStateChanged(int state) {
+
+        }
+    };
 }
