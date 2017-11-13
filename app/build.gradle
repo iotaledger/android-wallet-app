@@ -8,11 +8,11 @@ def versionBuild = 0 // bump for dogfood builds, public betas, etc.
 //TODO edit the changelog as well
 
 android {
-    compileSdkVersion 26
+    compileSdkVersion 27
     defaultConfig {
         applicationId "org.iota.wallet"
         minSdkVersion 19
-        targetSdkVersion 26
+        targetSdkVersion 27
         versionCode versionMajor * 10000 + versionMinor * 1000 + versionPatch * 100 + versionBuild
         versionName "${versionMajor}.${versionMinor}" + (versionPatch == 0 ? "" : ".${versionPatch}")
         multiDexEnabled true
@@ -52,7 +52,7 @@ android {
 }
 
 ext {
-    supportLibrary = "26.1.0"
+    supportLibrary = "27.0.1"
 }
 
 dependencies {
