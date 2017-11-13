@@ -39,7 +39,6 @@ import android.widget.Spinner;
 
 import com.google.gson.Gson;
 
-import org.apache.commons.lang3.StringUtils;
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.iota.wallet.IOTA;
@@ -58,7 +57,6 @@ import butterknife.OnClick;
 import butterknife.Unbinder;
 import jota.error.ArgumentException;
 import jota.utils.Checksum;
-import jota.utils.InputValidator;
 import jota.utils.IotaUnits;
 
 public class GenerateQRCodeFragment extends Fragment {
@@ -81,12 +79,8 @@ public class GenerateQRCodeFragment extends Fragment {
     TextInputEditText messageEditText;
     @BindView(R.id.generate_qr_code_tag_input)
     TextInputEditText tagEditText;
-    @BindView(R.id.generate_qr_code_address_input_aylout)
+    @BindView(R.id.generate_qr_code_address_input_layout)
     TextInputLayout addressEditTextInputLayout;
-    @BindView(R.id.generate_qr_code_message_input_aylout)
-    TextInputLayout messageEditTextInputLayout;
-    @BindView(R.id.generate_qr_code_tag_input_aylout)
-    TextInputLayout tagEditTextInputLayout;
     @BindView(R.id.generate_qr_code_units_spinner)
     Spinner unitsSpinner;
 
@@ -138,26 +132,20 @@ public class GenerateQRCodeFragment extends Fragment {
         inputManager.hideSoftInputFromWindow(fab.getWindowToken(), 0);
         //reset errors
         addressEditTextInputLayout.setError(null);
-        messageEditTextInputLayout.setError(null);
-        tagEditTextInputLayout.setError(null);
 
+        //noinspection StatementWithEmptyBody
         if (!isValidAddress()) {
-
-        } else if (!InputValidator.isTrytes(getMessage(), getMessage().length()) && !getMessage().equals(getMessage().toUpperCase())) {
-            messageEditTextInputLayout.setError(getString(R.string.messages_invalid_characters));
-
-        } else if (!InputValidator.isTrytes(getTaG(), getTaG().length()) && !getTaG().equals(getTaG().toUpperCase())) {
-            tagEditTextInputLayout.setError(getString(R.string.messages_invalid_characters));
 
         } else {
 
             QRCode qrCode = new QRCode();
             qrCode.setAddress(addressEditText.getText().toString());
 
-            if (getAmount().isEmpty())
+            if (getAmount().isEmpty()) {
                 qrCode.setAmount("");
-            else
+            } else {
                 qrCode.setAmount(amountInSelectedUnit());
+            }
 
             qrCode.setMessage(messageEditText.getText().toString());
             qrCode.setTag(tagEditText.getText().toString());
@@ -312,9 +300,6 @@ public class GenerateQRCodeFragment extends Fragment {
     }
 
     private String getTaG() {
-        if (tagEditText.getText().toString().length() < 27)
-            return StringUtils.rightPad(tagEditText.getText().toString(), 27, '9');
-        else
             return tagEditText.getText().toString();
     }
 }

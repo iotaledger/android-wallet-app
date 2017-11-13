@@ -65,7 +65,6 @@ import butterknife.OnClick;
 import butterknife.Unbinder;
 import jota.error.ArgumentException;
 import jota.utils.Checksum;
-import jota.utils.InputValidator;
 import jota.utils.IotaUnitConverter;
 import jota.utils.IotaUnits;
 
@@ -92,10 +91,6 @@ public class NewTransferFragment extends Fragment {
     TextInputLayout addressEditTextInputLayout;
     @BindView(R.id.new_transfer_amount_text_input_layout)
     TextInputLayout amountEditTextInputLayout;
-    @BindView(R.id.new_transfer_message_text_input_layout)
-    TextInputLayout messageEditTextInputLayout;
-    @BindView(R.id.new_transfer_tag_input_layout)
-    TextInputLayout tagEditTextInputLayout;
     @BindView(R.id.new_transfer_units_spinner)
     Spinner unitsSpinner;
 
@@ -171,10 +166,9 @@ public class NewTransferFragment extends Fragment {
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getActivity());
 
         addressEditTextInputLayout.setError(null);
-        tagEditTextInputLayout.setError(null);
         amountEditTextInputLayout.setError(null);
-        messageEditTextInputLayout.setError(null);
 
+        //noinspection StatementWithEmptyBody
         if (!isValidAddress()) {
 
         } else if (getAmount().isEmpty() || getAmount().equals("0")) {
@@ -182,15 +176,6 @@ public class NewTransferFragment extends Fragment {
 
         } else if (prefs.getLong(Constants.PREFERENCES_CURRENT_IOTA_BALANCE, 0) < Long.parseLong(amountInSelectedUnit())) {
             amountEditTextInputLayout.setError(getString(R.string.messages_not_enough_balance));
-
-        } else if (!InputValidator.isTrytes(getMessage(), getMessage().length()) && !getMessage().equals(getMessage().toUpperCase())) {
-            messageEditTextInputLayout.setError(getString(R.string.messages_invalid_characters));
-
-        } else if (!InputValidator.isTrytes(getTaG(), getTaG().length()) && !getTaG().equals(getTaG().toUpperCase())) {
-            tagEditTextInputLayout.setError(getString(R.string.messages_invalid_characters));
-
-        } else if (getTaG().length() > 27) {
-            tagEditTextInputLayout.setError(getString(R.string.messages_tag_to_long));
 
         } else {
             AlertDialog alertDialog = new AlertDialog.Builder(getActivity())
@@ -400,11 +385,10 @@ public class NewTransferFragment extends Fragment {
     }
 
     private String getTaG() {
-        if (tagEditText.getText().toString().isEmpty())
+        if (tagEditText.getText().toString().isEmpty()) {
             return Constants.NEW_TRANSFER_TAG;
-        else if (tagEditText.getText().toString().length() < 27)
+        } else if (tagEditText.getText().toString().length() < 27)
             return StringUtils.rightPad(tagEditText.getText().toString(), 27, '9');
-        else
-            return tagEditText.getText().toString();
+        return tagEditText.getText().toString();
     }
 }

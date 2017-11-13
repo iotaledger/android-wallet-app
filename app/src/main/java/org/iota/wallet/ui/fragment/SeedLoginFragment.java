@@ -113,13 +113,15 @@ public class SeedLoginFragment extends Fragment {
 
     private void loginDialog() {
 
-        if (seedEditText.getText().toString().isEmpty()) {
+        //TODO Only accept seeds that are longer than SeedValidator.SEED_LENGTH_MIN ?
+
+        String seed = seedEditText.getText().toString();
+
+        if (seed.isEmpty()) {
             seedEditTextLayout.setError(getString(R.string.messages_empty_seed));
             if (seedEditTextLayout.getError() != null)
                 return;
         }
-
-        String seed = seedEditText.getText().toString();
 
         if (SeedValidator.isSeedValid(getActivity(), seed) == null) {
             login();

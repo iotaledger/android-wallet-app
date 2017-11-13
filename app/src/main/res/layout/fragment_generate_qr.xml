@@ -34,7 +34,7 @@
 
             <!--  Address Label -->
             <android.support.design.widget.TextInputLayout
-                android:id="@+id/generate_qr_code_address_input_aylout"
+                android:id="@+id/generate_qr_code_address_input_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:paddingTop="72dp"
@@ -47,13 +47,14 @@
                     android:layout_height="wrap_content"
                     android:hint="@string/address"
                     android:digits="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ9"
+                    android:maxLength="90"
                     android:inputType="text" />
 
             </android.support.design.widget.TextInputLayout>
 
             <!--  Amount Label -->
             <android.support.design.widget.TextInputLayout
-                android:id="@+id/generate_qr_code_amount_input_aylout"
+                android:id="@+id/generate_qr_code_amount_input_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/baseline"
@@ -70,6 +71,7 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:hint="@string/amount"
+                        android:maxLength="16"
                         android:inputType="numberSigned" />
 
                     <Spinner
@@ -83,11 +85,10 @@
 
             <!--  Message Label -->
             <android.support.design.widget.TextInputLayout
-                android:id="@+id/generate_qr_code_message_input_aylout"
+                android:id="@+id/generate_qr_code_message_input_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/baseline_typo"
-                app:errorEnabled="true"
                 app:hintTextAppearance="@style/TextLabel">
 
                 <android.support.design.widget.TextInputEditText
@@ -102,11 +103,10 @@
 
             <!--  Tag Label -->
             <android.support.design.widget.TextInputLayout
-                android:id="@+id/generate_qr_code_tag_input_aylout"
+                android:id="@+id/generate_qr_code_tag_input_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/baseline_typo"
-                app:errorEnabled="true"
                 app:hintTextAppearance="@style/TextLabel">
 
                 <android.support.design.widget.TextInputEditText
@@ -115,6 +115,7 @@
                     android:layout_height="wrap_content"
                     android:hint="@string/tag_optional"
                     android:digits="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ9"
+                    android:maxLength="27"
                     android:inputType="text" />
 
             </android.support.design.widget.TextInputLayout>
