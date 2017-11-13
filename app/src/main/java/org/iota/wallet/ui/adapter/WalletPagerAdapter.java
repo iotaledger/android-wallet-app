@@ -34,7 +34,6 @@ import java.util.List;
 
 public class WalletPagerAdapter extends FragmentPagerAdapter {
 
-    private static final int TAB_COUNT = 2;
     private final Context context;
     private List<Fragment> fragments = new ArrayList<>();
 
@@ -52,7 +51,7 @@ public class WalletPagerAdapter extends FragmentPagerAdapter {
 
     @Override
     public int getCount() {
-        return TAB_COUNT;
+        return fragments.size();
     }
 
     @Override
@@ -66,11 +65,4 @@ public class WalletPagerAdapter extends FragmentPagerAdapter {
         return null;
     }
 
-
-    public void performFabClick(int position) {
-        Fragment fragment = fragments.get(position);
-        if (fragment != null && fragment instanceof WalletTabFragment.OnFabClickListener) {
-            ((WalletTabFragment.OnFabClickListener) fragment).onFabClick();
-        }
-    }
 }

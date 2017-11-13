@@ -92,24 +92,19 @@ public class TangleExplorerTransactionsCardAdapter extends RecyclerView.Adapter<
 
         holder.hashLabel.setText(transaction.getHash());
         holder.addressLabel.setText(transaction.getAddress());
-        if (NumberUtils.isCreatable(String.valueOf(transaction.getValue()))) {
-            holder.valueLabel.setText(IotaUnitConverter.convertRawIotaAmountToDisplayText(transaction.getValue(), false));
-            try {
-                Currency currency = Utils.getConfiguredAlternateCurrency(context);
-                String text = AlternateValueUtils.formatAlternateBalanceText(
-                        new AlternateValueManager(context).convert(transaction.getValue(), currency), currency);
-                holder.alternativeValueLabel.setText(text);
-            } catch (ExchangeRateNotAvailableException e) {
-                holder.alternativeValueLabel.setText(R.string.na);
-            }
-            if (transaction.getValue() < 0) {
-                holder.valueLabel.setTextColor(ContextCompat.getColor(context, R.color.flatRed));
-            } else if (transaction.getValue() > 0) {
-                holder.valueLabel.setTextColor(ContextCompat.getColor(context, R.color.flatGreen));
-            }
-
-        } else {
-            holder.valueLabel.setText(String.valueOf(transaction.getValue()));
+        holder.valueLabel.setText(IotaUnitConverter.convertRawIotaAmountToDisplayText(transaction.getValue(), false));
+        try {
+            Currency currency = Utils.getConfiguredAlternateCurrency(context);
+            String text = AlternateValueUtils.formatAlternateBalanceText(
+                    new AlternateValueManager(context).convert(transaction.getValue(), currency), currency);
+            holder.alternativeValueLabel.setText(text);
+        } catch (ExchangeRateNotAvailableException e) {
+            holder.alternativeValueLabel.setText(R.string.na);
+        }
+        if (transaction.getValue() < 0) {
+            holder.valueLabel.setTextColor(ContextCompat.getColor(context, R.color.flatRed));
+        } else if (transaction.getValue() > 0) {
+            holder.valueLabel.setTextColor(ContextCompat.getColor(context, R.color.flatGreen));
         }
         holder.tagLabel.setText(transaction.getTag());
         holder.timestampLabel.setText(Utils.timeStampToDate(transaction.getTimestamp()));

@@ -185,22 +185,21 @@ public class WalletTransfersFragment extends BaseSwipeRefreshLayoutFragment impl
         rt.startNewRequestTask(nir);
 
         if (!swipeRefreshLayout.isRefreshing()) {
-            swipeRefreshLayout.post(new Runnable() {
-                @Override
-                public void run() {
-                    swipeRefreshLayout.setRefreshing(true);
-                }
-            });
+            swipeRefreshLayout.post(() -> swipeRefreshLayout.setRefreshing(true));
         }
     }
 
+    @Override
     public void onFabClick() {
         Fragment fragment = new NewTransferFragment();
-        getActivity().getFragmentManager().beginTransaction()
-                .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
-                .add(R.id.container, fragment, null)
-                .addToBackStack(null)
-                .commit();
+        Fragment parentFragment = getParentFragment();
+        if (parentFragment != null) {
+            parentFragment.getFragmentManager().beginTransaction()
+                    .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
+                    .add(R.id.container, fragment, null)
+                    .addToBackStack(null)
+                    .commit();
+        }
     }
 
     @Override

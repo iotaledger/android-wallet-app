@@ -90,11 +90,17 @@ class RequestTask extends AsyncTask<ApiRequest, String, ApiResponse> {
         if (BuildConfig.DEBUG) {
             if (result != null)
                 Log.i("ApiResponse", new Gson().toJson(result));
-            Log.i("duration", (new Date().getTime()) - start.getTime() + "");
+            if (start != null) {
+                Log.i("duration", (new Date().getTime()) - start.getTime() + "");
+            }
         }
 
-        bus.post(result);
-        bus = null;
+        if (result != null) {
+            bus.post(result);
+        } else {
+            bus = null;
+        }
+
         TaskManager.removeTask(tag);
     }
 }

@@ -86,8 +86,6 @@ public class WalletTransfersCardAdapter extends RecyclerView.Adapter<WalletTrans
         int adapterPosition = holder.getAdapterPosition();
         Transfer transfer = getItem(adapterPosition - 1);
 
-        holder.setIsRecyclable(true);
-
         holder.valueLabel.setText(IotaUnitConverter.convertRawIotaAmountToDisplayText(transfer.getValue(), false));
         holder.addressLabel.setText(transfer.getAddress());
         holder.messageLabel.setText(TextUtils.isEmpty(transfer.getMessage()) ? "-" : transfer.getMessage());

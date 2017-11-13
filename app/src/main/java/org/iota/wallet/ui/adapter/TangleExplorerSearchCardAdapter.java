@@ -73,8 +73,6 @@ public class TangleExplorerSearchCardAdapter extends RecyclerView.Adapter<Tangle
         int adapterPosition = holder.getAdapterPosition();
         Transaction transaction = getItem(adapterPosition - 1);
 
-        holder.setIsRecyclable(true);
-
         holder.hashLabel.setText(transaction.getHash());
         holder.addressLabel.setText(transaction.getAddress());
         if (NumberUtils.isCreatable(String.valueOf(transaction.getValue()))) {
