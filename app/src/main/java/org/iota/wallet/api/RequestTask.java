@@ -95,8 +95,12 @@ class RequestTask extends AsyncTask<ApiRequest, String, ApiResponse> {
             }
         }
 
-        bus.post(result);
-        bus = null;
+        if (result != null) {
+            bus.post(result);
+        } else {
+            bus = null;
+        }
+
         TaskManager.removeTask(tag);
     }
 }
