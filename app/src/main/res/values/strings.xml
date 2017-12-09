@@ -123,9 +123,12 @@
     <string name="about_changelog">Changelog</string>
     <string name="about_licenses">Licenses</string>
     <string name="about_support">Support us</string>
+    <string name="about_buildchain">Build chain</string>
     <string name="about_faq">FAQ</string>
     <string name="about_donation_website">Visit our website</string>
+    <string name="about_buildchain_github">Show last commit at Github</string>
     <string name="about_donation_btc">BTC donation</string>
+    <string name="about_buildchain_travis">Show build at Travis CI</string>
     <string name="about_donation_iota">IOTA donation</string>
     <string name="about_iota_support">Visit Iotasupport.com</string>
 

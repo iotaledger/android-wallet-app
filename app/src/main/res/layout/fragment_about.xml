@@ -39,6 +39,12 @@
                 android:layout_height="wrap_content" />
 
             <include
+                layout="@layout/card_about_buildchain"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/baseline_card" />
+
+            <include
                 layout="@layout/card_about_donation"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
