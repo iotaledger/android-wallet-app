@@ -23,7 +23,7 @@ android {
             shrinkResources false
             minifyEnabled false
         }
-        
+
         debug {
             versionNameSuffix " DEBUG"
         }
@@ -52,7 +52,7 @@ android {
 }
 
 ext {
-    supportLibrary = "27.0.1"
+    supportLibrary = "27.0.2"
 }
 
 dependencies {
