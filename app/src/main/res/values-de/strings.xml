@@ -243,5 +243,8 @@
     <string name="card_label_trunk_transaction">Stamm-Transaktion:</string>
     <string name="card_label_branch_transaction">Zweig-Transaktion:</string>
     <string name="card_label_nonce">Nonce:</string>
+    <string name="about_buildchain_github">Zeige letzten commit auf Github</string>
+    <string name="about_buildchain_travis">Zeige build auf Travis CI</string>
+    <string name="about_buildchain">Build Quellen</string>
 
 </resources>

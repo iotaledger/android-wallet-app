@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:padding="@dimen/baseline"
+            android:text="@string/about_buildchain"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+            android:textColor="?android:textColorSecondary" />
+
+        <TextView
+            android:id="@+id/about_buildchain_github"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="?android:selectableItemBackground"
+            android:drawableEnd="@null"
+            android:drawablePadding="@dimen/about_item_drawable_padding"
+            android:drawableStart="@drawable/ic_github"
+            android:gravity="center_vertical"
+            android:padding="@dimen/baseline"
+            android:text="@string/about_buildchain_github"
+            android:textAppearance="@style/TextAppearance.AppCompat.Subhead" />
+
+        <TextView
+            android:id="@+id/about_buildchain_travis"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="?android:selectableItemBackground"
+            android:drawableEnd="@null"
+            android:drawablePadding="@dimen/about_item_drawable_padding"
+            android:drawableStart="@drawable/ic_travis_ci"
+            android:gravity="center_vertical"
+            android:padding="@dimen/baseline"
+            android:text="@string/about_buildchain_travis"
+            android:textAppearance="@style/TextAppearance.AppCompat.Subhead" />
+
+    </LinearLayout>
+</android.support.v7.widget.CardView>

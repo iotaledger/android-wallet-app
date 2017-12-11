@@ -35,6 +35,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import org.iota.wallet.BuildConfig;
 import org.iota.wallet.IOTA;
 import org.iota.wallet.R;
 import org.iota.wallet.helper.Constants;
@@ -168,9 +169,18 @@ public class AboutFragment extends Fragment {
         }
     }
 
-    @OnClick(R.id.about_faq)
-    public void onAboutFaqClick() {
-        Uri uri = Uri.parse("http://iotasupport.com");
+    @OnClick(R.id.about_buildchain_github)
+    public void onAboutGithubClick() {
+        Uri uri = Uri.parse(BuildConfig.GIT_COMMIT_URL);
+        Intent intent = new Intent(Intent.ACTION_VIEW, uri);
+        if (intent.resolveActivity(getActivity().getPackageManager()) != null) {
+            startActivity(intent);
+        }
+    }
+
+    @OnClick(R.id.about_buildchain_travis)
+    public void onAboutTravisClick() {
+        Uri uri = Uri.parse(BuildConfig.CI_BUILD_URL);
         Intent intent = new Intent(Intent.ACTION_VIEW, uri);
         if (intent.resolveActivity(getActivity().getPackageManager()) != null) {
             startActivity(intent);
