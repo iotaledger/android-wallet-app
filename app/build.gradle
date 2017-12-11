@@ -2,7 +2,7 @@ apply plugin: 'com.android.application'
 
 def versionMajor = 0
 def versionMinor = 9
-def versionPatch = 1
+def versionPatch = 2
 def magicNumber = 9 * 1000 + 1 * 100 // last number before apply automatic logic
 
 //TODO edit the changelog as well
@@ -94,7 +94,7 @@ dependencies {
     implementation 'org.knowm.xchange:xchange-okcoin:4.3.0'
     implementation 'com.jakewharton:butterknife:8.8.1'
     annotationProcessor 'com.jakewharton:butterknife-compiler:8.8.1'
-    implementation 'org.iota:jota:0.9.10'
+    implementation 'com.github.iotaledger:iota~lib~java:6c2df37'
 }
 
 static def getGitCommitCount() {

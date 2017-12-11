@@ -2,6 +2,14 @@
 <changelog bulletedList="true">
 
     <changelogversion
+        changeDate="December 11, 2017"
+        versionName="0.9.2">
+        <changelogtext>Updated dependencies</changelogtext>
+        <changelogtext>Bug fixes</changelogtext>
+        <changelogtext>Improved stability</changelogtext>
+    </changelogversion>
+
+    <changelogversion
         changeDate="November 11, 2017"
         versionName="0.9.1">
         <changelogtext>Updated dependencies</changelogtext>

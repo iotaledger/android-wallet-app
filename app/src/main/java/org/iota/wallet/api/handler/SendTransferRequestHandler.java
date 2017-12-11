@@ -19,8 +19,10 @@
 
 package org.iota.wallet.api.handler;
 
+import android.app.Activity;
 import android.app.NotificationManager;
 import android.content.Context;
+import android.os.Bundle;
 
 import org.iota.wallet.R;
 import org.iota.wallet.api.requests.ApiRequest;
@@ -32,6 +34,7 @@ import org.iota.wallet.api.responses.error.NetworkErrorType;
 import org.iota.wallet.helper.Constants;
 import org.iota.wallet.helper.NotificationHelper;
 import org.iota.wallet.helper.Utils;
+import org.iota.wallet.ui.dialog.KeyReuseDetectedDialog;
 
 import java.util.Arrays;
 
@@ -72,30 +75,45 @@ public class SendTransferRequestHandler extends IotaRequestHandler {
                     null,
                     //remainder address
                     null,
-                    false));
+                    false,
+                    true));
         } catch (ArgumentException | IllegalAccessError e) {
             NetworkError error = new NetworkError();
 
             NotificationManager mNotificationManager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
-            mNotificationManager.cancel(notificationId);
+            if (mNotificationManager != null) {
+                mNotificationManager.cancel(notificationId);
+            }
 
-            if (((SendTransferRequest) request).getValue().equals("0")
-                    && ((SendTransferRequest) request).getTag().equals(Constants.NEW_ADDRESS_TAG)) {
-                NotificationHelper.responseNotification(context, R.drawable.ic_address, context.getString(R.string.notification_attaching_new_address_response_failed_title), notificationId);
-
-            } else {
-                NotificationHelper.responseNotification(context, R.drawable.ic_fab_send, context.getString(R.string.notification_send_transfer_response_failed_title), notificationId);
+            if (e instanceof ArgumentException) {
+                if (e.getMessage().contains("Sending to a used address.") || e.getMessage().contains("Private key reuse detect!")) {
+                    final Activity activity = (Activity) context;
+                    Bundle bundle = new Bundle();
+                    bundle.putString("error", e.getMessage());
+                    KeyReuseDetectedDialog dialog = new KeyReuseDetectedDialog();
+                    dialog.setArguments(bundle);
+                    dialog.show(activity.getFragmentManager(), null);
+                    error.setErrorType(NetworkErrorType.KEY_REUSE_ERROR);
+                }
             }
 
             if (e instanceof IllegalAccessError) {
                 error.setErrorType(NetworkErrorType.ACCESS_ERROR);
-                mNotificationManager.cancel(notificationId);
                 if (((SendTransferRequest) request).getTag().equals(Constants.NEW_ADDRESS_TAG))
                     NotificationHelper.responseNotification(context, R.drawable.ic_error, context.getString(R.string.notification_address_attach_to_tangle_blocked_title), notificationId);
                 else
                     NotificationHelper.responseNotification(context, R.drawable.ic_error, context.getString(R.string.notification_transfer_attach_to_tangle_blocked_title), notificationId);
-            } else
-                error.setErrorType(NetworkErrorType.NETWORK_ERROR);
+            } else {
+                if (error.getErrorType() != NetworkErrorType.KEY_REUSE_ERROR) {
+                    error.setErrorType(NetworkErrorType.NETWORK_ERROR);
+                }
+                if (((SendTransferRequest) request).getValue().equals("0") && ((SendTransferRequest) request).getTag().equals(Constants.NEW_ADDRESS_TAG)) {
+                    NotificationHelper.responseNotification(context, R.drawable.ic_address, context.getString(R.string.notification_attaching_new_address_response_failed_title), notificationId);
+
+                } else {
+                    NotificationHelper.responseNotification(context, R.drawable.ic_fab_send, context.getString(R.string.notification_send_transfer_response_failed_title), notificationId);
+                }
+            }
 
             response = error;
         }

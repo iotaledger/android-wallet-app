@@ -195,7 +195,7 @@
     <string name="copy_hash">Hash kopieren</string>
     <string name="open_tangle_explorer">Im Tangle Explorer öffnen</string>
     <string name="receive_to_address">Anfordern an diese Adresse</string>
-    <string name="replay_bundle">Transfer wiederholen</string>
+    <string name="replay_bundle">Transfer erneut anhängen</string>
     <string name="title_current_seed">Aktueller Seed:</string>
     <string name="title_enter_password">Passwort eingeben</string>
     <string name="message_enter_password">Lege dein Passwort fest</string>
@@ -205,6 +205,10 @@
     <string name="message_forgot_password">Es gibt keine Möglichkeit der Wiederherstellung. Mit neuem Seed anmelden? Das wird den alten löschen.</string>
     <string name="title_root_detected">Gerät möglicherweise gerootet!</string>
     <string name="message_root_detected">Es ist anzunhemen das dieses Gerät gerootet ist. Weiter auf eigene Gefahr?</string>
+    <string name="title_spend_to_used_address">Senden an eine schon benutzte Adresse!</string>
+    <string name="message_spend_to_used_address">Sie versuchen eine Transaktion an eine Adresse zu senden, die bereits verwendet wurde (d. h. Token wurden bereits von dieser Adresse gesendet). Bitte fragen Sie den Empfänger nach einer neuen Adresse, die noch nicht für ausgehende Transaktionen benutzt wurde.</string>
+    <string name="title_key_reuse_detect">Wiederverwendung des privaten Schlüssels erkannt!</string>
+    <string name="message_key_reuse_detect">Sie versuchen eine Transaktion mit einer bereits verwendeten Adresse zu signieren. IOTA verwendet das  Winternitz-Einmalsignatur-Schema für einmalige Unterschrift (W-OTS). Aufgrund seiner Einmaligkeit sinkt die Sicherheit von Geldmitteln in einer Adresse schnell, wenn Sie neue Transaktionen mit demselben Schlüssel neu signieren. Bitte warten Sie, bis die vorherige Transaktion bestätigt wurde bevor eine weitere Transaktion gesendet wird. Durch erneutes anhängen der Transaktion bekommen Sie diese betätigt.</string>
 
     <!-- Confirm transfer dialog -->
     <string name="message_confirm_transfer">Bist du sicher das die Überweisung senden willst?</string>
