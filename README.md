@@ -37,7 +37,7 @@ Miscellaneous:
 
 
 ```bash
-$ git https://github.com/iotaledger/android-wallet-app
+$ git clone https://github.com/iotaledger/android-wallet-app
 $ cd android-wallet-app
 $ ./gradlew clean build
 ```
