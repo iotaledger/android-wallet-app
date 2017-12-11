@@ -18,7 +18,6 @@
         <item>@string/copy_address</item>
         <item>@string/copy_hash</item>
         <item>@string/open_tangle_explorer</item>
-        <item>@string/receive_to_address</item>
         <item>@string/replay_bundle</item>
     </string-array>
 

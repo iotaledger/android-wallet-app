@@ -61,7 +61,7 @@ public class WalletAddressCardAdapter extends RecyclerView.Adapter<WalletAddress
     public void onBindViewHolder(final ViewHolder holder, int position) {
         int adapterPosition = holder.getAdapterPosition();
         Address address = getItem(adapterPosition - 1);
-
+        holder.isUsed = address.isUsed();
         holder.setIsRecyclable(false);
 
         holder.addressLabel.setText(address.getAddress());
@@ -89,6 +89,9 @@ public class WalletAddressCardAdapter extends RecyclerView.Adapter<WalletAddress
     }
 
     class ViewHolder extends RecyclerView.ViewHolder {
+
+        boolean isUsed;
+
         @BindView(R.id.item_wa_address)
         TextView addressLabel;
         @BindView(R.id.item_wa_address_image)
@@ -101,6 +104,7 @@ public class WalletAddressCardAdapter extends RecyclerView.Adapter<WalletAddress
             itemView.setOnClickListener(v -> {
                 Bundle bundle = new Bundle();
                 bundle.putString("address", addressLabel.getText().toString());
+                bundle.putInt("isAddressUsed", (isUsed ? 1 : 0));
 
                 WalletAddressesItemDialog dialog = new WalletAddressesItemDialog();
                 dialog.setArguments(bundle);

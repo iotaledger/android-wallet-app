@@ -95,6 +95,7 @@ public class WalletTransfersCardAdapter extends RecyclerView.Adapter<WalletTrans
         holder.persistenceLabel.setText(context.getResources().getString(
                 transfer.getPersistence() ? R.string.card_label_persistence_yes :
                         R.string.card_label_persistence_no));
+        holder.isConfirmed = transfer.getPersistence();
         try {
             Currency currency = Utils.getConfiguredAlternateCurrency(context);
             String text = AlternateValueUtils.formatAlternateBalanceText(
@@ -121,6 +122,9 @@ public class WalletTransfersCardAdapter extends RecyclerView.Adapter<WalletTrans
     }
 
     class ViewHolder extends RecyclerView.ViewHolder {
+
+        boolean isConfirmed;
+
         @BindView(R.id.item_wt_value)
         TextView valueLabel;
         @BindView(R.id.item_wt_alternate_value)
@@ -147,10 +151,10 @@ public class WalletTransfersCardAdapter extends RecyclerView.Adapter<WalletTrans
             ButterKnife.bind(this, itemView);
 
             expandableLayout.collapse();
-
             itemView.setOnClickListener(v -> {
                 Bundle bundle = new Bundle();
                 bundle.putString("address", addressLabel.getText().toString());
+                bundle.putInt("isConfirmed", isConfirmed ? 1 : 0);
                 bundle.putString("hash", hashLabel.getText().toString());
 
                 WalletTransfersItemDialog dialog = new WalletTransfersItemDialog();

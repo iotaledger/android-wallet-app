@@ -30,6 +30,7 @@ import android.content.DialogInterface;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.NonNull;
+import android.support.design.widget.Snackbar;
 import android.support.v7.app.AlertDialog;
 
 import org.greenrobot.eventbus.EventBus;
@@ -43,6 +44,7 @@ import org.iota.wallet.ui.fragment.TangleExplorerTabFragment;
 public class WalletAddressesItemDialog extends DialogFragment implements DialogInterface.OnClickListener {
 
     private String address;
+    private boolean isAddressUsed;
 
     public WalletAddressesItemDialog() {
     }
@@ -53,6 +55,7 @@ public class WalletAddressesItemDialog extends DialogFragment implements DialogI
         Bundle bundle = getArguments();
 
         address = bundle.getString("address");
+        isAddressUsed = bundle.getInt("isAddressUsed") != 0;
 
         return new AlertDialog.Builder(getActivity())
                 .setTitle(getString(R.string.address))
@@ -88,18 +91,22 @@ public class WalletAddressesItemDialog extends DialogFragment implements DialogI
 
                 break;
             case 2:
-                QRCode qrCode = new QRCode();
-                qrCode.setAddress(address);
-                bundle.putParcelable(Constants.QRCODE, qrCode);
+                if (!isAddressUsed) {
+                    QRCode qrCode = new QRCode();
+                    qrCode.setAddress(address);
+                    bundle.putParcelable(Constants.QRCODE, qrCode);
 
-                fragment = new GenerateQRCodeFragment();
-                fragment.setArguments(bundle);
+                    fragment = new GenerateQRCodeFragment();
+                    fragment.setArguments(bundle);
 
-                getActivity().getFragmentManager().beginTransaction()
-                        .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
-                        .replace(R.id.container, fragment, null)
-                        .addToBackStack(null)
-                        .commit();
+                    getActivity().getFragmentManager().beginTransaction()
+                            .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
+                            .replace(R.id.container, fragment, null)
+                            .addToBackStack(null)
+                            .commit();
+                } else {
+                    Snackbar.make(getActivity().findViewById(R.id.drawer_layout), getString(R.string.messages_address_used), Snackbar.LENGTH_LONG).show();
+                }
                 break;
         }
     }

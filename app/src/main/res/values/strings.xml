@@ -85,6 +85,9 @@
     <string name="message_open_licenses_error">Can\'t open WebView.</string>
     <string name="message_install_web_view">Install WebView</string>
     <string name="messages_iota_donation_require_login">Please first login with your seed</string>
+    <string name="messages_address_used">The address is already used. Please generate a new one or choose a non-used address.</string>
+    <string name="messages_transaction_already_confirmed">The transaction is already confirmed.</string>
+
 
     <!-- Menu-->
     <string name="menu_group_misc">Misc</string>

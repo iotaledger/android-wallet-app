@@ -22,7 +22,6 @@ package org.iota.wallet.ui.dialog;
 import android.app.Dialog;
 import android.app.DialogFragment;
 import android.app.Fragment;
-import android.app.FragmentTransaction;
 import android.content.ClipData;
 import android.content.ClipboardManager;
 import android.content.Context;
@@ -30,6 +29,7 @@ import android.content.DialogInterface;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.NonNull;
+import android.support.design.widget.Snackbar;
 import android.support.v7.app.AlertDialog;
 
 import org.greenrobot.eventbus.EventBus;
@@ -37,14 +37,13 @@ import org.iota.wallet.R;
 import org.iota.wallet.api.TaskManager;
 import org.iota.wallet.api.requests.ReplayBundleRequest;
 import org.iota.wallet.helper.Constants;
-import org.iota.wallet.model.QRCode;
 import org.iota.wallet.ui.activity.MainActivity;
-import org.iota.wallet.ui.fragment.GenerateQRCodeFragment;
 import org.iota.wallet.ui.fragment.TangleExplorerTabFragment;
 
 public class WalletTransfersItemDialog extends DialogFragment implements DialogInterface.OnClickListener {
 
     private String address;
+    private boolean isConfirmed;
     private String hash;
 
     public WalletTransfersItemDialog() {
@@ -55,6 +54,7 @@ public class WalletTransfersItemDialog extends DialogFragment implements DialogI
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         Bundle bundle = getArguments();
         address = bundle.getString("address");
+        isConfirmed = bundle.getInt("isConfirmed") != 0;
         hash = bundle.getString("hash");
 
         return new AlertDialog.Builder(getActivity())
@@ -89,23 +89,13 @@ public class WalletTransfersItemDialog extends DialogFragment implements DialogI
 
                 break;
             case 3:
-                QRCode qrCode = new QRCode();
-                qrCode.setAddress(address);
-                bundle.putParcelable(Constants.QRCODE, qrCode);
-
-                fragment = new GenerateQRCodeFragment();
-                fragment.setArguments(bundle);
-
-                getActivity().getFragmentManager().beginTransaction()
-                        .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
-                        .replace(R.id.container, fragment, null)
-                        .addToBackStack(null)
-                        .commit();
-                break;
-            case 4:
-                ReplayBundleRequest rtr = new ReplayBundleRequest(hash);
-                TaskManager rt = new TaskManager(getActivity());
-                rt.startNewRequestTask(rtr);
+                if (!isConfirmed) {
+                    ReplayBundleRequest rtr = new ReplayBundleRequest(hash);
+                    TaskManager rt = new TaskManager(getActivity());
+                    rt.startNewRequestTask(rtr);
+                } else {
+                    Snackbar.make(getActivity().findViewById(R.id.drawer_layout), getString(R.string.messages_transaction_already_confirmed), Snackbar.LENGTH_LONG).show();
+                }
                 break;
         }
     }
