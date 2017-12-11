@@ -50,7 +50,7 @@ import de.psdev.licensesdialog.LicensesDialog;
 
 public class AboutFragment extends Fragment {
 
-    public static final String IOTA_DONATION_ADDRESS = "TBH9CSFWUHACJSWGA9XDDMNPJ9USPRLJ9FCHDEYDYGOWPQTQUWXMUBCUKTFJRESNBHGJOISFJOLXTLZOBRLLGVTROD";
+    public static final String IOTA_DONATION_ADDRESS = "QKWGXPCWQWZE9PELCXOGOMWOSOHJJFEFGQJ9ANMPOYFKDGMLKGWCPFQVNKYOCCRKOIKAGYZIEVUCCFBHDK9AJIPTJC";
     private static final String IOTA_DONATION_TAG = "ANDROID9WALLET9DONATION9999";
     private static final String PACKAGE_WEBVIEW = "com.google.android.webview";
 
