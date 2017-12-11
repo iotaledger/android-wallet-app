@@ -33,7 +33,7 @@ public class ReportIssueActivity extends IssueReporterActivity {
 
         setMinimumDescriptionLength(20);
         setGuestEmailRequired(true);
-        setGuestToken("d3224f1482bcd85e635288b68f70df52092b5b32");
+        setGuestToken("3e9b7bfd7a0efeeb5aa8508c48f0774a5d85c6e5");
     }
 
     @Override
