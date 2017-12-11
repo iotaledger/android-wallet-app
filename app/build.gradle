@@ -2,7 +2,7 @@ apply plugin: 'com.android.application'
 
 def versionMajor = 0
 def versionMinor = 9
-def versionPatch = 2
+def versionPatch = 3
 def magicNumber = 9 * 1000 + 1 * 100 // last number before apply automatic logic
 
 //TODO edit the changelog as well
@@ -98,8 +98,8 @@ dependencies {
 }
 
 static def getGitCommitCount() {
-    def process = "git rev-list HEAD --count".execute()
-    return process.text.toInteger()
+    def process = "git rev-list --count HEAD".execute()
+    return process.text.trim().toInteger()
 }
 
 static def getGitHash() {

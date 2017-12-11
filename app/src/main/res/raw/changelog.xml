@@ -3,6 +3,12 @@
 
     <changelogversion
         changeDate="December 11, 2017"
+        versionName="0.9.3">
+        <changelogtext>Minor update</changelogtext>
+    </changelogversion>
+    
+    <changelogversion
+        changeDate="December 11, 2017"
         versionName="0.9.2">
         <changelogtext>Updated dependencies</changelogtext>
         <changelogtext>Bug fixes</changelogtext>
