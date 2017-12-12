@@ -2,7 +2,6 @@ apply plugin: 'com.android.application'
 
 def versionMajor = 0
 def versionMinor = 9
-def versionPatch = 3
 def magicNumber = 9 * 1000 + 1 * 100 // last number before apply automatic logic
 
 //TODO edit the changelog as well
@@ -15,7 +14,7 @@ android {
         targetSdkVersion 27
         // get rid from manual setting, and it prevents sometimes a nasty git push -f on master
         versionCode magicNumber + getGitCommitCount()
-        versionName "${versionMajor}.${versionMinor}" + (versionPatch == 0 ? "" : ".${versionPatch}") + "-" + getGitHash()
+        versionName "${versionMajor}.${versionMinor}" + (versionCode == 0 ? "" : ".${versionCode}") + "-" + getGitHash()
         buildConfigField "String", "CI_BUILD_ID", "\"" + getBuildId() + "\""
         buildConfigField "String", "CI_BUILD_URL", "\"" + getBuildUrl() + "\""
         buildConfigField "String", "GIT_COMMIT_URL", "\"" + getGitCommitUrl() + "\""
