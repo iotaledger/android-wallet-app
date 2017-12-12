@@ -58,7 +58,7 @@ public class SettingsNodeFragment extends PreferenceFragment implements SharedPr
                     p.setText(Constants.PREFERENCE_NODE_DEFAULT_PROTOCOL);
                     if (getView() != null)
                         Snackbar.make(getView(), R.string.settings_messages_empty_node_protocol, Snackbar.LENGTH_LONG).show();
-                } else if (!nodeProtocol.equals("http") || !nodeProtocol.equals("https")) {
+                } else if (!nodeProtocol.matches("http|https")) {
                     EditTextPreference p = (EditTextPreference) findPreference(key);
                     p.setText(Constants.PREFERENCE_NODE_DEFAULT_PROTOCOL);
                     if (getView() != null)
