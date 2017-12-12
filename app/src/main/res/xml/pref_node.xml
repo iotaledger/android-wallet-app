@@ -3,18 +3,21 @@
 
     <EditTextPreference
         android:defaultValue="http"
+        android:hint="http"
         android:key="preference_node_protocol"
         android:summary="@string/settings_node_protocol_summary"
         android:title="@string/settings_node_protocol_title" />
 
     <EditTextPreference
         android:defaultValue="node.iotawallet.info"
+        android:hint="node.iotawallet.info"
         android:key="preference_node_ip"
         android:summary="@string/settings_node_ip_summary"
         android:title="@string/settings_node_ip_title" />
 
     <EditTextPreference
         android:defaultValue="14265"
+        android:hint="14265"
         android:digits="0123456789"
         android:inputType="number"
         android:key="preference_node_port"
