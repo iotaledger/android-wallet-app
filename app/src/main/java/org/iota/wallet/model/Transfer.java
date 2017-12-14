@@ -89,8 +89,8 @@ public class Transfer implements Parcelable, Comparable<Transfer> {
         dest.writeLong(timestamp);
         dest.writeString(address);
         dest.writeString(hash);
-        dest.writeLong(value);
         dest.writeInt((persistence != null ? persistence : false) ? 1 : 0);
+        dest.writeLong(value);
         dest.writeString(message);
         dest.writeString(tag);
     }
