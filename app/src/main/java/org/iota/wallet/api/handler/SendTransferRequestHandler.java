@@ -86,7 +86,7 @@ public class SendTransferRequestHandler extends IotaRequestHandler {
             }
 
             if (e instanceof ArgumentException) {
-                if (e.getMessage().contains("Sending to a used address.") || e.getMessage().contains("Private key reuse detect!")) {
+                if (e.getMessage().contains("Sending to a used address.") || e.getMessage().contains("Private key reuse detect!") || e.getMessage().contains("Send to inputs!")) {
                     final Activity activity = (Activity) context;
                     Bundle bundle = new Bundle();
                     bundle.putString("error", e.getMessage());

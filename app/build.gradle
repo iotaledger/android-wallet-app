@@ -2,7 +2,7 @@ apply plugin: 'com.android.application'
 
 def versionMajor = 0
 def versionMinor = 9
-def magicNumber = 9 * 1000 + 1 * 100 // last number before apply automatic logic
+def magicNumber = 9 * 10000
 
 //TODO edit the changelog as well
 
@@ -14,7 +14,7 @@ android {
         targetSdkVersion 27
         // get rid from manual setting, and it prevents sometimes a nasty git push -f on master
         versionCode magicNumber + getGitCommitCount()
-        versionName "${versionMajor}.${versionMinor}" + (versionCode == 0 ? "" : ".${versionCode}") + "-" + getGitHash()
+        versionName "${versionMajor}.${versionMinor}" + (versionCode == 0 ? "" : ".${getGitCommitCount()}") + "-" + getGitHash()
         buildConfigField "String", "CI_BUILD_ID", "\"" + getBuildId() + "\""
         buildConfigField "String", "CI_BUILD_URL", "\"" + getBuildUrl() + "\""
         buildConfigField "String", "GIT_COMMIT_URL", "\"" + getGitCommitUrl() + "\""
@@ -93,7 +93,7 @@ dependencies {
     implementation 'org.knowm.xchange:xchange-okcoin:4.3.0'
     implementation 'com.jakewharton:butterknife:8.8.1'
     annotationProcessor 'com.jakewharton:butterknife-compiler:8.8.1'
-    implementation 'com.github.iotaledger:iota~lib~java:6c2df37'
+    implementation 'com.github.iotaledger:iota~lib~java:7613eb2'
 }
 
 static def getGitCommitCount() {

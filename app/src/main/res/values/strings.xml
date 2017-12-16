@@ -68,7 +68,7 @@
     <string name="messages_invalid_characters_seed">Your seed contains invalid characters. Only uppercase characters from A-Z and the number 9 are accepted.</string>
     <string name="messages_to_long_seed">Your seed should not contain more than 81 characters. Extra characters are ignored.</string>
     <string name="messages_to_short_seed">Your seed does not contain enough characters. This is not secure.</string>
-    <string name="messages_not_fully_synced_yet">The connected node ist not fully synced yet</string>
+    <string name="messages_not_fully_synced_yet">The connected node is not fully synced yet</string>
     <string name="messages_no_data_available">No data available</string>
     <string name="messages_not_yet_implemented">Not yet implemented</string>
     <string name="messages_enter_txaddress_with_checksum">Please enter a valid recipient address with checksum</string>
@@ -104,7 +104,7 @@
     <string name="notification_send_transfer_request_title">Sending transfer</string>
     <string name="notification_generate_new_address_request_title">Generating new address</string>
     <string name="notification_attaching_new_address_request_title">Attaching new address</string>
-    <string name="notification_replay_bundle_request_title">Replay bundle</string>
+    <string name="notification_replay_bundle_request_title">Reattaching</string>
 
     <string name="notification_generating_new_address_response_succeeded_title">New address generated</string>
 
@@ -114,8 +114,8 @@
     <string name="notification_attaching_new_address_response_succeeded_title">Attaching new address executed</string>
     <string name="notification_attaching_new_address_response_failed_title">Attaching new address failed</string>
     ´
-    <string name="notification_replay_bundle_response_succeeded_title">Replay executed</string>
-    <string name="notification_replay_bundle_response_failed_title">Replay failed</string>
+    <string name="notification_replay_bundle_response_succeeded_title">Reattach executed</string>
+    <string name="notification_replay_bundle_response_failed_title">Reattach failed</string>
 
     <string name="notification_address_attach_to_tangle_blocked_title">Attaching new address failed, please enable local PoW</string>
     <string name="notification_transfer_attach_to_tangle_blocked_title">Transaction failed, please enable local PoW</string>
@@ -214,6 +214,8 @@
     <string name="message_spend_to_used_address">You are attempting to send a transaction to an address that has already been used (i.e. tokens have already been spent from this address). Please ask recipient for a new address, that hasn\'t been spent from yet.</string>
     <string name="title_key_reuse_detect">Private Key Reuse Detected!</string>
     <string name="message_key_reuse_detect">You are attempting to sign a transaction with input that have an already been used. IOTA uses Winternitz one-time signature (W-OTS) scheme, due to it\'s one-time nature, the security of funds in an address decreases rapidly if you re-sign new transactions using the same key. Please wait for previous transaction to confirm, e.g. by reattaching, before sending another transaction.</string>
+    <string name="title_send_to_inputs">Send to inputs!</string>
+    <string name="message_send_to_inputs">It is not possible to send to the own address!</string>
 
     <!-- Confirm transfer dialog -->
     <string name="message_confirm_transfer">Are you sure you want to send the transfer?</string>

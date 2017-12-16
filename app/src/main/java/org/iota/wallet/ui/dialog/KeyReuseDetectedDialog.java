@@ -21,14 +21,13 @@ package org.iota.wallet.ui.dialog;
 
 import android.app.Dialog;
 import android.app.DialogFragment;
-import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AlertDialog;
 
 import org.iota.wallet.R;
 
-public class KeyReuseDetectedDialog extends DialogFragment implements DialogInterface.OnClickListener {
+public class KeyReuseDetectedDialog extends DialogFragment {
 
     public KeyReuseDetectedDialog() {
     }
@@ -50,24 +49,17 @@ public class KeyReuseDetectedDialog extends DialogFragment implements DialogInte
             } else if (error.contains("Private key reuse detect!")) {
                 title = getResources().getString(R.string.title_key_reuse_detect);
                 message = getResources().getString(R.string.message_key_reuse_detect);
+
+            } else if (error.contains("Send to inputs!")) {
+                title = getResources().getString(R.string.title_send_to_inputs);
+                message = getResources().getString(R.string.message_send_to_inputs);
             }
         }
 
         return new AlertDialog.Builder(getActivity(), R.style.AppCompatAlertDialogStyle)
                 .setTitle(title)
                 .setMessage(message)
-                .setCancelable(false)
-                .setPositiveButton(R.string.buttons_ok, null)
+                .setCancelable(true)
                 .create();
     }
-
-    @Override
-    public void onClick(DialogInterface dialogInterface, int which) {
-        switch (which) {
-            case AlertDialog.BUTTON_NEGATIVE:
-                getDialog().dismiss();
-                break;
-        }
-    }
-
 }

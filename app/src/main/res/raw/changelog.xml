@@ -2,6 +2,14 @@
 <changelog bulletedList="true">
 
     <changelogversion
+        changeDate="December 16, 2017"
+        versionName="0.9.109">
+        <changelogtext>Added https support</changelogtext>
+        <changelogtext>Fixed send transfer</changelogtext>
+        <changelogtext>Updated translation</changelogtext>
+    </changelogversion>
+
+    <changelogversion
         changeDate="December 11, 2017"
         versionName="0.9.3">
         <changelogtext>Minor update</changelogtext>
