@@ -20,18 +20,20 @@
 package org.iota.wallet.ui.fragment;
 
 import android.app.Fragment;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.Preference;
 import android.preference.PreferenceFragment;
 
 import org.iota.wallet.R;
+import org.iota.wallet.helper.Constants;
 
 public class SettingsFragment extends PreferenceFragment implements Preference.OnPreferenceClickListener {
 
-    private static final String PREFERENCE_SCREEN_NODE = "preference_screen_node";
-    private static final String PREFERENCE_SCREEN_PASSWORD = "preference_screen_password_protection";
-    private static final String PREFERENCE_SCREEN_MISC = "preference_screen_misc";
-    private static final String[] ALL_PREFERENCES = {PREFERENCE_SCREEN_NODE,
+    private static final String   PREFERENCE_SCREEN_NODE     = "preference_screen_node";
+    private static final String   PREFERENCE_SCREEN_PASSWORD = "preference_screen_password_protection";
+    private static final String   PREFERENCE_SCREEN_MISC     = "preference_screen_misc";
+    private static final String[] ALL_PREFERENCES            = {PREFERENCE_SCREEN_NODE,
             PREFERENCE_SCREEN_PASSWORD, PREFERENCE_SCREEN_MISC};
 
     @Override
@@ -40,6 +42,13 @@ public class SettingsFragment extends PreferenceFragment implements Preference.O
 
         // Load the preferences from an XML resource
         addPreferencesFromResource(R.xml.prefs);
+
+        SharedPreferences prefs = getPreferenceManager().getSharedPreferences();
+        String protocol = prefs.getString(Constants.PREFERENCE_NODE_PROTOCOL, Constants.PREFERENCE_NODE_DEFAULT_PROTOCOL);
+        String host = prefs.getString(Constants.PREFERENCE_NODE_IP, Constants.PREFERENCE_NODE_DEFAULT_IP);
+        int port = Integer.parseInt(prefs.getString(Constants.PREFERENCE_NODE_PORT, Constants.PREFERENCE_NODE_DEFAULT_PORT));
+
+        findPreference(PREFERENCE_SCREEN_NODE).setSummary(protocol + "://" + host + ":" + port);
 
         for (String preference : ALL_PREFERENCES) {
             findPreference(preference)
