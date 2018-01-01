@@ -34,14 +34,16 @@ import org.iota.wallet.api.responses.ApiResponse;
 import org.iota.wallet.helper.Constants;
 
 import java.lang.ref.WeakReference;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 class RequestTask extends AsyncTask<ApiRequest, String, ApiResponse> {
 
     private WeakReference<Context> context;
-    private EventBus bus;
-    private Date start;
-    private String tag = "";
+    private EventBus               bus;
+    private long             start = 0;
+    private SimpleDateFormat sdf   = new SimpleDateFormat("HH:mm:ss.sss");
+    private String           tag   = "";
 
 
     public RequestTask(Context context) {
@@ -61,9 +63,8 @@ class RequestTask extends AsyncTask<ApiRequest, String, ApiResponse> {
             int port = Integer.parseInt(prefs.getString(Constants.PREFERENCE_NODE_PORT, Constants.PREFERENCE_NODE_DEFAULT_PORT));
 
             if (BuildConfig.DEBUG) {
-                Log.i("ApiRequest", params[0].toString());
-                start = new Date();
-                Log.i("started at", start.getTime() + "");
+                start = System.currentTimeMillis();
+                Log.i("ApiRequest", protocol +"://"+ host +":"+ port + " at:" + sdf.format(new Date(start)));
             }
 
             ApiRequest apiRequest = params[0];
@@ -90,9 +91,7 @@ class RequestTask extends AsyncTask<ApiRequest, String, ApiResponse> {
         if (BuildConfig.DEBUG) {
             if (result != null)
                 Log.i("ApiResponse", new Gson().toJson(result));
-            if (start != null) {
-                Log.i("duration", (new Date().getTime()) - start.getTime() + "");
-            }
+            Log.i("duration", (System.currentTimeMillis() - start) + " ms");
         }
 
         if (result != null) {
