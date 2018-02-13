@@ -102,15 +102,15 @@
     <!-- Notification-->
     <string name="notification_send_transfer_request_title">Überweisung wird gesendet</string>
     <string name="notification_generate_new_address_request_title">Adresse wird generiert</string>
-    <string name="notification_attaching_new_address_request_title">Adresse wird angehangen</string>
-    <string name="notification_replay_bundle_request_title">Transfer wird erneut angehnagen</string>
+    <string name="notification_attaching_new_address_request_title">Adresse wird angehängt</string>
+    <string name="notification_replay_bundle_request_title">Transfer wird erneut angehängt</string>
 
     <string name="notification_generating_new_address_response_succeeded_title">Neue Adresse generiert</string>
 
     <string name="notification_send_transfer_response_succeeded_title">Überweisung erfolgreich</string>
     <string name="notification_send_transfer_response_failed_title">Überweisung fehlgeschlagen</string>
 
-    <string name="notification_attaching_new_address_response_succeeded_title">Neue Adresse erfolgreich angehangen</string>
+    <string name="notification_attaching_new_address_response_succeeded_title">Neue Adresse erfolgreich angehängt</string>
     <string name="notification_attaching_new_address_response_failed_title">Fehler beim anhängen der neuen Adresse</string>
 
     <string name="notification_replay_bundle_response_succeeded_title">Erneutes anhängen erfolgreich ausgeführt</string>
