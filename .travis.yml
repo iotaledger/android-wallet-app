@@ -8,7 +8,7 @@ env:
 jdk:
 - oraclejdk8
 git:
-  depth: 9999999
+  depth: 3
 android:
   components:
   - tools
